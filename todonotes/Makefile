@@ -20,4 +20,17 @@ compile:
 test:
 	valgrind $(RUN)
 
+x: a b 
+	@echo $(wildcard *.c)
+	@echo $(wildcard */*.c)
+	@echo $(addprefix ./, a b d)
+	@echo $(addprefix ./, $(OBJECTS))
+	@echo $@
+	@echo $<
+	@echo $^
+
+	#include gcc *.c -MM $(INCLUDES)
+a:
+b:
+
 .PHONY=main run compile test

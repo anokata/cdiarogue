@@ -1,6 +1,7 @@
 # vim: filetype=make
 P=test
-CFLAGS=-Wall -Wextra -std=gnu11 -g -D_GNU_SOURCE=1
+CFLAGS=-Wall -Wextra -std=gnu11 -g -D_GNU_SOURCE=1 
+PKG=$(shell pkg-config --libs --cflags glib-2.0)
 OBJECTS=test_note.c ../note.c
 CC=gcc
 TARGET=/tmp/$(P)
@@ -16,5 +17,8 @@ run:
 test:
 	valgrind $(RUN)
 
-.PHONY=main run test
+test_notesbook:
+	$(CC) $(CFLAGS)  -I../include test_notesbook.c ../notesbook.c ../note.c $(PKG) $(TEMPOUT) && valgrind $(TARGET)
+
+.PHONY=main run test test_notesbook
 
