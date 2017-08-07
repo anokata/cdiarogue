@@ -4,6 +4,8 @@
 #include <stdio.h>
 #include "note.h"
 
+const char *notebooks_path = "./nb/"; // ~/.notebooks/
+
 typedef struct NotesBook {
     GList *notes;
     char *name;

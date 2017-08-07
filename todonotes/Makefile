@@ -2,6 +2,7 @@
 P=todonotes
 CFLAGS=-Wall -Wextra -std=gnu11 -g -D_GNU_SOURCE=1
 INCLUDES=-I./include -I../include
+PKG=$(shell pkg-config --libs --cflags glib-2.0)
 OBJECTS=main.c note.c
 CC=gcc
 TARGET=/tmp/$(P)
@@ -9,7 +10,7 @@ TEMPOUT=-o $(TARGET)
 RUN=$(TARGET)
 
 main: 
-	$(CC) $(CFLAGS) $(OBJECTS) $(INCLUDES) $(TEMPOUT) && $(RUN)
+	$(CC) $(CFLAGS) $(OBJECTS) $(INCLUDES) $(PKG) $(TEMPOUT) && $(RUN)
 
 run:
 	$(RUN)
