@@ -17,3 +17,18 @@ void nbook_free(NotesBook book) {
     g_list_free(book->notes);
     free(book);
 }
+
+void nbook_add_note(NotesBook book, Note note) {
+    book->notes = g_list_append(book->notes, note);
+}
+
+void nbook_print(NotesBook book) {
+    printf("Notes book '%s'()\n",book->name);
+    GList *note_node = book->notes;
+    int i = 1;
+    while (note_node != NULL) {
+        Note note = note_node->data;
+        printf("#%d. %s:%s\n", i++, note->title, note->text);
+        note_node = g_list_next(note_node);
+    }
+}
