@@ -20,7 +20,7 @@
 //      one file = one notebook
 //+3.1 dump note
 // 3.2 load note
-//+3.3 dump notesbook
+//+3.3 dump and save notesbook
 // 3.4 load notesbook
 //
 // 4 cli crud first minimum:

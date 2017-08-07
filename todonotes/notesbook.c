@@ -53,3 +53,20 @@ char *nbook_dump(NotesBook book) {
     }
 	return buf;
 }
+
+void nbook_save(NotesBook book) {
+    int len = strlen(book->name) + strlen(notebooks_path) + 2;
+    char *filename = malloc(len);
+    snprintf(filename, len, "%s%s", notebooks_path, book->name);
+    FILE *fout = fopen(filename, "w+");
+    if (!fout) {
+        perror("fopen file for save");
+        printf("%s\n", filename);
+        exit(3);
+    }
+    char *dump = nbook_dump(book);
+    fwrite(dump, strlen(dump), 1, fout);
+    free(dump);
+    free(filename);
+    fclose(fout);
+}

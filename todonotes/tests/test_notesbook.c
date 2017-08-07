@@ -2,7 +2,7 @@
 #include <stdio.h>
 
 int main() {
-    printf("test notebooks\n");
+    printf("test notebooks %s\n", notebooks_path);
     NotesBook b;
     b = nbook_new(g_strdup("name"));
 
@@ -16,9 +16,10 @@ int main() {
     nbook_print(b);
 
 	char *dump = nbook_dump(b);
-	printf("DUMP: %s\n", dump);
+	printf("DUMP\n%s\n", dump);
 	free(dump);
 
+    nbook_save(b);
     nbook_free(b);
 }
 
