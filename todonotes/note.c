@@ -51,3 +51,37 @@ char *note_dump(Note note) {
     free(header);
     return buf;
 }
+
+    // TODO first date
+    // methods of parse 
+Note note_load(char *dump) {
+    Note note = malloc(sizeof(struct Note));
+    memset(note, 0, sizeof(struct Note));
+    char delim = ':';
+    char *after_title = strchr(dump, delim);
+        printf("L:%s\n", after_title);
+    int len = after_title - dump;
+    char *title = malloc(len + 1);
+    memset(title, 0, len + 1);
+    strncpy(title, dump, len);
+        printf("Lt%s\n", title);
+    note->title = title;
+    char *after_time = strchr(dump, '\n');
+    len = after_time - after_title;
+    char *time = malloc(len + 1);
+    memset(time, 0, len + 1);
+    strncpy(time, after_title + 1, len);
+        printf("T%s\n", time);
+
+    struct tm *time_full = malloc(sizeof(struct tm));
+    if (strptime(after_title + 1, date_format, time_full) == NULL) {
+        perror("date format read");
+        exit(4);
+    }
+    time_t date = mktime(time_full);
+    free(time_full);
+
+    note->date = date;
+
+    return note;
+}

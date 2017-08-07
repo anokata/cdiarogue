@@ -14,6 +14,15 @@ void note_test() {
 	free(free_me);
 
     note_free(n);
+
+
+    char *dump = "title:01.29.2018 21:22:11\ntext\n.....\n ....\n %%";
+    n = note_load(dump);
+	free_me = note_show(n);
+	printf("NOTE loaded:%s\n", free_me);
+	free(free_me);
+
+    note_free(n);
 }
 
 int main(void) {
