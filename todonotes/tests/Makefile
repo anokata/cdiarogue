@@ -17,6 +17,9 @@ run:
 test:
 	valgrind $(RUN)
 
+test_note:
+	$(CC) $(CFLAGS)  -I../include test_note.c ../note.c $(PKG) $(TEMPOUT) && valgrind $(TARGET)
+
 test_notesbook:
 	$(CC) $(CFLAGS)  -I../include test_notesbook.c ../notesbook.c ../note.c $(PKG) $(TEMPOUT) && valgrind $(TARGET)
 

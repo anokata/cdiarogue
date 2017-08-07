@@ -13,3 +13,5 @@ typedef struct Note {
 
 void note_free(Note note);
 Note note_new(string title, string text);
+char *note_show(Note note);
+char *note_dump(Note note);

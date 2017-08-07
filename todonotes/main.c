@@ -7,9 +7,16 @@
 //+0 Note is text, date, title
 //+1 NotesBook is a book file containing notes
 //+2 Notes list in book
-// First run: check if dir exist, else create, or exit
+//+First run: check if dir exist, else create, or exit
 // 3 Serialization to text formats
 //      store all notebooks in dir
+//			store note to string
+//		format note:
+//		title:01.29.2018 21:22:11
+//		text .....
+//		....
+//		%%
+//		
 //      one file = one notebook
 //
 // 4 cli crud first minimum:
@@ -43,4 +50,7 @@ int main(void) {
 
 	notes_dir = opendir(notebooks_path);
 	printf("Opened note books dir.\n");
+
+	
+
 }
