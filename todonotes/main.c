@@ -18,6 +18,10 @@
 //		%%
 //		
 //      one file = one notebook
+//+3.1 dump note
+// 3.2 load note
+//+3.3 dump notesbook
+// 3.4 load notesbook
 //
 // 4 cli crud first minimum:
 //   program show = show all notebooks(name:len)
@@ -52,5 +56,5 @@ int main(void) {
 	printf("Opened note books dir.\n");
 
 	
-
+	closedir(notes_dir);
 }

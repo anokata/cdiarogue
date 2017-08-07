@@ -4,7 +4,7 @@
 #include <stdio.h>
 #include "note.h"
 
-const char *notebooks_path = "./nb/"; // ~/.notebooks/
+static const char *notebooks_path = "./nb/"; // ~/.notebooks/
 
 typedef struct NotesBook {
     GList *notes;
@@ -16,3 +16,4 @@ void nbook_free(NotesBook book);
 
 void nbook_add_note(NotesBook book, Note note);
 void nbook_print(NotesBook book);
+char *nbook_dump(NotesBook book);

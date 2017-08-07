@@ -7,7 +7,7 @@ OBJECTS=main.c note.c
 CC=gcc
 TARGET=/tmp/$(P)
 TEMPOUT=-o $(TARGET)
-RUN=$(TARGET)
+RUN=valgrind $(TARGET)
 
 main: 
 	$(CC) $(CFLAGS) $(OBJECTS) $(INCLUDES) $(PKG) $(TEMPOUT) && $(RUN)
