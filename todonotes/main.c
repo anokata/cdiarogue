@@ -19,9 +19,9 @@
 //		
 //      one file = one notebook
 //+3.1 dump note
-// 3.2 load note
+//+3.2 load note
 //+3.3 dump and save notesbook
-// 3.4 load notesbook
+//.3.4 load notesbook
 // 3.5 load all notesbooks from dir
 //
 // 4 cli crud first minimum:

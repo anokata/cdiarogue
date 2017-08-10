@@ -3,6 +3,7 @@
 #include <stdio.h>
 
 const char *date_format = "%d.%m.%Y %H:%M:%S";
+char separator_file[] = "%%\n";
 
 Note note_new(string title, string text) {
     time_t now = time(NULL);
@@ -38,7 +39,7 @@ char *note_show(Note note) {
     len += strlen(time_str) + 1;
     len += strlen(note->title) + 1;
     buf = malloc(len);
-    sprintf(buf, "%s:%s", time_str, note->title);
+    sprintf(buf, "%s\n%s", note->title, time_str);
 
     return buf;
 }
@@ -52,36 +53,70 @@ char *note_dump(Note note) {
     return buf;
 }
 
-    // TODO first date
-    // methods of parse 
-Note note_load(char *dump) {
-    Note note = malloc(sizeof(struct Note));
-    memset(note, 0, sizeof(struct Note));
-    char delim = ':';
-    char *after_title = strchr(dump, delim);
-        printf("L:%s\n", after_title);
-    int len = after_title - dump;
-    char *title = malloc(len + 1);
-    memset(title, 0, len + 1);
-    strncpy(title, dump, len);
-        printf("Lt%s\n", title);
-    note->title = title;
-    char *after_time = strchr(dump, '\n');
-    len = after_time - after_title;
-    char *time = malloc(len + 1);
-    memset(time, 0, len + 1);
-    strncpy(time, after_title + 1, len);
-        printf("T%s\n", time);
+char *_parse_title(char **dump) { // one line
+    char *str_title = NULL;
+    char *line = strchr(*dump, '\n');
+    if (line) *line = '\0';  // temporarily terminate the current line
+    str_title = malloc(strlen(*dump) + 1);
+    strcpy(str_title, *dump);
+    if (line) *line = '\n';  // then restore newline-char, just to be tidy    
+    *dump = line ? (line+1) : NULL;
+    printf("title: %s\n", str_title);
+    return str_title;
+}
 
+time_t _parse_date_str(char *date) {
     struct tm *time_full = malloc(sizeof(struct tm));
-    if (strptime(after_title + 1, date_format, time_full) == NULL) {
+    memset(time_full, 0, sizeof(struct tm));
+    if (strptime(date, date_format, time_full) == NULL) {
         perror("date format read");
         exit(4);
     }
-    time_t date = mktime(time_full);
+    time_t time = mktime(time_full);
     free(time_full);
+    return time;
+}
 
-    note->date = date;
+time_t _parse_date(char **dump) {
+    char *line = strchr(*dump, '\n');
+    char *str_date = NULL;
+    if (line) *line = '\0';
+    str_date = malloc(strlen(*dump) + 2);
+    strcpy(str_date, *dump);
+    if (line) *line = '\n';
+    *dump = line ? (line+1) : NULL;
+    printf("date: [%s]\n", str_date);
+
+    time_t date = _parse_date_str(str_date);
+    free(str_date);
+    return date;
+}
+
+char *_parse_content(char **dump) {
+    char *str_content = NULL;
+    char *line = strstr(*dump, separator_file);
+    if (line) *line = '\0';
+    str_content = malloc(strlen(*dump) + 2);
+    strcpy(str_content, *dump);
+    if (line) *line = '\n';
+    *dump = line ? (line+1) : NULL;
+    printf("str_content: [%s]\n", str_content);
+    return str_content;
+}
+
+Note note_load(char *dump) {
+    Note note = malloc(sizeof(struct Note));
+    memset(note, 0, sizeof(struct Note));
+    
+    note->title = _parse_title(&dump);
+    note->date = _parse_date(&dump);
+    note->text = _parse_content(&dump);
 
     return note;
+}
+
+void _print_note(Note note) {
+	char *free_me = note_dump(note);
+	printf("%s\n", free_me);
+	free(free_me);
 }

@@ -1,6 +1,9 @@
 #include "notesbook.h"
 #include <stdlib.h>
 
+char separator[] = "\n%%\n";
+static char separator_file[] = "%%\n"; //TODO extract
+
 NotesBook nbook_new(char *name) {
     NotesBook book = malloc(sizeof(struct NotesBook));
     book->name = name;
@@ -36,7 +39,6 @@ void nbook_print(NotesBook book) {
 
 char *nbook_dump(NotesBook book) {
     GList *note_node = book->notes;
-	char separator[] = "\n%%\n";
 	int len = 5;
 	char *buf = malloc(len);
 	bzero(buf, len);
@@ -69,4 +71,59 @@ void nbook_save(NotesBook book) {
     free(dump);
     free(filename);
     fclose(fout);
+}
+
+FILE *_open_nbook_file(const char *filename) {
+    int len = strlen(filename) + strlen(notebooks_path) + 2;
+    char *full_path = malloc(len);
+    snprintf(full_path, len, "%s%s", notebooks_path, filename);
+    printf("Full path: %s\n", full_path);
+
+    FILE *fin;
+    fin = fopen(full_path, "r");
+    free(full_path);
+    return fin;
+}
+
+Note note_read(char **content) {
+    Note note = NULL;
+    char *dump = NULL;
+    char *note_str = NULL;
+    note_str = strstr(*content, separator_file);
+    if (note_str) *note_str = '\0';
+    dump = malloc(strlen(*content) + 1);
+    strcpy(dump, *content);
+    if (note_str) *note_str = '\n';
+    *content = note_str ? (note_str + strlen(separator_file)) : NULL;
+    
+    note = note_load(dump);
+    free(dump);
+    return note;
+}
+
+NotesBook nbook_load(const char *filename) {
+    NotesBook book;
+    book = nbook_new(g_strdup(filename));
+
+    // read book file
+    // Read until separator, send to read note from string, add note, until EOF
+    FILE *fin = _open_nbook_file(filename);
+    // read whole file, then strstr dup pass by note
+    fseek(fin, 0, SEEK_END);
+    long fsize = ftell(fin);
+    fseek(fin, 0, SEEK_SET);
+    char *content = malloc(fsize + 1);
+    char *old_content = content;
+    fread(content, fsize, 1, fin);
+    content[fsize] = 0;
+    fclose(fin);
+
+    while (*content) {
+        Note note = note_read(&content);
+        _print_note(note);
+        note_free(note);
+    }
+    free(old_content);
+
+    return book;
 }

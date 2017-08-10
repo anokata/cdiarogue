@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include "note.h"
+#include <glib.h>
 
 void note_test() {
     string t = strdup("hi");
@@ -16,11 +17,12 @@ void note_test() {
     note_free(n);
 
 
-    char *dump = "title:01.29.2018 21:22:11\ntext\n.....\n ....\n %%";
+    char *dump = g_strdup("title\n29.01.2018 21:22:11\ntext\n.....\n ....\n %%\n");
     n = note_load(dump);
 	free_me = note_show(n);
 	printf("NOTE loaded:%s\n", free_me);
 	free(free_me);
+    free(dump);
 
     note_free(n);
 }

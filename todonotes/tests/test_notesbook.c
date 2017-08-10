@@ -21,5 +21,10 @@ int main() {
 
     nbook_save(b);
     nbook_free(b);
+
+
+    b = nbook_load("name");
+
+    nbook_free(b);
 }
 

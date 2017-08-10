@@ -16,3 +16,4 @@ Note note_new(string title, string text);
 char *note_show(Note note);
 char *note_dump(Note note);
 Note note_load(char *dump);
+void _print_note(Note note);
