@@ -1,7 +1,5 @@
 #include "command.h"
 #include "notesbook.h"
-#include <unistd.h>
-#include <errno.h>
 #define UNUSED(x) ((void)(x))
 
 void print_help(char **params) {
@@ -34,24 +32,7 @@ void print_nbook(char **params) {
 
 void cmd_book(char **params) {
     char *bookname = _get_bookname(params);
-    // Check if file exist then warning else create
-    char *bookpath = nbook_path(bookname);
-    if(access(bookpath, F_OK) != -1) {
-        printf("Book %s already exists @ %s\n", bookname, bookpath);
-        exit(6);
-    } else {
-        printf("Creating book %s\n", bookname);
-        FILE *f = fopen(bookpath, "w+");
-        if (!f) {
-            fprintf(stderr, 
-                    "Error creating book @ %s: %s\n", 
-                    bookpath, 
-                    strerror(errno));
-            exit(6);
-        }
-
-        fclose(f);
-    }   
+    nbook_file_new(bookname);
 }
 
 void cmd_unbook(char **params) {

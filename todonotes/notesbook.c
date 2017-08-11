@@ -1,7 +1,9 @@
-#include "notesbook.h"
 #include <stdlib.h>
 #include <dirent.h>
+#include <unistd.h>
+#include <errno.h>
 #include "util.h"
+#include "notesbook.h"
 
 char separator[] = "\n%%\n";
 static char separator_file[] = "%%\n"; //TODO extract
@@ -163,4 +165,25 @@ void nbook_list() {
 
 guint nbook_len(NotesBook book) {
     return g_list_length(book->notes);
+}
+
+void nbook_file_new(char *bookname) {
+    // Check if file exist then warning else create
+    char *bookpath = nbook_path(bookname);
+    if(access(bookpath, F_OK) != -1) {
+        printf("Book %s already exists @ %s\n", bookname, bookpath);
+        exit(6);
+    } else {
+        printf("Creating book %s\n", bookname);
+        FILE *f = fopen(bookpath, "w+");
+        if (!f) {
+            fprintf(stderr, 
+                    "Error creating book @ %s: %s\n", 
+                    bookpath, 
+                    strerror(errno));
+            exit(6);
+        }
+
+        fclose(f);
+    }   
 }
