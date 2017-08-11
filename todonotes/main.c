@@ -22,8 +22,8 @@
 //+3.1 dump note
 //+3.2 load note
 //+3.3 dump and save notesbook
-//.3.4 load notesbook
-// 3.5 load all notesbooks from dir
+//+3.4 load notesbook
+// 3.5 load all notesbooks from dir? list notesbooks?
 //
 // 4 cli crud first minimum:
 //   program show = show all notebooks(name:len)
@@ -34,8 +34,12 @@
 //   program rm bookname name = rm note 
 //
 // future:
+// find, remove,
 // x curses ui (cui)
 // x daemon
+
+#define dprint(expr) printf(#expr "= (%d)\n", expr);
+#define swap(t, x, y) { t temp = x; x = y; y = temp; }
 
 static const char *version = "0.1";
 
@@ -56,6 +60,9 @@ int main(void) {
 
 	notes_dir = opendir(notebooks_path);
 	printf("Opened note books dir.\n");
+    int x = 2; int y = 80;
+   swap(int, x, y);
+   dprint(x - y);
 
 	
 	closedir(notes_dir);

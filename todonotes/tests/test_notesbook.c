@@ -27,5 +27,7 @@ int main() {
     nbook_print(b);
 
     nbook_free(b);
+
+    nbook_list();
 }
 

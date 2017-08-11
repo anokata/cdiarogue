@@ -19,3 +19,4 @@ void nbook_print(NotesBook book);
 char *nbook_dump(NotesBook book);
 void nbook_save(NotesBook book);
 NotesBook nbook_load(const char *filename);
+void nbook_list();

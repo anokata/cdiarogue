@@ -1,5 +1,6 @@
 #include "notesbook.h"
 #include <stdlib.h>
+#include <dirent.h>
 #include "util.h"
 
 char separator[] = "\n%%\n";
@@ -125,4 +126,28 @@ NotesBook nbook_load(const char *filename) {
     free(old_content);
 
     return book;
+}
+
+#define NOT_SELF_DIR(name) strcmp(name, ".")
+
+void nbook_list() {
+    DIR *dir = opendir(notebooks_path);
+    if (!dir) {
+        perror("open dir");
+        exit(5);
+    }
+    struct dirent *entry = NULL;
+
+    printf("Books:\n");
+    int i = 1;
+    do {
+        entry = readdir(dir);
+        if (entry 
+                && NOT_SELF_DIR(entry->d_name)
+                && strcmp(entry->d_name, "..")) {
+            printf("%d)\t%s\n", i++, entry->d_name);
+        }
+    } while (entry);
+
+    closedir(dir);
 }
