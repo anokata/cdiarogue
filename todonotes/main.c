@@ -6,7 +6,9 @@
 #include "command.h"
 
 /* #define DEBUG */
-//+0 Note is text, date, title
+/* Rule of dev: First make full basic functionality then detailed expand it. */
+
+/* Note consist of text, date, and title */
 //+1 NotesBook is a book file containing notes
 //+2 Notes list in book
 //+First run: check if dir exist, else create, or exit
@@ -32,14 +34,16 @@
 // + program show name = show notes of notebook
 // . program book somename = add notebook
 //   program unbook somename = rm book file
-//   program note bookname name <input> = add note
-//   program rm bookname name = rm note 
+//   program note bookname name <input> = add note (load, add, save or create and dump append to book file)
+//   program rm bookname name = rm note (load, del in list, serialize)
 //
 // future:
 // show notes short/long modes
-// find, remove,
+// find, remove, edit note text
 // x curses ui (cui)
 // x daemon
+// x web ui
+// x http api
 
 #define dprint(expr) printf(#expr "= (%d)\n", expr);
 #define swap(t, x, y) { t temp = x; x = y; y = temp; }
@@ -70,10 +74,11 @@ int main(int argc, char *argv[]) {
     /* printf("C:%d\n", argc); */
     if (argc == 1) {
         printf("using: tn [CMD] [PARAM]\n"
-               "Avaliable CMD is:\n" 
+               "Avaliable CMD is:\n"  // TO help
                "\tlist - List notes books in default path\n"
-               "\tshow BOOKNAME - show book of notes\n"
-               "\tbook BOOKNAME - create book\n"
+               "\tshow\t BOOKNAME - show book of notes\n"
+               "\tbook\t BOOKNAME - create book\n"
+               "\tunbook\t BOOKNAME - delete book\n"
                 );
         return 0;
     }

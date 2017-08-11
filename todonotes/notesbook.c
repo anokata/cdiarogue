@@ -75,12 +75,16 @@ void nbook_save(NotesBook book) {
     fclose(fout);
 }
 
-FILE *_open_nbook_file(const char *filename) {
+char *nbook_path(const char *filename) {
     int len = strlen(filename) + strlen(notebooks_path) + 2;
     char *full_path = malloc(len);
     snprintf(full_path, len, "%s%s", notebooks_path, filename);
     DEBUG_PRINT("Full path: %s\n", full_path);
+    return full_path;
+}
 
+FILE *_open_nbook_file(const char *filename) {
+    char *full_path = nbook_path(filename);
     FILE *fin;
     fin = fopen(full_path, "r");
     if (!fin) {

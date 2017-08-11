@@ -22,3 +22,4 @@ NotesBook nbook_load(const char *filename);
 void nbook_list();
 
 void nbook_file_new(char *name);
+char *nbook_path(const char *bookname);
