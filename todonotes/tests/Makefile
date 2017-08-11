@@ -1,6 +1,7 @@
 # vim: filetype=make
 P=test
 CFLAGS=-Wall -Wextra -std=gnu11 -g -D_GNU_SOURCE=1 
+INCLUDES=-I./include 
 PKG=$(shell pkg-config --libs --cflags glib-2.0)
 OBJECTS=test_note.c ../note.c
 CC=gcc
