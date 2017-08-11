@@ -34,7 +34,7 @@
 // + program show name = show notes of notebook
 // + program book somename = add notebook
 // + program unbook somename = rm book file
-//   program note bookname name <input> = add note (load, add, save or create and dump append to book file)
+// . program note bookname name <input> = add note (load, add, save or create and dump append to book file)
 //   program rm bookname name = rm note (load, del in list, serialize)
 //
 // future:
@@ -48,7 +48,7 @@
 #define dprint(expr) printf(#expr "= (%d)\n", expr);
 #define swap(t, x, y) { t temp = x; x = y; y = temp; }
 
-static const char *version = "0.2.2";
+static const char *version = "0.2.3";
 // RULES:
 // Global names namig!!! how? or drop it
 // comments
@@ -79,6 +79,7 @@ int main(int argc, char *argv[]) {
                "\tshow\t BOOKNAME - show book of notes\n"
                "\tbook\t BOOKNAME - create book\n"
                "\tunbook\t BOOKNAME - delete book\n"
+               "\tnote\t BOOKNAME NOTENAME - create note in book\n"
                 );
         return 0;
     }

@@ -18,7 +18,7 @@ void print_list(char **params) {
 char *_get_bookname(char **params) {
     char *bookname = params[0];
     if (bookname == NULL) {
-        printf("no parametr\n");
+        printf("Need more parametrs\n");
         exit(6);
     }
     return bookname;
@@ -40,12 +40,24 @@ void cmd_unbook(char **params) {
     nbook_file_rm(bookname);
 }
 
+void cmd_note(char **params) {
+    char *bookname = _get_bookname(params);
+    char *notename = _get_bookname(params + 1);
+    printf("Creating note %s in book %s \n", notename, bookname);
+    // load book, with check
+    // Read stdin for text
+    // create note
+    // add to notebook
+    // save
+}
+
 Command Commands[] = {
     {"help", print_help},
     {"list", print_list},
     {"show", print_nbook},
     {"book", cmd_book},
     {"unbook", cmd_unbook},
+    {"note", cmd_note},
 };
 
 static int commands_count = sizeof(Commands)/sizeof(Command);
