@@ -1,4 +1,5 @@
 #include "note.h"
+#include "util.h"
 #include <errno.h>
 #include <stdio.h>
 
@@ -61,7 +62,7 @@ char *_parse_title(char **dump) { // one line
     strcpy(str_title, *dump);
     if (line) *line = '\n';  // then restore newline-char, just to be tidy    
     *dump = line ? (line+1) : NULL;
-    printf("title: %s\n", str_title);
+    DEBUG_PRINT("title: %s\n", str_title);
     return str_title;
 }
 
@@ -85,7 +86,7 @@ time_t _parse_date(char **dump) {
     strcpy(str_date, *dump);
     if (line) *line = '\n';
     *dump = line ? (line+1) : NULL;
-    printf("date: [%s]\n", str_date);
+    DEBUG_PRINT("date: [%s]\n", str_date);
 
     time_t date = _parse_date_str(str_date);
     free(str_date);
@@ -100,7 +101,7 @@ char *_parse_content(char **dump) {
     strcpy(str_content, *dump);
     if (line) *line = '\n';
     *dump = line ? (line+1) : NULL;
-    printf("str_content: [%s]\n", str_content);
+    DEBUG_PRINT("str_content: [%s]\n", str_content);
     return str_content;
 }
 

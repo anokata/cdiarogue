@@ -24,6 +24,7 @@ int main() {
 
 
     b = nbook_load("name");
+    nbook_print(b);
 
     nbook_free(b);
 }

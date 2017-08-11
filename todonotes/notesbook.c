@@ -1,5 +1,6 @@
 #include "notesbook.h"
 #include <stdlib.h>
+#include "util.h"
 
 char separator[] = "\n%%\n";
 static char separator_file[] = "%%\n"; //TODO extract
@@ -47,7 +48,6 @@ char *nbook_dump(NotesBook book) {
 		char *note_str = note_dump(note);
 		len += strlen(note_str) + 5;
 		buf = realloc(buf, len);
-		/* snprintf(buf, len, "%s\n%%%%\n", note_str); */
 		strcat(buf, note_str);
 		strcat(buf, separator);
 		free(note_str);
@@ -77,7 +77,7 @@ FILE *_open_nbook_file(const char *filename) {
     int len = strlen(filename) + strlen(notebooks_path) + 2;
     char *full_path = malloc(len);
     snprintf(full_path, len, "%s%s", notebooks_path, filename);
-    printf("Full path: %s\n", full_path);
+    DEBUG_PRINT("Full path: %s\n", full_path);
 
     FILE *fin;
     fin = fopen(full_path, "r");
@@ -120,8 +120,7 @@ NotesBook nbook_load(const char *filename) {
 
     while (*content) {
         Note note = note_read(&content);
-        _print_note(note);
-        note_free(note);
+        nbook_add_note(book, note);
     }
     free(old_content);
 

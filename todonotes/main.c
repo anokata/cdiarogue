@@ -4,6 +4,7 @@
 #include <sys/stat.h>
 #include <errno.h>
 
+/* #define DEBUG */
 //+0 Note is text, date, title
 //+1 NotesBook is a book file containing notes
 //+2 Notes list in book
