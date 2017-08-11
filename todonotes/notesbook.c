@@ -29,7 +29,8 @@ void nbook_add_note(NotesBook book, Note note) {
 }
 
 void nbook_print(NotesBook book) {
-    printf("Notes book '%s'()\n",book->name);
+    unsigned int len = g_list_length(book->notes);
+    printf("Notes book '%s'(%d)\n",book->name, len);
     GList *note_node = book->notes;
     int i = 1;
     while (note_node != NULL) {
@@ -150,4 +151,8 @@ void nbook_list() {
     } while (entry);
 
     closedir(dir);
+}
+
+guint nbook_len(NotesBook book) {
+    return g_list_length(book->notes);
 }

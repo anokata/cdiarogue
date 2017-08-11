@@ -3,6 +3,7 @@
 #include <sys/stat.h>
 #include <errno.h>
 #include "notesbook.h"
+#include "command.h"
 
 /* #define DEBUG */
 //+0 Note is text, date, title
@@ -27,7 +28,7 @@
 //
 //.4 cli crud first minimum:
 //   parsing args
-//   program show = show all notebooks(name:len)
+// + program list = show all notebooks(name:len)
 //   program show name = show notes of notebook
 //   program book somename = add notebook
 //   program unbook somename = rm book file
@@ -59,30 +60,25 @@ void ensure_notes_dir_exist() {
 		}
         printf("Created note books dir @ %s\n", notebooks_path);
     }
-
 }
-
-#define MAX_CMD_NAME 32
-
-typedef struct Command {
-	char name[MAX_CMD_NAME];
-	// fun
-} Command;
 
 int main(int argc, char *argv[]) {
     printf("NOTES V%s @ %s\n", version, notebooks_path);
     ensure_notes_dir_exist();
-    nbook_list();
 
-	// commands
-
-    printf("C:%d\n", argc);
+    /* printf("C:%d\n", argc); */
     if (argc == 1) {
-        printf("using: tn [CMD] [PARAM]\n");
+        printf("using: tn [CMD] [PARAM]\n"
+               "Avaliable CMD is:\n" 
+               "\tlist - List notes books in default path\n"
+                );
         return 0;
     }
     char *command = argv[1];
+    char **params = &argv[2];
     printf("Cmd: %s\n", command);
+    cmd_get(command).run(params);
+
 
 	/* notes_dir = opendir(notebooks_path); */
 	/* printf("Opened note books dir.\n"); */
