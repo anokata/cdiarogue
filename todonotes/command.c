@@ -37,8 +37,7 @@ void cmd_book(char **params) {
 
 void cmd_unbook(char **params) {
     char *bookname = _get_bookname(params);
-    // Check if file exist then remove it else warning
-
+    nbook_file_rm(bookname);
 }
 
 Command Commands[] = {

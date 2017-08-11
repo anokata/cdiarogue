@@ -29,5 +29,12 @@ int main() {
     nbook_free(b);
 
     nbook_list();
+
+    nbook_file_new("test_book");
+    nbook_file_new("test_book");
+    nbook_list();
+    nbook_file_rm("test_book");
+    nbook_file_rm("test_book");
+    nbook_list();
 }
 

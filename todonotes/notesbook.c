@@ -172,7 +172,6 @@ void nbook_file_new(char *bookname) {
     char *bookpath = nbook_path(bookname);
     if(access(bookpath, F_OK) != -1) {
         printf("Book %s already exists @ %s\n", bookname, bookpath);
-        exit(6);
     } else {
         printf("Creating book %s\n", bookname);
         FILE *f = fopen(bookpath, "w+");
@@ -181,9 +180,24 @@ void nbook_file_new(char *bookname) {
                     "Error creating book @ %s: %s\n", 
                     bookpath, 
                     strerror(errno));
-            exit(6);
         }
-
         fclose(f);
     }   
+    free(bookpath);
+}
+
+
+void nbook_file_rm(char *bookname) {
+    // Check if file exist then remove it else warning
+    char *bookpath = nbook_path(bookname);
+    if (access(bookpath, F_OK) != -1) {
+        if (!remove(bookpath)) {
+            printf("Book @ %s removed\n", bookpath);
+        } else {
+            perror("Book remove");
+        }
+    } else {
+        fprintf(stderr, "Book file @ %s not exist\n", bookpath);
+    }
+    free(bookpath);
 }

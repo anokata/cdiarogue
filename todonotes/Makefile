@@ -1,5 +1,5 @@
 # vim: filetype=make
-P=todonotes
+P=tn
 CFLAGS=-Wall -Wextra -std=gnu11 -g -D_GNU_SOURCE=1
 INCLUDES=-I./include -I../include
 PKG=$(shell pkg-config --libs --cflags glib-2.0)
