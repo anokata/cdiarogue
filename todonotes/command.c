@@ -15,9 +15,22 @@ void print_list(char **params) {
     nbook_list();
 }
 
+void print_nbook(char **params) {
+    char *bookname = params[0];
+    if (bookname == NULL) {
+        printf("no parametr\n");
+        exit(6);
+    }
+    NotesBook book = nbook_load(bookname);
+    nbook_print(book);
+    nbook_free(book);
+}
+
 Command Commands[] = {
     {"help", print_help},
-    {"list", print_list}
+    {"list", print_list},
+    {"show", print_nbook},
+    {"book", print_help},
 };
 
 static int commands_count = sizeof(Commands)/sizeof(Command);

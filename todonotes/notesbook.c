@@ -28,7 +28,7 @@ void nbook_add_note(NotesBook book, Note note) {
     book->notes = g_list_append(book->notes, note);
 }
 
-void nbook_print(NotesBook book) {
+void nbook_print(NotesBook book) { // TODO print mode: short long - options
     unsigned int len = g_list_length(book->notes);
     printf("Notes book '%s'(%d)\n",book->name, len);
     GList *note_node = book->notes;
@@ -83,6 +83,10 @@ FILE *_open_nbook_file(const char *filename) {
 
     FILE *fin;
     fin = fopen(full_path, "r");
+    if (!fin) {
+        perror("note book file open error\n");
+        exit(6);
+    }
     free(full_path);
     return fin;
 }

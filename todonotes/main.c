@@ -29,13 +29,14 @@
 //.4 cli crud first minimum:
 //   parsing args
 // + program list = show all notebooks(name:len)
-//   program show name = show notes of notebook
-//   program book somename = add notebook
+// + program show name = show notes of notebook
+// . program book somename = add notebook
 //   program unbook somename = rm book file
 //   program note bookname name <input> = add note
 //   program rm bookname name = rm note 
 //
 // future:
+// show notes short/long modes
 // find, remove,
 // x curses ui (cui)
 // x daemon
@@ -43,7 +44,7 @@
 #define dprint(expr) printf(#expr "= (%d)\n", expr);
 #define swap(t, x, y) { t temp = x; x = y; y = temp; }
 
-static const char *version = "0.1";
+static const char *version = "0.2.1";
 // RULES:
 // Global names namig!!! how? or drop it
 // comments
@@ -63,7 +64,7 @@ void ensure_notes_dir_exist() {
 }
 
 int main(int argc, char *argv[]) {
-    printf("NOTES V%s @ %s\n", version, notebooks_path);
+    printf("Notes books v%s\t2017 path@ %s\n", version, notebooks_path);
     ensure_notes_dir_exist();
 
     /* printf("C:%d\n", argc); */
@@ -71,6 +72,8 @@ int main(int argc, char *argv[]) {
         printf("using: tn [CMD] [PARAM]\n"
                "Avaliable CMD is:\n" 
                "\tlist - List notes books in default path\n"
+               "\tshow BOOKNAME - show book of notes\n"
+               "\tbook BOOKNAME - create book\n"
                 );
         return 0;
     }
