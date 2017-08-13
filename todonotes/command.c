@@ -40,15 +40,27 @@ void cmd_unbook(char **params) {
     nbook_file_rm(bookname);
 }
 
+char *enter_note();
+char *enter_note() {
+    char *text = NULL;
+
+    return text;
+}
+
 void cmd_note(char **params) {
     char *bookname = _get_bookname(params);
     char *notename = _get_bookname(params + 1);
     printf("Creating note %s in book %s \n", notename, bookname);
     // load book, with check
+    NotesBook book = nbook_load(bookname);
+    printf("Book loaded ok, contains %d notes.\n", nbook_len(book));
     // Read stdin for text
+    char *text = enter_note();
     // create note
     // add to notebook
     // save
+
+    nbook_free(book);
 }
 
 Command Commands[] = {

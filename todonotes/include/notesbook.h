@@ -24,3 +24,4 @@ void nbook_list();
 void nbook_file_new(char *name);
 void nbook_file_rm(char *bookname);
 char *nbook_path(const char *bookname);
+guint nbook_len(NotesBook book);
