@@ -7,7 +7,7 @@ OBJECTS=main.c note.c notesbook.c command.c
 CC=gcc
 TARGET=/tmp/$(P)
 TEMPOUT=-o $(TARGET)
-RUN=valgrind $(TARGET)
+RUN=valgrind --leak-check=full $(TARGET)
 
 main: 
 	$(CC) $(CFLAGS) $(OBJECTS) $(INCLUDES) $(PKG) $(TEMPOUT) && $(RUN)

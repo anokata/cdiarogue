@@ -34,8 +34,8 @@
 // + program show name = show notes of notebook
 // + program book somename = add notebook
 // + program unbook somename = rm book file
-// . program note bookname name <input> = add note (load, add, save or create and dump append to book file)
-//   program rm bookname name = rm note (load, del in list, serialize)
+// + program note bookname name <input> = add note (load, add, save or create and dump append to book file)
+// . program rm bookname name = rm note (load, del in list, serialize)
 //
 // future:
 // show notes short/long modes

@@ -1,6 +1,9 @@
 #include "command.h"
 #include "notesbook.h"
+#include "util.h"
 #define UNUSED(x) ((void)(x))
+
+char *enter_note();
 
 void print_help(char **params) {
     UNUSED(params);
@@ -40,10 +43,31 @@ void cmd_unbook(char **params) {
     nbook_file_rm(bookname);
 }
 
-char *enter_note();
-char *enter_note() {
-    char *text = NULL;
+// FIXME empty string
+char *str_trim_nl(char *text) {
+    size_t len = strlen(text) - 1;
+    char *end = text + len;
+    while (len-- && *end == '\n') {
+        *end = '\0';
+        end--;
+    }
+    return text;
+}
 
+char *enter_note() {
+    size_t len = 1;
+    const size_t max_line_len = 80;
+    char *text = malloc(max_line_len);
+    memset(text, 0 , max_line_len);
+    char *buf = malloc(max_line_len);
+
+    while (fgets(buf, max_line_len, stdin) != NULL) {
+        len += strlen(buf);
+        text = realloc(text, 1 + len);
+        strcat(text, buf);
+    }
+    free(buf);
+    str_trim_nl(text);
     return text;
 }
 
@@ -56,10 +80,10 @@ void cmd_note(char **params) {
     printf("Book loaded ok, contains %d notes.\n", nbook_len(book));
     // Read stdin for text
     char *text = enter_note();
-    // create note
-    // add to notebook
-    // save
-
+    // create note, add, store, close book
+    Note note = note_new(g_strdup(notename), text);
+    nbook_add_note(book, note);
+    nbook_save(book);
     nbook_free(book);
 }
 
