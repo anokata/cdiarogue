@@ -27,15 +27,15 @@
 //+3.3 dump and save notesbook
 //+3.4 load notesbook
 //+3.5 load all notesbooks from dir? list notesbooks?
-//
-//.4 cli crud first minimum:
-// . parsing args
+//+4 cli crud first minimum:
+// + parsing args
 // + program list = show all notebooks(name:len)
 // + program show name = show notes of notebook
 // + program book somename = add notebook
 // + program unbook somename = rm book file
 // + program note bookname name <input> = add note (load, add, save or create and dump append to book file)
-// . program rm bookname name = rm note (load, del in list, serialize)
+// + program rm bookname name = rm note (load, del in list, serialize)
+// 5. 
 //
 // future:
 // show notes short/long modes
