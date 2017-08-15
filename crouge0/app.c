@@ -83,7 +83,8 @@ void debug_draw(G g) {
     char log_text[1024];
     log_text[0] = '\0';
     /* debuglog(g, "abc"); */
-
+    g_debug("hi");
+    g_log(NULL, G_LOG_LEVEL_DEBUG, "MSG");
     for (int i = 0; i < (g->log_len > 10 ? 10 : g->log_len); i++) {
         strcat(log_text, g_list_nth_data(g->log, i));
         strcat(log_text, "\n");

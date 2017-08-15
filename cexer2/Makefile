@@ -1,3 +1,10 @@
+CFLAGS=-Wall -Wextra -std=gnu11 -g -D_GNU_SOURCE=1
+CC=gcc
+GLIB=$(shell pkg-config --cflags --libs glib-2.0)
+
+glog:
+	$(CC) $@.c $(GLIB) -o /tmp/$@ && valgrind /tmp/$@
+
 build: 
 	gcc solution.c -o solution
 sdltest: 
