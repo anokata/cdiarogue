@@ -48,7 +48,7 @@ State state;
 // unicode ncursesw
 //http://www.roguebasin.com/index.php?title=Ncursesw
 //https://stackoverflow.com/questions/43834833/print-a-wide-unicode-character-with-ncurses
-//
+// TODO valgrind libccurses and fix
 
 void process_input(G g) {
     ss_handle(state, Event_draw, g);
@@ -80,10 +80,20 @@ int key_run(void* data) {
 void debug_draw(G g) {
     char buf[1024];
     // LOG
+    char log_text[1024];
+    log_text[0] = '\0';
+    /* debuglog(g, "abc"); */
+
+    for (int i = 0; i < (g->log_len > 10 ? 10 : g->log_len); i++) {
+        strcat(log_text, g_list_nth_data(g->log, i));
+        strcat(log_text, "\n");
+    }
+
     snprintf(buf, 1024, 
 "Debug: \n"
-"Key: %d\n", 
-        g->key);
+"Key: %d\n" 
+"Log:\n%s\n" 
+        , g->key, log_text);
     cc_printxy(buf, cn_white, 0, 30);
 }
 

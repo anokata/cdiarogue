@@ -13,7 +13,9 @@ typedef struct G {
     char key;
     Viewport *view;
     GList *log;
+    int log_len;
 } *G;
 
 G new_g();
 void free_g(G g);
+void debuglog(G g, char *msg);
