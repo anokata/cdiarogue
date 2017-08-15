@@ -40,10 +40,12 @@
 // future:
 // show notes short/long modes
 // find, remove, edit note text
+// interactive cli, with one button cmd
 // x curses ui (cui)
 // x daemon
 // x web ui
 // x http api
+// FIXME seems nbook_save add newline at every note
 
 #define dprint(expr) printf(#expr "= (%d)\n", expr);
 #define swap(t, x, y) { t temp = x; x = y; y = temp; }

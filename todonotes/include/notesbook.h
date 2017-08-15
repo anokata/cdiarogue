@@ -25,3 +25,4 @@ void nbook_file_new(char *name);
 void nbook_file_rm(char *bookname);
 char *nbook_path(const char *bookname);
 guint nbook_len(NotesBook book);
+void nbook_note_remove(NotesBook book, int note_index);

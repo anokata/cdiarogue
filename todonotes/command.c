@@ -91,18 +91,28 @@ void cmd_remove(char **params) {
     // by name or by index? by title not 
     char *bookname = _get_bookname(params);
     char *noteindex = _get_bookname(params + 1);
-    printf("Removing note #%s in book [%s] \n", noteindex, bookname);
-    // to int
-    int note_index = atoi(noteindex);
     // 1. check contains digits
-    size_t digits = strspn(noteindex, "0123456789");
-    // TODO check result
+    int is_digits = strpbrk(noteindex, "0123456789") != NULL;
+    if (!is_digits) {
+        fprintf(stderr, "index not contain digits\n");
+        return;
+    }
+    int note_index = atoi(noteindex);
     // or strtol
-    
     NotesBook book = nbook_load(bookname);
-    printf("Book loaded ok, contains %d notes.\n", nbook_len(book));
-    // nbook_note_remove(book, note_index)
+    int len = nbook_len(book);
+    printf("Book loaded ok, contains %d notes.\n", len);
 
+    printf("Removing note #%s in book [%s] \n", noteindex, bookname);
+    /* cmp with len */
+    if (note_index < 1 || note_index > len) {
+        fprintf(stderr, "index not in [1..%d], is too big or small\n", len);
+        nbook_free(book);
+        return;
+    }
+    note_index--; /* For numerating from 1. */
+    
+    nbook_note_remove(book, note_index);
     nbook_save(book);
     nbook_free(book);
 }

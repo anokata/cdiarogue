@@ -201,3 +201,10 @@ void nbook_file_rm(char *bookname) {
     }
     free(bookpath);
 }
+
+void nbook_note_remove(NotesBook book, int note_index) {
+    gpointer note_data = g_list_nth_data(book->notes, note_index);
+    Note note = note_data;
+    note_free(note);
+    book->notes = g_list_remove(book->notes, note_data);
+}
