@@ -31,6 +31,7 @@ State state;
 //+2.3 load to global map
 //+2.3.1 gmap mode
 //+2.3.2 colors (without attributes)
+// TODO Remade map formats to more text-like edit-easy
 // 2.4 global to viewport at point
 // 2.5 moving and view map
 // WRite and draw GP Mechanic, view, make questions and decisions, KNOW WHAT TO DO
@@ -48,7 +49,7 @@ State state;
 //http://www.roguebasin.com/index.php?title=Ncursesw
 //https://stackoverflow.com/questions/43834833/print-a-wide-unicode-character-with-ncurses
 
-void processInput(G g) {
+void process_input(G g) {
     ss_handle(state, Event_draw, g);
 	int ch = getch();
 	while(ch != 'q') {
@@ -161,7 +162,7 @@ void start() {
     curses_init();
     state_init();
 
-    processInput(g);
+    process_input(g);
     ss_free_state(state);
     curses_end();
     free_g(g);
