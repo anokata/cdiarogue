@@ -11,6 +11,7 @@
 
 #include "color.h"
 #include "state.h"
+#include "util.h"
 
 int width;
 int heigth;

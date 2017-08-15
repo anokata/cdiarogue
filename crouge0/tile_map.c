@@ -21,7 +21,7 @@ void free_tile_map(TileMap map) {
 
 Tile *tile_at(TileMap map, int x, int y) {
     if (x > map->width) exit(1);
-    /* debug_file_log("x"); */
+    debug_file_log_format("x %d  y %d.\n", x, y);
     Tile *tile = map->tiles + y * map->width + x;
     return tile;
 }
