@@ -8,6 +8,7 @@ CC=gcc
 TARGET=/tmp/$(P)
 TEMPOUT=-o $(TARGET)
 RUN=valgrind --leak-check=full $(TARGET)
+# VPATH := 
 
 main: 
 	$(CC) $(CFLAGS) $(OBJECTS) $(INCLUDES) $(PKG) $(TEMPOUT) && $(RUN)

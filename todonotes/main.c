@@ -80,6 +80,7 @@ int main(int argc, char *argv[]) {
                "\tbook\t BOOKNAME - create book\n"
                "\tunbook\t BOOKNAME - delete book\n"
                "\tnote\t BOOKNAME NOTENAME - create note in book\n"
+               "\trm\t BOOKNAME INDEX - remove note#index from book\n"
                 );
         return 0;
     }

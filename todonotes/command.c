@@ -87,6 +87,26 @@ void cmd_note(char **params) {
     nbook_free(book);
 }
 
+void cmd_remove(char **params) {
+    // by name or by index? by title not 
+    char *bookname = _get_bookname(params);
+    char *noteindex = _get_bookname(params + 1);
+    printf("Removing note #%s in book [%s] \n", noteindex, bookname);
+    // to int
+    int note_index = atoi(noteindex);
+    // 1. check contains digits
+    size_t digits = strspn(noteindex, "0123456789");
+    // TODO check result
+    // or strtol
+    
+    NotesBook book = nbook_load(bookname);
+    printf("Book loaded ok, contains %d notes.\n", nbook_len(book));
+    // nbook_note_remove(book, note_index)
+
+    nbook_save(book);
+    nbook_free(book);
+}
+
 Command Commands[] = {
     {"help", print_help},
     {"list", print_list},
@@ -94,6 +114,7 @@ Command Commands[] = {
     {"book", cmd_book},
     {"unbook", cmd_unbook},
     {"note", cmd_note},
+    {"rm", cmd_remove},
 };
 
 static int commands_count = sizeof(Commands)/sizeof(Command);
