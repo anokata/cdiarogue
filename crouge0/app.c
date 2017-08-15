@@ -75,6 +75,7 @@ int key_run(void* data) {
 }
 
 int draw(void* data) {
+    UNUSED(data);
     clear();
     /* cc_putxy('D', cb_yellow, 3, 2); */
     cc_printxy(

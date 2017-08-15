@@ -11,10 +11,10 @@ CC=gcc
 GLIB=$(shell pkg-config --cflags --libs glib-2.0)
 
 main:
-	$(CC) $(CFLAGS) $(OBJECTS) -L../ccurses -lccurses -I./include -I../ccurses -lncurses -o /tmp/$(P) && /tmp/$(P)
+	$(CC) $(CFLAGS) $(OBJECTS) -L../lib -lccurses -I./include -I../ccurses -lncurses -o /tmp/$(P) && /tmp/$(P)
 
 compile:
-	$(CC) $(CFLAGS) *.c -L../ccurses -lccurses -I../ccurses -lncurses -o /tmp/$(P)
+	$(CC) $(CFLAGS) *.c -L../lib -lccurses -I../ccurses -lncurses -o /tmp/$(P)
 
 makelib:
 	$(CC) -std=c11 lib/*.c -c
@@ -23,14 +23,14 @@ makelib:
 	# make to temp
 
 make_with_lib:
-	$(CC) -Wall -std=c11 *.c -L../ccurses -lccurses -I../ccurses -lncurses -o /tmp/a.out && /tmp/a.out
+	$(CC) -Wall -std=c11 *.c -L../lib -lccurses -I../ccurses -lncurses -o /tmp/a.out && /tmp/a.out
 
 
 map:
-	$(CC) $(CFLAGS) $(MAP_OBJECTS) -L../ccurses -lccurses -I./include -I../ccurses -lncurses -o /tmp/$(MAPGEN) && valgrind /tmp/$(MAPGEN) && ls -l /tmp/*.map
+	$(CC) $(CFLAGS) $(MAP_OBJECTS) -L../lib -lccurses -I./include -I../ccurses -lncurses -o /tmp/$(MAPGEN) && valgrind /tmp/$(MAPGEN) && ls -l /tmp/*.map
 
 tmap:
-	$(CC) $(CFLAGS) $(TMAP_OBJECTS) -L../ccurses -lccurses -I./include -I../ccurses -lncurses -o /tmp/out && valgrind /tmp/out
+	$(CC) $(CFLAGS) $(TMAP_OBJECTS) -L../lib -lccurses -I./include -I../ccurses -lncurses -o /tmp/out && valgrind /tmp/out
 
 test: tmap map
 	echo ok

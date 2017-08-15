@@ -2,7 +2,7 @@
 #ifndef __MAP_GEN__
 #define __MAP_GEN__
 
-#define _GNU_SOURCE
+/* #define _GNU_SOURCE */
 #define DEBUG
 
 #include <stdlib.h>

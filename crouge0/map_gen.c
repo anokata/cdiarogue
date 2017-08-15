@@ -32,12 +32,15 @@ char map_char_at(TileMap map, int x, int y) {
 
 int map_neighbours(Map map, Point p) {
     int n = 0;
-
+    UNUSED(map);
+    UNUSED(p);
+    // TODO
     return n;
 }
 
 void gen_map_step(Map map) {
-
+    // TODO
+    UNUSED(map);
 }
 
 Map gen_map(int width, int heigth) {

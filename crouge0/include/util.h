@@ -5,6 +5,8 @@
 #include <stdlib.h>
 typedef char* string;
 
+#define UNUSED(x) ((void)(x));
+
 #ifdef DEBUG
 #define DEBUG_PRINT(fmt, args...)    fprintf(stderr, fmt, ## args)
 #else
