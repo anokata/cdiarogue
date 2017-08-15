@@ -11,8 +11,8 @@ G new_g() {
     g->view = malloc(sizeof(Viewport));
     g->view->cx = 0;
     g->view->cy = 0;
-    g->view->width = 6;
-    g->view->heigth = 6;
+    g->view->width = 16;
+    g->view->heigth = 16;
 
     return g;
 }

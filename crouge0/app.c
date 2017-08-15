@@ -36,7 +36,7 @@ State state;
 // 2.5 moving and view map
 // WRite and draw GP Mechanic, view, make questions and decisions, KNOW WHAT TO DO
 // 1. walking @
-// 2. debug and msg
+// 2.!debug and msg
 // 3. simple location
 // 4. walking @ loc stop walls
 // 5. add monstr, simple ai, stay, rand. time steps
@@ -48,6 +48,7 @@ State state;
 // unicode ncursesw
 //http://www.roguebasin.com/index.php?title=Ncursesw
 //https://stackoverflow.com/questions/43834833/print-a-wide-unicode-character-with-ncurses
+//
 
 void process_input(G g) {
     ss_handle(state, Event_draw, g);
@@ -56,6 +57,7 @@ void process_input(G g) {
         g->key = ch;
         ss_handle(state, Event_key, g);
         ss_handle(state, Event_draw, g);
+        debug_draw(g);
 		ch = getch();
 	}
 }
@@ -73,6 +75,16 @@ int key_run(void* data) {
             break;
     }
     return 0;
+}
+
+void debug_draw(G g) {
+    char buf[1024];
+    // LOG
+    snprintf(buf, 1024, 
+"Debug: \n"
+"Key: %d\n", 
+        g->key);
+    cc_printxy(buf, cn_white, 0, 30);
 }
 
 int draw(void* data) {

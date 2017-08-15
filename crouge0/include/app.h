@@ -12,4 +12,6 @@
 #include "world_map.h"
 #include "g.h"
 
+void debug_draw(G g);
+
 #endif

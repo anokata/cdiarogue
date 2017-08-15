@@ -4,6 +4,7 @@
 #include "map_gen.h"
 #include "tile_map.h"
 #include "world_map.h"
+#include <glib.h>
 
 typedef struct G {
     WorldMap wmap;
@@ -11,6 +12,7 @@ typedef struct G {
     Point cursor;
     char key;
     Viewport *view;
+    GList *log;
 } *G;
 
 G new_g();

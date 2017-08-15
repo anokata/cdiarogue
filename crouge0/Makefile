@@ -11,7 +11,7 @@ CC=gcc
 GLIB=$(shell pkg-config --cflags --libs glib-2.0)
 
 main:
-	$(CC) $(CFLAGS) $(OBJECTS) -L../lib -lccurses -I./include -I../ccurses -lncurses -o /tmp/$(P) && /tmp/$(P)
+	$(CC) $(CFLAGS) $(OBJECTS) -L../lib -lccurses -I./include -I../ccurses -lncurses $(GLIB) -o /tmp/$(P) && /tmp/$(P)
 
 compile:
 	$(CC) $(CFLAGS) *.c -L../lib -lccurses -I../ccurses -lncurses -o /tmp/$(P)
