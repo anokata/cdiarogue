@@ -5,7 +5,7 @@
 #include "util.h"
 #include "notesbook.h"
 
-char separator[] = "\n%%\n";
+/* char separator[] = "\n%%\n"; */
 static char separator_file[] = "%%\n"; //TODO extract
 
 NotesBook nbook_new(char *name) {
@@ -53,7 +53,7 @@ char *nbook_dump(NotesBook book) {
 		len += strlen(note_str) + 5;
 		buf = realloc(buf, len);
 		strcat(buf, note_str);
-		strcat(buf, separator);
+		strcat(buf, separator_file);
 		free(note_str);
         note_node = g_list_next(note_node);
     }
