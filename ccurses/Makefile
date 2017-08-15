@@ -1,10 +1,11 @@
-LIB=libfurses.a
 CC=gcc
 CFLAGS=-Wall -std=gnu11 -g 
-LIBFLAGS=-L../ccurses -lccurses -I./ -I./lib -lncurses 
+LIBFLAGS=-L../lib -lccurses -I./ -I./lib -lncurses 
+OBJECTS=app.c main.c
+OUT=/tmp/ccurses_app
 
 main:
-	$(CC) -Wall -std=c11 *.c lib/*.c -lncurses -o /tmp/a.out && /tmp/a.out
+	$(CC) -Wall -std=c11 $(OBJECTS) lib/*.c $(LIBFLAGS) -o $(OUT) && valgrind $(OUT)
 
 makelib:
 	$(CC) -std=c11 lib/*.c -c

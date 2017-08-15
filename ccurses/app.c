@@ -27,6 +27,10 @@ int key_run(void* data) {
 int draw(void* data) {
     clear();
     cc_putxy('D', cb_yellow, 3, 2);
+    cc_print("cc_print", cb_red);
+    cc_printi(123, cb_green);
+    cc_printxy("cc_printxy", cn_blue, 2, 3);
+    cc_put('X', cb_blue);
     return 0;
 }
 
