@@ -3,6 +3,7 @@
 #define __UTIL__
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 typedef char* string;
 
 #define UNUSED(x) ((void)(x));
@@ -14,5 +15,10 @@ typedef char* string;
 #endif
 
 int fget_int_line(FILE *file);
+
+typedef void (*EachStrFunc)(char* str, void *data);
+void for_every_part(char *text, char delim, EachStrFunc f, void *data);
+
+char *read_whole_file(char *filename);
 
 #endif

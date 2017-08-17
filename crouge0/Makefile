@@ -42,5 +42,5 @@ test_sky:
 	$(CC) $(CFLAGS) test_sky.c sky_view.c $(GLIB) -I./include -I../ccurses -o /tmp/sky && /tmp/sky
 
 test_config_parser:
-	$(CC) $(CFLAGS) test_config_parser.c config_parser.c $(GLIB) -I./include -I../ccurses -o /tmp/parser && /tmp/parser
+	$(CC) $(CFLAGS) test_config_parser.c config_parser.c util.c $(GLIB) -I./include -I../ccurses -o /tmp/parser && /tmp/parser
 
