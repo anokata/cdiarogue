@@ -124,6 +124,7 @@ void _copy_tileloc2glob(TileMap gmap, TileMap lmap, int offset) {
 
 TileMap load_global_tmap() {
     TileMap global_map;
+    // TODO read from map info file
     int local_width = 2;
     int local_height = 2;
     int local_map_width = 6;

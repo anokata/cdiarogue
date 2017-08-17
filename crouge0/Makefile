@@ -26,7 +26,7 @@ make_with_lib:
 	$(CC) -Wall -std=c11 *.c -L../lib -lccurses -I../ccurses -lncurses -o /tmp/a.out && /tmp/a.out
 
 
-map:
+mapgen_main:
 	$(CC) $(CFLAGS) $(MAP_OBJECTS) -L../lib -lccurses -I./include -I../ccurses -lncurses -o /tmp/$(MAPGEN) && valgrind /tmp/$(MAPGEN) && ls -l /tmp/*.map
 
 tmap:

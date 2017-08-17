@@ -19,8 +19,9 @@ void free_map(Map map) { // OK
     free(map);
 }
 
-static const char *map_chars = ".o";
-int map_chars_count = 0;
+static const char map_chars[] = ".......ox";
+int map_chars_count = sizeof(map_chars);
+// TODO chars and probabilities
 
 char rand_char() {
     return map_chars[rand() % map_chars_count];
