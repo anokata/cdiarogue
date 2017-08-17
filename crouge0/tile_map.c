@@ -21,7 +21,7 @@ void free_tile_map(TileMap map) {
 
 Tile *tile_at(TileMap map, int x, int y) {
     if (x > map->width) exit(1);
-    debug_file_log_format("x %d  y %d.\n", x, y);
+    //debug_file_log_format("x %d  y %d.\n", x, y);
     Tile *tile = map->tiles + y * map->width + x;
     return tile;
 }
@@ -149,14 +149,21 @@ TileMap load_global_tmap() {
     return global_map;
 }
 
+#define max(x, y) (x) > (y) ? (x) : (y)
+#define min(x, y) (x) < (y) ? (x) : (y)
+
 void foreach_tile_viewport(TileMap map, TileFunc f, Viewport v) {
     int top = v.cy - v.heigth / 2;
     int left = v.cx - v.width / 2;
-    int bottom = (v.cy + v.heigth / 2);// % map->heigth + 0;
-    int right = (v.cx + v.width / 2) % map->width + 0;
+    int bottom = min((v.cy + v.heigth / 2), map->heigth);
+    int right = min((v.cx + v.width / 2), map->width);
     top = (top < 0) ? 0 : top;
     left = (left < 0) ? 0 : left;
 
+    /* debug_file_log_format("viewport cx %d  cy %d.\n", v.cx, v.cy); */
+    /* debug_file_log_format("viewport w %d  h %d. map w h %d %d\n", v.width, v.heigth, map->width, map->heigth); */
+    /* debug_file_log_format("foreach t %d  l %d.\n", top, left); */
+    /* debug_file_log_format("foreach b %d  r %d.\n", bottom, right); */
     for (int y = top; y < bottom; ++y) {
         for (int x = left; x < right; ++x) {
             f(tile_at(map, x, y), x - left, y - top);

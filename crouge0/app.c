@@ -48,7 +48,8 @@ State state;
 // unicode ncursesw
 //http://www.roguebasin.com/index.php?title=Ncursesw
 //https://stackoverflow.com/questions/43834833/print-a-wide-unicode-character-with-ncurses
-// TODO valgrind libccurses and fix
+// TODO union cursor and view and move cursor only if no view moved
+//      or get cursor pos from view, calc or store?
 
 void process_input(G g) {
     ss_handle(state, Event_draw, g);
