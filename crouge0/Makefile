@@ -2,7 +2,7 @@
 P=rouge0
 MAPGEN=mapgen_main
 CFLAGS=-Wall -Wextra -std=gnu11 -g -D_GNU_SOURCE=1
-OBJECTS=app.c main.c map_gen.c world_map.c g.c tile_map.c util.c
+OBJECTS=app.c main.c map_gen.c world_map.c g.c tile_map.c util.c config_parser.c
 MAP_OBJECTS=mapgen_main.c map_gen.c tile_map.c util.c
 TMAP_OBJECTS=tile_map.c test_tile_map.c util.c
 LDLIBS=
@@ -40,3 +40,7 @@ lint:
 
 test_sky:
 	$(CC) $(CFLAGS) test_sky.c sky_view.c $(GLIB) -I./include -I../ccurses -o /tmp/sky && /tmp/sky
+
+test_config_parser:
+	$(CC) $(CFLAGS) test_config_parser.c config_parser.c $(GLIB) -I./include -I../ccurses -o /tmp/parser && /tmp/parser
+
