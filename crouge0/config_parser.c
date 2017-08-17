@@ -4,7 +4,6 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-// Valgrind it TODO
 char delim = ':';
 
 KVParam parse_dsv_kv_line(char *line) {
@@ -21,12 +20,14 @@ void print_ss_kvparam(KVParam param) {
 void _add_kv_to_hash(char *line, void *hash_table) {
     GHashTable *table = hash_table;
     KVParam param = parse_dsv_kv_line(line);
-    g_hash_table_insert(table, param.key, param.value);
-    //print_ss_kvparam(param);
+    /* dup every param key val */
+    g_hash_table_insert(table, g_strdup(param.key), g_strdup(param.value));
+    /* print_ss_kvparam(param); */
 }
 
 GHashTable *parse_file(char *filename) {
-    GHashTable *table = g_hash_table_new(g_str_hash, g_str_equal);
+    /* for auto free key and val when destroy */
+    GHashTable *table = g_hash_table_new_full(g_str_hash, g_str_equal, free, free);
     char *content = read_whole_file(filename);
     for_every_part(content, '\n', _add_kv_to_hash, table);
     free(content);

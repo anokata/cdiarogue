@@ -1,4 +1,5 @@
 #include "tile_map.h"
+#include "config_parser.h"
 
 TileMap make_tile_map(int width, int heigth) {
     TileMap map = malloc(sizeof(struct TileMap));
@@ -124,11 +125,18 @@ void _copy_tileloc2glob(TileMap gmap, TileMap lmap, int offset) {
 
 TileMap load_global_tmap() {
     TileMap global_map;
-    // TODO read from map info file
     int local_width = 2;
     int local_height = 2;
     int local_map_width = 6;
     int local_map_height = 3;
+    /* read params from map info file */
+    GHashTable *config = parse_file("./maps/info");
+    // TODO read params
+    printf("_w:%s\n", g_hash_table_lookup(config, "map_width"));
+    local_map_width = atoi(g_hash_table_lookup(config, "map_width"));
+    printf("WW:%d\n", local_map_width);
+    g_hash_table_destroy(config);
+
     global_map = make_tile_map(local_width * local_map_width, local_height * local_map_height);
     DEBUG_PRINT("Global tile map with w:%d h:%d\n", global_map->width, global_map->heigth);
     string mapname_format = "maps/map_%i_%i";

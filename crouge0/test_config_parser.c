@@ -22,5 +22,6 @@ int main() {
     for_every_part(test1, ':', testfun, NULL);
     free(test1);
 
-    parse_file("./maps/info");
+    GHashTable *t = parse_file("./maps/info");
+    g_hash_table_destroy(t);
 }
