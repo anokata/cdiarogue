@@ -205,3 +205,21 @@ void draw_map(TileMap map, Viewport *v) {
     /* cc_print(m2, cd_yellow); */
     /* free(m2); */
 }
+
+void viewport_move_left(Viewport *v) {
+    if (v->cx == 0) return;
+    v->cx--;
+}
+
+void viewport_move_right(Viewport *v) {
+    v->cx++;
+}
+
+void viewport_move_up(Viewport *v) {
+    if (v->cy == 0) return;
+    v->cy--;
+}
+
+void viewport_move_down(Viewport *v) {
+    v->cy++;
+}

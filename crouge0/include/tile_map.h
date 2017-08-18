@@ -31,6 +31,11 @@ typedef struct Viewport {
     int display_top;
 } Viewport;
 
+void viewport_move_left(Viewport *v);
+void viewport_move_right(Viewport *v);
+void viewport_move_up(Viewport *v);
+void viewport_move_down(Viewport *v);
+
 typedef void (*TileFunc)(Tile *tile, int x, int y);
 
 TileMap make_tile_map(int width, int height);

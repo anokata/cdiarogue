@@ -35,10 +35,13 @@ State state;
 // 2.4 global to viewport at point
 // 2.5 moving and view map
 // WRite and draw GP Mechanic, view, make questions and decisions, KNOW WHAT TO DO
-// 1. walking @
-// 2.!debug and msg
-// 3. simple location
-// 4. walking @ loc stop walls
+// 1.+walking @
+// 2.+debug and msg
+// 3.+simple location
+// 4.~walking @ loc stop walls
+//  -4.1 stop at map ends/ now just for 0 left top
+//   4.2 map objects properties
+//
 // 5. add monstr, simple ai, stay, rand. time steps
 // 6. interacting, simple combat
 // 7. items
@@ -105,7 +108,6 @@ void debug_draw(G g) {
 int draw(void* data) {
     UNUSED(data);
     clear();
-    /* cc_putxy('D', cb_yellow, 3, 2); */
     cc_printxy(
             "Key bindings:\n\
         w world map\n\
@@ -143,19 +145,19 @@ int cursor_key(void* data) {
             break;
         case 'j':
             g->cursor.y++;
-            g->view->cy++;
+            viewport_move_down(g->view);
             break;
         case 'k':
             g->cursor.y--;
-            g->view->cy--;
+            viewport_move_up(g->view);
             break;
         case 'h':
             g->cursor.x--;
-            g->view->cx--;
+            viewport_move_left(g->view);
             break;
         case 'l':
             g->cursor.x++;
-            g->view->cx++;
+            viewport_move_right(g->view);
             break;
     }
     return 0;
@@ -165,7 +167,6 @@ int cursor_draw(void* data) {
     G g = data;
 
     clear();
-    /* cc_putxy(g->key, cb_yellow, 3, 2); */
     draw_map(g->gmap, g->view);
     /* cc_putxy(' ', cw_white, g->cursor.x, g->cursor.y); */
     cc_putxy('@', cn_yellow, 
@@ -187,8 +188,6 @@ void state_init() {
 
 void start() {
     G g = new_g();
-    /* free_g(g); */
-    /* return; */
     curses_init();
     state_init();
 
