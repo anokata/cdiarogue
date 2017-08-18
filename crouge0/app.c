@@ -95,7 +95,10 @@ void debug_draw(G g) {
 "Debug: \n"
 "Key: %d\n" 
 "Log:\n%s\n" 
-        , g->key, log_text);
+"Viewport Left: %d\n" 
+"Viewport cx:cy = %d:%d\n" 
+        , g->key, log_text, 
+        g->view->display_left, g->view->cx, g->view->cy);
     cc_printxy(buf, cn_white, 0, 30);
 }
 
@@ -164,7 +167,10 @@ int cursor_draw(void* data) {
     clear();
     /* cc_putxy(g->key, cb_yellow, 3, 2); */
     draw_map(g->gmap, g->view);
-    cc_putxy(' ', cw_white, g->cursor.x, g->cursor.y);
+    /* cc_putxy(' ', cw_white, g->cursor.x, g->cursor.y); */
+    cc_putxy('@', cn_yellow, 
+            min(g->view->cx, g->view->width / 2) + g->view->display_left, 
+            min(g->view->cy, g->view->height / 2) + g->view->display_top);
     return 0;
 }
 

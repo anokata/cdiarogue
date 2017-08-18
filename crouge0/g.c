@@ -17,7 +17,9 @@ G new_g() {
     g->view->cx = 0;
     g->view->cy = 0;
     g->view->width = 8;
-    g->view->heigth = 8;
+    g->view->height = 8;
+    g->view->display_left = 8;
+    g->view->display_top = 8;
 
     g->log = NULL;
     g->log_len = 0;

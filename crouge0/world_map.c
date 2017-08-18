@@ -48,7 +48,7 @@ void free_wmap(WorldMap wmap) {
 
 void print_wmap(WorldMap wmap) {
     TileMap map = wmap->map;
-    for (int y = 0; y < map->heigth; y++) {
+    for (int y = 0; y < map->height; y++) {
         for (int x = 0; x < map->width; x++) {
             Color color = get_color_for_tile(wmap, x, y);
             cc_putxy(map_char_at(map, x, y), color, x, y);

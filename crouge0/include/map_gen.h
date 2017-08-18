@@ -14,12 +14,12 @@
 #include "map.h"
 
 
-Map make_map(int width, int heigth);
+Map make_map(int width, int height);
 Map load_map(string filename);
 void free_map(Map map);
 
 void print_map(Map map);
-int out_map(char *filename, int width, int heigth);
+int out_map(char *filename, int width, int height);
 
 int fget_int_line(FILE *file);
 char map_char_at(TileMap map, int x, int y);

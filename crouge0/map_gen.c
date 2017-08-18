@@ -1,12 +1,12 @@
 #include "map_gen.h"
 
-Map make_map(int width, int heigth) { // OK
+Map make_map(int width, int height) { // OK
     Map map = malloc(sizeof(struct Map));
-    char *data = calloc(width * heigth, 1);
+    char *data = calloc(width * height, 1);
     map->data = data;
     map->width = width;
-    map->heigth = heigth;
-    for (int i=0; i < heigth; i++) {
+    map->height = height;
+    for (int i=0; i < height; i++) {
         for (int j=0; j < width; j++) {
             data[i * width + j] = ' ';
         }
@@ -44,14 +44,14 @@ void gen_map_step(Map map) {
     UNUSED(map);
 }
 
-Map gen_map(int width, int heigth) {
+Map gen_map(int width, int height) {
     time_t t;
     srand((unsigned) time(&t));
     map_chars_count = strlen(map_chars);
 
-    Map map = make_map(width, heigth);
+    Map map = make_map(width, height);
 
-    for (int i=0; i < heigth; i++) {
+    for (int i=0; i < height; i++) {
         for (int j=0; j < width; j++) {
             map->data[i * width + j] = rand_char();
         }
@@ -61,27 +61,27 @@ Map gen_map(int width, int heigth) {
 
 string map_to2d(Map map) { // OK
     int nwidth = map->width + 1;
-    string map2d = malloc(1 + map->heigth * nwidth);
-    memset(map2d, 0, map->heigth * nwidth);
+    string map2d = malloc(1 + map->height * nwidth);
+    memset(map2d, 0, map->height * nwidth);
 
-    for (int i=0; i < map->heigth; i++) {
+    for (int i=0; i < map->height; i++) {
         for (int j=0; j < map->width; j++) {
             map2d[i * nwidth + j] = map->data[i * map->width + j];
         }
-        if (i < map->heigth - 1)
+        if (i < map->height - 1)
             map2d[(i + 1) * nwidth - 1] = '\n';
     }
     return map2d;
 }
 
 int get_map_size(Map map) {
-    return map->width * map->heigth;
+    return map->width * map->height;
 }
 
 void print_map(Map map) { // OK
     string m2;
     m2 = map_to2d(map);
-    DEBUG_PRINT("w:%d h:%d\n", map->width, map->heigth);
+    DEBUG_PRINT("w:%d h:%d\n", map->width, map->height);
     printf("%s\n", m2);
     free(m2);
 }
@@ -89,12 +89,12 @@ void print_map(Map map) { // OK
 // to viewable with newlines, from viewable/editable in vi
 // mode for open view map in editor in tmp file, edit, save and convert to map.
 
-int out_map(char *filename, int width, int heigth) {
-    Map map = gen_map(width, heigth);
+int out_map(char *filename, int width, int height) {
+    Map map = gen_map(width, height);
     FILE *file = fopen(filename, "w");
 
     char *buf = malloc(100);
-    sprintf(buf, "%d\n%d\n%d\n", 0, map->width, map->heigth); //mode w h
+    sprintf(buf, "%d\n%d\n%d\n", 0, map->width, map->height); //mode w h
     fwrite(buf, strlen(buf), 1, file);
     free(buf);
 
@@ -113,7 +113,7 @@ Map load_map(string filename) { // OK
     Map map = 0;
     FILE *file = fopen(filename, "r");
     int width = 0;
-    int heigth = 0;
+    int height = 0;
 
     char * line = NULL;
     size_t len = 0;
@@ -122,10 +122,10 @@ Map load_map(string filename) { // OK
     int mode = fget_int_line(file);
     UNUSED(mode);
     width = fget_int_line(file);
-    heigth = fget_int_line(file);
-    DEBUG_PRINT("Loading map with w:%d h:%d\n", width, heigth);
+    height = fget_int_line(file);
+    DEBUG_PRINT("Loading map with w:%d h:%d\n", width, height);
 
-    map = make_map(width, heigth);
+    map = make_map(width, height);
 
     read = getline(&line, &len, file);
     memcpy(map->data, line, read - 1);

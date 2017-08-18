@@ -1,13 +1,13 @@
 #include "tile_map.h"
 #include "config_parser.h"
 
-TileMap make_tile_map(int width, int heigth) {
+TileMap make_tile_map(int width, int height) {
     TileMap map = malloc(sizeof(struct TileMap));
-    Tile *tiles = calloc(width * heigth, sizeof(struct Tile));
+    Tile *tiles = calloc(width * height, sizeof(struct Tile));
     map->tiles = tiles;
     map->width = width;
-    map->heigth = heigth;
-    for (int i=0; i < heigth; i++) {
+    map->height = height;
+    for (int i=0; i < height; i++) {
         for (int j=0; j < width; j++) {
             tiles[i * width + j].c = ' ';
         }
@@ -29,15 +29,15 @@ Tile *tile_at(TileMap map, int x, int y) {
 
 string tilemap_to2d(TileMap map) {
     int nwidth = map->width + 1;
-    string map2d = malloc(1 + map->heigth * nwidth);
-    memset(map2d, 0, map->heigth * nwidth);
-memset(map2d, '-', map->heigth * nwidth - 1);
+    string map2d = malloc(1 + map->height * nwidth);
+    memset(map2d, 0, map->height * nwidth);
+memset(map2d, '-', map->height * nwidth - 1);
 
-    for (int i=0; i < map->heigth; i++) {
+    for (int i=0; i < map->height; i++) {
         for (int j=0; j < map->width; j++) {
             map2d[i * nwidth + j] = tile_at(map, j, i)->c;
         }
-        if (i < map->heigth - 1)
+        if (i < map->height - 1)
             map2d[(i + 1) * nwidth - 1] = '\n';
     }
     return map2d;
@@ -46,7 +46,7 @@ memset(map2d, '-', map->heigth * nwidth - 1);
 void print_tile_map(TileMap map) {
     string m2;
     m2 = tilemap_to2d(map);
-    DEBUG_PRINT("w:%d h:%d\n", map->width, map->heigth);
+    DEBUG_PRINT("w:%d h:%d\n", map->width, map->height);
     printf("%s\n", m2);
     free(m2);
 }
@@ -58,8 +58,8 @@ void copy_map2tiles(TileMap map, char *line, int len, int offset) {
 }
 
 void apply_color(TileMap map, char c, int color_index) {
-    for (int y = 0; y < map->heigth; ++y) {
-        for (int x = 0; x < map->heigth; ++x) {
+    for (int y = 0; y < map->height; ++y) {
+        for (int x = 0; x < map->height; ++x) {
             if (tile_at(map, x, y)->c == c) {
                 tile_at(map, x, y)->color = cc_get_color_by_id(color_index);
             }
@@ -85,7 +85,7 @@ TileMap load_tile_map(string filename) {
     TileMap map = 0;
     FILE *file = fopen(filename, "r");
     int width = 0;
-    int heigth = 0;
+    int height = 0;
 
     char * line = NULL;
     size_t len = 0;
@@ -93,17 +93,17 @@ TileMap load_tile_map(string filename) {
 
     int mode = fget_int_line(file);
     width = fget_int_line(file);
-    heigth = fget_int_line(file);
-    DEBUG_PRINT("Loading tile map with w:%d h:%d\n", width, heigth);
+    height = fget_int_line(file);
+    DEBUG_PRINT("Loading tile map with w:%d h:%d\n", width, height);
 
-    map = make_tile_map(width, heigth);
+    map = make_tile_map(width, height);
 
     if (mode == 0) { // Local map
         read = getline(&line, &len, file);
         copy_map2tiles(map, line, read - 1, 0);
         load_colors(map, file);
     } else if (mode == 1) { // Global map by line
-        for (int y = 0; y < heigth; y++) {
+        for (int y = 0; y < height; y++) {
             read = getline(&line, &len, file);
             copy_map2tiles(map, line, read - 1, y * width);
         }
@@ -117,7 +117,7 @@ TileMap load_tile_map(string filename) {
 }
 
 void _copy_tileloc2glob(TileMap gmap, TileMap lmap, int offset) {
-    for (int i = 0; i < lmap->heigth; i++) {
+    for (int i = 0; i < lmap->height; i++) {
         memcpy(gmap->tiles + offset + i * gmap->width, 
                lmap->tiles + i * lmap->width, lmap->width * sizeof(struct Tile));
     }
@@ -142,7 +142,7 @@ TileMap load_global_tmap() {
     g_hash_table_destroy(config);
 
     global_map = make_tile_map(local_width * local_map_width, local_height * local_map_height);
-    DEBUG_PRINT("Global tile map with w:%d h:%d\n", global_map->width, global_map->heigth);
+    DEBUG_PRINT("Global tile map with w:%d h:%d\n", global_map->width, global_map->height);
     string mapname_format = "maps/map_%i_%i";
     char mapname[100];
     int block_height = local_map_width * local_width * local_map_height;
@@ -162,30 +162,29 @@ TileMap load_global_tmap() {
     return global_map;
 }
 
-#define max(x, y) (x) > (y) ? (x) : (y)
-#define min(x, y) (x) < (y) ? (x) : (y)
-
 void foreach_tile_viewport(TileMap map, TileFunc f, Viewport v) {
-    int top = v.cy - v.heigth / 2;
+    int top = v.cy - v.height / 2;
     int left = v.cx - v.width / 2;
-    int bottom = min((v.cy + v.heigth / 2), map->heigth);
+    int bottom = min((v.cy + v.height / 2), map->height);
     int right = min((v.cx + v.width / 2), map->width);
     top = (top < 0) ? 0 : top;
     left = (left < 0) ? 0 : left;
 
     /* debug_file_log_format("viewport cx %d  cy %d.\n", v.cx, v.cy); */
-    /* debug_file_log_format("viewport w %d  h %d. map w h %d %d\n", v.width, v.heigth, map->width, map->heigth); */
+    /* debug_file_log_format("viewport w %d  h %d. map w h %d %d\n", v.width, v.height, map->width, map->height); */
     /* debug_file_log_format("foreach t %d  l %d.\n", top, left); */
     /* debug_file_log_format("foreach b %d  r %d.\n", bottom, right); */
     for (int y = top; y < bottom; ++y) {
         for (int x = left; x < right; ++x) {
-            f(tile_at(map, x, y), x - left, y - top);
+            f(tile_at(map, x, y), 
+              x - left + v.display_left, 
+              y - top + v.display_top);
         }
     }
 }
 
 void foreach_tile(TileMap map, TileFunc f) {
-    for (int y = 0; y < map->heigth; ++y) {
+    for (int y = 0; y < map->height; ++y) {
         for (int x = 0; x < map->width; ++x) {
             f(tile_at(map, x, y), x, y);
         }

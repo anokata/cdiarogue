@@ -19,19 +19,21 @@ typedef struct MapTile {
 typedef struct TileMap {
     Tile *tiles;
     int width;
-    int heigth;
+    int height;
 } *TileMap;
 
 typedef struct Viewport {
     int width;
-    int heigth;
+    int height;
     int cx;
     int cy;
+    int display_left;
+    int display_top;
 } Viewport;
 
 typedef void (*TileFunc)(Tile *tile, int x, int y);
 
-TileMap make_tile_map(int width, int heigth);
+TileMap make_tile_map(int width, int height);
 TileMap load_tile_map(string filename);
 TileMap load_global_tmap();
 void free_tile_map(TileMap map);

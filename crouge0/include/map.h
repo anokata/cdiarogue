@@ -6,7 +6,7 @@
 typedef struct Map {
     char *data;
     int width;
-    int heigth;
+    int height;
 } *Map;
 
 typedef struct Point {
