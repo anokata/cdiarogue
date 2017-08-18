@@ -129,12 +129,16 @@ TileMap load_global_tmap() {
     int local_height = 2;
     int local_map_width = 6;
     int local_map_height = 3;
-    /* read params from map info file */
+    /* Read params from map info file */
     GHashTable *config = parse_file("./maps/info");
-    // TODO read params
-    printf("_w:%s\n", g_hash_table_lookup(config, "map_width"));
     local_map_width = atoi(g_hash_table_lookup(config, "map_width"));
-    printf("WW:%d\n", local_map_width);
+    local_map_height = atoi(g_hash_table_lookup(config, "map_height"));
+    local_width = atoi(g_hash_table_lookup(config, "x_segments"));
+    local_height = atoi(g_hash_table_lookup(config, "y_segments"));
+    /* printf("WW:%d\n", local_map_width); */
+    /* printf("WW:%d\n", local_map_height); */
+    /* printf("WW:%d\n", local_width); */
+    /* printf("WW:%d\n", local_height); */
     g_hash_table_destroy(config);
 
     global_map = make_tile_map(local_width * local_map_width, local_height * local_map_height);

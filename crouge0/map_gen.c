@@ -94,7 +94,7 @@ int out_map(char *filename, int width, int heigth) {
     FILE *file = fopen(filename, "w");
 
     char *buf = malloc(100);
-    sprintf(buf, "%d\n%d\n", map->width, map->heigth);
+    sprintf(buf, "%d\n%d\n%d\n", 0, map->width, map->heigth); //mode w h
     fwrite(buf, strlen(buf), 1, file);
     free(buf);
 
@@ -108,6 +108,7 @@ int out_map(char *filename, int width, int heigth) {
     return 0;
 }
 
+// FIXME Duplicate with tile map load
 Map load_map(string filename) { // OK
     Map map = 0;
     FILE *file = fopen(filename, "r");
@@ -118,6 +119,8 @@ Map load_map(string filename) { // OK
     size_t len = 0;
     ssize_t read;
 
+    int mode = fget_int_line(file);
+    UNUSED(mode);
     width = fget_int_line(file);
     heigth = fget_int_line(file);
     DEBUG_PRINT("Loading map with w:%d h:%d\n", width, heigth);

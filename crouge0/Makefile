@@ -3,7 +3,7 @@ P=rouge0
 MAPGEN=mapgen_main
 CFLAGS=-Wall -Wextra -std=gnu11 -g -D_GNU_SOURCE=1
 OBJECTS=app.c main.c map_gen.c world_map.c g.c tile_map.c util.c config_parser.c
-MAP_OBJECTS=mapgen_main.c map_gen.c tile_map.c util.c
+MAP_OBJECTS=mapgen_main.c map_gen.c tile_map.c util.c config_parser.c
 TMAP_OBJECTS=tile_map.c test_tile_map.c util.c
 LDLIBS=
 LIB=libfurses.a
@@ -27,13 +27,7 @@ make_with_lib:
 
 
 mapgen_main:
-	$(CC) $(CFLAGS) $(MAP_OBJECTS) -L../lib -lccurses -I./include -I../ccurses -lncurses -o /tmp/$(MAPGEN) && valgrind /tmp/$(MAPGEN) && ls -l /tmp/*.map
-
-tmap:
-	$(CC) $(CFLAGS) $(TMAP_OBJECTS) -L../lib -lccurses -I./include -I../ccurses -lncurses -o /tmp/out && valgrind /tmp/out
-
-test: tmap map
-	echo ok
+	$(CC) $(CFLAGS) $(MAP_OBJECTS) -L../lib -lccurses -I./include -I../ccurses -lncurses $(GLIB) -o /tmp/$(MAPGEN) && valgrind /tmp/$(MAPGEN) && ls -l /tmp/*.map
 
 lint:
 	splint main.c -I./include -I../ccurses/
