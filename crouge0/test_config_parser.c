@@ -9,6 +9,13 @@ void testfun(char *s, void *d) {
     (void)(d);
 }
 
+void test_printKV(gpointer key, gpointer value, gpointer data) {
+    char *skey = key;
+    char *svalue = value;
+    UNUSED(data);
+    printf("%s : %s \n", skey, svalue);
+}
+
 int main() {
     char *test1;
     test1 = strdup("abcd:123");
@@ -23,5 +30,9 @@ int main() {
     free(test1);
 
     GHashTable *t = parse_file("./maps/info");
+    g_hash_table_destroy(t);
+
+    t = parse_file("./maps/map_0_0");
+    g_hash_table_foreach(t, test_printKV, NULL);
     g_hash_table_destroy(t);
 }

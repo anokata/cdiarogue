@@ -15,9 +15,14 @@ void for_every_part(char *text, char delim, EachStrFunc f, void *data) {
     while (*text) {
         char *end = strchr(text, delim);
         if (!end) break;
-        *end = '\0';
-        f(text, data);
-        *end = delim;
+        /* trim leading whitespaces */
+        char *start = text + strspn(text, " \t");
+        /* check for comment */
+        if (*start != '#' && *start != '\n') { 
+			*end = '\0';
+            f(start, data);
+			*end = delim;
+        }
         text = end + 1;
     }
 }
