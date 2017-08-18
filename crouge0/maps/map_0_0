@@ -1,0 +1,11 @@
+mode:0
+width:20
+height:10
+ox................x.......o...o..x...ox...ox...o..........ox......o..o...o.oo........xo.x.......o.xx.o....x.......ox........o....x..o........o.x.x...xx...x.......xxx.....o..x....o..........x.........x
+tile:o
+color:1
+passable:t
+#ignore comments and empty lines with trim spaces
+tile:x
+color:2
+passable:f

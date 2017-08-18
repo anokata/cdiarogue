@@ -4,10 +4,12 @@
 
 #include "lib/ccurses.h"
 #include "util.h"
+#include <stdbool.h>
 
 typedef struct Tile {
     Color color;
     char c;
+    bool passable;
 } Tile;
 
 typedef struct MapTile {
