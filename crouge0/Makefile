@@ -35,6 +35,9 @@ lint:
 test_sky:
 	$(CC) $(CFLAGS) test_sky.c sky_view.c $(GLIB) -I./include -I../ccurses -o /tmp/sky && /tmp/sky
 
+test_tile_map:
+	$(CC) $(CFLAGS) test_tile_map.c config_parser.c tile_map.c util.c $(GLIB) -I./include -I../ccurses -lncurses -o /tmp/tiles && valgrind /tmp/tiles
+
 test_config_parser:
 	$(CC) $(CFLAGS) test_config_parser.c config_parser.c util.c $(GLIB) -I./include -I../ccurses -o /tmp/parser && valgrind /tmp/parser
 

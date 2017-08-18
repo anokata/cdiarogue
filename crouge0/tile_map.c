@@ -82,10 +82,15 @@ void load_colors(TileMap map, FILE *file) {
 }
 
 TileMap load_tile_map(string filename) {
-    TileMap map = 0;
+    TileMap map = NULL;
+/* GHashTable *config = parse_file(filename); */
+/* local_map_width = atoi(g_hash_table_lookup(config, "map_width")); */
+/* g_hash_table_destroy(config); */
+    /* how global? */
     FILE *file = fopen(filename, "r");
     int width = 0;
     int height = 0;
+    // tile infos
 
     char * line = NULL;
     size_t len = 0;

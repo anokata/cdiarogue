@@ -1,0 +1,18 @@
+# vi: filetype=sh
+mode:0
+width:20
+height:10
+
+map:ox................x.......o...o..x...ox...ox...o..........ox......o..o...o.oo........xo.x.......o.xx.o....x.......ox........o....x..o........o.x.x...xx...x.......xxx.....o..x....o..........x.........x
+
+tile:o
+    color:1
+    passable:t
+
+tile:x
+    color:2
+    passable:f
+
+tile:.
+    color:3
+    passable:t
