@@ -6,11 +6,13 @@ OBJECTS=app.c main.c map_gen.c world_map.c g.c tile_map.c util.c config_parser.c
 MAP_OBJECTS=mapgen_main.c map_gen.c tile_map.c util.c config_parser.c
 TMAP_OBJECTS=tile_map.c test_tile_map.c util.c
 LDLIBS=
-LIB=libfurses.a
+LIB=libccurses.a
 CC=gcc
 GLIB=$(shell pkg-config --cflags --libs glib-2.0)
 
 main:
+	if [ ! -e ../lib ]; then mkdir ../lib; fi
+	if [ ! -e ../lib/$(LIB) ]; then cd ../ccurses; make makelib; cd -; fi
 	$(CC) $(CFLAGS) $(OBJECTS) -L../lib -lccurses -I./include -I../ccurses -lncurses $(GLIB) -o /tmp/$(P) && /tmp/$(P)
 
 compile:
