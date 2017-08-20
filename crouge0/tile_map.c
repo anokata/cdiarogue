@@ -87,37 +87,26 @@ TileMap load_tile_map(string filename) {
 /* local_map_width = atoi(g_hash_table_lookup(config, "map_width")); */
 /* g_hash_table_destroy(config); */
     /* how global? */
-    FILE *file = fopen(filename, "r");
     int width = 0;
     int height = 0;
-    // tile infos
 
-    char * line = NULL;
-    size_t len = 0;
-    ssize_t read;
-
-    int mode = fget_int_line(file);
-    width = fget_int_line(file);
-    height = fget_int_line(file);
+    int mode = 
+    width = 
+    height = 
     DEBUG_PRINT("Loading tile map with w:%d h:%d\n", width, height);
 
     map = make_tile_map(width, height);
 
-    if (mode == 0) { // Local map
-        read = getline(&line, &len, file);
-        copy_map2tiles(map, line, read - 1, 0);
-        load_colors(map, file);
-    } else if (mode == 1) { // Global map by line
-        for (int y = 0; y < height; y++) {
-            read = getline(&line, &len, file);
-            copy_map2tiles(map, line, read - 1, y * width);
-        }
+    if (mode == 0) { 
+        /* Local map */
+        char *map_data = 
+        copy_map2tiles(map, line, map_data - 1, 0);
+        //load_colors(map, file); 
+    } else if (mode == 1) { 
+        /* Global map by line */
     }
-    /* print_tile_map(map); */
+    print_tile_map(map);
 
-    if (line)
-        free(line);
-    fclose(file);
     return map;
 }
 
