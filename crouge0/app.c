@@ -1,4 +1,5 @@
 #include "app.h"
+char version[] = "0.0.1";
 
 enum States {State_run, State_end, State_wmap, State_cursor,  NUM_STATES};
 enum Events {Event_draw, Event_key,  NUM_EVENTS};
