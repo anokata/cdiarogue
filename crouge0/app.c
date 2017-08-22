@@ -145,19 +145,19 @@ int cursor_key(void* data) {
             break;
         case 'j':
             g->cursor.y++;
-            viewport_move_down(g->view);
+            viewport_move_down(g->view, g->gmap);
             break;
         case 'k':
             g->cursor.y--;
-            viewport_move_up(g->view);
+            viewport_move_up(g->view, g->gmap);
             break;
         case 'h':
             g->cursor.x--;
-            viewport_move_left(g->view);
+            viewport_move_left(g->view, g->gmap);
             break;
         case 'l':
             g->cursor.x++;
-            viewport_move_right(g->view);
+            viewport_move_right(g->view, g->gmap);
             break;
     }
     return 0;

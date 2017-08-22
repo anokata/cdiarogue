@@ -3,39 +3,22 @@ mode:1
 width:20
 height:10
 
-map:
-       %%%--
-      %%%%---
-     %%%%%----
-    %%%%%%-----
-   %%%%%%%------
-  %%%%%%%%-------
- %%%%%%%%%--------
-*********%---------
-*********^.........
- ********^........
-  *******^.......
-   ^^^^^^^......
-    ^^^^^^.....
-     ^^^^^....
-       ^^^..
-        ^^.
-
-tile: 
-    color:3
-    description:space
-tile:%
-    color:3
-    description:plains
-tile:-
-    color:3
-    description:swarm
-tile:^
-    color:3
-    description:mountains
-tile:*
-    color:3
-    description:forest
-tile:.
-    color:3
-    description:desert
+map:maps/world
+tile_1: 
+    color_1:3
+    description_1:space
+tile_2:%
+    color_2:3
+    description_2:plains
+tile_3:-
+    color_3:3
+    description_3:swarm
+tile_4:^
+    color_4:3
+    description_4:mountains
+tile_5:*
+    color_5:3
+    description_5:forest
+tile_6:.
+    color_6:3
+    description_6:desert

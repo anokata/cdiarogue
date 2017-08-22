@@ -67,6 +67,13 @@ void apply_color(TileMap map, char c, int color_index) {
     }
 }
 
+void _set_tile_passable(Tile *tile, int x, int y, void *data) {
+    bool passable = (bool)data;
+    tile->passable = passable;
+    UNUSED(x);
+    UNUSED(y);
+}
+
 char _get_tile_opt(GHashTable *config, int i, char *params) {
     char *values = g_hash_table_lookup(config, params);
     return values[i - 1];
@@ -82,13 +89,22 @@ char _get_tile_color(GHashTable *config, int i) {
     return _get_tile_opt(config, i, "colrs") - '0';
 }
 
+bool _get_tile_passable(GHashTable *config, int i) {
+    return _get_tile_opt(config, i, "passb") == 't';
+}
+
 void load_colors(TileMap map, GHashTable *config) {
     int tiles_count = atoi(g_hash_table_lookup(config, "tiles_count"));
     for (int i = 1; i <= tiles_count; i++) {
         char tile_char = _get_tile_char(config, i);
         int color_index = _get_tile_color(config, i);
-        /* printf("Tile#%d = '%c' color#%d \n", i, tile_char, color_index); */
+        bool passable = _get_tile_passable(config, i);
+        printf("Tile#%d = '%c' color#%d pass:%s\n", i, 
+                tile_char, 
+                color_index, 
+                passable ? "true" : "false");
         apply_color(map, tile_char, color_index);
+        foreach_tile_set(map, _set_tile_passable, (void*)passable, tile_char);
     }
 }
 
@@ -107,13 +123,13 @@ TileMap load_tile_map(string filename) {
     if (mode == 0) { 
         /* Local map */
         copy_map2tiles(map, map_data, strlen(map_data) - 1, 0);
-        // TODO
         load_colors(map, config); 
     } else if (mode == 1) { 
         /* Global map by line */
         copy_map2tiles(map, map_data, strlen(map_data) - 1, 0);
         // TODO
         //load_description(map); 
+        //load_wmap_data(world_filename);
     }
     print_tile_map(map);
     g_hash_table_destroy(config);
@@ -192,6 +208,21 @@ void foreach_tile(TileMap map, TileFunc f) {
     }
 }
 
+void foreach_tile_set(TileMap map, TileDataFunc f, void *data, char tile_char) {
+    for (int y = 0; y < map->height; ++y) {
+        for (int x = 0; x < map->width; ++x) {
+            Tile *tile = tile_at(map, x, y);
+            if (tile_char == '\0' || tile_char == tile->c) {
+                f(tile, x, y, data);
+            }
+        }
+    }
+}
+
+bool is_passable(TileMap map, int x, int y) {
+    return tile_at(map, x, y)->passable;
+}
+
 void draw_tile(Tile *tile, int x, int y) {
     cc_putxy(tile->c, tile->color, x, y);
 }
@@ -207,20 +238,24 @@ void draw_map(TileMap map, Viewport *v) {
     /* free(m2); */
 }
 
-void viewport_move_left(Viewport *v) {
+void viewport_move_left(Viewport *v, TileMap map) {
     if (v->cx == 0) return;
+    if (! is_passable(map, (v->cx - 1), v->cy)) return;
     v->cx--;
 }
 
-void viewport_move_right(Viewport *v) {
+void viewport_move_right(Viewport *v, TileMap map) {
+    if (! is_passable(map, (v->cx + 1), v->cy)) return;
     v->cx++;
 }
 
-void viewport_move_up(Viewport *v) {
+void viewport_move_up(Viewport *v, TileMap map) {
     if (v->cy == 0) return;
+    if (! is_passable(map, v->cx, (v->cy - 1))) return;
     v->cy--;
 }
 
-void viewport_move_down(Viewport *v) {
+void viewport_move_down(Viewport *v, TileMap map) {
+    if (! is_passable(map, v->cx, (v->cy + 1))) return;
     v->cy++;
 }

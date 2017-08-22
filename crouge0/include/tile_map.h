@@ -33,12 +33,13 @@ typedef struct Viewport {
     int display_top;
 } Viewport;
 
-void viewport_move_left(Viewport *v);
-void viewport_move_right(Viewport *v);
-void viewport_move_up(Viewport *v);
-void viewport_move_down(Viewport *v);
+void viewport_move_left(Viewport *v, TileMap map);
+void viewport_move_right(Viewport *v, TileMap map);
+void viewport_move_up(Viewport *v, TileMap map);
+void viewport_move_down(Viewport *v, TileMap map);
 
 typedef void (*TileFunc)(Tile *tile, int x, int y);
+typedef void (*TileDataFunc)(Tile *tile, int x, int y, void *data);
 
 TileMap make_tile_map(int width, int height);
 TileMap load_tile_map(string filename);
@@ -50,3 +51,4 @@ string tilemap_to2d(TileMap map);
 Tile *tile_at(TileMap map, int x, int y);
 void draw_map(TileMap map, Viewport *v);
 void foreach_tile(TileMap map, TileFunc f);
+void foreach_tile_set(TileMap map, TileDataFunc f, void *data, char tile_char);
