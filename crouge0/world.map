@@ -1,6 +1,9 @@
-1
-19
-16
+# vi: filetype=sh
+mode:1
+width:20
+height:10
+
+map:
        %%%--
       %%%%---
      %%%%%----
@@ -17,9 +20,22 @@
      ^^^^^....
        ^^^..
         ^^.
-' ', .description="space", cd_blue
-'%', .description="plains",
-'-', .description="swarm",
-'^', .description="mountains",
-'*', .description="forest",
-'.', .description="desert"
+
+tile: 
+    color:3
+    description:space
+tile:%
+    color:3
+    description:plains
+tile:-
+    color:3
+    description:swarm
+tile:^
+    color:3
+    description:mountains
+tile:*
+    color:3
+    description:forest
+tile:.
+    color:3
+    description:desert

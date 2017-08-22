@@ -42,7 +42,7 @@ State state;
 // 4.~walking @ loc stop walls
 //  -4.1 stop at map ends/ now just for 0 left top
 //   4.2 map objects properties
-//		load map with kv params format
+//	+	load map with kv params format
 //
 // 5. add monstr, simple ai, stay, rand. time steps
 // 6. interacting, simple combat

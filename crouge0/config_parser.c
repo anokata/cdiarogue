@@ -1,3 +1,4 @@
+#define DEBUG
 #include "config_parser.h"
 #include <string.h>
 #include <unistd.h>
@@ -10,6 +11,7 @@ KVParam parse_dsv_kv_line(char *line) {
     char *value = strchr(line, delim);
     *value = '\0';
     KVParam kvp = { line, value + 1};
+    DEBUG_PRINT("Parse: %s : %s\n", line, value + 1);
     return kvp;
 }
 

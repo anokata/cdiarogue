@@ -1,6 +1,6 @@
 #include "map_gen.h"
 
-Map make_map(int width, int height) { // OK
+Map make_map(int width, int height) { // OK 
     Map map = malloc(sizeof(struct Map));
     char *data = calloc(width * height, 1);
     map->data = data;
@@ -78,7 +78,7 @@ int get_map_size(Map map) {
     return map->width * map->height;
 }
 
-void print_map(Map map) { // OK
+void print_map(Map map) { // OK DEPRECATED
     string m2;
     m2 = map_to2d(map);
     DEBUG_PRINT("w:%d h:%d\n", map->width, map->height);
@@ -94,11 +94,12 @@ int out_map(char *filename, int width, int height) {
     FILE *file = fopen(filename, "w");
 
     char *buf = malloc(100);
-    sprintf(buf, "%d\n%d\n%d\n", 0, map->width, map->height); //mode w h
+    sprintf(buf, "mode:%d\nwidth:%d\nheight:%d\nmap:", 0, map->width, map->height); 
     fwrite(buf, strlen(buf), 1, file);
     free(buf);
 
     fwrite(map->data, get_map_size(map), 1, file);
+    fwrite("\n", 1, 1, file);
     fclose(file);
 
     DEBUG_PRINT("Map:\n");
@@ -106,34 +107,5 @@ int out_map(char *filename, int width, int height) {
     DEBUG_PRINT("Saved to %s\n", filename);
     free_map(map);
     return 0;
-}
-
-// FIXME Duplicate with tile map load
-Map load_map(string filename) { // OK
-    Map map = 0;
-    FILE *file = fopen(filename, "r");
-    int width = 0;
-    int height = 0;
-
-    char * line = NULL;
-    size_t len = 0;
-    ssize_t read;
-
-    int mode = fget_int_line(file);
-    UNUSED(mode);
-    width = fget_int_line(file);
-    height = fget_int_line(file);
-    DEBUG_PRINT("Loading map with w:%d h:%d\n", width, height);
-
-    map = make_map(width, height);
-
-    read = getline(&line, &len, file);
-    memcpy(map->data, line, read - 1);
-    /* print_map(map); */
-
-    if (line)
-        free(line);
-    fclose(file);
-    return map;
 }
 

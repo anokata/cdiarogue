@@ -11,14 +11,13 @@
 #include <string.h>
 #include "lib/ccurses.h"
 #include "util.h"
+#include "tile_map.h"
 #include "map.h"
 
 
-Map make_map(int width, int height);
-Map load_map(string filename);
-void free_map(Map map);
-
-void print_map(Map map);
+/* Map make_map(int width, int height); */
+/* void free_map(Map map); */
+/* void print_map(TileMap map); */
 int out_map(char *filename, int width, int height);
 
 int fget_int_line(FILE *file);

@@ -7,9 +7,9 @@ int main(int argc, char *argv[]) {
         printf("(%d) Usage: mapgen FILENAME WIDTH HEIGHT\n", argc);
         string file = "/tmp/test.map";
         out_map(file, 20, 10);
-        Map m = load_map(file);
-        print_map(m);
-        free_map(m);
+        TileMap m = load_tile_map(file);
+        print_tile_map(m);
+        free_tile_map(m);
         return 0;
     }
     char *filename = argv[1];
@@ -19,8 +19,8 @@ int main(int argc, char *argv[]) {
 
     string file = filename;
     out_map(file, width, height);
-    Map m = load_map(file);
-    print_map(m);
-    free_map(m);
+    TileMap m = load_tile_map(file);
+    print_tile_map(m);
+    free_tile_map(m);
 }
 

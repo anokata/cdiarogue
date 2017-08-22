@@ -83,29 +83,29 @@ void load_colors(TileMap map, FILE *file) {
 
 TileMap load_tile_map(string filename) {
     TileMap map = NULL;
-/* GHashTable *config = parse_file(filename); */
-/* local_map_width = atoi(g_hash_table_lookup(config, "map_width")); */
-/* g_hash_table_destroy(config); */
+    GHashTable *config = parse_file(filename);
     /* how global? */
-    int width = 0;
-    int height = 0;
-
-    int mode = 
-    width = 
-    height = 
+    int mode = atoi(g_hash_table_lookup(config, "mode"));
+    int width = atoi(g_hash_table_lookup(config, "width"));
+    int height = atoi(g_hash_table_lookup(config, "height"));
+    char *map_data = g_hash_table_lookup(config, "map");
     DEBUG_PRINT("Loading tile map with w:%d h:%d\n", width, height);
 
     map = make_tile_map(width, height);
 
     if (mode == 0) { 
         /* Local map */
-        char *map_data = 
-        copy_map2tiles(map, line, map_data - 1, 0);
-        //load_colors(map, file); 
+        copy_map2tiles(map, map_data, strlen(map_data) - 1, 0);
+        // TODO
+        //load_colors(map); 
     } else if (mode == 1) { 
         /* Global map by line */
+        copy_map2tiles(map, map_data, strlen(map_data) - 1, 0);
+        // TODO
+        //load_description(map); 
     }
     print_tile_map(map);
+    g_hash_table_destroy(config);
 
     return map;
 }
@@ -129,10 +129,6 @@ TileMap load_global_tmap() {
     local_map_height = atoi(g_hash_table_lookup(config, "map_height"));
     local_width = atoi(g_hash_table_lookup(config, "x_segments"));
     local_height = atoi(g_hash_table_lookup(config, "y_segments"));
-    /* printf("WW:%d\n", local_map_width); */
-    /* printf("WW:%d\n", local_map_height); */
-    /* printf("WW:%d\n", local_width); */
-    /* printf("WW:%d\n", local_height); */
     g_hash_table_destroy(config);
 
     global_map = make_tile_map(local_width * local_map_width, local_height * local_map_height);
