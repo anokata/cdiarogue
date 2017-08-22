@@ -100,6 +100,7 @@ int out_map(char *filename, int width, int height) {
 
     fwrite(map->data, get_map_size(map), 1, file);
     fwrite("\n", 1, 1, file);
+    // TODO tiles_count colors etc
     fclose(file);
 
     DEBUG_PRINT("Map:\n");

@@ -67,18 +67,29 @@ void apply_color(TileMap map, char c, int color_index) {
     }
 }
 
-void load_colors(TileMap map, FILE *file) {
-    char * line = NULL;
-    size_t len = 0;
-    ssize_t read;
+char _get_tile_opt(GHashTable *config, int i, char *params) {
+    char *values = g_hash_table_lookup(config, params);
+    return values[i - 1];
+}
 
-    while ((read = getline(&line, &len, file)) != -1) {
-        char c = line[0];
-        int color_index = atoi(line + 1);
-        apply_color(map, c, color_index);
-        printf("%c:%d\n", c, color_index);
-    }  
-    if (line) free(line);
+
+char _get_tile_char(GHashTable *config, int i) {
+    return _get_tile_opt(config, i, "tiles");
+    // for other method: return g_hash_table_lookup(config, tile_char_name);
+}
+
+char _get_tile_color(GHashTable *config, int i) {
+    return _get_tile_opt(config, i, "colrs") - '0';
+}
+
+void load_colors(TileMap map, GHashTable *config) {
+    int tiles_count = atoi(g_hash_table_lookup(config, "tiles_count"));
+    for (int i = 1; i <= tiles_count; i++) {
+        char tile_char = _get_tile_char(config, i);
+        int color_index = _get_tile_color(config, i);
+        /* printf("Tile#%d = '%c' color#%d \n", i, tile_char, color_index); */
+        apply_color(map, tile_char, color_index);
+    }
 }
 
 TileMap load_tile_map(string filename) {
@@ -97,7 +108,7 @@ TileMap load_tile_map(string filename) {
         /* Local map */
         copy_map2tiles(map, map_data, strlen(map_data) - 1, 0);
         // TODO
-        //load_colors(map); 
+        load_colors(map, config); 
     } else if (mode == 1) { 
         /* Global map by line */
         copy_map2tiles(map, map_data, strlen(map_data) - 1, 0);

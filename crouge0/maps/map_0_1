@@ -5,14 +5,20 @@ height:10
 
 map:ox................x.......o...o..x...ox...ox...o..........ox......o..o...o.oo........xo.x.......o.xx.o....x.......ox........o....x..o........o.x.x...xx...x.......xxx.....o..x....o..........x.........x
 
-tile:o
-    color:1
-    passable:t
+tiles_count:3
 
-tile:x
-    color:2
-    passable:f
+tile_1:o
+    color_1:1
+    passable_1:t
 
-tile:.
-    color:3
-    passable:t
+tile_1:x
+    color_1:2
+    passable_1:f
+
+tile_1:.
+    color_1:3
+    passable_1:t
+
+tiles:.ox
+passb:tft
+colrs:123

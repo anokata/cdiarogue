@@ -9,6 +9,13 @@ width:20
 
 height:10
 map:ox................x.......o...o..x...ox...ox...o..........ox......o..o...o.oo........xo.x.......o.xx.o....x.......ox........o....x..o........o.x.x...xx...x.......xxx.....o..x....o..........x.........x
+
+tiles_count:3
+tiles:.ox
+passables:tft
+colors:123
+# or tilesFile:tiles_0_0
+
 tile:o
     color:1
     passable:t
