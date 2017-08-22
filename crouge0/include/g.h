@@ -4,6 +4,7 @@
 #include "map_gen.h"
 #include "tile_map.h"
 #include "world_map.h"
+#include "actor.h"
 #include <glib.h>
 
 typedef struct G {
@@ -14,8 +15,10 @@ typedef struct G {
     Viewport *view;
     GList *log;
     int log_len;
+    GList *actors;
 } *G;
 
 G new_g();
 void free_g(G g);
 void debuglog(G g, char *msg);
+void add_actor(G g, Actor actor);

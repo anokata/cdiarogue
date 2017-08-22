@@ -1,5 +1,5 @@
 # vim: filetype=make
-OBJECTS=app.c main.c map_gen.c world_map.c g.c tile_map.c util.c config_parser.c
+OBJECTS=app.c main.c map_gen.c world_map.c g.c tile_map.c util.c config_parser.c actor.c
 MAP_OBJECTS=mapgen_main.c map_gen.c tile_map.c util.c config_parser.c
 TMAP_OBJECTS=tile_map.c test_tile_map.c util.c
 

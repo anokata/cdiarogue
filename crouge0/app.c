@@ -32,21 +32,25 @@ State state;
 //+2.3 load to global map
 //+2.3.1 gmap mode
 //+2.3.2 colors (without attributes)
-// TODO Remade map formats to more text-like edit-easy
-// 2.4 global to viewport at point
-// 2.5 moving and view map
+//+2.4 global to viewport at point
+//+2.5 moving and view map
 // WRite and draw GP Mechanic, view, make questions and decisions, KNOW WHAT TO DO
 // 1.+walking @
 // 2.+debug and msg
 // 3.+simple location
-// 4.~walking @ loc stop walls
+// 4.+walking @ loc stop walls
 //  -4.1 stop at map ends/ now just for 0 left top
-//   4.2 map objects properties
+//  -4.2 map objects properties
 //	+	load map with kv params format
 //
-// 5. add monstr, simple ai, stay, rand. time steps
+// 5.~add monstr, simple ai, stay, rand. time steps
+//   5.1~list of others  [ INWORK ]
+//   5.2 moving other by steps
 // 6. interacting, simple combat
 // 7. items
+// ...
+// fun
+// levels dungs town
 
 // [ ] make wmap from locals
 // UI progress bar with value
@@ -117,6 +121,23 @@ int draw(void* data) {
     return 0;
 }
 
+void draw_actors(GList *actors, Viewport *v);
+void draw_actor(Actor actor, int x, int y);
+
+void draw_actor(Actor actor, int x, int y) {
+    cc_putxy(actor->c, cn_blue, x, y);
+}
+void draw_actors(GList *actors, Viewport *v) {
+    GList *it = actors;
+UNUSED(v);
+    while (it) {
+        Actor actor = it;
+        // TODO Coord with viewport (x, y, v) END WORK WIP
+        draw_actor(it->data, v->cx + actor->x, v->cy + actor->y);
+        it = g_list_next(it);
+    }
+}
+
 int wmap_key(void* data) {
     G g = data;
     char key = g->key;
@@ -172,6 +193,7 @@ int cursor_draw(void* data) {
     cc_putxy('@', cn_yellow, 
             min(g->view->cx, g->view->width / 2) + g->view->display_left, 
             min(g->view->cy, g->view->height / 2) + g->view->display_top);
+    draw_actors(g->actors, g->view);
     return 0;
 }
 
@@ -190,6 +212,8 @@ void start() {
     G g = new_g();
     curses_init();
     state_init();
+    Actor a = make_actor('d', 2, 2);
+    add_actor(g, a);
 
     process_input(g);
     ss_free_state(state);

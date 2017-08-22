@@ -24,6 +24,8 @@ G new_g() {
     g->log = NULL;
     g->log_len = 0;
 
+    g->actors = NULL;
+
     return g;
 }
 
@@ -32,5 +34,10 @@ void free_g(G g) {
     free_tile_map(g->gmap);
     free(g->view);
     g_list_free(g->log);
+    g_list_free(g->actors);
     free(g);
+}
+
+void add_actor(G g, Actor actor) {
+    g->actors = g_list_append(g->actors, actor);
 }
