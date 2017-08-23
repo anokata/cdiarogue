@@ -127,17 +127,7 @@ int draw(void* data) {
     return 0;
 }
 
-bool in_viewport(Viewport *v, int x, int y) {  // TODO union with Point struct
-    int top = viewport_top(v);
-    int left = viewport_left(v);
-    int bottom = viewport_bottom(v);
-    int right = viewport_right(v);
-    return (x >= left) && (y >= top) && (x < right) && (y < bottom);
-}
-
-// TODO Module?
-void draw_actors(GList *actors, Viewport *v);
-void draw_actor(Actor actor, int x, int y);
+// TODO mechanic Module?
 void move_all_actors_rand(G g);
 void actor_move_rand(Actor actor, G g);
 
@@ -167,25 +157,6 @@ void move_all_actors_rand(G g) {
     while (actor_node) {
         actor_move_rand(actor_node->data, g);
         actor_node = g_list_next(actor_node);
-    }
-}
-
-void draw_actor(Actor actor, int x, int y) {
-    cc_putxy(actor->c, cn_blue, x, y);
-}
-void draw_actors(GList *actors, Viewport *v) {
-    GList *it = actors;
-    int top = viewport_top(v);
-    int left = viewport_left(v);
-
-    while (it) {
-        Actor actor = it->data;
-        if (in_viewport(v, actor->x, actor->y)) {
-            draw_actor(it->data, 
-                    v->display_left + actor->x - left, 
-                    v->display_top + actor->y - top);
-        }
-        it = g_list_next(it);
     }
 }
 
