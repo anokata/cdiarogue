@@ -129,33 +129,11 @@ int draw(void* data) {
 
 // TODO mechanic Module?
 void move_all_actors_rand(G g);
-void actor_move_rand(Actor actor, G g);
-
-void actor_move_rand(Actor actor, G g) {
-    int horz_move = rand() % 3;
-    int vert_move = rand() % 3;
-
-    if (horz_move == 1) {
-        if (is_passable(g->gmap, actor->x + 1, actor->y))
-            actor->x++;
-    } else if (horz_move == 2) {
-        if (is_passable(g->gmap, actor->x - 1, actor->y))
-            actor->x--;
-    }
-
-    if (vert_move == 1) {
-        if (is_passable(g->gmap, actor->x, actor->y + 1))
-            actor->y++;
-    } else if (vert_move == 2) {
-        if (is_passable(g->gmap, actor->x, actor->y - 1))
-            actor->y--;
-    }
-}
 
 void move_all_actors_rand(G g) {
     GList *actor_node = g->actors;
     while (actor_node) {
-        actor_move_rand(actor_node->data, g);
+        actor_move(actor_node->data, g->gmap);
         actor_node = g_list_next(actor_node);
     }
 }
@@ -237,10 +215,13 @@ void start() {
     state_init();
     Actor a = make_actor('d', 2, 2);
     add_actor(g, a);
-    for (int i = 0; i < 20; i++) {
-        a = make_actor('d', i, 5);
-        add_actor(g, a);
-    }
+    a->behavior = BehaviorSimpleDirect;
+    a->directed.x = 5;
+    a->directed.y = 1;
+    /* for (int i = 0; i < 20; i++) { */
+    /*     a = make_actor('d', i, 5); */
+    /*     add_actor(g, a); */
+    /* } */
 
     process_input(g);
     ss_free_state(state);
