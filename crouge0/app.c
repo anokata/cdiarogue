@@ -44,8 +44,9 @@ State state;
 //	+	load map with kv params format
 //
 // 5.~add monstr, simple ai, stay, rand. time steps
-//   5.1~list of others  [ INWORK ]
-//   5.2 moving other by steps
+//   5.1+list of actors, draw 
+//   5.2~moving other by steps, rand, direct to near rand point [ INWORK ]
+//   5.3 actors attributes, color, attack, behavior
 // 6. interacting, simple combat
 // 7. items
 // ...
@@ -57,6 +58,8 @@ State state;
 // unicode ncursesw
 //http://www.roguebasin.com/index.php?title=Ncursesw
 //https://stackoverflow.com/questions/43834833/print-a-wide-unicode-character-with-ncurses
+// Check map folder exist
+// TODO fixing mem errors
 
 void process_input(G g) {
     ss_handle(state, Event_draw, g);

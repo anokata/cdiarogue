@@ -34,6 +34,7 @@ void free_g(G g) {
     free_tile_map(g->gmap);
     free(g->view);
     g_list_free(g->log);
+    free_actors(g->actors);
     g_list_free(g->actors);
     free(g);
 }
