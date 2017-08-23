@@ -180,12 +180,10 @@ TileMap load_global_tmap() {
 }
 
 void foreach_tile_viewport(TileMap map, TileFunc f, Viewport v) {
-    int top = v.cy - v.height / 2;
-    int left = v.cx - v.width / 2;
+    int top = viewport_top(&v);
+    int left = viewport_left(&v);
     int bottom = min((v.cy + v.height / 2), map->height);
     int right = min((v.cx + v.width / 2), map->width);
-    top = (top < 0) ? 0 : top;
-    left = (left < 0) ? 0 : left;
 
     /* debug_file_log_format("viewport cx %d  cy %d.\n", v.cx, v.cy); */
     /* debug_file_log_format("viewport w %d  h %d. map w h %d %d\n", v.width, v.height, map->width, map->height); */
@@ -258,4 +256,24 @@ void viewport_move_up(Viewport *v, TileMap map) {
 void viewport_move_down(Viewport *v, TileMap map) {
     if (! is_passable(map, v->cx, (v->cy + 1))) return;
     v->cy++;
+}
+
+int viewport_top(Viewport *v) {
+    int top = v->cy - v->height / 2;
+    return max(top, 0);
+}
+
+int viewport_left(Viewport *v) {
+    int left = v->cx - v->width / 2;
+    return max(left, 0);
+}
+
+int viewport_bottom(Viewport *v) {
+    int bottom = (v->cy + v->height / 2);
+    return bottom;
+}
+
+int viewport_right(Viewport *v) {
+    int right = (v->cx + v->width / 2);
+    return right;
 }

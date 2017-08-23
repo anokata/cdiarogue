@@ -104,8 +104,10 @@ void debug_draw(G g) {
 "Log:\n%s\n" 
 "Viewport Left: %d\n" 
 "Viewport cx:cy = %d:%d\n" 
+"Viewport left:top = %d:%d\n" 
         , g->key, log_text, 
-        g->view->display_left, g->view->cx, g->view->cy);
+        g->view->display_left, g->view->cx, g->view->cy,
+        viewport_left(g->view), viewport_top(g->view));
     cc_printxy(buf, cn_white, 0, 30);
 }
 
@@ -121,6 +123,14 @@ int draw(void* data) {
     return 0;
 }
 
+bool in_viewport(Viewport *v, int x, int y) {  // TODO union with Point struct
+    int top = viewport_top(v);
+    int left = viewport_left(v);
+    int bottom = viewport_bottom(v);
+    int right = viewport_right(v);
+    return (x >= left) && (y >= top) && (x < right) && (y < bottom);
+}
+
 void draw_actors(GList *actors, Viewport *v);
 void draw_actor(Actor actor, int x, int y);
 
@@ -129,11 +139,16 @@ void draw_actor(Actor actor, int x, int y) {
 }
 void draw_actors(GList *actors, Viewport *v) {
     GList *it = actors;
-UNUSED(v);
+    int top = viewport_top(v);
+    int left = viewport_left(v);
+
     while (it) {
-        Actor actor = it;
-        // TODO Coord with viewport (x, y, v) END WORK WIP
-        draw_actor(it->data, v->cx + actor->x, v->cy + actor->y);
+        Actor actor = it->data;
+        if (in_viewport(v, actor->x, actor->y)) {
+            draw_actor(it->data, 
+                    v->display_left + actor->x - left, 
+                    v->display_top + actor->y - top);
+        }
         it = g_list_next(it);
     }
 }
@@ -213,6 +228,8 @@ void start() {
     curses_init();
     state_init();
     Actor a = make_actor('d', 2, 2);
+    add_actor(g, a);
+    a = make_actor('d', 5, 5);
     add_actor(g, a);
 
     process_input(g);

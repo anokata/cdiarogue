@@ -37,6 +37,10 @@ void viewport_move_left(Viewport *v, TileMap map);
 void viewport_move_right(Viewport *v, TileMap map);
 void viewport_move_up(Viewport *v, TileMap map);
 void viewport_move_down(Viewport *v, TileMap map);
+int viewport_top(Viewport *v);
+int viewport_left(Viewport *v);
+int viewport_bottom(Viewport *v);
+int viewport_right(Viewport *v);
 
 typedef void (*TileFunc)(Tile *tile, int x, int y);
 typedef void (*TileDataFunc)(Tile *tile, int x, int y, void *data);
