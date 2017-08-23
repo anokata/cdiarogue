@@ -42,6 +42,7 @@ int viewport_top(Viewport *v);
 int viewport_left(Viewport *v);
 int viewport_bottom(Viewport *v);
 int viewport_right(Viewport *v);
+bool is_passable(TileMap map, int x, int y);
 
 typedef void (*TileFunc)(Tile *tile, int x, int y);
 typedef void (*TileDataFunc)(Tile *tile, int x, int y, void *data);

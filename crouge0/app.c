@@ -45,7 +45,7 @@ State state;
 //
 // 5.~add monstr, simple ai, stay, rand. time steps
 //   5.1+list of actors, draw 
-//   5.2~moving other by steps, rand, direct to near rand point [ INWORK ]
+//   5.2~moving other by steps, rand, direct to near rand point, wall block [ INWORK ]
 //   5.3 actors attributes, color, attack, behavior
 // 6. interacting, simple combat
 // 7. items
@@ -139,11 +139,33 @@ bool in_viewport(Viewport *v, int x, int y) {  // TODO union with Point struct
 void draw_actors(GList *actors, Viewport *v);
 void draw_actor(Actor actor, int x, int y);
 void move_all_actors_rand(G g);
+void actor_move_rand(Actor actor, G g);
+
+void actor_move_rand(Actor actor, G g) {
+    int horz_move = rand() % 3;
+    int vert_move = rand() % 3;
+
+    if (horz_move == 1) {
+        if (is_passable(g->gmap, actor->x + 1, actor->y))
+            actor->x++;
+    } else if (horz_move == 2) {
+        if (is_passable(g->gmap, actor->x - 1, actor->y))
+            actor->x--;
+    }
+
+    if (vert_move == 1) {
+        if (is_passable(g->gmap, actor->x, actor->y + 1))
+            actor->y++;
+    } else if (vert_move == 2) {
+        if (is_passable(g->gmap, actor->x, actor->y - 1))
+            actor->y--;
+    }
+}
 
 void move_all_actors_rand(G g) {
     GList *actor_node = g->actors;
     while (actor_node) {
-        actor_move_rand(actor_node->data);
+        actor_move_rand(actor_node->data, g);
         actor_node = g_list_next(actor_node);
     }
 }
@@ -244,8 +266,10 @@ void start() {
     state_init();
     Actor a = make_actor('d', 2, 2);
     add_actor(g, a);
-    a = make_actor('d', 5, 5);
-    add_actor(g, a);
+    for (int i = 0; i < 20; i++) {
+        a = make_actor('d', i, 5);
+        add_actor(g, a);
+    }
 
     process_input(g);
     ss_free_state(state);
