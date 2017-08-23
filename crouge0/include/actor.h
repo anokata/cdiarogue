@@ -10,3 +10,4 @@ typedef struct Actor {
 
 Actor make_actor(char c, int x, int y);
 void free_actors(GList *actors);
+void actor_move_rand(Actor actor);

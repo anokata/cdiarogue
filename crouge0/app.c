@@ -60,6 +60,7 @@ State state;
 //https://stackoverflow.com/questions/43834833/print-a-wide-unicode-character-with-ncurses
 // Check map folder exist
 // TODO fixing mem errors
+// ATTENTION: Naming convention for func = <modulename>_<action>_<opt>
 
 void process_input(G g) {
     ss_handle(state, Event_draw, g);
@@ -134,8 +135,18 @@ bool in_viewport(Viewport *v, int x, int y) {  // TODO union with Point struct
     return (x >= left) && (y >= top) && (x < right) && (y < bottom);
 }
 
+// TODO Module?
 void draw_actors(GList *actors, Viewport *v);
 void draw_actor(Actor actor, int x, int y);
+void move_all_actors_rand(G g);
+
+void move_all_actors_rand(G g) {
+    GList *actor_node = g->actors;
+    while (actor_node) {
+        actor_move_rand(actor_node->data);
+        actor_node = g_list_next(actor_node);
+    }
+}
 
 void draw_actor(Actor actor, int x, int y) {
     cc_putxy(actor->c, cn_blue, x, y);
@@ -199,6 +210,7 @@ int cursor_key(void* data) {
             viewport_move_right(g->view, g->gmap);
             break;
     }
+    move_all_actors_rand(g);
     return 0;
 }
 
