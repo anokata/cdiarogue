@@ -45,13 +45,14 @@ State state;
 //
 // 5.~add monstr, simple ai, stay, rand. time steps
 //   5.1+list of actors, draw 
-//   5.2~moving other by steps, rand, direct to near rand point, wall block [ INWORK ]
-//   5.3 actors attributes, color, attack, behavior
+//   5.2+moving other by steps, rand, direct to near rand point, wall block 
+//   5.3 actors attributes, color, attack, behavior [ INWORK ]
 // 6. interacting, simple combat
 // 7. items
 // ...
 // fun
 // levels dungs town
+//	Display turns.
 
 // [ ] make wmap from locals
 // UI progress bar with value
@@ -218,10 +219,15 @@ void start() {
     a->behavior = BehaviorSimpleDirect;
     a->directed.x = 5;
     a->directed.y = 1;
-    /* for (int i = 0; i < 20; i++) { */
-    /*     a = make_actor('d', i, 5); */
-    /*     add_actor(g, a); */
-    /* } */
+    for (int i = 0; i < 20; i++) {
+        a = make_actor('d', i, 5);
+        add_actor(g, a);
+        a->behavior = BehaviorSimpleDirect;
+    }
+    for (int i = 0; i < 20; i++) {
+        a = make_actor('s', i, 5);
+        add_actor(g, a);
+    }
 
     process_input(g);
     ss_free_state(state);

@@ -2,8 +2,11 @@
 
 /* index = Behavior  value = move func */
 static ActorMoveFunc actor_move_behavior_map[] = { 
+    /* just random moving */
     actor_move_rand,
-    actor_move_direct
+    /* choose direct point, move to it, if collided then random move one, 
+     * at point choose other rand point. */
+    actor_step_at_directed 
 };
 
 Actor make_actor(char c, int x, int y) {
@@ -43,24 +46,31 @@ int actor_direct_diffy(Actor actor) {
     return diff == 0 ? 0 : (diff > 0 ? 1 : -1);
 }
 
-void actor_step_at_directed(Actor actor) {
+void actor_step_at_directed(Actor actor, TileMap map) {
     if (!actor_isat_directed_place(actor)) {
-        actor->x += actor_direct_diffx(actor);
-        actor->y += actor_direct_diffy(actor);
+        /* actor->x += actor_direct_diffx(actor); */
+        /* actor->y += actor_direct_diffy(actor); */
+        actor_move_direct(actor, map);
+    } else {
+        actor_choose_direct_point_rand(actor, map);
     }
 }
 
-void actor_move_hv(Actor actor, TileMap map, int h, int v) {
+bool actor_move_hv(Actor actor, TileMap map, int h, int v) {
     if (is_passable(map, actor->x + h, actor->y + v)) {
             actor->x += h;
             actor->y += v;
+            return true;
     }
+    return false;
 }
 
 void actor_move_direct(Actor actor, TileMap map) {
     int horz_move = actor_direct_diffx(actor);
     int vert_move = actor_direct_diffy(actor);
-    actor_move_hv(actor, map, horz_move, vert_move);
+    if (!actor_move_hv(actor, map, horz_move, vert_move)) {
+        actor_move_rand(actor, map);
+    }
 }
 
 void actor_move_rand(Actor actor, TileMap map) {
@@ -71,7 +81,10 @@ void actor_move_rand(Actor actor, TileMap map) {
 }
 
 void actor_choose_direct_point_rand(Actor actor, TileMap map) {
-    // TODO END
+    int x = rand() % map->width;
+    int y = rand() % map->height;
+    actor->directed.x = x;
+    actor->directed.y = y;
 }
 /* moving end */
 
