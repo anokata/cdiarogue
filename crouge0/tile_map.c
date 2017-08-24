@@ -131,7 +131,7 @@ TileMap load_tile_map(string filename) {
         //load_description(map); 
         //load_wmap_data(world_filename);
     }
-    print_tile_map(map);
+    /* print_tile_map(map); */
     g_hash_table_destroy(config);
 
     return map;

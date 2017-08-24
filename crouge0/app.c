@@ -46,19 +46,29 @@ State state;
 // 5.~add monstr, simple ai, stay, rand. time steps
 //   5.1+list of actors, draw 
 //   5.2+moving other by steps, rand, direct to near rand point, wall block 
-//   5.3 actors attributes, color, attack, behavior [ INWORK ]
+//   5.3~actors attributes, color, attack, behavior [ INWORK ]
+//   5.4 direct to player
 // 6. interacting, simple combat
+//   6.1 actor-player collide detect, from player and from actors
+//   6.2 collide events by types. health, wounds
 // 7. items
+//   7.1 doors, open, close
+//   7.2 weapon, weild, take off. effect on combat
 // ...
 // fun
 // levels dungs town
+// drop from actors
 //	Display turns.
 
 // [ ] make wmap from locals
 // UI progress bar with value
 // unicode ncursesw
+// save load
+// data files for actors, items
+// magic, skills, exp
 //http://www.roguebasin.com/index.php?title=Ncursesw
 //https://stackoverflow.com/questions/43834833/print-a-wide-unicode-character-with-ncurses
+//	lighting
 // Check map folder exist
 // TODO fixing mem errors
 // ATTENTION: Naming convention for func = <modulename>_<action>_<opt>
