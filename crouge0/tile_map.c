@@ -258,6 +258,33 @@ void viewport_move_down(Viewport *v, TileMap map) {
     v->cy++;
 }
 
+void viewport_move_leftup(Viewport *v, TileMap map) {
+    if ((v->cx == 0) || (v->cy == 0)) return;
+    if (! is_passable(map, (v->cx - 1), (v->cy - 1))) return;
+    v->cx--;
+    v->cy--;
+}
+
+void viewport_move_rightup(Viewport *v, TileMap map) {
+    if ((v->cy == 0)) return;
+    if (! is_passable(map, (v->cx + 1), (v->cy - 1))) return;
+    v->cx++;
+    v->cy--;
+}
+
+void viewport_move_leftdown(Viewport *v, TileMap map) {
+    if ((v->cx == 0)) return;
+    if (! is_passable(map, (v->cx - 1), (v->cy + 1))) return;
+    v->cx--;
+    v->cy++;
+}
+
+void viewport_move_rightdown(Viewport *v, TileMap map) {
+    if (! is_passable(map, (v->cx + 1), (v->cy + 1))) return;
+    v->cx++;
+    v->cy++;
+}
+
 int viewport_top(Viewport *v) {
     int top = v->cy - v->height / 2;
     return max(top, 0);

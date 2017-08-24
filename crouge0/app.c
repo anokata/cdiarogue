@@ -191,6 +191,18 @@ int cursor_key(void* data) {
             g->cursor.x++;
             viewport_move_right(g->view, g->gmap);
             break;
+        case 'y':
+            viewport_move_leftup(g->view, g->gmap);
+            break;
+        case 'u':
+            viewport_move_rightup(g->view, g->gmap);
+            break;
+        case 'm':
+            viewport_move_rightdown(g->view, g->gmap);
+            break;
+        case 'n':
+            viewport_move_leftdown(g->view, g->gmap);
+            break;
     }
     move_all_actors_rand(g);
     return 0;
