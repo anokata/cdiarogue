@@ -147,12 +147,26 @@ void move_all_actors_rand(G g);
 void move_all_actors_rand(G g) {
     GList *actor_node = g->actors;
     while (actor_node) {
+        // todo collide
         actor_move(actor_node->data, g->gmap);
         actor_node = g_list_next(actor_node);
     }
 }
 
-bool collisions_check(Actor actor, int dx, int dy, GList actors); 
+bool collisions_player_move(Actor player, int dx, int dy, G g);
+bool collisions_check(Actor actor, int dx, int dy, GList *actors); 
+
+bool collisions_check(Actor actor, int dx, int dy, GList *actors) {
+    return true;
+}
+
+bool collisions_player_move(Actor player, int dx, int dy, G g) {
+    if (collisions_check(player, dx, dy, g->actors)) {
+        actor_move_hv(player, g->gmap, dx, dy);
+        return true;
+    }
+    return false;
+}
 
 int wmap_key(void* data) {
     G g = data;
@@ -182,39 +196,47 @@ int cursor_key(void* data) {
             break;
         case 'j':
             g->cursor.y++;
-            viewport_move_down(g->view, g->gmap);
-            actor_move_hv(g->player, g->gmap, 0, 1);
+            if (collisions_player_move(g->player, 0, 1, g)) {
+                viewport_move_down(g->view, g->gmap);
+            }
             break;
         case 'k':
             g->cursor.y--;
-            viewport_move_up(g->view, g->gmap);
-            actor_move_hv(g->player, g->gmap, 0, -1);
+            if (collisions_player_move(g->player, 0, -1, g)) {
+                viewport_move_up(g->view, g->gmap);
+            }
             break;
         case 'h':
             g->cursor.x--;
-            viewport_move_left(g->view, g->gmap);
-            actor_move_hv(g->player, g->gmap, -1, 0);
+            if (collisions_player_move(g->player, -1, 0, g)) {
+                viewport_move_left(g->view, g->gmap);
+            }
             break;
         case 'l':
             g->cursor.x++;
-            viewport_move_right(g->view, g->gmap);
-            actor_move_hv(g->player, g->gmap, 1, 0);
+            if (collisions_player_move(g->player, 1, 0, g)) {
+                viewport_move_right(g->view, g->gmap);
+            }
             break;
         case 'y':
-            viewport_move_leftup(g->view, g->gmap);
-            actor_move_hv(g->player, g->gmap, -1, -1);
+            if (collisions_player_move(g->player, -1, -1, g)) {
+                viewport_move_leftup(g->view, g->gmap);
+            }
             break;
         case 'u':
-            viewport_move_rightup(g->view, g->gmap);
-            actor_move_hv(g->player, g->gmap, 1, -1);
+            if (collisions_player_move(g->player, 1, -1, g)) {
+                viewport_move_rightup(g->view, g->gmap);
+            }
             break;
         case 'm':
-            viewport_move_rightdown(g->view, g->gmap);
-            actor_move_hv(g->player, g->gmap, 1, 1);
+            if (collisions_player_move(g->player, 1, 1, g)) {
+                viewport_move_rightdown(g->view, g->gmap);
+            }
             break;
         case 'n':
-            viewport_move_leftdown(g->view, g->gmap);
-            actor_move_hv(g->player, g->gmap, -1, 1);
+            if (collisions_player_move(g->player, -1, 1, g)) {
+                viewport_move_leftdown(g->view, g->gmap);
+            }
             break;
     }
     move_all_actors_rand(g);
