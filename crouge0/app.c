@@ -147,23 +147,44 @@ void move_all_actors_rand(G g);
 void move_all_actors_rand(G g) {
     GList *actor_node = g->actors;
     while (actor_node) {
-        // todo collide
+        // TODO collide
         actor_move(actor_node->data, g->gmap);
         actor_node = g_list_next(actor_node);
     }
 }
 
 bool collisions_player_move(Actor player, int dx, int dy, G g);
-bool collisions_check(Actor actor, int dx, int dy, GList *actors); 
+Actor collision_get_actor(Actor actor, int dx, int dy, GList *actors);
+void collision_effect(Actor actor, Actor subject, G g);
 
-bool collisions_check(Actor actor, int dx, int dy, GList *actors) {
-    return true;
+void collision_effect(Actor actor, Actor subject, G g) {
+    debuglog(g, "collide");
 }
 
+/* return collided actor */
+Actor collision_get_actor(Actor actor, int dx, int dy, GList *actors) {
+    GList *node = actors;
+    int x = actor->x + dx;
+    int y = actor->y + dy;
+
+    while (node) {
+        Actor subject = node->data;
+        if ((x == subject->x) && (y == subject->y)) {
+            return subject;
+        }
+        node = g_list_next(node);
+    }
+    return NULL;
+}
+
+/* True if can move */
 bool collisions_player_move(Actor player, int dx, int dy, G g) {
-    if (collisions_check(player, dx, dy, g->actors)) {
+    Actor subject = collision_get_actor(player, dx, dy, g->actors);
+    if (!subject) {
         actor_move_hv(player, g->gmap, dx, dy);
         return true;
+    } else {
+        collision_effect(player, subject, g);
     }
     return false;
 }
