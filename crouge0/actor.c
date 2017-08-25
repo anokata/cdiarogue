@@ -17,6 +17,9 @@ Actor make_actor(char c, int x, int y) {
     actor->directed.x = x;
     actor->directed.y = y;
     actor->behavior = BehaviorRandom;
+    actor->color = cn_white;
+    actor->stat_attack = 1;
+    actor->role = RoleMonster;
     return actor;
 }
 

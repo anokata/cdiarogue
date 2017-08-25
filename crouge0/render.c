@@ -17,7 +17,7 @@ void draw_actors(GList *actors, Viewport *v) {
 }
 
 void draw_actor(Actor actor, int x, int y) {
-    cc_putxy(actor->c, cn_blue, x, y);
+    cc_putxy(actor->c, actor->color, x, y);
 }
 
 bool in_viewport(Viewport *v, int x, int y) {  // TODO union with Point struct

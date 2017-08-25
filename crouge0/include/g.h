@@ -16,6 +16,7 @@ typedef struct G {
     GList *log;
     int log_len;
     GList *actors;
+    Actor player;
 } *G;
 
 G new_g();

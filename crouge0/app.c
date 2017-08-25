@@ -43,14 +43,17 @@ State state;
 //  -4.2 map objects properties
 //	+	load map with kv params format
 //
-// 5.~add monstr, simple ai, stay, rand. time steps
+//+5. add monstr, simple ai, stay, rand. time steps
 //   5.1+list of actors, draw 
 //   5.2+moving other by steps, rand, direct to near rand point, wall block 
-//   5.3~actors attributes, color, attack, behavior [ INWORK ]
-//   5.4 direct to player
-// 6. interacting, simple combat
-//   6.1 actor-player collide detect, from player and from actors
+//   5.3+actors attributes, color, attack, behavior
+// [ INWORK ]
+//~6. interacting, simple combat
+//   6.0+player must be actor
+//   6.1~actor-player collide detect, from player and from actors, events map
 //   6.2 collide events by types. health, wounds
+//
+//   6.4 direct to player
 // 7. items
 //   7.1 doors, open, close
 //   7.2 weapon, weild, take off. effect on combat
@@ -149,6 +152,10 @@ void move_all_actors_rand(G g) {
     }
 }
 
+//bool move_check()
+
+bool collisions_check(Actor actor); // who with who and where
+
 int wmap_key(void* data) {
     G g = data;
     char key = g->key;
@@ -178,34 +185,56 @@ int cursor_key(void* data) {
         case 'j':
             g->cursor.y++;
             viewport_move_down(g->view, g->gmap);
+            actor_move_hv(g->player, g->gmap, 0, 1);
             break;
         case 'k':
             g->cursor.y--;
             viewport_move_up(g->view, g->gmap);
+            actor_move_hv(g->player, g->gmap, 0, -1);
             break;
         case 'h':
             g->cursor.x--;
             viewport_move_left(g->view, g->gmap);
+            actor_move_hv(g->player, g->gmap, -1, 0);
             break;
         case 'l':
             g->cursor.x++;
             viewport_move_right(g->view, g->gmap);
+            actor_move_hv(g->player, g->gmap, 1, 0);
             break;
         case 'y':
             viewport_move_leftup(g->view, g->gmap);
+            actor_move_hv(g->player, g->gmap, -1, -1);
             break;
         case 'u':
             viewport_move_rightup(g->view, g->gmap);
+            actor_move_hv(g->player, g->gmap, 1, -1);
             break;
         case 'm':
             viewport_move_rightdown(g->view, g->gmap);
+            actor_move_hv(g->player, g->gmap, 1, 1);
             break;
         case 'n':
             viewport_move_leftdown(g->view, g->gmap);
+            actor_move_hv(g->player, g->gmap, -1, 1);
             break;
     }
     move_all_actors_rand(g);
+    //player_move(g->player, g->view);
     return 0;
+}
+
+//void player_move(Actor player, int dx, int dy);
+/* void player_move(Actor player, Viewport *view) { */
+/*     // ??? self coord, simple as in actors */
+/*     player->x = min(view->cx, view->width / 2) + view->display_left, */ 
+/*     player->y = min(view->cy, view->height / 2) + view->display_top; */
+/* } */
+
+void draw_actor_self(Actor actor, Viewport *v) {
+    int top = v->display_left - viewport_top(v);
+    int left = v->display_top - viewport_left(v);
+    draw_actor(actor, left + actor->x, top + actor->y);
 }
 
 int cursor_draw(void* data) {
@@ -214,10 +243,12 @@ int cursor_draw(void* data) {
     clear();
     draw_map(g->gmap, g->view);
     /* cc_putxy(' ', cw_white, g->cursor.x, g->cursor.y); */
-    cc_putxy('@', cn_yellow, 
-            min(g->view->cx, g->view->width / 2) + g->view->display_left, 
-            min(g->view->cy, g->view->height / 2) + g->view->display_top);
+    // TODO draw_player()
+    /* cc_putxy('@', cn_yellow, */ 
+    /*         min(g->view->cx, g->view->width / 2) + g->view->display_left, */ 
+    /*         min(g->view->cy, g->view->height / 2) + g->view->display_top); */
     draw_actors(g->actors, g->view);
+    draw_actor_self(g->player, g->view);
     return 0;
 }
 
@@ -244,10 +275,12 @@ void start() {
     for (int i = 0; i < 20; i++) {
         a = make_actor('d', i, 5);
         add_actor(g, a);
+        a->color = cb_red;
         a->behavior = BehaviorSimpleDirect;
     }
     for (int i = 0; i < 20; i++) {
         a = make_actor('s', i, 5);
+        a->color = cb_yellow;
         add_actor(g, a);
     }
 

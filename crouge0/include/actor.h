@@ -6,6 +6,7 @@
 #include "tile_map.h"
 
 typedef enum Behavior { BehaviorRandom=0, BehaviorSimpleDirect } Behavior;
+typedef enum Role { RolePlayer, RoleMonster, RoleNPC } Role;
 
 typedef struct Actor {
     char c;
@@ -13,6 +14,9 @@ typedef struct Actor {
     int y;
     Behavior behavior;
     Point directed;
+    Color color;
+    int stat_attack;
+    Role role;
 } *Actor;
 
 typedef void (*ActorMoveFunc)(Actor actor, TileMap map);
@@ -25,3 +29,6 @@ void actor_move_rand(Actor actor, TileMap map);
 void actor_move_direct(Actor actor, TileMap map);
 void actor_move(Actor actor, TileMap map);
 void actor_choose_direct_point_rand(Actor actor, TileMap map);
+
+bool actor_move_hv(Actor actor, TileMap map, int h, int v);
+void player_move(Actor player, Viewport *view);

@@ -28,6 +28,10 @@ G new_g() {
 
     g->actors = NULL;
 
+    g->player = make_actor('@', 0, 0);
+    g->player->role = RolePlayer;
+    g->player->color = cb_white;
+
     return g;
 }
 
@@ -38,6 +42,7 @@ void free_g(G g) {
     g_list_free(g->log);
     free_actors(g->actors);
     g_list_free(g->actors);
+    free(g->player);
     free(g);
 }
 
