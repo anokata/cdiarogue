@@ -152,9 +152,7 @@ void move_all_actors_rand(G g) {
     }
 }
 
-//bool move_check()
-
-bool collisions_check(Actor actor); // who with who and where
+bool collisions_check(Actor actor, int dx, int dy, GList actors); 
 
 int wmap_key(void* data) {
     G g = data;
@@ -220,16 +218,8 @@ int cursor_key(void* data) {
             break;
     }
     move_all_actors_rand(g);
-    //player_move(g->player, g->view);
     return 0;
 }
-
-//void player_move(Actor player, int dx, int dy);
-/* void player_move(Actor player, Viewport *view) { */
-/*     // ??? self coord, simple as in actors */
-/*     player->x = min(view->cx, view->width / 2) + view->display_left, */ 
-/*     player->y = min(view->cy, view->height / 2) + view->display_top; */
-/* } */
 
 void draw_actor_self(Actor actor, Viewport *v) {
     int top = v->display_left - viewport_top(v);
@@ -242,8 +232,6 @@ int cursor_draw(void* data) {
 
     clear();
     draw_map(g->gmap, g->view);
-    /* cc_putxy(' ', cw_white, g->cursor.x, g->cursor.y); */
-    // TODO draw_player()
     /* cc_putxy('@', cn_yellow, */ 
     /*         min(g->view->cx, g->view->width / 2) + g->view->display_left, */ 
     /*         min(g->view->cy, g->view->height / 2) + g->view->display_top); */
@@ -267,22 +255,24 @@ void start() {
     G g = new_g();
     curses_init();
     state_init();
-    Actor a = make_actor('d', 2, 2);
+    Actor a = make_actor('o', 2, 2);
     add_actor(g, a);
     a->behavior = BehaviorSimpleDirect;
+    a->behavior = BehaviorStand;
+    a->color = cb_blue;
     a->directed.x = 5;
     a->directed.y = 1;
-    for (int i = 0; i < 20; i++) {
-        a = make_actor('d', i, 5);
-        add_actor(g, a);
-        a->color = cb_red;
-        a->behavior = BehaviorSimpleDirect;
-    }
-    for (int i = 0; i < 20; i++) {
-        a = make_actor('s', i, 5);
-        a->color = cb_yellow;
-        add_actor(g, a);
-    }
+    /* for (int i = 0; i < 20; i++) { */
+    /*     a = make_actor('d', i, 5); */
+    /*     add_actor(g, a); */
+    /*     a->color = cb_red; */
+    /*     a->behavior = BehaviorSimpleDirect; */
+    /* } */
+    /* for (int i = 0; i < 20; i++) { */
+    /*     a = make_actor('s', i, 5); */
+    /*     a->color = cb_yellow; */
+    /*     add_actor(g, a); */
+    /* } */
 
     process_input(g);
     ss_free_state(state);
