@@ -32,8 +32,8 @@ void free_actors(GList *actors) {
 }
 
 /* Moving */
-void actor_move(Actor actor, TileMap map) {
-    actor_move_behavior_map[actor->behavior](actor, map);
+Point actor_get_move_point(Actor actor, TileMap map) {
+    return actor_move_behavior_map[actor->behavior](actor, map);
 }
 
 /* Actual moving with change coords */
@@ -47,36 +47,40 @@ bool actor_move_hv(Actor actor, TileMap map, int h, int v) {
 }
 
 /* Behavior func */
-void actor_step_at_directed(Actor actor, TileMap map) {
-    if (!_actor_isat_directed_place(actor)) {
-        _actor_move_direct(actor, map);
-    } else {
+Point actor_step_at_directed(Actor actor, TileMap map) {
+    if (_actor_isat_directed_place(actor)) {
         _actor_choose_direct_point_rand(actor, map);
     }
+    return _actor_move_direct(actor, map);
 }
 
-void _actor_move_direct(Actor actor, TileMap map) {
+Point _actor_move_direct(Actor actor, TileMap map) {
     int horz_move = _actor_direct_diffx(actor);
     int vert_move = _actor_direct_diffy(actor);
-    if (!actor_move_hv(actor, map, horz_move, vert_move)) {
-        actor_move_rand(actor, map);
+    if (!is_passable(map, actor->x + horz_move, actor->y + vert_move)) {
+        return actor_move_rand(actor, map);
     }
+    Point p = {horz_move, vert_move};
+    return p;
 }
 
 /* Behavior func */
-void actor_not_move(Actor actor, TileMap map) {
+Point actor_not_move(Actor actor, TileMap map) {
     UNUSED(actor);
     UNUSED(map);
+    Point p = {0, 0};
+    return p;
 }
 
 /* Behavior func */
-//Point actor_move_rand(Actor actor, TileMap map) {
-void actor_move_rand(Actor actor, TileMap map) {
+Point actor_move_rand(Actor actor, TileMap map) {
+    UNUSED(actor);
+    UNUSED(map);
     // TODO Dice roll [-1, 1]
     int horz_move = rand() % 3 - 1; 
     int vert_move = rand() % 3 - 1;
-    actor_move_hv(actor, map, horz_move, vert_move);
-    //return {horz_move, vert_move};
+    Point p = {horz_move, vert_move};
+    return p;
 }
 
 void _actor_choose_direct_point_rand(Actor actor, TileMap map) {
@@ -100,13 +104,6 @@ int _actor_direct_diffy(Actor actor) {
     return diff == 0 ? 0 : (diff > 0 ? 1 : -1);
 }
 
-
-Point actor_get_move_point(Actor actor, TileMap map) {
-
-}
-
-void actor_move2point(Actor actor, Point p) {
-}
 /* moving end */
 
 

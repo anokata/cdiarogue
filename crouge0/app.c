@@ -146,41 +146,25 @@ int draw(void* data) {
 
 // TODO mechanic Module?
 void move_all_actors_rand(G g);
-bool actor_try_go(Actor actor, Point p, G g);
-
-bool actor_try_go(Actor actor, Point p, G g) {
-    // TODO
-    // check map
-    // collisions_player_move
-    return true;
-}
-
-void move_all_actors_rand(G g) {
-    GList *actor_node = g->actors;
-    while (actor_node) {
-        // TODO collide
-        Actor actor = actor_node->data;
-
-      actor_move(actor, g->gmap);
-        // TODO-ing
-        // get point where actor want go
-        Point next_point = actor_get_move_point(actor, g->gmap);
-        // check for collide
-        if (actor_try_go(actor, next_point, g)) {
-            // go if can
-            // not need if collisions_player_move
-            // actor_move2point(actor, next_point);
-        }
-        // ---
-        actor_node = g_list_next(actor_node);
-    }
-}
-
 bool collisions_player_move(Actor player, int dx, int dy, G g);
 Actor collision_get_actor(Actor actor, int dx, int dy, GList *actors);
 void collision_effect(Actor actor, Actor subject, G g);
 
+void move_all_actors_rand(G g) {
+    GList *actor_node = g->actors;
+    while (actor_node) {
+        Actor actor = actor_node->data;
+        // TODO-ing
+        // get point where actor want go
+        Point next_point = actor_get_move_point(actor, g->gmap);
+        // check for collide and go
+        collisions_player_move(actor, next_point.x, next_point.y, g);
+        actor_node = g_list_next(actor_node);
+    }
+}
+
 void collision_effect(Actor actor, Actor subject, G g) {
+    UNUSED(subject);
     if (actor->role == RolePlayer) {
         debuglog(g, "collide from player");
     } else {
@@ -196,7 +180,8 @@ Actor collision_get_actor(Actor actor, int dx, int dy, GList *actors) {
 
     while (node) {
         Actor subject = node->data;
-        if ((x == subject->x) && (y == subject->y)) {
+        // also checks for self collide
+        if ((x == subject->x) && (y == subject->y) && (actor != subject)) {
             return subject;
         }
         node = g_list_next(node);
@@ -327,10 +312,11 @@ void start() {
     Actor a = make_actor('o', 2, 2);
     add_actor(g, a);
     a->behavior = BehaviorSimpleDirect;
-    a->behavior = BehaviorStand;
+    //a->behavior = BehaviorRandom;
+    //a->behavior = BehaviorStand;
     a->color = cb_blue;
-    a->directed.x = 5;
-    a->directed.y = 1;
+    a->directed.x = 0;
+    a->directed.y = 0;
     /* for (int i = 0; i < 20; i++) { */
     /*     a = make_actor('d', i, 5); */
     /*     add_actor(g, a); */

@@ -16,10 +16,10 @@ G new_g() {
     g->view = malloc(sizeof(Viewport));
     g->view->cx = 0;
     g->view->cy = 0;
-    /* g->view->width = 30; */
-    /* g->view->height = 30; */
-    g->view->width = 8;
-    g->view->height = 8;
+    g->view->width = 40;
+    g->view->height = 40;
+    /* g->view->width = 8; */
+    /* g->view->height = 8; */
     g->view->display_left = 8;
     g->view->display_top = 8;
 
@@ -31,6 +31,8 @@ G new_g() {
     g->player = make_actor('@', 0, 0);
     g->player->role = RolePlayer;
     g->player->color = cb_white;
+    g->player->behavior = BehaviorStand;
+    add_actor(g, g->player);
 
     return g;
 }
@@ -42,7 +44,7 @@ void free_g(G g) {
     g_list_free(g->log);
     free_actors(g->actors);
     g_list_free(g->actors);
-    free(g->player);
+    //free(g->player);
     free(g);
 }
 
