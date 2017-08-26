@@ -28,3 +28,9 @@ bool in_viewport(Viewport *v, int x, int y) {  // TODO union with Point struct
     return (x >= left) && (y >= top) && (x < right) && (y < bottom);
 }
 
+void draw_actor_self(Actor actor, Viewport *v) {
+    int top = v->display_left - viewport_top(v);
+    int left = v->display_top - viewport_left(v);
+    draw_actor(actor, left + actor->x, top + actor->y);
+}
+

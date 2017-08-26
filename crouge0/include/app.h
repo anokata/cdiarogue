@@ -13,6 +13,7 @@
 #include "actor.h"
 #include "g.h"
 #include "render.h"
+#include "collide.h"
 
 void debug_draw(G g);
 

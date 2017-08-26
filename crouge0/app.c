@@ -148,9 +148,6 @@ int draw(void* data) {
 
 // TODO mechanic Module?
 void move_all_actors_rand(G g);
-bool collisions_player_move(Actor player, int dx, int dy, G g);
-Actor collision_get_actor(Actor actor, int dx, int dy, GList *actors);
-void collision_effect(Actor actor, Actor subject, G g);
 
 void move_all_actors_rand(G g) {
     GList *actor_node = g->actors;
@@ -162,48 +159,6 @@ void move_all_actors_rand(G g) {
         collisions_player_move(actor, next_point.x, next_point.y, g);
         actor_node = g_list_next(actor_node);
     }
-}
-
-void collision_effect(Actor actor, Actor subject, G g) {
-    // TODO LAST
-    // collide by roles
-    // run_action(actor, subject);
-    //    _get_action(actor, subject)(actor, subject);
-    //    ActionFunc actions[] = [];
-    UNUSED(subject);
-    if (actor->role == RolePlayer) {
-        debuglog(g, "collide from player");
-    } else {
-        debuglog(g, "collide from monster");
-    }
-}
-
-/* return collided actor */
-Actor collision_get_actor(Actor actor, int dx, int dy, GList *actors) {
-    GList *node = actors;
-    int x = actor->x + dx;
-    int y = actor->y + dy;
-
-    while (node) {
-        Actor subject = node->data;
-        // also checks for self collide
-        if ((x == subject->x) && (y == subject->y) && (actor != subject)) {
-            return subject;
-        }
-        node = g_list_next(node);
-    }
-    return NULL;
-}
-
-/* True if can move */
-bool collisions_player_move(Actor player, int dx, int dy, G g) {
-    Actor subject = collision_get_actor(player, dx, dy, g->actors);
-    if (!subject) {
-        return actor_move_hv(player, g->gmap, dx, dy);
-    } else {
-        collision_effect(player, subject, g);
-    }
-    return false;
 }
 
 int wmap_key(void* data) {
@@ -279,12 +234,6 @@ int cursor_key(void* data) {
     }
     move_all_actors_rand(g);
     return 0;
-}
-
-void draw_actor_self(Actor actor, Viewport *v) {
-    int top = v->display_left - viewport_top(v);
-    int left = v->display_top - viewport_left(v);
-    draw_actor(actor, left + actor->x, top + actor->y);
 }
 
 int cursor_draw(void* data) {
