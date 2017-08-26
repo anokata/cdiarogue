@@ -50,8 +50,9 @@ State state;
 // [ INWORK ]
 //~6. interacting, simple combat
 //   6.0+player must be actor
-//   6.1~actor-player collide detect, from player and from actors, events map
-//   6.2 collide events by types. health, wounds
+//   6.1+actor-player collide detect, from player and from actors, 
+//   6.2~events map
+//   6.3 collide events by types. health, wounds
 //
 //   6.4 direct to player
 // 7. items
@@ -75,6 +76,7 @@ State state;
 // Check map folder exist
 // TODO fixing mem errors
 // ATTENTION: Naming convention for func = <modulename>_<action>_<opt>
+// TODO map editor pipe, fix global map loading
 
 void process_input(G g) {
     ss_handle(state, Event_draw, g);
@@ -117,13 +119,13 @@ void debug_draw(G g) {
     }
 
     snprintf(buf, 1024, 
-"Debug: \n"
-"Key: %d\n" 
-"Log:\n%s\n" 
-"Viewport Left: %d\n" 
-"Viewport cx:cy = %d:%d\n" 
-"Viewport left:top = %d:%d\n" 
-"Player x:y = %d:%d\n" 
+            "Debug: \n"
+            "Key: %d\n" 
+            "Log:\n%s\n" 
+            "Viewport Left: %d\n" 
+            "Viewport cx:cy = %d:%d\n" 
+            "Viewport left:top = %d:%d\n" 
+            "Player x:y = %d:%d\n" 
         , g->key, log_text, 
         g->view->display_left, g->view->cx, g->view->cy,
         viewport_left(g->view), viewport_top(g->view),
@@ -154,7 +156,6 @@ void move_all_actors_rand(G g) {
     GList *actor_node = g->actors;
     while (actor_node) {
         Actor actor = actor_node->data;
-        // TODO-ing
         // get point where actor want go
         Point next_point = actor_get_move_point(actor, g->gmap);
         // check for collide and go
@@ -164,6 +165,11 @@ void move_all_actors_rand(G g) {
 }
 
 void collision_effect(Actor actor, Actor subject, G g) {
+    // TODO LAST
+    // collide by roles
+    // run_action(actor, subject);
+    //    _get_action(actor, subject)(actor, subject);
+    //    ActionFunc actions[] = [];
     UNUSED(subject);
     if (actor->role == RolePlayer) {
         debuglog(g, "collide from player");
