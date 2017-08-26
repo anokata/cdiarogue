@@ -19,7 +19,7 @@ typedef struct Actor {
     Role role;
 } *Actor;
 
-typedef void (*ActorMoveFunc)(Actor actor, TileMap map);
+typedef Point (*ActorMoveFunc)(Actor actor, TileMap map);
 
 Actor make_actor(char c, int x, int y);
 void free_actors(GList *actors);
@@ -35,3 +35,5 @@ void _actor_choose_direct_point_rand(Actor actor, TileMap map);
 
 bool actor_move_hv(Actor actor, TileMap map, int h, int v);
 void player_move(Actor player, Viewport *view);
+Point actor_get_move_point(Actor actor, TileMap map);
+void actor_move2point(Actor actor, Point p);
