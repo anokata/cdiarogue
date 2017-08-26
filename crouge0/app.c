@@ -123,10 +123,13 @@ void debug_draw(G g) {
 "Viewport Left: %d\n" 
 "Viewport cx:cy = %d:%d\n" 
 "Viewport left:top = %d:%d\n" 
+"Player x:y = %d:%d\n" 
         , g->key, log_text, 
         g->view->display_left, g->view->cx, g->view->cy,
-        viewport_left(g->view), viewport_top(g->view));
-    cc_printxy(buf, cn_white, 0, 30);
+        viewport_left(g->view), viewport_top(g->view),
+        g->player->x, g->player->y
+        );
+    cc_printxy(buf, cn_white, 0, 20);
 }
 
 int draw(void* data) {
@@ -181,8 +184,7 @@ Actor collision_get_actor(Actor actor, int dx, int dy, GList *actors) {
 bool collisions_player_move(Actor player, int dx, int dy, G g) {
     Actor subject = collision_get_actor(player, dx, dy, g->actors);
     if (!subject) {
-        actor_move_hv(player, g->gmap, dx, dy);
-        return true;
+        return actor_move_hv(player, g->gmap, dx, dy);
     } else {
         collision_effect(player, subject, g);
     }

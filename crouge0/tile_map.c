@@ -218,6 +218,7 @@ void foreach_tile_set(TileMap map, TileDataFunc f, void *data, char tile_char) {
 }
 
 bool is_passable(TileMap map, int x, int y) {
+    if ((x < 0) || (y < 0)) return false;
     return tile_at(map, x, y)->passable;
 }
 
@@ -226,14 +227,7 @@ void draw_tile(Tile *tile, int x, int y) {
 }
 
 void draw_map(TileMap map, Viewport *v) {
-    // draw by tile
-    /* foreach_tile(map, draw_tile); */
-    /* Viewport ve = {6, 6, 0, 0}; */
     foreach_tile_viewport(map, draw_tile, *v);
-    /* string m2; */
-    /* m2 = tilemap_to2d(map); // store to g? */
-    /* cc_print(m2, cd_yellow); */
-    /* free(m2); */
 }
 
 void viewport_move_left(Viewport *v, TileMap map) {
