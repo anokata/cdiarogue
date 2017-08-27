@@ -1,13 +1,21 @@
 #include "collide.h"
 
 // Role of actor X Role of subject TODO END
+// matrix Role of actor X role of subject
+// analogically make other actions, not just collision: (type, roleA, roleB)
 ActionFunc actions[] = {
-
+    //{_no_action, _no_action}
+    //or g_hash
 };
+
+// void init_actions(int roles_count)
+// action_set(actions, role_a role_b action_func)
+// or static
 
 ActionFunc _get_action(Actor actor, Actor subject, G g) {
     UNUSED(actor);
     UNUSED(subject);
+    UNUSED(g);
     //return actions[]
     return _no_action;
 }
