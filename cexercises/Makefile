@@ -1,3 +1,6 @@
+test:
+	cc $@.c -o /tmp/$@ && /tmp/$@
+
 maxtime:
 	cc maxtime.c -o /tmp/maxtime && /tmp/maxtime
 
