@@ -284,8 +284,10 @@ void start() {
     /*     add_actor(g, a); */
     /* } */
 
+    start_events();
     process_input(g);
     ss_free_state(state);
     curses_end();
+    end_events();
     free_g(g);
 }

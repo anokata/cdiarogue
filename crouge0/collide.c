@@ -1,36 +1,15 @@
 #include "collide.h"
 
-// Role of actor X Role of subject TODO END
-// matrix Role of actor X role of subject
-// analogically make other actions, not just collision: (type, roleA, roleB)
-ActionFunc actions[] = {
-    //{_no_action, _no_action}
-    //or g_hash
-};
-
-// void init_actions(int roles_count)
-// action_set(actions, role_a role_b action_func)
-// or static
-
-ActionFunc _get_action(Actor actor, Actor subject, G g) {
-    UNUSED(actor);
-    UNUSED(subject);
-    UNUSED(g);
-    //return actions[]
-    return _no_action;
-}
-
-void _no_action(Actor actor, Actor subject, G g) {
-    UNUSED(actor);
-    UNUSED(subject);
-    debuglog(g, "action undef");
-}
-
 void collision_effect(Actor actor, Actor subject, G g) {
     // TODO LAST
     // collide by roles
     // run_action(actor, subject);
-    _get_action(actor, subject, g)(actor, subject, g);
+    ActionFunc f = event_get(ActionCollide, actor, subject, g);
+    if (f) {
+        f(ActionCollide, actor, subject, g);
+    } else {
+        _no_action(ActionCollide, actor, subject, g);
+    }
     UNUSED(subject);
     if (actor->role == RolePlayer) {
         debuglog(g, "collide from player");

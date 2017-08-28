@@ -1,4 +1,5 @@
 #include "g.h"
+#define WORK
 
 void debuglog(G g, char *msg) {
     g->log_len++;
@@ -16,10 +17,13 @@ G new_g() {
     g->view = malloc(sizeof(Viewport));
     g->view->cx = 0;
     g->view->cy = 0;
+#ifndef WORK
     g->view->width = 40;
     g->view->height = 40;
-    /* g->view->width = 8; */
-    /* g->view->height = 8; */
+#else
+    g->view->width = 8;
+    g->view->height = 8;
+#endif
     g->view->display_left = 8;
     g->view->display_top = 8;
 

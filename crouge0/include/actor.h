@@ -6,7 +6,11 @@
 #include "tile_map.h"
 
 typedef enum Behavior { BehaviorRandom=0, BehaviorSimpleDirect, BehaviorStand } Behavior;
-typedef enum Role { RolePlayer, RoleMonster, RoleNPC } Role;
+typedef enum Role { 
+    RolePlayer, 
+    RoleMonster, 
+    RoleNPC,
+    RoleLength} Role;
 
 typedef struct Actor {
     char c;
