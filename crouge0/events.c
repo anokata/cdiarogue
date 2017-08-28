@@ -1,5 +1,4 @@
 #include "events.h"
-// Role of actor X Role of subject TODO END
 // matrix Role of actor X role of subject
 // analogically make other actions, not just collision: (type, roleA, roleB)
 EventsMap events;
@@ -23,19 +22,30 @@ EventsMap events_init() {
     int size = roles * roles * actions * sizeof(ActionFunc);
     EventsMap events = malloc(size);
     // for_each_event(events, _event_set_default_no_action);
+    event_register(ActionCollide, RolePlayer, RoleNPC, _no_action);
     memset(events, 0, size);
     return events;
 }
-// event_register(actions, role_a role_b action_func)
+
+void event_register(Action action, Role object, Role subject, ActionFunc f) {
+    int roles = RoleLength;
+    ActionFunc *fun = (events +
+        (roles * roles * action) + (roles * subject + object));
+    // TODO END
+    /* *fun = f; */
+}
 
 ActionFunc event_get(Action action, Actor actor, Actor subject, G g) {
     UNUSED(actor);
     UNUSED(subject);
     UNUSED(g);
     UNUSED(action);
+    int roles = RoleLength;
     // 3d get
-    //return events[action][actor->role][subject->role];
-    return _no_action;
+    ActionFunc fun = *(events +
+        (roles * roles * action) + (roles * subject->role + actor->role));
+    return fun;
+    /* return _no_action; */
 }
 
 void _no_action(Action action, Actor actor, Actor subject, G g) {
