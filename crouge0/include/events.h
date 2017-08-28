@@ -17,3 +17,4 @@ ActionFunc event_get(Action action, Actor actor, Actor subject, G g);
 void end_events();
 void events_free(EventsMap events);
 void event_register(Action action, Role object, Role subject, ActionFunc f);
+int _3d_array_index(int x, int y, int z, int r);

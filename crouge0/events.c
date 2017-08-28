@@ -22,28 +22,29 @@ EventsMap events_init() {
     int size = roles * roles * actions * sizeof(ActionFunc);
     EventsMap events = malloc(size);
     // for_each_event(events, _event_set_default_no_action);
-    event_register(ActionCollide, RolePlayer, RoleNPC, _no_action);
     memset(events, 0, size);
     return events;
 }
 
 void event_register(Action action, Role object, Role subject, ActionFunc f) {
     int roles = RoleLength;
-    ActionFunc *fun = (events +
-        (roles * roles * action) + (roles * subject + object));
-    // TODO END
-    /* *fun = f; */
+    size_t index = _3d_array_index(action, subject, object, roles);
+    ActionFunc *fun = events + index;
+    *fun = f;
 }
 
-ActionFunc event_get(Action action, Actor actor, Actor subject, G g) {
-    UNUSED(actor);
-    UNUSED(subject);
+int _3d_array_index(int x, int y, int z, int r) {
+    return (z + x * r * r + y * r);
+}
+
+ActionFunc event_get(Action action, Actor actor, Actor coactor, G g) {
     UNUSED(g);
     UNUSED(action);
     int roles = RoleLength;
-    // 3d get
-    ActionFunc fun = *(events +
-        (roles * roles * action) + (roles * subject->role + actor->role));
+    int object = actor->role;
+    int subject = coactor->role;
+    size_t index = _3d_array_index(action, subject, object, roles);
+    ActionFunc fun = *(events + index);
     return fun;
     /* return _no_action; */
 }
