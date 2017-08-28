@@ -20,7 +20,9 @@ Actor make_actor(char c, int x, int y) {
     actor->behavior = BehaviorRandom;
     actor->color = cn_white;
     actor->stat_attack = 1;
+    actor->stat_hp = 3;
     actor->role = RoleMonster;
+    actor->name = "poring";
     return actor;
 }
 

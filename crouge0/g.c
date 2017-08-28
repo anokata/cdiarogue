@@ -32,10 +32,12 @@ G new_g() {
 
     g->actors = NULL;
 
+    // make_player(
     g->player = make_actor('@', 0, 0);
     g->player->role = RolePlayer;
     g->player->color = cb_white;
     g->player->behavior = BehaviorStand;
+    g->player->name = "you";
     add_actor(g, g->player);
 
     return g;

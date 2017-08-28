@@ -20,6 +20,8 @@ typedef struct Actor {
     Point directed;
     Color color;
     int stat_attack;
+    int stat_hp;
+    char *name;
     Role role;
 } *Actor;
 

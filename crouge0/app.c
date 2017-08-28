@@ -52,7 +52,8 @@ State state;
 //   6.0+player must be actor
 //   6.1+actor-player collide detect, from player and from actors, 
 //   6.2+events map, collide events by types
-//   6.3~health, wounds
+//   6.3~health, wounds, minimum needed stats and mechanic
+//      show msg who atk, with how attk, with amount of hp, show player hp, die
 //
 //   6.4 direct to player
 // 7. items
@@ -125,11 +126,11 @@ void debug_draw(G g) {
             "Viewport Left: %d\n" 
             "Viewport cx:cy = %d:%d\n" 
             "Viewport left:top = %d:%d\n" 
-            "Player x:y = %d:%d\n" 
+            "Player x:y = %d:%d [HP: %d  ]\n" 
         , g->key, log_text, 
         g->view->display_left, g->view->cx, g->view->cy,
         viewport_left(g->view), viewport_top(g->view),
-        g->player->x, g->player->y
+        g->player->x, g->player->y, g->player->stat_hp
         );
     cc_printxy(buf, cn_white, 0, 20);
 }

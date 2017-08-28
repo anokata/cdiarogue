@@ -10,7 +10,7 @@ void collision_effect(Actor actor, Actor subject, G g) {
     } else {
         _no_action(ActionCollide, actor, subject, g);
     }
-    UNUSED(subject);
+
     if (actor->role == RolePlayer) {
         debuglog(g, "collide from player");
     } else {
@@ -50,7 +50,10 @@ void collide_action_player_monster(Action action, Actor actor, Actor subject, G 
     UNUSED(actor);
     UNUSED(subject);
     UNUSED(action);
-    debuglog(g, "@ player hit monster");
+    subject->stat_hp -= actor->stat_attack;
+    char *msg = malloc(100); // TODO free debug log
+    snprintf(msg, 99, "%s hit (%s) by %dpt. remain HP:%d", actor->name, subject->name, actor->stat_attack, subject->stat_hp);
+    debuglog(g, msg);
 }
 
 void collide_action_monster_player(Action action, Actor actor, Actor subject, G g) {
