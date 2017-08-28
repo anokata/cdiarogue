@@ -51,8 +51,8 @@ State state;
 //~6. interacting, simple combat
 //   6.0+player must be actor
 //   6.1+actor-player collide detect, from player and from actors, 
-//   6.2~events map
-//   6.3 collide events by types. health, wounds
+//   6.2+events map, collide events by types
+//   6.3~health, wounds
 //
 //   6.4 direct to player
 // 7. items
@@ -285,6 +285,8 @@ void start() {
     /* } */
 
     start_events();
+    event_register(ActionCollide, RolePlayer, RoleMonster, collide_action_player_monster);
+    event_register(ActionCollide, RoleMonster, RolePlayer, collide_action_monster_player);
     process_input(g);
     ss_free_state(state);
     curses_end();

@@ -4,7 +4,7 @@ void collision_effect(Actor actor, Actor subject, G g) {
     // TODO LAST
     // collide by roles
     // run_action(actor, subject);
-    ActionFunc f = event_get(ActionCollide, actor, subject, g);
+    ActionFunc f = event_get(ActionCollide, actor->role, subject->role, g);
     if (f) {
         f(ActionCollide, actor, subject, g);
     } else {
@@ -44,4 +44,18 @@ bool collisions_player_move(Actor player, int dx, int dy, G g) {
         collision_effect(player, subject, g);
     }
     return false;
+}
+
+void collide_action_player_monster(Action action, Actor actor, Actor subject, G g) {
+    UNUSED(actor);
+    UNUSED(subject);
+    UNUSED(action);
+    debuglog(g, "@ player hit monster");
+}
+
+void collide_action_monster_player(Action action, Actor actor, Actor subject, G g) {
+    UNUSED(actor);
+    UNUSED(subject);
+    UNUSED(action);
+    debuglog(g, "! monster hit player");
 }

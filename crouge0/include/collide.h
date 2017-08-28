@@ -9,3 +9,5 @@ Actor collision_get_actor(Actor actor, int dx, int dy, GList *actors);
 void collision_effect(Actor actor, Actor subject, G g);
 ActionFunc _get_action(Actor actor, Actor subject, G g);
 
+void collide_action_player_monster(Action action, Actor actor, Actor subject, G g);
+void collide_action_monster_player(Action action, Actor actor, Actor subject, G g);
