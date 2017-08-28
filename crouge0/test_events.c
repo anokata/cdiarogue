@@ -12,13 +12,10 @@ int main() {
         }
     }
 
-    event_register(ActionCollide, RolePlayer, RolePlayer, _no_action);
-    Actor actor = make_actor(' ', 0, 0);
-    actor->role = RolePlayer;
-    ActionFunc f = event_get(ActionCollide, actor, actor, NULL);
+    event_register(ActionCollide, RolePlayer, RoleMonster, _no_action);
+    ActionFunc f = event_get(ActionCollide, RolePlayer, RoleMonster, NULL);
     printf("%p", (void*)f);
     assert(f != NULL);
-    free(actor);
 
     end_events();
 }
