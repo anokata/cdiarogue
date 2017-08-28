@@ -3,7 +3,7 @@
 
 void debuglog(G g, char *msg) {
     g->log_len++;
-    g->log = g_list_append(g->log, msg);
+    g->log = g_list_append(g->log, g_strdup(msg));
 }
 
 G new_g() {
@@ -43,10 +43,16 @@ G new_g() {
     return g;
 }
 
+void gfree(gpointer data, gpointer user_data) {
+    UNUSED(user_data);
+    free(data);
+}
+
 void free_g(G g) {
     free_wmap(g->wmap);
     free_tile_map(g->gmap);
     free(g->view);
+    g_list_foreach(g->log, gfree, NULL);
     g_list_free(g->log);
     free_actors(g->actors);
     g_list_free(g->actors);

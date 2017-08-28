@@ -51,7 +51,7 @@ void collide_action_player_monster(Action action, Actor actor, Actor subject, G 
     UNUSED(subject);
     UNUSED(action);
     subject->stat_hp -= actor->stat_attack;
-    char *msg = malloc(100); // TODO free debug log
+    char msg[100];
     snprintf(msg, 99, "%s hit (%s) by %dpt. remain HP:%d", actor->name, subject->name, actor->stat_attack, subject->stat_hp);
     debuglog(g, msg);
 }
