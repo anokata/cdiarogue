@@ -127,10 +127,12 @@ void debug_draw(G g) {
             "Viewport cx:cy = %d:%d\n" 
             "Viewport left:top = %d:%d\n" 
             "Player x:y = %d:%d [HP: %d  ]\n" 
+            "Target [HP: %d  ]\n" 
         , g->key, log_text, 
         g->view->display_left, g->view->cx, g->view->cy,
         viewport_left(g->view), viewport_top(g->view),
-        g->player->x, g->player->y, g->player->stat_hp
+        g->player->x, g->player->y, g->player->stat_hp,
+        (g->last_target ? g->last_target->stat_hp : 0)
         );
     cc_printxy(buf, cn_white, 0, 20);
 }

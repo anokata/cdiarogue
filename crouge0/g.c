@@ -39,6 +39,7 @@ G new_g() {
     g->player->behavior = BehaviorStand;
     g->player->name = "you";
     add_actor(g, g->player);
+    g->last_target = NULL;
 
     return g;
 }

@@ -50,7 +50,10 @@ void collide_action_player_monster(Action action, Actor actor, Actor subject, G 
     UNUSED(actor);
     UNUSED(subject);
     UNUSED(action);
+    /* mechanic */
+    g->last_target = subject;
     subject->stat_hp -= actor->stat_attack;
+
     char msg[100];
     snprintf(msg, 99, "%s hit (%s) by %dpt. remain HP:%d", actor->name, subject->name, actor->stat_attack, subject->stat_hp);
     debuglog(g, msg);
