@@ -50,13 +50,24 @@ void collide_action_player_monster(Action action, Actor actor, Actor subject, G 
     UNUSED(actor);
     UNUSED(subject);
     UNUSED(action);
+    char msg[100];
+
+    snprintf(msg, 99, "%s hit %s by %dpt. remain HP:%d", actor->name, subject->name, actor->stat_attack, subject->stat_hp);
+    debuglog(g, msg);
     /* mechanic */
     g->last_target = subject;
     subject->stat_hp -= actor->stat_attack;
+    if (subject->stat_hp <= 0) {
+        snprintf(msg, 99, "%s kill %s", actor->name, subject->name);
+        debuglog(g, msg);
 
-    char msg[100];
-    snprintf(msg, 99, "%s hit (%s) by %dpt. remain HP:%d", actor->name, subject->name, actor->stat_attack, subject->stat_hp);
-    debuglog(g, msg);
+        //actor_kill(subject, g);
+        //GList *subject_l = g_list_find(g->actors, subject);
+        //g->actors = g_list_remove_link(g->actors, subject_l);
+        g->actors = g_list_remove_link(g->actors, subject);
+        //actor_free(subject);// TODO END 
+    }
+
 }
 
 void collide_action_monster_player(Action action, Actor actor, Actor subject, G g) {

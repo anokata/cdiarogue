@@ -26,9 +26,14 @@ Actor make_actor(char c, int x, int y) {
     return actor;
 }
 
+void actor_free(Actor actor) {
+    free(actor);
+}
+
 void free_actors(GList *actors) {
     while (actors) {
-        free(actors->data);
+        Actor actor = actors->data;
+        actor_free(actor);
         actors = g_list_next(actors);
     }
 }

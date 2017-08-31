@@ -42,3 +42,5 @@ test_config_parser: prepare
 test_events: prepare
 	$(CC) $@.c actor.c events.c util.c tile_map.c config_parser.c g.c world_map.c map_gen.c  $(CFLAGS) -o $(BUILD_DIR)/$@ && valgrind $(BUILD_DIR)/$@
 
+val:
+	valgrind $(BUILD_DIR)/$(P)

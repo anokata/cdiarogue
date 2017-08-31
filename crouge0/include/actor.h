@@ -29,6 +29,7 @@ typedef Point (*ActorMoveFunc)(Actor actor, TileMap map);
 
 Actor make_actor(char c, int x, int y);
 void free_actors(GList *actors);
+void actor_free(Actor actor);
 bool _actor_isat_directed_place(Actor actor);
 int _actor_direct_diffx(Actor actor);
 int _actor_direct_diffy(Actor actor);
