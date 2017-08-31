@@ -11,6 +11,11 @@ typedef enum Role {
     RoleMonster, 
     RoleNPC,
     RoleLength} Role;
+typedef enum Status {
+    StatusLive,
+    StatusDead,
+    StatusSleep
+} Status;
 
 typedef struct Actor {
     char c;
@@ -19,6 +24,7 @@ typedef struct Actor {
     Behavior behavior;
     Point directed;
     Color color;
+    Status status;
     int stat_attack;
     int stat_hp;
     char *name;

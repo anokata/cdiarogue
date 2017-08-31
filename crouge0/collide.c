@@ -62,10 +62,9 @@ void collide_action_player_monster(Action action, Actor actor, Actor subject, G 
         debuglog(g, msg);
 
         //actor_kill(subject, g);
-        //GList *subject_l = g_list_find(g->actors, subject);
-        //g->actors = g_list_remove_link(g->actors, subject_l);
-        g->actors = g_list_remove_link(g->actors, subject);
-        //actor_free(subject);// TODO END 
+        subject->status = StatusDead;
+        g->actors = g_list_remove(g->actors, subject);
+        actor_free(subject); // strange behavior of g_list_remove (its free data)
     }
 
 }

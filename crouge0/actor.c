@@ -23,6 +23,7 @@ Actor make_actor(char c, int x, int y) {
     actor->stat_hp = 3;
     actor->role = RoleMonster;
     actor->name = "poring";
+    actor->status = StatusLive;
     return actor;
 }
 

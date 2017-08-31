@@ -54,6 +54,7 @@ State state;
 //   6.2+events map, collide events by types
 //   6.3~health, wounds, minimum needed stats and mechanic
 //      show msg who atk, with how attk, with amount of hp, show player hp, die
+//      end game, mon attaking
 //
 //   6.4 direct to player
 // 7. items
@@ -164,6 +165,18 @@ void move_all_actors_rand(G g) {
     }
 }
 
+void proc_all_actors_status(G g);
+void proc_all_actors_status(G g) {
+    GList *actor_node = g->actors;
+    while (actor_node) {
+        Actor actor = actor_node->data;
+        actor_node = g_list_next(actor_node);
+        if (actor->status == StatusDead) {
+            // 
+        }
+    }
+}
+
 int wmap_key(void* data) {
     G g = data;
     char key = g->key;
@@ -236,6 +249,7 @@ int cursor_key(void* data) {
             break;
     }
     move_all_actors_rand(g);
+    proc_all_actors_status(g);
     return 0;
 }
 
