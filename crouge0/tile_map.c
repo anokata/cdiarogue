@@ -1,5 +1,4 @@
 #include "tile_map.h"
-#include "config_parser.h"
 
 TileMap make_tile_map(int width, int height) {
     TileMap map = malloc(sizeof(struct TileMap));

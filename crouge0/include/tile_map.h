@@ -4,6 +4,7 @@
 
 #include "lib/ccurses.h"
 #include "util.h"
+#include "config_parser.h"
 #include <stdbool.h>
 
 typedef struct Tile {
