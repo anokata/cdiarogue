@@ -73,5 +73,14 @@ void collide_action_monster_player(Action action, Actor actor, Actor subject, G 
     UNUSED(actor);
     UNUSED(subject);
     UNUSED(action);
+    char msg[100];
     debuglog(g, "! monster hit player");
+
+    subject->stat_hp -= actor->stat_attack;
+
+    if (subject->stat_hp <= 0) {
+        snprintf(msg, 99, "%s kill you.", actor->name);
+        debuglog(g, msg);
+        subject->status = StatusDead;
+    }
 }

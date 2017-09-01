@@ -83,9 +83,10 @@ State state;
 void process_input(G g) {
     ss_handle(state, Event_draw, g);
 	int ch = getch();
-	while(ch != 'q') {
+    int status = 0;
+	while(ch != 'q' && !status) {
         g->key = ch;
-        ss_handle(state, Event_key, g);
+        status = ss_handle(state, Event_key, g);
         ss_handle(state, Event_draw, g);
         debug_draw(g);
 		ch = getch();
@@ -165,8 +166,8 @@ void move_all_actors_rand(G g) {
     }
 }
 
-void proc_all_actors_status(G g);
-void proc_all_actors_status(G g) {
+int proc_all_actors_status(G g);
+int proc_all_actors_status(G g) {
     GList *actor_node = g->actors;
     while (actor_node) {
         Actor actor = actor_node->data;
@@ -175,6 +176,11 @@ void proc_all_actors_status(G g) {
             // 
         }
     }
+    if (g->player->status == StatusDead) {
+        debuglog(g, "end");
+        return 1;
+    }
+    return 0;
 }
 
 int wmap_key(void* data) {
@@ -249,8 +255,7 @@ int cursor_key(void* data) {
             break;
     }
     move_all_actors_rand(g);
-    proc_all_actors_status(g);
-    return 0;
+    return proc_all_actors_status(g);
 }
 
 int cursor_draw(void* data) {
