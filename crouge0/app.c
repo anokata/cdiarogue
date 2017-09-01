@@ -52,11 +52,11 @@ State state;
 //   6.0+player must be actor
 //   6.1+actor-player collide detect, from player and from actors, 
 //   6.2+events map, collide events by types
-//   6.3~health, wounds, minimum needed stats and mechanic
+//   6.3+health, wounds, minimum needed stats and mechanic
 //      show msg who atk, with how attk, with amount of hp, show player hp, die
 //      end game, mon attaking
 //
-//   6.4 direct to player
+//   6.4~direct to player
 // 7. items
 //   7.1 doors, open, close
 //   7.2 weapon, weild, take off. effect on combat
@@ -79,6 +79,8 @@ State state;
 // TODO fixing mem errors
 // ATTENTION: Naming convention for func = <modulename>_<action>_<opt>
 // TODO map editor pipe, fix global map loading
+// 1. separate map loader using tile_map
+// 1.1 print loaded to stdout
 
 void process_input(G g) {
     ss_handle(state, Event_draw, g);
