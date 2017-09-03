@@ -58,7 +58,7 @@ void copy_map2tiles(TileMap map, char *line, int len, int offset) {
 
 void apply_color(TileMap map, char c, int color_index) {
     for (int y = 0; y < map->height; ++y) {
-        for (int x = 0; x < map->height; ++x) {
+        for (int x = 0; x < map->width; ++x) {
             if (tile_at(map, x, y)->c == c) {
                 tile_at(map, x, y)->color = cc_get_color_by_id(color_index);
             }
@@ -166,7 +166,7 @@ TileMap load_global_tmap() {
     for (int i = 1; i <= local_height; i++) {
         for (int j = 1; j <= local_width; j++) {
             sprintf(mapname, mapname_format, i, j);
-            DEBUG_PRINT("name: %s\n", mapname);
+            DEBUG_PRINT("name: %s @ (%d:%d)\n", mapname, i, j);
 			TileMap lmap = load_tile_map(mapname);
             _copy_tileloc2glob(global_map, lmap, 
                     local_map_width * (j - 1) + (i - 1) * block_height);
