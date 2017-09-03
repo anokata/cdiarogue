@@ -1,5 +1,5 @@
 # vim: filetype=make
-OBJECTS=app.c main.c map_gen.c world_map.c g.c tile_map.c util.c config_parser.c actor.c render.c collide.c events.c
+OBJECTS=app.c main.c map_gen.c world_map.c g.c tile_map.c util.c config_parser.c actor.c render.c collide.c events.c behavior.c
 MAP_OBJECTS=mapgen_main.c map_gen.c tile_map.c util.c config_parser.c
 TMAP_OBJECTS=tile_map.c test_tile_map.c util.c
 
@@ -64,8 +64,10 @@ toolmodule:
 	@echo successfully created.
 
 module:
+	# using make module name=somename
 	@echo Creating $(name) module
 	echo '#pragma once' >> include/$(name).h
-	echo '#include "$(name).h" >> $(name).c
+	echo '#include "$(name).h"' >> $(name).c
+	@echo successfully created.
 
 
