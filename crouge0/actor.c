@@ -7,7 +7,8 @@ static ActorMoveFunc actor_move_behavior_map[] = {
     /* choose direct point, move to it, if collided then random move one, 
      * at point choose other rand point. */
     actor_step_at_directed,
-    actor_not_move
+    actor_not_move,
+    actor_simple_attack
 };
 
 Actor make_actor(char c, int x, int y) {
@@ -70,6 +71,18 @@ Point _actor_move_direct(Actor actor, TileMap map) {
     }
     Point p = {horz_move, vert_move};
     return p;
+}
+
+/* Behavior func */
+Point actor_simple_attack(Actor actor, TileMap map) {
+    if (_actor_isat_directed_place(actor)) {
+        _actor_choose_target(actor, map);
+    }
+    return _actor_move_direct(actor, map);
+}
+
+void _actor_choose_target(Actor actor, TileMap map) {
+
 }
 
 /* Behavior func */
