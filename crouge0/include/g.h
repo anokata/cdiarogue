@@ -15,7 +15,6 @@ typedef struct G {
     Viewport *view;
     GList *log;
     int log_len;
-    GList *actors;
     Actor player;
     Actor last_target;
 } *G;

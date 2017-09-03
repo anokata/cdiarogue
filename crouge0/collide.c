@@ -37,7 +37,7 @@ Actor collision_get_actor(Actor actor, int dx, int dy, GList *actors) {
 
 /* True if can move */
 bool collisions_player_move(Actor player, int dx, int dy, G g) {
-    Actor subject = collision_get_actor(player, dx, dy, g->actors);
+    Actor subject = collision_get_actor(player, dx, dy, g->gmap->actors);
     if (!subject) {
         return actor_move_hv(player, g->gmap, dx, dy);
     } else {
@@ -60,10 +60,11 @@ void collide_action_player_monster(Action action, Actor actor, Actor subject, G 
     if (subject->stat_hp <= 0) {
         snprintf(msg, 99, "%s kill %s", actor->name, subject->name);
         debuglog(g, msg);
+        g->last_target = NULL;
 
         //actor_kill(subject, g);
         subject->status = StatusDead;
-        g->actors = g_list_remove(g->actors, subject);
+        g->gmap->actors = g_list_remove(g->gmap->actors, subject);
         actor_free(subject); // strange behavior of g_list_remove (its free data)
     }
 

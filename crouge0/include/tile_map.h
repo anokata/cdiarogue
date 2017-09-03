@@ -4,6 +4,7 @@
 #include "util.h"
 #include "config_parser.h"
 #include <stdbool.h>
+#include <glib.h>
 
 typedef struct Tile {
     Color color;
@@ -21,6 +22,7 @@ typedef struct TileMap {
     Tile *tiles;
     int width;
     int height;
+    GList *actors;
 } *TileMap;
 
 typedef struct Viewport {

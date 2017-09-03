@@ -6,6 +6,7 @@ TileMap make_tile_map(int width, int height) {
     map->tiles = tiles;
     map->width = width;
     map->height = height;
+    map->actors = NULL;
     for (int i=0; i < height; i++) {
         for (int j=0; j < width; j++) {
             tiles[i * width + j].c = ' ';
@@ -15,6 +16,8 @@ TileMap make_tile_map(int width, int height) {
 }
 
 void free_tile_map(TileMap map) {
+    //free_actors(map->actors);
+    g_list_free(map->actors);
     free(map->tiles);
     free(map);
 }

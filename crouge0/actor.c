@@ -82,7 +82,8 @@ Point actor_simple_attack(Actor actor, TileMap map) {
 }
 
 void _actor_choose_target(Actor actor, TileMap map) {
-
+    UNUSED(actor);
+    UNUSED(map);
 }
 
 /* Behavior func */

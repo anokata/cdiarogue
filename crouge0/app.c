@@ -162,7 +162,7 @@ int draw(void* data) {
 void move_all_actors_rand(G g);
 
 void move_all_actors_rand(G g) {
-    GList *actor_node = g->actors;
+    GList *actor_node = g->gmap->actors;
     while (actor_node) {
         Actor actor = actor_node->data;
         // get point where actor want go
@@ -175,7 +175,7 @@ void move_all_actors_rand(G g) {
 
 int proc_all_actors_status(G g);
 int proc_all_actors_status(G g) {
-    GList *actor_node = g->actors;
+    GList *actor_node = g->gmap->actors;
     while (actor_node) {
         Actor actor = actor_node->data;
         actor_node = g_list_next(actor_node);
@@ -273,7 +273,7 @@ int cursor_draw(void* data) {
     /* cc_putxy('@', cn_yellow, */ 
     /*         min(g->view->cx, g->view->width / 2) + g->view->display_left, */ 
     /*         min(g->view->cy, g->view->height / 2) + g->view->display_top); */
-    draw_actors(g->actors, g->view);
+    draw_actors(g->gmap->actors, g->view);
     draw_actor_self(g->player, g->view);
     return 0;
 }
@@ -301,17 +301,17 @@ void start() {
     a->color = cb_blue;
     a->directed.x = 0;
     a->directed.y = 0;
-    /* for (int i = 0; i < 20; i++) { */
-    /*     a = make_actor('d', i, 5); */
-    /*     add_actor(g, a); */
-    /*     a->color = cb_red; */
-    /*     a->behavior = BehaviorSimpleDirect; */
-    /* } */
-    /* for (int i = 0; i < 20; i++) { */
-    /*     a = make_actor('s', i, 5); */
-    /*     a->color = cb_yellow; */
-    /*     add_actor(g, a); */
-    /* } */
+    for (int i = 0; i < 20; i++) {
+        a = make_actor('d', i, 5);
+        add_actor(g, a);
+        a->color = cb_red;
+        a->behavior = BehaviorSimpleDirect;
+    }
+    for (int i = 0; i < 20; i++) {
+        a = make_actor('s', i, 5);
+        a->color = cb_yellow;
+        add_actor(g, a);
+    }
 
     start_events();
     event_register(ActionCollide, RolePlayer, RoleMonster, collide_action_player_monster);

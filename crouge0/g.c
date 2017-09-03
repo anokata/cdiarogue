@@ -29,8 +29,6 @@ G new_g() {
     g->log = NULL;
     g->log_len = 0;
 
-    g->actors = NULL;
-
     // make_player(
     g->player = make_actor('@', 0, 0);
     g->player->role = RolePlayer;
@@ -50,16 +48,16 @@ void gfree(gpointer data, gpointer user_data) {
 
 void free_g(G g) {
     free_wmap(g->wmap);
+    free_actors(g->gmap->actors);
+    g_list_free(g->gmap->actors);
     free_tile_map(g->gmap);
     free(g->view);
     g_list_foreach(g->log, gfree, NULL);
     g_list_free(g->log);
-    free_actors(g->actors);
-    g_list_free(g->actors);
     //free(g->player);
     free(g);
 }
 
 void add_actor(G g, Actor actor) {
-    g->actors = g_list_append(g->actors, actor);
+    g->gmap->actors = g_list_append(g->gmap->actors, actor);
 }
