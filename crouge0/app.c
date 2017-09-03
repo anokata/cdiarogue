@@ -47,7 +47,6 @@ State state;
 //   5.1+list of actors, draw 
 //   5.2+moving other by steps, rand, direct to near rand point, wall block 
 //   5.3+actors attributes, color, attack, behavior
-// [ INWORK ]
 //~6. interacting, simple combat
 //   6.0+player must be actor
 //   6.1+actor-player collide detect, from player and from actors, 
@@ -55,15 +54,24 @@ State state;
 //   6.3+health, wounds, minimum needed stats and mechanic
 //      show msg who atk, with how attk, with amount of hp, show player hp, die
 //      end game, mon attaking
-//
-//   6.4~direct to player
+//   6.4+direct to player
+// [ INWORK ]
 // 7. items
-//   7.1 doors, open, close
-//   7.2 weapon, weild, take off. effect on combat
+//   7.0 items on map
+//   7.1 interaction
+//   7.2 doors, open, close
+//   7.3 weapon, weild, take off. effect on combat
+//   7.4 loot, paws, wool, skin, bone, meet, jelly
+// 8 inventory, view, take, drop
+//
+// monsters data files, spawns
+// other stats, and fun and story
+// map, town, locations
 // ...
 // fun
 // levels dungs town
 // drop from actors
+// wild simulations, population, born, old, learn, work, eat, sleep
 //	Display turns.
 
 // What I LEARNED
