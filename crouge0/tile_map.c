@@ -300,3 +300,8 @@ int viewport_right(Viewport *v) {
     int right = (v->cx + v->width / 2);
     return right;
 }
+
+struct Actor* map_get_player(TileMap map) {
+    // TODO
+    return map->actors->data;
+}

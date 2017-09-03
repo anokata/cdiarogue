@@ -63,3 +63,6 @@ Tile *tile_at(TileMap map, int x, int y);
 void draw_map(TileMap map, Viewport *v);
 void foreach_tile(TileMap map, TileFunc f);
 void foreach_tile_set(TileMap map, TileDataFunc f, void *data, char tile_char);
+
+struct Actor;
+struct Actor* map_get_player(TileMap map);

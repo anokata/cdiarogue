@@ -295,23 +295,24 @@ void start() {
     state_init();
     Actor a = make_actor('o', 2, 2);
     add_actor(g, a);
-    a->behavior = BehaviorSimpleDirect;
+    a->behavior = BehaviorSimpleAttacker;
+    //a->behavior = BehaviorSimpleDirect;
     //a->behavior = BehaviorRandom;
     //a->behavior = BehaviorStand;
     a->color = cb_blue;
     a->directed.x = 0;
     a->directed.y = 0;
-    for (int i = 0; i < 20; i++) {
-        a = make_actor('d', i, 5);
-        add_actor(g, a);
-        a->color = cb_red;
-        a->behavior = BehaviorSimpleDirect;
-    }
-    for (int i = 0; i < 20; i++) {
-        a = make_actor('s', i, 5);
-        a->color = cb_yellow;
-        add_actor(g, a);
-    }
+    /* for (int i = 0; i < 20; i++) { */
+    /*     a = make_actor('d', i, 5); */
+    /*     add_actor(g, a); */
+    /*     a->color = cb_red; */
+    /*     a->behavior = BehaviorSimpleDirect; */
+    /* } */
+    /* for (int i = 0; i < 20; i++) { */
+    /*     a = make_actor('s', i, 5); */
+    /*     a->color = cb_yellow; */
+    /*     add_actor(g, a); */
+    /* } */
 
     start_events();
     event_register(ActionCollide, RolePlayer, RoleMonster, collide_action_player_monster);

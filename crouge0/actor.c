@@ -75,15 +75,11 @@ Point _actor_move_direct(Actor actor, TileMap map) {
 
 /* Behavior func */
 Point actor_simple_attack(Actor actor, TileMap map) {
-    if (_actor_isat_directed_place(actor)) {
-        _actor_choose_target(actor, map);
-    }
+    /* hunt on player */
+    Actor player = map_get_player(map);
+    actor->directed.x = player->x;
+    actor->directed.y = player->y;
     return _actor_move_direct(actor, map);
-}
-
-void _actor_choose_target(Actor actor, TileMap map) {
-    UNUSED(actor);
-    UNUSED(map);
 }
 
 /* Behavior func */
