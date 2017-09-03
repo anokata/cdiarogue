@@ -302,12 +302,12 @@ void start() {
     a->color = cb_blue;
     a->directed.x = 0;
     a->directed.y = 0;
-    /* for (int i = 0; i < 20; i++) { */
-    /*     a = make_actor('d', i, 5); */
-    /*     add_actor(g, a); */
-    /*     a->color = cb_red; */
-    /*     a->behavior = BehaviorSimpleDirect; */
-    /* } */
+    for (int i = 0; i < 20; i++) {
+        a = make_actor('d', i, 5);
+        add_actor(g, a);
+        a->color = cb_red;
+        a->behavior = BehaviorSimpleAttacker;
+    }
     /* for (int i = 0; i < 20; i++) { */
     /*     a = make_actor('s', i, 5); */
     /*     a->color = cb_yellow; */
