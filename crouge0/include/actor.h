@@ -5,12 +5,20 @@
 #include "map.h"
 #include "tile_map.h"
 
-typedef enum Behavior { BehaviorRandom=0, BehaviorSimpleDirect, BehaviorStand } Behavior;
+typedef enum Behavior { 
+    BehaviorRandom=0, 
+    BehaviorSimpleDirect, 
+    BehaviorStand, 
+    BehaviorSimpleAttacker 
+} Behavior;
+
 typedef enum Role { 
     RolePlayer, 
     RoleMonster, 
     RoleNPC,
-    RoleLength} Role;
+    RoleLength
+} Role;
+
 typedef enum Status {
     StatusLive,
     StatusDead,
