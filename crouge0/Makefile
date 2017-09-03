@@ -47,6 +47,10 @@ test_events: prepare
 val:
 	valgrind $(BUILD_DIR)/$(P)
 
+mapview:
+	cd tools
+	make $@
+
 module:
 	if [ -z $(name) ]; then exit; fi
 	@echo Creating $(name) module
