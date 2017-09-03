@@ -123,19 +123,19 @@ void debug_draw(G g) {
     /* debuglog(g, "abc"); */
     g_debug("hi");
     g_log(NULL, G_LOG_LEVEL_DEBUG, "MSG");
-    for (int i = 0; i < (g->log_len > 10 ? 10 : g->log_len); i++) {
+    for (int i = 0; i < (g->log_len > 8 ? 8 : g->log_len); i++) {
         strcat(log_text, g_list_nth_data(g->log, i));
         strcat(log_text, "\n");
     }
 
     snprintf(buf, 1024, 
-            "Debug: \n"
+            "Debug: \t"
             "Key: %d\n" 
             "Log:\n%s\n" 
             "Viewport Left: %d\n" 
-            "Viewport cx:cy = %d:%d\n" 
+            "Viewport cx:cy = %d:%d\t" 
             "Viewport left:top = %d:%d\n" 
-            "Player x:y = %d:%d [HP: %d  ]\n" 
+            "Player x:y = %d:%d [HP: %d  ]\t" 
             "Target [HP: %d  ]\n" 
         , g->key, log_text, 
         g->view->display_left, g->view->cx, g->view->cy,
