@@ -11,6 +11,7 @@
 #include "tile_map.h"
 #include "world_map.h"
 #include "actor.h"
+#include "behavior.h"
 #include "g.h"
 #include "render.h"
 #include "collide.h"
