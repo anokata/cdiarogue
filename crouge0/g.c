@@ -1,5 +1,4 @@
 #include "g.h"
-#define WORK
 
 void debuglog(G g, char *msg) {
     g->log_len++;
