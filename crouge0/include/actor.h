@@ -39,7 +39,6 @@ typedef struct Actor {
     Role role;
 } *Actor;
 
-typedef Point (*ActorMoveFunc)(Actor actor, TileMap map);
 
 Actor make_actor(char c, int x, int y);
 void free_actors(GList *actors);
@@ -48,6 +47,8 @@ bool _actor_isat_directed_place(Actor actor);
 int _actor_direct_diffx(Actor actor);
 int _actor_direct_diffy(Actor actor);
 
+// behavior.c
+typedef Point (*ActorMoveFunc)(Actor actor, TileMap map);
 /* Behavior */
 Point actor_step_at_directed(Actor actor, TileMap map);
 Point actor_move_rand(Actor actor, TileMap map);

@@ -66,6 +66,10 @@ State state;
 // drop from actors
 //	Display turns.
 
+// What I LEARNED
+//   make simple structures and basic methods in module
+//   then other module for more complex, linked to other modules functionality
+//   then most complex few modules than used by main module?
 // [ ] make wmap from locals
 // UI progress bar with value
 // unicode ncursesw

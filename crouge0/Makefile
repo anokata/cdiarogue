@@ -52,7 +52,7 @@ mapview:
 	cd tools
 	make $@
 
-module:
+toolmodule:
 	if [ -z $(name) ]; then exit; fi
 	@echo Creating $(name) module
 	mkdir $(name)
@@ -62,4 +62,10 @@ module:
 	echo '#pragma once' >> $(name)/include/$(name).h
 	echo '#include "$(name).h"' >> $(name)/$(name).c
 	@echo successfully created.
+
+module:
+	@echo Creating $(name) module
+	echo '#pragma once' >> include/$(name).h
+	echo '#include "$(name).h" >> $(name).c
+
 
