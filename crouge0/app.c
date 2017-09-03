@@ -76,11 +76,16 @@ State state;
 //https://stackoverflow.com/questions/43834833/print-a-wide-unicode-character-with-ncurses
 //	lighting
 // Check map folder exist
+// TODO Fix global world map
 // TODO fixing mem errors
 // ATTENTION: Naming convention for func = <modulename>_<action>_<opt>
 // TODO map editor pipe, fix global map loading
 // 1. separate map loader using tile_map
-// 1.1 print loaded to stdout
+// 1.1+print loaded to stdout
+// 1.2 input map path-name to view
+// 2. make map converter from viewable format to string like in data
+// 2.1 load by lines from file and out to one line - script : tr -d \n 
+// 2.2 save converted to map file
 
 void process_input(G g) {
     ss_handle(state, Event_draw, g);
