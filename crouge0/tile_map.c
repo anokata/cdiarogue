@@ -303,15 +303,13 @@ int viewport_right(Viewport *v) {
 
 struct Actor* map_get_player(TileMap map) {
     /* search ... TODO in view field */
-    /* Actor it = map->actors; */
-    /* while (it) { */
-    /*     Actor actor = it->data; */
-    /*     // TODO actor list module */
-    /*     // TODO actor behavior separate module */
-    /*     if (actor->role == RolePlayer) { */
-    /*         return actor; */
-    /*     } */
-    /*     it = g_list_next(it); */
-    /* } */
+    GList *it = map->actors;
+    while (it) {
+        Actor actor = it->data;
+        if (actor->role == RolePlayer) {
+            return actor;
+        }
+        it = g_list_next(it);
+    }
     return map->actors->data; // first
 }

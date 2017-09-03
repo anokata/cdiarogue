@@ -2,6 +2,7 @@
 
 #include "lib/ccurses.h"
 #include "util.h"
+#include "actor.h"
 #include "config_parser.h"
 #include <stdbool.h>
 #include <glib.h>
@@ -24,6 +25,11 @@ typedef struct TileMap {
     int height;
     GList *actors;
 } *TileMap;
+
+typedef struct WorldMap {
+    TileMap map;
+    WorldMapRegionDescriptor *metadata;
+} *WorldMap;
 
 typedef struct Viewport {
     int width;
@@ -64,5 +70,4 @@ void draw_map(TileMap map, Viewport *v);
 void foreach_tile(TileMap map, TileFunc f);
 void foreach_tile_set(TileMap map, TileDataFunc f, void *data, char tile_char);
 
-struct Actor;
 struct Actor* map_get_player(TileMap map);

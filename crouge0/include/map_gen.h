@@ -10,8 +10,8 @@
 #include <string.h>
 #include "lib/ccurses.h"
 #include "util.h"
-#include "tile_map.h"
 #include "map.h"
+#include "tile_map.h"
 
 
 /* Map make_map(int width, int height); */
