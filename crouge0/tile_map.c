@@ -16,8 +16,10 @@ TileMap make_tile_map(int width, int height) {
 }
 
 void free_tile_map(TileMap map) {
-    //free_actors(map->actors);
-    g_list_free(map->actors);
+    if (map->actors) {
+        //free_actors(map->actors);
+        g_list_free(map->actors);
+    }
     free(map->tiles);
     free(map);
 }
