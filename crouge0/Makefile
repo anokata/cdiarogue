@@ -44,3 +44,15 @@ test_events: prepare
 
 val:
 	valgrind $(BUILD_DIR)/$(P)
+
+module:
+	if [ -z $(name) ]; then exit; fi
+	@echo Creating $(name) module
+	mkdir $(name)
+	touch $(name)/$(name).c
+	mkdir $(name)/include
+	touch $(name)/include/$(name).h
+	echo '#pragma once' >> $(name)/include/$(name).h
+	echo '#include "$(name).h"' >> $(name)/$(name).c
+	@echo successfully created.
+
