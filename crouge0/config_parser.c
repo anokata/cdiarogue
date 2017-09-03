@@ -1,4 +1,3 @@
-#define DEBUG
 #include "config_parser.h"
 #include <string.h>
 #include <unistd.h>

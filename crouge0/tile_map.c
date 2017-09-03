@@ -98,7 +98,7 @@ void load_colors(TileMap map, GHashTable *config) {
         char tile_char = _get_tile_char(config, i);
         int color_index = _get_tile_color(config, i);
         bool passable = _get_tile_passable(config, i);
-        printf("Tile#%d = '%c' color#%d pass:%s\n", i, 
+        DEBUG_PRINT("Tile#%d = '%c' color#%d pass:%s\n", i, 
                 tile_char, 
                 color_index, 
                 passable ? "true" : "false");
@@ -166,7 +166,7 @@ TileMap load_global_tmap() {
     for (int i = 1; i <= local_height; i++) {
         for (int j = 1; j <= local_width; j++) {
             sprintf(mapname, mapname_format, i, j);
-            printf("name: %s\n", mapname);
+            DEBUG_PRINT("name: %s\n", mapname);
 			TileMap lmap = load_tile_map(mapname);
             _copy_tileloc2glob(global_map, lmap, 
                     local_map_width * (j - 1) + (i - 1) * block_height);

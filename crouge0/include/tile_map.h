@@ -1,7 +1,5 @@
 #pragma once
 
-#define DEBUG
-
 #include "lib/ccurses.h"
 #include "util.h"
 #include "config_parser.h"
