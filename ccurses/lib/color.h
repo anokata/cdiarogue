@@ -17,8 +17,8 @@ typedef int color_index;
 #define _cn_black 3
 #define _cn_white 4
 #define _cn_yellow 5
-#define _cn_blue 12
-#define _cw_white 13
+#define _cn_blue 6
+#define _cw_white 7
 static const struct Color cn_red = {_cn_red, A_NORMAL};
 static const struct Color cb_red = {_cn_red, A_BOLD};
 static const struct Color cd_red = {_cn_red, A_DIM};
