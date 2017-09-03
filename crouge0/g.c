@@ -23,8 +23,8 @@ G new_g() {
     g->view->width = 8;
     g->view->height = 8;
 #endif
-    g->view->display_left = 8;
-    g->view->display_top = 8;
+    g->view->display_left = 1;
+    g->view->display_top = 1;
 
     g->log = NULL;
     g->log_len = 0;
