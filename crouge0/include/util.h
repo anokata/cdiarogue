@@ -14,6 +14,12 @@ typedef char* string;
 #define DEBUG_PRINT(fmt, args...)
 #endif
 
+typedef struct Point {
+    int x;
+    int y;
+} Point;
+
+
 int fget_int_line(FILE *file);
 
 typedef void (*EachStrFunc)(char* str, void *data);
