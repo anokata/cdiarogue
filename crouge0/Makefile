@@ -45,6 +45,10 @@ test_config_parser: prepare
 test_events: prepare
 	$(CC) $@.c actor.c events.c util.c tile_map.c config_parser.c g.c world_map.c map_gen.c  $(CFLAGS) -o $(BUILD_DIR)/$@ && valgrind $(BUILD_DIR)/$@
 
+test_item: prepare
+	$(CC) $@.c item.c actor.c events.c util.c tile_map.c config_parser.c g.c world_map.c map_gen.c  $(CFLAGS) -o $(BUILD_DIR)/$@ && valgrind $(BUILD_DIR)/$@
+
+
 val:
 	valgrind $(BUILD_DIR)/$(P)
 
@@ -73,7 +77,7 @@ module:
 	@echo '#include "$(name).h"' >> test_$(name).c
 	@echo '#include <stdio.h>'   >> test_$(name).c
 	@echo '#include <assert.h>'  >> test_$(name).c
-	@echo -e 'int main() {\n}'   >> test_$(name).c
+	@echo '\nint main() {\n\n}'  >> test_$(name).c
 	@echo successfully created.
 
 
