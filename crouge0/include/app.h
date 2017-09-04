@@ -15,6 +15,7 @@
 #include "g.h"
 #include "render.h"
 #include "collide.h"
+#include "item.h"
 
 void debug_draw(G g);
 
