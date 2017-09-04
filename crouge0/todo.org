@@ -22,8 +22,9 @@
 [ INWORK ]
 ** 7 items										   :inwork:
 *** items on map
-*** interaction
-*** doors, open, close
+**** item list, test items in map, colors, draw items
+*** interaction - find item on point
+*** doors, open, close - commands, to direction mode
 *** weapon, weild, take off. effect on combat
 *** loot, paws, wool, skin, bone, meet, jelly
 
