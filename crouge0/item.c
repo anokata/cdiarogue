@@ -5,6 +5,7 @@ Item item_new(char c, int x, int y) {
     item->c = c;
     item->x = x;
     item->y = y;
+    item->color = cn_white;
     return item;
 }
 

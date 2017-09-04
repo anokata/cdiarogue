@@ -192,6 +192,7 @@ int cursor_draw(void* data) {
     /* cc_putxy('@', cn_yellow, */ 
     /*         min(g->view->cx, g->view->width / 2) + g->view->display_left, */ 
     /*         min(g->view->cy, g->view->height / 2) + g->view->display_top); */
+    draw_charpoints(g->gmap->items, g->view);
     draw_charpoints(g->gmap->actors, g->view);
     draw_actor_self(g->player, g->view);
     return 0;
@@ -221,7 +222,7 @@ void start() {
     a->color = cb_blue;
     a->directed.x = 0;
     a->directed.y = 0;
-    for (int i = 0; i < 20; i++) {
+    for (int i = 0; i < 2; i++) {
         a = make_actor('d', i, 5);
         add_actor(g, a);
         a->color = cb_red;
@@ -232,7 +233,8 @@ void start() {
     /*     a->color = cb_yellow; */
     /*     add_actor(g, a); */
     /* } */
-    tmap_add_item(g->gmap, item_new('i', 1, 1));
+    tmap_add_item(g->gmap, item_new('[', 1, 1));
+    tmap_add_item(g->gmap, item_new('?', 4, 4));
 
     start_events();
     event_register(ActionCollide, RolePlayer, RoleMonster, collide_action_player_monster);
