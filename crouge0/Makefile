@@ -13,7 +13,7 @@ LFLAGS=-L../lib -lccurses -lncurses
 IFLAGS=-I./include -I../ccurses
 GLIB=$(shell pkg-config --cflags --libs glib-2.0)
 DEBUG=-DDEBUG
-WORK=-DWORK_
+WORK=$(shell if [ -e ~/.work.sig ]; then echo -DWORK; fi)
 CFLAGS=$(DEBUG) $(WORK) -Wall -Wextra -std=gnu11 -g -D_GNU_SOURCE=1 $(IFLAGS) $(LFLAGS) $(GLIB)
 
 # Must be first rule, for compile main app
