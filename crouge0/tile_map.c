@@ -7,6 +7,7 @@ TileMap make_tile_map(int width, int height) {
     map->width = width;
     map->height = height;
     map->actors = NULL;
+    map->items = NULL;
     for (int i=0; i < height; i++) {
         for (int j=0; j < width; j++) {
             tiles[i * width + j].c = ' ';
@@ -20,6 +21,7 @@ void free_tile_map(TileMap map) {
         //free_actors(map->actors);
         g_list_free(map->actors);
     }
+    items_free(&map->items);
     free(map->tiles);
     free(map);
 }
@@ -315,3 +317,8 @@ struct Actor* map_get_player(TileMap map) {
     }
     return map->actors->data; // first
 }
+
+void tmap_add_item(TileMap map, Item item) {
+    item_add(&map->items, item);
+}
+

@@ -232,6 +232,7 @@ void start() {
     /*     a->color = cb_yellow; */
     /*     add_actor(g, a); */
     /* } */
+    tmap_add_item(g->gmap, item_new('i', 1, 1));
 
     start_events();
     event_register(ActionCollide, RolePlayer, RoleMonster, collide_action_player_monster);

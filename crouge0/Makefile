@@ -24,7 +24,7 @@ main: prepare
 prepare:
 	if [ ! -e ../lib ]; then mkdir ../lib; fi
 	if [ ! -e ../lib/$(LIB) ]; then cd ../ccurses; make makelib; cd -; fi
-	mkdir $(BUILD_DIR) 2&> /dev/null || true
+	mkdir $(BUILD_DIR) &> /dev/null || true
 
 lint:
 	splint main.c $(IFLAGS)
