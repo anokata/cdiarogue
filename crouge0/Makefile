@@ -66,8 +66,14 @@ toolmodule:
 module:
 	# using make module name=somename
 	@echo Creating $(name) module
-	echo '#pragma once' >> include/$(name).h
-	echo '#include "$(name).h"' >> $(name).c
+	@echo '#pragma once' >> include/$(name).h
+	@echo '#include "$(name).h"' >> $(name).c
+	# create test
+	@echo Create test
+	@echo '#include "$(name).h"' >> test_$(name).c
+	@echo '#include <stdio.h>'   >> test_$(name).c
+	@echo '#include <assert.h>'  >> test_$(name).c
+	@echo -e 'int main() {\n}'   >> test_$(name).c
 	@echo successfully created.
 
 
