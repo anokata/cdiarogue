@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "lib/ccurses.h"
 typedef char* string;
 
 #define UNUSED(x) ((void)(x));
@@ -19,6 +20,12 @@ typedef struct Point {
     int y;
 } Point;
 
+typedef struct CharPoint {
+    char c;
+    int x;
+    int y;
+    Color color;
+} *CharPoint;
 
 int fget_int_line(FILE *file);
 

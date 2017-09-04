@@ -192,7 +192,7 @@ int cursor_draw(void* data) {
     /* cc_putxy('@', cn_yellow, */ 
     /*         min(g->view->cx, g->view->width / 2) + g->view->display_left, */ 
     /*         min(g->view->cy, g->view->height / 2) + g->view->display_top); */
-    draw_actors(g->gmap->actors, g->view);
+    draw_charpoints(g->gmap->actors, g->view);
     draw_actor_self(g->player, g->view);
     return 0;
 }

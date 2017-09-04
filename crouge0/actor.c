@@ -43,3 +43,6 @@ int _actor_direct_diffy(Actor actor) {
     return diff == 0 ? 0 : (diff > 0 ? 1 : -1);
 }
 
+CharPoint actor_as_charpoint_cast(Actor actor) {
+    return (struct CharPoint *) actor;
+}

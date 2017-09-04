@@ -1,23 +1,23 @@
 #include "render.h"
 
-void draw_actors(GList *actors, Viewport *v) {
-    GList *it = actors;
+void draw_charpoints(GList *elements, Viewport *v) {
+    GList *it = elements;
     int top = viewport_top(v);
     int left = viewport_left(v);
 
     while (it) {
-        Actor actor = it->data;
-        if (in_viewport(v, actor->x, actor->y)) {
-            draw_actor(it->data, 
-                    v->display_left + actor->x - left, 
-                    v->display_top + actor->y - top);
+        CharPoint cp = it->data;
+        if (in_viewport(v, cp->x, cp->y)) {
+            draw_charpoint(it->data, 
+                    v->display_left + cp->x - left, 
+                    v->display_top + cp->y - top);
         }
         it = g_list_next(it);
     }
 }
 
-void draw_actor(Actor actor, int x, int y) {
-    cc_putxy(actor->c, actor->color, x, y);
+void draw_charpoint(CharPoint cp, int x, int y) {
+    cc_putxy(cp->c, cp->color, x, y);
 }
 
 bool in_viewport(Viewport *v, int x, int y) {  // TODO union with Point struct
@@ -31,6 +31,6 @@ bool in_viewport(Viewport *v, int x, int y) {  // TODO union with Point struct
 void draw_actor_self(Actor actor, Viewport *v) {
     int top = v->display_left - viewport_top(v);
     int left = v->display_top - viewport_left(v);
-    draw_actor(actor, left + actor->x, top + actor->y);
+    draw_charpoint(actor_as_charpoint_cast(actor), left + actor->x, top + actor->y);
 }
 

@@ -26,3 +26,7 @@ void items_free(Items *items) {
     g_list_free(*items);
     *items = NULL;
 }
+
+CharPoint item_as_charpoint_cast(Item item) {
+    return (struct CharPoint *) item;
+}

@@ -3,6 +3,7 @@
 #include <stdbool.h>
 #include <glib.h>
 #include "map.h"
+#include "util.h"
 
 typedef enum Behavior { 
     BehaviorRandom=0, 
@@ -25,12 +26,12 @@ typedef enum Status {
 } Status;
 
 typedef struct Actor {
-    char c;
-    int x;
-    int y;
+    char c; /* First (four) fields is CharPoint struct */
+    int x; /* Do not change it self or its order */
+    int y; /* Access for it via cast function */
+    Color color; /* end of CharPoint */
     Behavior behavior;
     Point directed;
-    Color color;
     Status status;
     int stat_attack;
     int stat_hp;
@@ -38,6 +39,7 @@ typedef struct Actor {
     Role role;
 } *Actor;
 
+CharPoint actor_as_charpoint_cast(Actor actor);
 
 Actor make_actor(char c, int x, int y);
 void free_actors(GList *actors);
