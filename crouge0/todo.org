@@ -100,6 +100,22 @@ https://stackoverflow.com/questions/43834833/print-a-wide-unicode-character-with
  2.1 load by lines from file and out to one line - script : tr -d \n 
  2.2 save converted to map file
 
+* quests types
+- reach location
+- find(catch) N objects and bring it to npc/location
+- escape from
+- clear location from x
+get quest from random encounter
+
+- traps, and traps with reward
+
+* plot
+have a general goal, many rewards and many pitfalls.
+Goal: find artifact. what? why? Ring of wisdome. World had stupid. You need cure it.
+You hear that artifact deep in cave near forest. You go there and get lost.
+... you find artifact and it traped in crystal, you need find magic wand of
+freedome, lying in island in see over a desert.
+
 * backlog
 make dir for src
 separate src .c for dirs/modules
