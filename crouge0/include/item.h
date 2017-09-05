@@ -8,6 +8,7 @@ typedef struct Item {
     int x;
     int y;
     Color color;
+    char *name;
 } *Item;
 
 typedef GList *Items;

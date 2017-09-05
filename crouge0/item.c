@@ -6,6 +6,7 @@ Item item_new(char c, int x, int y) {
     item->x = x;
     item->y = y;
     item->color = cn_white;
+    item->name = NULL;
     return item;
 }
 
