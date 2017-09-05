@@ -31,3 +31,15 @@ void items_free(Items *items) {
 CharPoint item_as_charpoint_cast(Item item) {
     return (struct CharPoint *) item;
 }
+
+Item items_get(Items items, int x, int y) {
+    GList *it = items;
+    while (it) {
+        Item item = it->data;
+        if ((item->x == x) && (item->y == y)) {
+            return item;
+        }
+        it = g_list_next(it);
+    }
+    return NULL;
+}
