@@ -14,10 +14,12 @@ Actor make_actor(char c, int x, int y) {
     actor->role = RoleMonster;
     actor->name = "poring";
     actor->status = StatusLive;
+    actor->items = NULL;
     return actor;
 }
 
 void actor_free(Actor actor) {
+    items_free(&actor->items);
     free(actor);
 }
 

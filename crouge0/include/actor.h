@@ -3,6 +3,7 @@
 #include <stdbool.h>
 #include <glib.h>
 #include "map.h"
+#include "item.h"
 #include "util.h"
 
 typedef enum Behavior { 
@@ -37,6 +38,7 @@ typedef struct Actor {
     int stat_hp;
     char *name;
     Role role;
+    Items items;
 } *Actor;
 
 CharPoint actor_as_charpoint_cast(Actor actor);
