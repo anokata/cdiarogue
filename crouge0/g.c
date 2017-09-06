@@ -38,6 +38,10 @@ G new_g() {
     g->player->stat_hp = 20;
     add_actor(g, g->player);
     g->last_target = NULL;
+    // init inventory
+    item_add(&g->player->items, item_new('!', 0, 0));
+    item_add(&g->player->items, item_new('%', 0, 0));
+    item_add(&g->player->items, item_new('(', 0, 0));
 
     return g;
 }

@@ -28,7 +28,9 @@
 *** inventory, view, take, drop
       - +inventory module
       - +inventory state
+      - item types and description about item by type
       - inventory list draw
+            - same items to stack with number
       - action on item
       - take item
       - drop item
