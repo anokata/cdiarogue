@@ -26,8 +26,8 @@
 - +interaction - find item on point
 - mini inventory
 *** inventory, view, take, drop
-      - inventory module
-      - inventory state
+      - +inventory module
+      - +inventory state
       - inventory list draw
       - action on item
       - take item

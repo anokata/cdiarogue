@@ -16,6 +16,7 @@
 #include "render.h"
 #include "collide.h"
 #include "item.h"
+#include "inventory.h"
 
 void debug_draw(G g);
 

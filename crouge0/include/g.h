@@ -7,6 +7,19 @@
 #include "actor.h"
 #include <glib.h>
 
+enum States {
+    State_run, 
+    State_end, 
+    State_wmap, 
+    State_cursor, 
+    State_inventory, 
+    NUM_STATES};
+
+enum Events {
+    Event_draw, 
+    Event_key, 
+    NUM_EVENTS};
+
 typedef struct G {
     WorldMap wmap;
     TileMap gmap;
@@ -23,3 +36,5 @@ G new_g();
 void free_g(G g);
 void debuglog(G g, char *msg);
 void add_actor(G g, Actor actor);
+
+State state;

@@ -1,10 +1,8 @@
 #include "app.h"
 char version[] = "0.0.1";
 
-enum States {State_run, State_end, State_wmap, State_cursor,  NUM_STATES};
-enum Events {Event_draw, Event_key,  NUM_EVENTS};
 /* GLOBAL */
-State state;
+extern State state;
 
 void process_input(G g) {
     ss_handle(state, Event_draw, g);
@@ -135,6 +133,9 @@ int cursor_key(void* data) {
         case 'r':
             ss_setstate(state, State_run);
             break;
+        case 'i':
+            ss_setstate(state, State_inventory);
+            break;
         case 'j':
             g->cursor.y++;
             if (collisions_player_move(g->player, 0, 1, g)) {
@@ -206,6 +207,8 @@ void state_init() {
     ss_sethander(state, State_wmap, Event_key, wmap_key);
     ss_sethander(state, State_cursor, Event_draw, cursor_draw);
     ss_sethander(state, State_cursor, Event_key, cursor_key);
+    ss_sethander(state, State_inventory, Event_draw, inventory_draw);
+    ss_sethander(state, State_inventory, Event_key, inventory_key);
     ss_setstate(state, State_run);
 }
 
