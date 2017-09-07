@@ -40,7 +40,8 @@ void debug_draw(G g) {
     /* debuglog(g, "abc"); */
     g_debug("hi");
     g_log(NULL, G_LOG_LEVEL_DEBUG, "MSG");
-    for (int i = 0; i < (g->log_len > 8 ? 8 : g->log_len); i++) {
+
+    for (int i = g->log_len - 1; i > (g->log_len - 8) && i > 0; i--) {
         strcat(log_text, g_list_nth_data(g->log, i));
         strcat(log_text, "\n");
     }
@@ -179,6 +180,9 @@ int cursor_key(void* data) {
             if (collisions_player_move(g->player, -1, 1, g)) {
                 viewport_move_leftdown(g->view, g->gmap);
             }
+            break;
+        case ',':
+            debuglog(g, "You take");
             break;
     }
     move_all_actors_rand(g);
