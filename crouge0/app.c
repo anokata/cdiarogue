@@ -130,6 +130,7 @@ int wmap_draw(void* data) {
 int cursor_key(void* data) {
     G g = data;
     char key = g->key;
+    char *msg;
     switch (key) {
         case 'r':
             ss_setstate(state, State_run);
@@ -182,7 +183,9 @@ int cursor_key(void* data) {
             }
             break;
         case ',':
-            debuglog(g, "You take");
+            // TODO make return description string
+            msg = actor_take_from(g->player, g->gmap, g->player->x, g->player->y);
+            debuglog(g, msg);
             break;
     }
     move_all_actors_rand(g);

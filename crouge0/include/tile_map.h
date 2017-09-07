@@ -74,3 +74,4 @@ void foreach_tile_set(TileMap map, TileDataFunc f, void *data, char tile_char);
 
 struct Actor* map_get_player(TileMap map);
 void tmap_add_item(TileMap map, Item item);
+char *actor_take_from(Actor actor, TileMap map, int x, int y);

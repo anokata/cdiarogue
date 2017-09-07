@@ -323,3 +323,13 @@ void tmap_add_item(TileMap map, Item item) {
     item_add(&map->items, item);
 }
 
+char *actor_take_from(Actor actor, TileMap map, int x, int y) {
+    Item item = items_get(map->items, x, y);
+    if (item) {
+        item_add(&actor->items, item);
+        // remove item from items on map
+        map->items = g_list_remove(map->items, item);
+        return "You take";
+    } 
+    return "Nothing here";
+}
