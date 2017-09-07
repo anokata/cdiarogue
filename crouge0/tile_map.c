@@ -37,14 +37,14 @@ string tilemap_to2d(TileMap map) {
     // because add \n at end of each line
     int nwidth = map->width + 1;
     string map2d = malloc(1 + map->height * nwidth);
-    memset(map2d, 0, map->height * nwidth);
-    memset(map2d, '-', map->height * nwidth - 1);
+    memset(map2d, 0, map->height * nwidth + 1);
+    memset(map2d, '-', map->height * nwidth);
 
     for (int i=0; i < map->height; i++) {
         for (int j=0; j < map->width; j++) {
             map2d[i * nwidth + j] = tile_at(map, j, i)->c;
         }
-        if (i < map->height - 1)
+        if (i < (map->height + 1))
             map2d[(i + 1) * nwidth - 1] = '\n';
     }
     return map2d;
@@ -129,11 +129,11 @@ TileMap load_tile_map(string filename) {
 
     if (mode == 0) { 
         /* Local map */
-        copy_map2tiles(map, map_data, strlen(map_data) - 1, 0);
+        copy_map2tiles(map, map_data, strlen(map_data), 0);
         load_colors(map, config); 
     } else if (mode == 1) { 
         /* Global map by line */
-        copy_map2tiles(map, map_data, strlen(map_data) - 1, 0);
+        copy_map2tiles(map, map_data, strlen(map_data), 0);
         // TODO
         //load_description(map); 
         //load_wmap_data(world_filename);
