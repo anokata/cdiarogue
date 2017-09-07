@@ -34,10 +34,11 @@ Tile *tile_at(TileMap map, int x, int y) {
 }
 
 string tilemap_to2d(TileMap map) {
+    // because add \n at end of each line
     int nwidth = map->width + 1;
     string map2d = malloc(1 + map->height * nwidth);
     memset(map2d, 0, map->height * nwidth);
-memset(map2d, '-', map->height * nwidth - 1);
+    memset(map2d, '-', map->height * nwidth - 1);
 
     for (int i=0; i < map->height; i++) {
         for (int j=0; j < map->width; j++) {

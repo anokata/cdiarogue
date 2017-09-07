@@ -31,7 +31,7 @@
       - item types and description about item by type
       - inventory list draw
             - same items to stack with number
-      - action on item
+      - action on item walk - msg - see $item
       - take item
       - drop item
       - use item
