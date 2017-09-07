@@ -1,5 +1,16 @@
 #include "item.h"
 
+char *item_types[] = {
+    "potion of cure wounds",
+    "wood sword",
+};
+
+char *item_states[] = {
+    " ",
+    "blessed",
+    "cursed",
+};
+
 Item item_new(char c, int x, int y) {
     Item item = malloc(sizeof(struct Item));
     item->c = c;
@@ -7,6 +18,9 @@ Item item_new(char c, int x, int y) {
     item->y = y;
     item->color = cn_white;
     item->name = NULL;
+    item->state = ItemNormalState;
+    item->type = ItemWeaponSword;
+    item->cls = ItemWeaponCls;
     return item;
 }
 
@@ -43,4 +57,14 @@ Item items_get(Items items, int x, int y) {
         it = g_list_next(it);
     }
     return NULL;
+}
+
+char *item_descript(Item item) {
+    char *buf = malloc(BUFSIZE); // FIXME
+    snprintf(buf, BUFSIZE, "%s %s", 
+            item_states[item->state],
+            item_types[item->type]
+    );
+    
+    return buf;
 }

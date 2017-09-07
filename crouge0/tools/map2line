@@ -1,0 +1,4 @@
+#!/bin/bash
+# vim: filetype=sh
+tr -d "\n"
+# calc w:h and write

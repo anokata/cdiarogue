@@ -5,6 +5,8 @@
 #include <stdlib.h>
 #include <string.h>
 #include "lib/ccurses.h"
+
+#define BUFSIZE 128
 typedef char* string;
 
 #define UNUSED(x) ((void)(x));
