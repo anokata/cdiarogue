@@ -6,7 +6,11 @@
 typedef enum ItemClass {
     ItemPotionCls,
     ItemWeaponCls,
-    ItemClothCls,
+    ItemBodyEquipCls,
+    ItemFootEquipCls,
+    ItemLegsEquipCls,
+    ItemHeadEquipCls,
+    ItemFingerEquipCls,
     ItemFoodCls,
 } ItemClass;
 

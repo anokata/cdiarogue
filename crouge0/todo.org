@@ -28,16 +28,19 @@
 *** inventory, view, take, drop
       - +inventory module
       - +inventory state
-      - item types and description about item by type
-      - inventory list draw
+      - ~item types and description about item by type
+      - ~inventory list draw
             - same items to stack with number
       - action on item walk - msg - see $item
-      - take item
+      - +take item
       - drop item
-      - use item
+      - use item, activate, eat, quaff, read
+      - equiping wield and wear, actor slots
+
 - doors, open, close - commands, to direction mode
 - weapon, weild, take off. effect on combat
 - loot, paws, wool, skin, bone, meet, jelly
+- map gen, map items, save load with items, mobs
 
 
 * monsters data files, spawns

@@ -225,15 +225,15 @@ void start() {
     state_init();
     Actor a = make_actor('o', 2, 2);
     add_actor(g, a);
-    a->behavior = BehaviorSimpleAttacker;
-    //a->behavior = BehaviorSimpleDirect;
+    /* a->behavior = BehaviorSimpleAttacker; */
+    a->behavior = BehaviorSimpleDirect;
     //a->behavior = BehaviorRandom;
     //a->behavior = BehaviorStand;
     a->color = cb_blue;
-    a->directed.x = 0;
-    a->directed.y = 0;
+    a->directed.x = 2;
+    a->directed.y = 2;
     for (int i = 0; i < 2; i++) {
-        a = make_actor('d', i, 5);
+        a = make_actor('d', i + 15, 15);
         add_actor(g, a);
         a->color = cb_red;
         a->behavior = BehaviorSimpleAttacker;
