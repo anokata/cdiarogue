@@ -38,12 +38,23 @@ Actor collision_get_actor(Actor actor, int dx, int dy, GList *actors) {
 /* True if can move */
 bool collisions_player_move(Actor player, int dx, int dy, G g) {
     Actor subject = collision_get_actor(player, dx, dy, g->gmap->actors);
+    bool result = false;
     if (!subject) {
-        return actor_move_hv(player, g->gmap, dx, dy);
+        result = actor_move_hv(player, g->gmap, dx, dy);
     } else {
         collision_effect(player, subject, g);
     }
-    return false;
+
+    Item item = items_get(g->gmap->items, player->x, player->y);
+    if (item && player->role == RolePlayer) {
+        char buf[BUFSIZE];
+        char *description = item_descript(item);
+        snprintf(buf, BUFSIZE, "You see %s %d:%d", description, dx, dy);
+        free(description);
+        debuglog(g, buf);
+    }
+
+    return result;
 }
 
 void collide_action_player_monster(Action action, Actor actor, Actor subject, G g) {

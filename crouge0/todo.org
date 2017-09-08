@@ -37,6 +37,7 @@
       - use item, activate, eat, quaff, read
       - equiping wield and wear, actor slots
 
+- char info mode, weared, stats
 - doors, open, close - commands, to direction mode
 - weapon, weild, take off. effect on combat
 - loot, paws, wool, skin, bone, meet, jelly

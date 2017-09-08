@@ -1,6 +1,7 @@
 #pragma once
 #include <glib.h>
 #include "actor.h"
+#include "item.h"
 #include "behavior.h"
 #include "events.h"
 #include "g.h"

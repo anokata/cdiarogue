@@ -30,9 +30,9 @@ int inventory_draw(void* data) {
     while (it) {
         Item item = it->data;
         // wtf with % sign?
-        char *descriptoin = item_descript(item);
-        snprintf(buf, BUFSIZE, "%c) %c - %s", (y + 'a'), item->c, descriptoin);
-        free(descriptoin);
+        char *description = item_descript(item);
+        snprintf(buf, BUFSIZE, "%c) %c - %s", (y + 'a'), item->c, description);
+        free(description);
     debuglog(g, buf);
         cc_printxy(buf, cn_white, 2, ++y);
         it = g_list_next(it);
