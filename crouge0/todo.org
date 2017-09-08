@@ -31,18 +31,29 @@
       - ~item types and description about item by type
       - ~inventory list draw
             - same items to stack with number
-      - action on item walk - msg - see $item
+      - +action on item walk - msg - see $item
       - +take item
+      - item actions - pass func
       - drop item
-      - use item, activate, eat, quaff, read
-      - equiping wield and wear, actor slots
+      - use item
+      - activate
+      - eat
+      - quaff - item effects: effect X itemType X action
+      - read
+      - actor slots
+      - equiping wield and wear
 
+** 8 for minimum completed *DasHReaLM*
 - char info mode, weared, stats
-- doors, open, close - commands, to direction mode
-- weapon, weild, take off. effect on combat
-- loot, paws, wool, skin, bone, meet, jelly
-- map gen, map items, save load with items, mobs
+- stats str, dex, endurance and it's effect on actions and other
+- doors, open, close, kick - commands, to direction mode
+- weapon and armor effect on combat
+- mobs types/race - load from file
+- map save load with items, mobs, store player
 
+
+- loot, paws, wool, skin, bone, meet, jelly
+- map gen, 
 
 * monsters data files, spawns
  other stats, and fun and story

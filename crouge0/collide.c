@@ -37,6 +37,8 @@ Actor collision_get_actor(Actor actor, int dx, int dy, GList *actors) {
 
 /* True if can move */
 bool collisions_player_move(Actor player, int dx, int dy, G g) {
+    if ((dx == 0) && (dy == 0)) return false;
+
     Actor subject = collision_get_actor(player, dx, dy, g->gmap->actors);
     bool result = false;
     if (!subject) {
