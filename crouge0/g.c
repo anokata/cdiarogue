@@ -46,6 +46,16 @@ G new_g() {
     potion->type = ItemPotionOfCure;
     item_add(&g->player->items, potion);
 
+    Item sword = item_new('/', 0, 0);
+    sword->cls = ItemWeaponCls;
+    sword->type = ItemWeaponSword;
+    item_add(&g->player->items, sword);
+
+    Item helm = item_new(']', 0, 0);
+    helm->cls = ItemHeadEquipCls;
+    helm->type = ItemStrawHat;
+    item_add(&g->player->items, helm);
+
     return g;
 }
 

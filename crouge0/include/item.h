@@ -4,6 +4,7 @@
 #include "util.h"
 
 typedef enum ItemClass {
+    ItemNoCls,
     ItemPotionCls,
     ItemWeaponCls,
     ItemBodyEquipCls,

@@ -34,8 +34,9 @@
       - +take item
       - +drop item
       - +quaff 
-      - actor slots
-      - equiping wield and wear, calc phy defend - ph. def
+      - +actor slots
+      - +equiping wield and wear
+      - calc phy defend - ph. def
 
 ** 8 for minimum completed *DasHReaLM*
 - char info mode, weared, stats

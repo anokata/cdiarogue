@@ -76,6 +76,7 @@ int draw(void* data) {
         i show inventory\n\
         d drop an item \n\
         q quaff a potion \n\
+        e equip something \n\
         ", 
             cn_white, 0, 0);
     return 0;
@@ -145,6 +146,9 @@ int cursor_key(void* data) {
             break;
         case 'd':
             ss_setstate(state, State_drop); // TODO ?inventor action state with param
+            break;
+        case 'e':
+            ss_setstate(state, State_equip);
             break;
         case 'q':
             ss_setstate(state, State_quaff);
@@ -231,6 +235,8 @@ void state_init() {
     ss_sethander(state, State_drop, Event_key, inventory_key);
     ss_sethander(state, State_quaff, Event_draw, inventory_draw);
     ss_sethander(state, State_quaff, Event_key, inventory_key);
+    ss_sethander(state, State_equip, Event_draw, inventory_draw);
+    ss_sethander(state, State_equip, Event_key, inventory_key);
     ss_setstate(state, State_cursor);
 }
 

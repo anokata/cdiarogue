@@ -21,7 +21,7 @@ Item item_new(char c, int x, int y) {
     item->name = NULL;
     item->state = ItemNormalState;
     item->type = ItemWeaponSword;
-    item->cls = ItemWeaponCls;
+    item->cls = ItemNoCls;
     item->value = 1;
     return item;
 }

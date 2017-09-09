@@ -36,29 +36,24 @@ void drop_item(Actor actor, TileMap map, Item item) {
 
 void inventory_action(Item item, G g) {
     char *description = NULL;
+    description = item_descript(item);
+    debuglog(g, description);
+    free(description);
+
     switch (ss_get_state(state)) {
         case State_drop:
-            description = item_descript(item);
             debuglog(g, "you drop the");
-            debuglog(g, description);
-            free(description);
             /* actuall drop item from map */
             drop_item(g->player, g->gmap, item);
 
             ss_setstate(state, State_cursor);
             break;
         case State_inventory:
-            description = item_descript(item);
             debuglog(g, "you choose");
-            debuglog(g, description);
-            free(description);
             ss_setstate(state, State_cursor);
             break;
         case State_quaff:
-            description = item_descript(item);
             debuglog(g, "you try drink");
-            debuglog(g, description);
-            free(description);
             /* TODO item action */
                 /* apply drint effect */
                 actor_heal(g->player, item->value);
@@ -67,7 +62,17 @@ void inventory_action(Item item, G g) {
 
             ss_setstate(state, State_cursor);
             break;
+        case State_equip:
+            debuglog(g, "you try equip");
+            if (actor_equip(g->player, item)) {
+                debuglog(g, "Equiped!");
+            } else {
+                debuglog(g, error_msg());
+            }
+
+            break;
     }
+    ss_setstate(state, State_cursor);
 }
 
 int inventory_draw(void* data) {
