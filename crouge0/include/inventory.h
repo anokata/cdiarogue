@@ -7,3 +7,4 @@ int inventory_draw(void* data);
 
 Item inventory_get_by_idx(Items items, int index);
 void inventory_action(Item item, G g);
+void drop_item(Actor actor, TileMap map, Item item);

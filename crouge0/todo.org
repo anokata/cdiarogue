@@ -33,7 +33,7 @@
             - same items to stack with number
       - +action on item walk - msg - see $item
       - +take item
-      - drop item
+      - +drop item
       - quaff 
       - item effects: effect X itemType X action
       - actor slots

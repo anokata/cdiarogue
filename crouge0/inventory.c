@@ -23,6 +23,17 @@ int inventory_key(void* data) {
     return 0;
 }
 
+/* need test */
+void drop_item(Actor actor, TileMap map, Item item) {
+    /* set item coords */
+    item->x = actor->x;
+    item->y = actor->y;
+    /* place to map */
+    tmap_add_item(map, item);
+    /* remove from inventory */
+    item_remove(&actor->items, item);
+}
+
 void inventory_action(Item item, G g) {
     char *description = NULL;
     switch (ss_get_state(state)) {
@@ -31,7 +42,9 @@ void inventory_action(Item item, G g) {
             debuglog(g, "you drop the");
             debuglog(g, description);
             free(description);
-            // TODO actuall drop item from map
+            /* actuall drop item from map */
+            drop_item(g->player, g->gmap, item);
+
             ss_setstate(state, State_cursor);
             break;
         case State_inventory:

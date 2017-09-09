@@ -33,6 +33,10 @@ void item_add(Items *items, Item item) {
     *items = g_list_append(*items, item);
 }
 
+void item_remove(Items *items, Item item) {
+    *items = g_list_remove(*items, item);
+}
+
 void items_free(Items *items) {
     if (!*items) return;
     GList *it = *items;
