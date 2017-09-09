@@ -35,13 +35,16 @@ G new_g() {
     g->player->color = cb_white;
     g->player->behavior = BehaviorStand;
     g->player->name = "you";
-    g->player->stat_hp = 20;
+    g->player->stat_hp = 7;
     add_actor(g, g->player);
     g->last_target = NULL;
     // init inventory
-    item_add(&g->player->items, item_new('=', 0, 0));
-    item_add(&g->player->items, item_new('!', 0, 0));
-    item_add(&g->player->items, item_new('(', 0, 0));
+    Item potion = item_new('!', 1, 1);
+    potion->type = ItemPotionOfCure;
+    item_add(&g->player->items, potion);
+    potion = item_new('!', 1, 1);
+    potion->type = ItemPotionOfCure;
+    item_add(&g->player->items, potion);
 
     return g;
 }

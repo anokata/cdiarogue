@@ -31,6 +31,7 @@ typedef struct Item {
     int x;
     int y;
     Color color;
+    int value;
     char *name;
     ItemClass cls;
     ItemState state;

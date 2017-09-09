@@ -54,6 +54,19 @@ void inventory_action(Item item, G g) {
             free(description);
             ss_setstate(state, State_cursor);
             break;
+        case State_quaff:
+            description = item_descript(item);
+            debuglog(g, "you try drink");
+            debuglog(g, description);
+            free(description);
+            /* TODO item action */
+                /* apply drint effect */
+                actor_heal(g->player, item->value);
+                /* remove from inv */
+                item_remove(&g->player->items, item);
+
+            ss_setstate(state, State_cursor);
+            break;
     }
 }
 

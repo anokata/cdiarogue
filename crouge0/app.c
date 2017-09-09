@@ -8,7 +8,7 @@ void process_input(G g) {
     ss_handle(state, Event_draw, g);
 	int ch = getch();
     int status = 0;
-	while(ch != 'q' && !status) {
+	while(ch != 27 && !status) {
         g->key = ch;
         status = ss_handle(state, Event_key, g);
         ss_handle(state, Event_draw, g);
@@ -53,12 +53,13 @@ void debug_draw(G g) {
             "Viewport Left: %d\n" 
             "Viewport cx:cy = %d:%d\t" 
             "Viewport left:top = %d:%d\n" 
-            "Player x:y = %d:%d [HP: %d  ]\t" 
+            "Player x:y = %d:%d [HP: %d/%d atk: %d ]\t" 
             "Target [HP: %d  ]\n" 
         , g->key, log_text, 
         g->view->display_left, g->view->cx, g->view->cy,
         viewport_left(g->view), viewport_top(g->view),
         g->player->x, g->player->y, g->player->stat_hp,
+        actor_stat_maxhp(g->player), actor_stat_attack(g->player),
         (g->last_target ? g->last_target->stat_hp : 0)
         );
     cc_printxy(buf, cn_white, 0, 20);
@@ -73,7 +74,8 @@ int draw(void* data) {
         h this help\n\
         c character game mode\n\
         i show inventory\n\
-        d drop item \n\
+        d drop an item \n\
+        q quaff a potion \n\
         ", 
             cn_white, 0, 0);
     return 0;
@@ -142,7 +144,10 @@ int cursor_key(void* data) {
             ss_setstate(state, State_inventory);
             break;
         case 'd':
-            ss_setstate(state, State_drop);
+            ss_setstate(state, State_drop); // TODO ?inventor action state with param
+            break;
+        case 'q':
+            ss_setstate(state, State_quaff);
             break;
         case 'j':
             g->cursor.y++;
@@ -224,7 +229,9 @@ void state_init() {
     ss_sethander(state, State_inventory, Event_key, inventory_key);
     ss_sethander(state, State_drop, Event_draw, inventory_draw);
     ss_sethander(state, State_drop, Event_key, inventory_key);
-    ss_setstate(state, State_run);
+    ss_sethander(state, State_quaff, Event_draw, inventory_draw);
+    ss_sethander(state, State_quaff, Event_key, inventory_key);
+    ss_setstate(state, State_cursor);
 }
 
 void start() {

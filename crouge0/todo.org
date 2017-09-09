@@ -28,16 +28,14 @@
 *** inventory, view, take, drop
       - +inventory module
       - +inventory state
-      - ~item types and description about item by type
-      - ~inventory list draw
-            - same items to stack with number
+      - +item types and description about item by type
+      - +inventory list draw
       - +action on item walk - msg - see $item
       - +take item
       - +drop item
-      - quaff 
-      - item effects: effect X itemType X action
+      - +quaff 
       - actor slots
-      - equiping wield and wear
+      - equiping wield and wear, calc phy defend - ph. def
 
 ** 8 for minimum completed *DasHReaLM*
 - char info mode, weared, stats
@@ -59,6 +57,10 @@
 - zap wands
 - magic
 - fire, bows
+- same items to stack with number
+- better inventory by category
+- item effects: effect X itemType X action
+- damage at different parts of body/armor
 
 * monsters data files, spawns
  other stats, and fun and story

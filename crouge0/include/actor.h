@@ -53,3 +53,4 @@ int _actor_direct_diffy(Actor actor);
 
 int actor_stat_maxhp(Actor actor);
 int actor_stat_attack(Actor actor);
+void actor_heal(Actor actor, int value);

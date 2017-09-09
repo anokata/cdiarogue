@@ -14,6 +14,7 @@ enum States {
     State_cursor, 
     State_inventory, 
     State_drop,
+    State_quaff,
     NUM_STATES};
 
 enum Events {

@@ -58,3 +58,7 @@ int actor_stat_attack(Actor actor) {
     /* TODO weapon */
     return actor->basestat_strength * 2;
 }
+
+void actor_heal(Actor actor, int value) {
+    actor->stat_hp = (actor->stat_hp + value) % (actor_stat_maxhp(actor) + 1);
+}
