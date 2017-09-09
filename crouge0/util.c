@@ -39,3 +39,15 @@ char *read_whole_file(char *filename) {
     return content;
 }
 
+
+EError global_error = Error_OK;
+
+char *error_msg() {
+    char *error_messages[] = {
+        "ok",
+        "This item not equiptable",
+        "Already equiped at this slot",
+    };
+
+    return error_messages[global_error];
+}

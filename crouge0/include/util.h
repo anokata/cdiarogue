@@ -40,4 +40,11 @@ char *read_whole_file(char *filename);
 #define min(x, y) ((x) < (y) ? (x) : (y))
 
 
+typedef enum EError {
+    Error_OK,
+    Error_Actor_NotEquptable,
+    Error_Actor_SlotBusy
+} EError;
+
+char *error_msg();
 #endif
