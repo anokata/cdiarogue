@@ -34,8 +34,9 @@ typedef struct Actor {
     Behavior behavior;
     Point directed;
     Status status;
-    int stat_attack;
     int stat_hp;
+    int basestat_constitution; /* con -> max hp */
+    int basestat_strength; /* str -> attack */
     char *name;
     Role role;
     Items items;
@@ -49,3 +50,6 @@ void actor_free(Actor actor);
 bool _actor_isat_directed_place(Actor actor);
 int _actor_direct_diffx(Actor actor);
 int _actor_direct_diffy(Actor actor);
+
+int actor_stat_maxhp(Actor actor);
+int actor_stat_attack(Actor actor);

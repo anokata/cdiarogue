@@ -37,11 +37,11 @@
       - drop item
       - use item
       - activate
-      - eat
       - quaff - item effects: effect X itemType X action
       - read
       - actor slots
       - equiping wield and wear
+      - eat
 
 ** 8 for minimum completed *DasHReaLM*
 - char info mode, weared, stats
@@ -53,7 +53,8 @@
 
 
 - loot, paws, wool, skin, bone, meet, jelly
-- map gen, 
+- map gen 
+- mobs minds
 
 * monsters data files, spawns
  other stats, and fun and story

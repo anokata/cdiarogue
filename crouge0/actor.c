@@ -9,12 +9,13 @@ Actor make_actor(char c, int x, int y) {
     actor->directed.y = y;
     actor->behavior = BehaviorRandom;
     actor->color = cn_white;
-    actor->stat_attack = 1;
-    actor->stat_hp = 2;
     actor->role = RoleMonster;
     actor->name = "poring";
     actor->status = StatusLive;
     actor->items = NULL;
+    actor->basestat_constitution = 1;
+    actor->basestat_strength = 1;
+    actor->stat_hp = actor_stat_maxhp(actor);
     return actor;
 }
 
@@ -47,4 +48,13 @@ int _actor_direct_diffy(Actor actor) {
 
 CharPoint actor_as_charpoint_cast(Actor actor) {
     return (struct CharPoint *) actor;
+}
+
+int actor_stat_maxhp(Actor actor) {
+    return actor->basestat_constitution * 10;
+}
+
+int actor_stat_attack(Actor actor) {
+    /* TODO weapon */
+    return actor->basestat_strength * 2;
 }
