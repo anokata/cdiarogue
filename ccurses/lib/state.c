@@ -32,3 +32,6 @@ void ss_setstate(State state, int new_state) {
     state->current_state = new_state;
 }
 
+int ss_get_state(State s) {
+    return s->current_state;
+}

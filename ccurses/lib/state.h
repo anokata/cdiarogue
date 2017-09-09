@@ -20,6 +20,7 @@ void ss_sethander(State state, int state_id, int event, StateFunction fun);
 void ss_setstate(State state, int new_state);
 StateFunction ss_gethandler(State state, int event);
 int ss_handle(State state, int event, void *data);
+int ss_get_state(State s);
 
 
 #endif
