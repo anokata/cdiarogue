@@ -15,16 +15,44 @@ int inventory_key(void* data) {
         default:
             break;
     }
+    /* get item index by key, if correct, see state and call function on item */
+    int selected_item_index = key - 'a';
+    Item item = inventory_get_by_idx(g->player->items, selected_item_index);
+    if (!item) return 0;
+    inventory_action(item, g);
     return 0;
+}
+
+void inventory_action(Item item, G g) {
+    char *description = NULL;
+    switch (ss_get_state(state)) {
+        case State_drop:
+            description = item_descript(item);
+            debuglog(g, "you drop the");
+            debuglog(g, description);
+            free(description);
+            // TODO actuall drop item from map
+            ss_setstate(state, State_cursor);
+            break;
+        case State_inventory:
+            description = item_descript(item);
+            debuglog(g, "you choose");
+            debuglog(g, description);
+            free(description);
+            ss_setstate(state, State_cursor);
+            break;
+    }
 }
 
 int inventory_draw(void* data) {
     G g = data;
     UNUSED(g);
 
-    clear();
-    cc_printxy("Inventory:", cn_white, 0, 0);
     char buf[BUFSIZE];
+    clear();
+    int items_count = g_list_length(g->player->items);
+    snprintf(buf, BUFSIZE, "Inventory %d items:", items_count);
+    cc_printxy(buf, cn_white, 0, 0);
     GList *it = g->player->items;
     int y = 0;
     while (it) {
@@ -33,10 +61,18 @@ int inventory_draw(void* data) {
         char *description = item_descript(item);
         snprintf(buf, BUFSIZE, "%c) %c - %s", (y + 'a'), item->c, description);
         free(description);
-    debuglog(g, buf);
         cc_printxy(buf, cn_white, 2, ++y);
         it = g_list_next(it);
     }
 
     return 0;
+}
+
+Item inventory_get_by_idx(Items items, int index) {
+    int items_count = g_list_length(items);
+
+    if ((index < items_count) && (index >= 0)) {
+        return g_list_nth_data(items, index);
+    }
+    return NULL;
 }

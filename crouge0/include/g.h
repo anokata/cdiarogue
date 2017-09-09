@@ -13,6 +13,7 @@ enum States {
     State_wmap, 
     State_cursor, 
     State_inventory, 
+    State_drop,
     NUM_STATES};
 
 enum Events {

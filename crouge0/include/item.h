@@ -23,6 +23,7 @@ typedef enum ItemState {
 typedef enum ItemType {
     ItemPotionOfCure,
     ItemWeaponSword,
+    ItemStrawHat,
 } ItemType;
 
 typedef struct Item {

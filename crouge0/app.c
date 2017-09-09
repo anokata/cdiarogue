@@ -71,7 +71,10 @@ int draw(void* data) {
             "Key bindings:\n\
         w world map\n\
         h this help\n\
-        c cursor mode\n", 
+        c character game mode\n\
+        i show inventory\n\
+        d drop item \n\
+        ", 
             cn_white, 0, 0);
     return 0;
 }
@@ -137,6 +140,9 @@ int cursor_key(void* data) {
             break;
         case 'i':
             ss_setstate(state, State_inventory);
+            break;
+        case 'd':
+            ss_setstate(state, State_drop);
             break;
         case 'j':
             g->cursor.y++;
@@ -216,6 +222,8 @@ void state_init() {
     ss_sethander(state, State_cursor, Event_key, cursor_key);
     ss_sethander(state, State_inventory, Event_draw, inventory_draw);
     ss_sethander(state, State_inventory, Event_key, inventory_key);
+    ss_sethander(state, State_drop, Event_draw, inventory_draw);
+    ss_sethander(state, State_drop, Event_key, inventory_key);
     ss_setstate(state, State_run);
 }
 
@@ -243,8 +251,12 @@ void start() {
     /*     a->color = cb_yellow; */
     /*     add_actor(g, a); */
     /* } */
-    tmap_add_item(g->gmap, item_new('[', 1, 1));
-    tmap_add_item(g->gmap, item_new('?', 4, 4));
+    Item potion = item_new('!', 1, 1);
+    potion->type = ItemPotionOfCure;
+    Item hat = item_new(']', 2, 2);
+    hat->type = ItemStrawHat;
+    tmap_add_item(g->gmap, potion);
+    tmap_add_item(g->gmap, hat);
 
     start_events();
     event_register(ActionCollide, RolePlayer, RoleMonster, collide_action_player_monster);

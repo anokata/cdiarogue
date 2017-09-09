@@ -3,6 +3,7 @@
 char *item_types[] = {
     "potion of cure wounds",
     "wood sword",
+    "simple straw hat",
 };
 
 char *item_states[] = {
@@ -61,6 +62,7 @@ Item items_get(Items items, int x, int y) {
 
 char *item_descript(Item item) {
     char *buf = malloc(BUFSIZE); // FIXME
+    // check for null in type, state, ...
     snprintf(buf, BUFSIZE, "%s %s", 
             item_states[item->state],
             item_types[item->type]
