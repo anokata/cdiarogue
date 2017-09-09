@@ -1,4 +1,5 @@
 #include "actor.h"
+extern EError global_error;
 
 Actor make_actor(char c, int x, int y) {
     Actor actor = malloc(sizeof(struct Actor));
@@ -16,6 +17,8 @@ Actor make_actor(char c, int x, int y) {
     actor->basestat_constitution = 1;
     actor->basestat_strength = 1;
     actor->stat_hp = actor_stat_maxhp(actor);
+    actor->equiped_right_hand = NULL;
+    actor->equiped_head = NULL;
     return actor;
 }
 
@@ -61,4 +64,30 @@ int actor_stat_attack(Actor actor) {
 
 void actor_heal(Actor actor, int value) {
     actor->stat_hp = (actor->stat_hp + value) % (actor_stat_maxhp(actor) + 1);
+}
+
+bool actor_equip(Actor actor, Item item) {
+    switch (item->cls) {
+        case ItemWeaponCls:
+            if (actor->equiped_right_hand) {
+                global_error = Error_Actor_SlotBusy;
+                return false;
+            }
+            actor->equiped_right_hand = item;
+            return true;
+            break;
+        case ItemHeadEquipCls:
+            if (actor->equiped_head) {
+                global_error = Error_Actor_SlotBusy;
+                return false;
+            }
+            actor->equiped_head = item;
+            return true;
+            break;
+        default:
+            global_error = Error_Actor_NotEquptable;
+            return false;
+            break;
+    }
+    return false;
 }
