@@ -92,10 +92,6 @@ char _get_tile_char(GHashTable *config, int i) {
     // for other method: return g_hash_table_lookup(config, tile_char_name);
 }
 
-char _get_tile_char_(GHashTable *config, int i) {
-    //return 
-}
-
 char _get_tile_color(GHashTable *config, int i) {
     return _get_tile_opt(config, i, "colrs") - '0';
 }
@@ -105,27 +101,25 @@ bool _get_tile_passable(GHashTable *config, int i) {
 }
 
 void load_colors(TileMap map, GHashTable *config) {
-    int tiles_count = atoi(g_hash_table_lookup(config, "tiles_count"));
     char *tiles_file = g_hash_table_lookup(config, "tiles_file");
     StringTable tiles_config = parse_dsv_file(tiles_file);
-printf("Tiles@%s\n", tiles_file);
-    dsv_table_print(tiles_config);
-    free_dsv_table(tiles_config);
-    // parse header and store columns indexes and get columns index and make struct
-// TODO END. Remade for tiles info load from dsv file
+    StringTable it = tiles_config;
 
-    for (int i = 1; i <= tiles_count; i++) {
-        char tile_char = _get_tile_char(config, i);
-        char tile_char_ = _get_tile_char_(tiles_config, i);
-        int color_index = _get_tile_color(config, i);
-        bool passable = _get_tile_passable(config, i);
-        DEBUG_PRINT("Tile#%d = '%c' color#%d pass:%s\n", i, 
-                tile_char, 
-                color_index, 
-                passable ? "true" : "false");
+    DEBUG_PRINT("Tiles@%s\n", tiles_file);
+    /* dsv_table_print(tiles_config); */
+    it++; // skip first header line
+    while (*it) {
+        Strings line = it[0];
+        char tile_char = line[0][0];
+        int color_index = atoi(line[2]);
+        bool passable = strcmp(line[1], "f");
+        DEBUG_PRINT("char: %c color: %d  pass %d\n", tile_char, color_index, passable);
+
         apply_color(map, tile_char, color_index);
         foreach_tile_set(map, _set_tile_passable, (void*)passable, tile_char);
+        it++;
     }
+    free_dsv_table(tiles_config);
 }
 
 TileMap load_tile_map(string filename) {

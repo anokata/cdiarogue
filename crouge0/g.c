@@ -35,7 +35,8 @@ G new_g() {
     g->player->color = cb_white;
     g->player->behavior = BehaviorStand;
     g->player->name = "you";
-    g->player->stat_hp = 7;
+    g->player->stat_hp = 27;
+    g->player->basestat_constitution = 7;
     add_actor(g, g->player);
     g->last_target = NULL;
     // init inventory

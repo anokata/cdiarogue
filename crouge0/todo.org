@@ -43,6 +43,8 @@
 ** 8 for minimum completed *DasHReaLM*
 - char info mode, weared, stats
 - item take off
+- player self healing by time
+- wait and rest 
 - exp, lvls, stat points to add
 - doors, open, close, kick - commands, to direction mode
 - Add Tag support to key:value parser - tag separate sections or end one
@@ -52,9 +54,13 @@
       - +parse file to array of parsed lines
       - +test
       - +add to maps key = itemsfile:items_0_0 
-	- use to load tiles, items, mobs from map files
-	- mobs, player, items files on map 
-	- items, mobs, saving
+	- use to load tiles
+      - ... items
+      - mobs from map files
+	- saving player
+      - saving items
+      - mobs, saving
+
 
 - items marshaling
 - mobs types/race - load from file
@@ -63,6 +69,10 @@
 - make maps, town(heal point?, stores), dungeon
 
 
+- ! parse header and store columns indexes and get columns index and make struct
+- mobs evoluting. script based(bf like) behavior - see x:y if this = TileRock
+  ... move to, attack, take, eat.
+- more map tiles types, plants, rocks, sand
 - loot, paws, wool, skin, bone, meet, jelly
 - map gen 
 - mobs minds
