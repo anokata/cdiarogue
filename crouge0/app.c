@@ -53,13 +53,14 @@ void debug_draw(G g) {
             "Viewport Left: %d\n" 
             "Viewport cx:cy = %d:%d\t" 
             "Viewport left:top = %d:%d\n" 
-            "Player x:y = %d:%d [HP: %d/%d atk: %d ]\t" 
+            "Player x:y = %d:%d [HP: %d/%d atk: %d def: %d ]\t" 
             "Target [HP: %d  ]\n" 
         , g->key, log_text, 
         g->view->display_left, g->view->cx, g->view->cy,
         viewport_left(g->view), viewport_top(g->view),
         g->player->x, g->player->y, g->player->stat_hp,
-        actor_stat_maxhp(g->player), actor_stat_attack(g->player),
+        actor_stat_maxhp(g->player), actor_stat_attack(g->player), 
+        actor_stat_defence(g->player),
         (g->last_target ? g->last_target->stat_hp : 0)
         );
     cc_printxy(buf, cn_white, 0, 20);

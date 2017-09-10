@@ -40,13 +40,14 @@
 
 ** 8 for minimum completed *DasHReaLM*
 - char info mode, weared, stats
-- stats str, dex, endurance, wisdome and it's effect on actions and other
-- weapon and armor effect on combat
 - doors, open, close, kick - commands, to direction mode
 - exp, lvls, stat points to add
 - mobs types/race - load from file
 - map save load with items, mobs, store player
 - make maps, town, dungeon
+- weapon and armor effect on combat
+- stats str, dex, endurance, wisdome and it's effect on actions and other
+- item take off
 
 
 - loot, paws, wool, skin, bone, meet, jelly

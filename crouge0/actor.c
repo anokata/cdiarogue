@@ -113,3 +113,13 @@ bool actor_equip(Actor actor, Item item) {
     }
     return false;
 }
+
+bool actor_item_is_equiped(Actor actor, Item item) {
+    if (actor->equiped_right_hand == item) return true;
+    if (actor->equiped_head == item) return true;
+    if (actor->equiped_foot == item) return true;
+    if (actor->equiped_legs == item) return true;
+    if (actor->equiped_arms == item) return true;
+    if (actor->equiped_body == item) return true;
+    return false;
+}

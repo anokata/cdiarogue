@@ -64,3 +64,4 @@ int actor_calc_damage(Actor attacker, Actor defender);
 void actor_heal(Actor actor, int value);
 
 bool actor_equip(Actor actor, Item item);
+bool actor_item_is_equiped(Actor actor, Item item);
