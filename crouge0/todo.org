@@ -24,7 +24,7 @@
 - +items on map
 - +item list, test items in map, colors, draw items
 - +interaction - find item on point
-- mini inventory
+- +mini inventory
 *** inventory, view, take, drop
       - +inventory module
       - +inventory state
@@ -36,7 +36,7 @@
       - +quaff 
       - +actor slots
       - +equiping wield and wear
-      - calc phy defend - ph. def
+      - +calc phy defend - ph. def, atk - weapon, damage - atk&def
 
 ** 8 for minimum completed *DasHReaLM*
 - char info mode, weared, stats

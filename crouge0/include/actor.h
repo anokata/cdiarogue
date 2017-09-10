@@ -42,6 +42,10 @@ typedef struct Actor {
     Items items;
     Item equiped_right_hand;
     Item equiped_head;
+    Item equiped_foot;
+    Item equiped_legs;
+    Item equiped_arms;
+    Item equiped_body;
 } *Actor;
 
 CharPoint actor_as_charpoint_cast(Actor actor);
@@ -54,7 +58,9 @@ int _actor_direct_diffx(Actor actor);
 int _actor_direct_diffy(Actor actor);
 
 int actor_stat_maxhp(Actor actor);
-int actor_stat_attack(Actor actor);
+int actor_stat_attack(Actor actor); /* physical */
+int actor_stat_defence(Actor actor); /* physical */
+int actor_calc_damage(Actor attacker, Actor defender);
 void actor_heal(Actor actor, int value);
 
 bool actor_equip(Actor actor, Item item);

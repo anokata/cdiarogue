@@ -55,10 +55,17 @@ void inventory_action(Item item, G g) {
         case State_quaff:
             debuglog(g, "you try drink");
             /* TODO item action */
-                /* apply drint effect */
-                actor_heal(g->player, item->value);
-                /* remove from inv */
-                item_remove(&g->player->items, item);
+                if (item->cls != ItemPotionCls) {
+                    debuglog(g, "you can't drink that");
+                    break;
+                }
+                
+                if (item->type == ItemPotionOfCure) {
+                    /* apply drint effect */
+                    actor_heal(g->player, item->value);
+                    /* remove from inv */
+                    item_remove(&g->player->items, item);
+                }
 
             ss_setstate(state, State_cursor);
             break;

@@ -19,6 +19,10 @@ Actor make_actor(char c, int x, int y) {
     actor->stat_hp = actor_stat_maxhp(actor);
     actor->equiped_right_hand = NULL;
     actor->equiped_head = NULL;
+    actor->equiped_foot = NULL;
+    actor->equiped_legs = NULL;
+    actor->equiped_arms = NULL;
+    actor->equiped_body = NULL;
     return actor;
 }
 
@@ -58,8 +62,26 @@ int actor_stat_maxhp(Actor actor) {
 }
 
 int actor_stat_attack(Actor actor) {
-    /* TODO weapon */
-    return actor->basestat_strength * 2;
+    int atk = actor->basestat_strength * 2;
+    if (actor->equiped_right_hand) atk += actor->equiped_right_hand->value;
+    return atk;
+}
+
+int actor_stat_defence(Actor actor) {
+    int def = 0;
+    if (actor->equiped_head) def += actor->equiped_head->value;
+    if (actor->equiped_foot) def += actor->equiped_foot->value;
+    if (actor->equiped_legs) def += actor->equiped_legs->value;
+    if (actor->equiped_arms) def += actor->equiped_arms->value;
+    if (actor->equiped_body) def += actor->equiped_body->value;
+    return def;
+}
+
+int actor_calc_damage(Actor attacker, Actor defender) {
+    int atk = actor_stat_attack(attacker);
+    int def = actor_stat_defence(defender);
+    int dif = atk - def;
+    return MAX(dif, 0);
 }
 
 void actor_heal(Actor actor, int value) {

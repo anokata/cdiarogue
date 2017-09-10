@@ -41,9 +41,11 @@ G new_g() {
     // init inventory
     Item potion = item_new('!', 1, 1);
     potion->type = ItemPotionOfCure;
+    potion->cls = ItemPotionCls;
     item_add(&g->player->items, potion);
     potion = item_new('!', 1, 1);
     potion->type = ItemPotionOfCure;
+    potion->cls = ItemPotionCls;
     item_add(&g->player->items, potion);
 
     Item sword = item_new('/', 0, 0);

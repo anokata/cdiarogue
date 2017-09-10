@@ -65,11 +65,12 @@ void collide_action_player_monster(Action action, Actor actor, Actor subject, G 
     UNUSED(action);
     char msg[100];
 
-    snprintf(msg, 99, "%s hit %s by %dpt. remain HP:%d", actor->name, subject->name, actor_stat_attack(actor), subject->stat_hp);
+    int dmg = actor_calc_damage(actor, subject);
+    snprintf(msg, 99, "%s hit %s by %dpt. remain HP:%d", actor->name, subject->name, dmg, subject->stat_hp);
     debuglog(g, msg);
     /* mechanic */
     g->last_target = subject;
-    subject->stat_hp -= actor_stat_attack(actor);
+    subject->stat_hp -= dmg;
     if (subject->stat_hp <= 0) {
         snprintf(msg, 99, "%s kill %s", actor->name, subject->name);
         debuglog(g, msg);
@@ -90,7 +91,11 @@ void collide_action_monster_player(Action action, Actor actor, Actor subject, G 
     char msg[100];
     debuglog(g, "! monster hit player");
 
-    subject->stat_hp -= actor_stat_attack(actor);
+    int dmg = actor_calc_damage(actor, subject);
+    subject->stat_hp -= dmg;
+
+    snprintf(msg, 99, "%s hit you by %dpt", actor->name, dmg);
+    debuglog(g, msg);
 
     if (subject->stat_hp <= 0) {
         snprintf(msg, 99, "%s kill you.", actor->name);
