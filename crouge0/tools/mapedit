@@ -1,0 +1,31 @@
+#!/bin/bash
+# vim: filetype=sh
+# debug #set -x
+MAPNAME=$1
+MAPVIEW=/tmp/build/mapview
+# TODO mapview -size
+# store size and meta
+# map data replace: mapreplace MAPFILE <input
+MAPFILE=$(mktemp)
+
+if [ -z "$EDITOR" ]; then 
+    EDITOR=vim
+fi
+
+if [ -z "$MAPNAME" ]; then
+    MAPNAME=./maps/map_1_1
+fi
+
+if [ ! -x "$MAPVIEW" ]; then
+    make mapview
+fi
+
+cd ../
+$MAPVIEW $MAPNAME > $MAPFILE
+cd /tmp
+$EDITOR $MAPFILE
+cat $MAPFILE | tr -d "\n" 
+
+
+
+

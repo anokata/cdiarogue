@@ -69,6 +69,7 @@
 - make maps, town(heal point?, stores), dungeon
 
 
+- fix, made world map
 - ! parse header and store columns indexes and get columns index and make struct
 - mobs evoluting. script based(bf like) behavior - see x:y if this = TileRock
   ... move to, attack, take, eat.
