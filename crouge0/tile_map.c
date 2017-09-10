@@ -102,6 +102,12 @@ bool _get_tile_passable(GHashTable *config, int i) {
 
 void load_colors(TileMap map, GHashTable *config) {
     int tiles_count = atoi(g_hash_table_lookup(config, "tiles_count"));
+    char *tiles_file = g_hash_table_lookup(config, "tiles_file");
+    StringTable tiles_config = parse_dsv_file(tiles_file);
+printf("Tiles@%s\n", tiles_file);
+    dsv_table_print(tiles_config);
+    free_dsv_table(tiles_config);
+
     for (int i = 1; i <= tiles_count; i++) {
         char tile_char = _get_tile_char(config, i);
         int color_index = _get_tile_color(config, i);

@@ -19,11 +19,12 @@ typedef Strings *StringTable;
 typedef struct DSVTable {
 	StringTable table;
 	int columns;
+	int lines;
 } DSVTable;
 
 Strings parse_dsv_line(char *str, int columns);
 void free_dsv_strings(Strings s);
-StringTable parse_dsv_table(char *lines, int columns);
+StringTable parse_dsv_table(char *lines);
 void free_dsv_table(StringTable t);
 StringTable parse_dsv_file(char *filename);
 void dsv_table_print(StringTable table);

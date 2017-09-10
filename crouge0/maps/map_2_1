@@ -6,3 +6,4 @@ tiles:.ox
 passb:tff
 colrs:436
 tiles_count:3
+tiles_file:./maps/map_1_1.tiles

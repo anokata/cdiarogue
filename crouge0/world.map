@@ -22,3 +22,5 @@ tile_5:*
 tile_6:.
     color_6:3
     description_6:desert
+
+tiles_file:map_1_1.tiles

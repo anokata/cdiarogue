@@ -8,6 +8,23 @@
 char delim = ':';
 char tag_start = '[';
 
+int _detect_columns(char *lines) {
+	/* simple delim counter */
+	int columns = 0;
+	while (*lines != '\n') {
+		if (*lines++ == delim) columns++;
+	}
+	return columns + 1;
+}
+
+int _detect_lines(char *lines) {
+	int lines_count = 0;
+	while (*lines) {
+		if (*lines++ == '\n') lines_count++;
+	}
+	return lines_count + 1;
+}
+
 KVParam parse_dsv_kv_line(char *line) {
     char *value = strchr(line, delim);
     *value = '\0';
@@ -88,16 +105,19 @@ void free_dsv_strings(Strings s) {
 
 void _add_string_to_table(char *value, void *data) {
     DSVTable *table = data;
-	table->table[0] = parse_dsv_line(value, table->columns);
+	table->table[0] = parse_dsv_line(value, table->lines);
 	table->table++;
 }
 
-StringTable parse_dsv_table(char *lines, int columns) {
-	columns++;
-	StringTable table = malloc(sizeof(lines) * columns);
-	bzero(table, sizeof(lines) * columns);
+StringTable parse_dsv_table(char *lines) {
+	int columns = _detect_columns(lines) + 1;
+	int lines_count = _detect_lines(lines) + 1;
+
+	StringTable table = malloc(sizeof(lines) * lines_count);
+	bzero(table, sizeof(lines) * lines_count);
 	DSVTable dsv_table;
 	dsv_table.columns = columns - 1;
+	dsv_table.lines = lines_count - 1;
 	dsv_table.table = table;
 	for_every_part(lines, '\n', _add_string_to_table, &dsv_table);
 	return table;
@@ -125,20 +145,11 @@ void dsv_table_print(StringTable table) {
 	}
 }
 
-int _detect_columns(char *lines) {
-	/* simple delim counter */
-	int columns = 0;
-	while (*lines != '\n') {
-		if (*lines++ == delim) columns++;
-	}
-	return columns + 1;
-}
-
 StringTable parse_dsv_file(char *filename) {
 	/* File must have at first line correct table header delimited columns - for count */
 	StringTable table;
     char *content = read_whole_file(filename);
-    table = parse_dsv_table(content, _detect_columns(content));
+    table = parse_dsv_table(content);
     free(content);
 	return table;
 }

@@ -68,7 +68,7 @@ int main() {
 
     printf("\nDSV lines TEST\n");
 	test1 = strdup("ab:cd:\n12:34:\n");
-	StringTable st = parse_dsv_table(test1, 2);
+	StringTable st = parse_dsv_table(test1);
     dsv_table_print(st);
 	free_dsv_table(st);
 	free(test1);
