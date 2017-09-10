@@ -51,8 +51,9 @@
       - +parse line to strings array
       - +parse file to array of parsed lines
       - +test
-      - add to maps key = itemsfile:items_0_0 mobs, player etc
+      - +add to maps key = itemsfile:items_0_0 
 	- use to load tiles, items, mobs from map files
+	- mobs, player, items files on map 
 	- items, mobs, saving
 
 - items marshaling

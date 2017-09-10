@@ -92,6 +92,10 @@ char _get_tile_char(GHashTable *config, int i) {
     // for other method: return g_hash_table_lookup(config, tile_char_name);
 }
 
+char _get_tile_char_(GHashTable *config, int i) {
+    //return 
+}
+
 char _get_tile_color(GHashTable *config, int i) {
     return _get_tile_opt(config, i, "colrs") - '0';
 }
@@ -107,9 +111,12 @@ void load_colors(TileMap map, GHashTable *config) {
 printf("Tiles@%s\n", tiles_file);
     dsv_table_print(tiles_config);
     free_dsv_table(tiles_config);
+    // parse header and store columns indexes and get columns index and make struct
+// TODO END. Remade for tiles info load from dsv file
 
     for (int i = 1; i <= tiles_count; i++) {
         char tile_char = _get_tile_char(config, i);
+        char tile_char_ = _get_tile_char_(tiles_config, i);
         int color_index = _get_tile_color(config, i);
         bool passable = _get_tile_passable(config, i);
         DEBUG_PRINT("Tile#%d = '%c' color#%d pass:%s\n", i, 
