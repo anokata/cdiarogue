@@ -1,5 +1,7 @@
+char:passable:color:
 # vi: filetype=sh
-# char:passable:color 
-.:t:1
-o:f:2
-x:t:3
+# must have at first line table header
+# not forget to skip first line in table when parsing real data
+.:t:1:
+o:f:2:
+x:t:3:

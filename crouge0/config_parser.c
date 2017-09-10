@@ -87,7 +87,6 @@ void free_dsv_strings(Strings s) {
 }
 
 void _add_string_to_table(char *value, void *data) {
-	/* cast data to pointer to array to arrays to strings */
     DSVTable *table = data;
 	table->table[0] = parse_dsv_line(value, table->columns);
 	table->table++;
@@ -114,3 +113,33 @@ void free_dsv_table(StringTable t) {
 	}
 	free(t);
 }
+
+void dsv_table_print(StringTable table) {
+	Strings ss;
+	while (*table) {
+        ss = *table++;
+        printf("\n");
+        while (*ss) {
+            printf("* %s\n", *ss++);
+        }
+	}
+}
+
+int _detect_columns(char *lines) {
+	/* simple delim counter */
+	int columns = 0;
+	while (*lines != '\n') {
+		if (*lines++ == delim) columns++;
+	}
+	return columns + 1;
+}
+
+StringTable parse_dsv_file(char *filename) {
+	/* File must have at first line correct table header delimited columns - for count */
+	StringTable table;
+    char *content = read_whole_file(filename);
+    table = parse_dsv_table(content, _detect_columns(content));
+    free(content);
+	return table;
+}
+

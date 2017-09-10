@@ -50,7 +50,7 @@ int main() {
     g_hash_table_destroy(t);
 
     test1 = NULL;
-    printf("DSV lines TEST\n");
+    printf("DSV one line TEST\n");
     test1 = strdup("ab:cded:fe:");
     Strings ss = parse_dsv_line(test1, 3);
     Strings it = ss;
@@ -66,16 +66,15 @@ int main() {
 
     test_dsv_line("a:________13:zxcvzvvxzvvvvxxzvzxvxcvxzv*#!##!#z:00:", 4);
 
+    printf("\nDSV lines TEST\n");
 	test1 = strdup("ab:cd:\n12:34:\n");
 	StringTable st = parse_dsv_table(test1, 2);
-	StringTable ist = st;
-	while (*ist) {
-        ss = *ist++;
-        printf("line.\n");
-        while (*ss) {
-            printf("* %s\n", *ss++);
-        }
-	}
+    dsv_table_print(st);
 	free_dsv_table(st);
 	free(test1);
+
+    printf("\nDSV file TEST\n");
+    st = parse_dsv_file("./maps/map_0_0.tiles");
+    dsv_table_print(st);
+    free_dsv_table(st);
 }

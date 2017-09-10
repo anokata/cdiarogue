@@ -46,11 +46,14 @@
 - exp, lvls, stat points to add
 - doors, open, close, kick - commands, to direction mode
 - Add Tag support to key:value parser - tag separate sections or end one
+	Not Tag - Just separate file for each entity in DSV format
       - +parse dsv to strings list
       - +parse line to strings array
-      - parse file to array of parsed lines
-      - test
+      - +parse file to array of parsed lines
+      - +test
       - add to maps key = itemsfile:items_0_0 mobs, player etc
+	- use to load tiles, items, mobs from map files
+	- items, mobs, saving
 
 - items marshaling
 - mobs types/race - load from file
@@ -72,6 +75,7 @@
 - better inventory by category
 - item effects: effect X itemType X action
 - damage at different parts of body/armor
+- pack map files to zip/tarbz, unpack in mem (in ram space run or tmp)
 
 * monsters data files, spawns
  other stats, and fun and story
