@@ -55,3 +55,31 @@ GHashTable *parse_file(char *filename) {
 // 1. parse line to strings array
 // 2. parse file to array of parsed lines
 // TODO support of escaped \:
+
+void add_to_strings(char *value, void *data) {
+ printf("@ %s\n", value);
+    Strings strings = *(char ***)data;
+    Strings *pstrings = (char ***)data;
+    strings[0] = strdup(value);
+    (*pstrings)++;
+}
+
+Strings parse_dsv_line(char *str, int columns) {
+    columns++;
+    Strings strings = malloc(sizeof(str) * columns);
+    bzero(strings, sizeof(str) * columns);
+    Strings it = strings;
+    for_every_part(str, delim, add_to_strings, &it);
+    return strings;
+}
+
+void free_dsv_strings(Strings s) {
+    if (s == NULL) return;
+    Strings orig = s;
+    while (*s) {
+        free(*s);
+        *s = NULL;
+        s++;
+    }
+    free(orig);
+}
