@@ -1,0 +1,5 @@
+# vi: filetype=sh
+# char:passable:color 
+.:t:1
+o:f:2
+x:t:3

@@ -47,6 +47,12 @@
 - doors, open, close, kick - commands, to direction mode
 - Add Tag support to key:value parser - tag separate sections or end one
       - not just not ordered hash map but? hash of sections of hashs of key:values
+      - parse dsv to strings list
+      - parse line to strings array
+      - parse file to array of parsed lines
+      - test
+      - add to maps key = itemsfile:items_0_0 mobs, player etc
+
 - items marshaling
 - mobs types/race - load from file
 - map save load with items, mobs, store player

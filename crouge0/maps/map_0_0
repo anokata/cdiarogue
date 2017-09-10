@@ -12,7 +12,7 @@ width:20
 height:10
 map:ox................x.......o...o..x...ox...ox...o..........ox......o..o...o.oo........xo.x.......o.xx.o....x.......ox........o....x..o........o.x.x...xx...x.......xxx.....o..x....o..........x.........x
 
-[Map:Tiles]
+tiles_file: map_0_0.tiles
 tiles_count:3
 tiles:.ox
 passables:tft
