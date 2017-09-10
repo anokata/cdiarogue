@@ -41,14 +41,21 @@
       - +stats str, dex, endurance, !wisdome and it's effect on actions and other
 
 ** 8 for minimum completed *DasHReaLM*
-- char info mode, weared, stats
-- item take off
-- player self healing by time
-- wait and rest 
-- exp, lvls, stat points to add
+      [must be easy]
+      - char info mode, weared, stats 
+      - item take off
+      - player self healing by time
+      - wait and rest 
+      [intresting]
+      - exp, lvls, how stats grow
+      - stat points to add in char view
+
+      [need some remaking ]
+- other tiles types with props such water, plants, enters, doors
 - doors, open, close, kick - commands, to direction mode
-- Add Tag support to key:value parser - tag separate sections or end one
-	Not Tag - Just separate file for each entity in DSV format
+- map save load
+      - Add Tag support to key:value parser - tag separate sections or end one
+	  Not Tag - Just separate file for each entity in DSV format
       - +parse dsv to strings list
       - +parse line to strings array
       - +parse file to array of parsed lines
@@ -60,7 +67,11 @@
 	- saving player
       - saving items
       - mobs, saving
+      - mapreplace (use map gen) to make tile map save func
+      - mapedit - save with new data
 
+- TECHDEBT :: 
+      - Extract viewport module
 
 - items marshaling
 - mobs types/race - load from file

@@ -20,6 +20,7 @@ int main(int argc, char* argv[]) {
     copy_map2tiles(l, map_data, strlen(map_data), 0);
 
     print_tile_map(l);
+    // Save! TODO
     free_tile_map(l);
     free(map_data);
     map_data = NULL;
