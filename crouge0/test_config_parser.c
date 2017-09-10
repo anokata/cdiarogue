@@ -65,4 +65,17 @@ int main() {
     free(test1);
 
     test_dsv_line("a:________13:zxcvzvvxzvvvvxxzvzxvxcvxzv*#!##!#z:00:", 4);
+
+	test1 = strdup("ab:cd:\n12:34:\n");
+	StringTable st = parse_dsv_table(test1, 2);
+	StringTable ist = st;
+	while (*ist) {
+        ss = *ist++;
+        printf("line.\n");
+        while (*ss) {
+            printf("* %s\n", *ss++);
+        }
+	}
+	free_dsv_table(st);
+	free(test1);
 }

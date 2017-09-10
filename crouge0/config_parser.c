@@ -54,10 +54,12 @@ GHashTable *parse_file(char *filename) {
 // char *parsed_file = [x, y] -> x = ["value", "some" ...
 // 1. parse line to strings array
 // 2. parse file to array of parsed lines
+// 3. detect columns count
+// 4. parse file
 // TODO support of escaped \:
 
-void add_to_strings(char *value, void *data) {
- printf("@ %s\n", value);
+void _add_to_strings(char *value, void *data) {
+	/* cast data to pointer to array to strings */
     Strings strings = *(char ***)data;
     Strings *pstrings = (char ***)data;
     strings[0] = strdup(value);
@@ -69,7 +71,7 @@ Strings parse_dsv_line(char *str, int columns) {
     Strings strings = malloc(sizeof(str) * columns);
     bzero(strings, sizeof(str) * columns);
     Strings it = strings;
-    for_every_part(str, delim, add_to_strings, &it);
+    for_every_part(str, delim, _add_to_strings, &it);
     return strings;
 }
 
@@ -82,4 +84,33 @@ void free_dsv_strings(Strings s) {
         s++;
     }
     free(orig);
+}
+
+void _add_string_to_table(char *value, void *data) {
+	/* cast data to pointer to array to arrays to strings */
+    DSVTable *table = data;
+	table->table[0] = parse_dsv_line(value, table->columns);
+	table->table++;
+}
+
+StringTable parse_dsv_table(char *lines, int columns) {
+	columns++;
+	StringTable table = malloc(sizeof(lines) * columns);
+	bzero(table, sizeof(lines) * columns);
+	DSVTable dsv_table;
+	dsv_table.columns = columns - 1;
+	dsv_table.table = table;
+	for_every_part(lines, '\n', _add_string_to_table, &dsv_table);
+	return table;
+}
+
+void free_dsv_table(StringTable t) {
+	if (!t) return;
+	StringTable it = t;
+	while (*it) {
+		free_dsv_strings(*it);
+		*it = NULL;
+		it++;
+	}
+	free(t);
 }
