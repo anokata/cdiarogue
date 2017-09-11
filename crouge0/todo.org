@@ -42,7 +42,7 @@
 
 ** 8 for minimum completed *DasHReaLM*
       [must be easy]
-      - char info mode, weared, stats 
+      - +char info mode, weared, stats 
       - item take off
       - player self healing by time
       - wait and rest 

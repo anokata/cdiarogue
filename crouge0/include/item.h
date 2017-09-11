@@ -51,3 +51,4 @@ CharPoint item_as_charpoint_cast(Item item);
 Item items_get(Items items, int x, int y);
 
 char *item_descript(Item item);
+int item_value(Item item);

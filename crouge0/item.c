@@ -67,6 +67,7 @@ Item items_get(Items items, int x, int y) {
 }
 
 char *item_descript(Item item) {
+    if (!item) return "";
     char *buf = malloc(BUFSIZE); // FIXME
     // check for null in type, state, ...
     snprintf(buf, BUFSIZE, "%s %s", 
@@ -75,4 +76,9 @@ char *item_descript(Item item) {
     );
     
     return buf;
+}
+
+int item_value(Item item) {
+    if (!item) return 0;
+    return item->value;
 }
