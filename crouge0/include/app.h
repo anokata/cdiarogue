@@ -17,6 +17,7 @@
 #include "collide.h"
 #include "item.h"
 #include "inventory.h"
+#include "charinfo.h"
 
 void debug_draw(G g);
 

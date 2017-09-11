@@ -157,6 +157,9 @@ int cursor_key(void* data) {
         case 'q':
             ss_setstate(state, State_quaff);
             break;
+        case 'c':
+            ss_setstate(state, State_charinfo);
+            break;
         case 'j':
             g->cursor.y++;
             if (collisions_player_move(g->player, 0, 1, g)) {
@@ -241,6 +244,8 @@ void state_init() {
     ss_sethander(state, State_quaff, Event_key, inventory_key);
     ss_sethander(state, State_equip, Event_draw, inventory_draw);
     ss_sethander(state, State_equip, Event_key, inventory_key);
+    ss_sethander(state, State_charinfo, Event_draw, charinfo_draw);
+    ss_sethander(state, State_charinfo, Event_key, charinfo_key);
     ss_setstate(state, State_cursor);
 }
 
