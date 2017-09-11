@@ -41,7 +41,10 @@ void debug_draw(G g) {
     g_debug("hi");
     g_log(NULL, G_LOG_LEVEL_DEBUG, "MSG");
 
-    for (int i = g->log_len - 1; i > (g->log_len - 8) && i > 0; i--) {
+    int log_end = g->log_len - 1;
+    int log_start = (g->log_len > 8) ? g->log_len - 8 : 0;
+
+    for (int i = log_start; i < log_end; i++) {
         strcat(log_text, g_list_nth_data(g->log, i));
         strcat(log_text, "\n");
     }
