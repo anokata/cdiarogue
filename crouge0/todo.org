@@ -1,4 +1,4 @@
-* minimum playable
+* minimum playable. after all - read and rewrite todo tz.
 ** 1.+walking @
 ** 2.+debug and msg
 ** 3.+simple location
@@ -7,11 +7,11 @@
  4.2 map objects properties
      load map with kv params format
 
-** 5. add monstr, simple ai, stay, rand. time steps
+** 5.+add monstr, simple ai, stay, rand. time steps
    5.1+list of actors, draw 
    5.2+moving other by steps, rand, direct to near rand point, wall block 
    5.3+actors attributes, color, attack, behavior
-** 6. interacting, simple combat
+** 6.+interacting, simple combat
    6.0+player must be actor
    6.1+actor-player collide detect, from player and from actors, 
    6.2+events map, collide events by types
@@ -19,8 +19,8 @@
       show msg who atk, with how attk, with amount of hp, show player hp, die
       end game, mon attaking
    6.4+direct to player
-[ INWORK ]
-** 7 items										   :inwork:
+
+** 7.+items
 - +items on map
 - +item list, test items in map, colors, draw items
 - +interaction - find item on point
@@ -40,7 +40,8 @@
       - +weapon and armor effect on combat
       - +stats str, dex, endurance, !wisdome and it's effect on actions and other
 
-** 8 for minimum completed *DasHReaLM*
+[ INWORK ]
+** 8. gp for minimum completed *DasHReaLM*
       [must be easy]
       - +char info mode, weared, stats 
       - +item take off
@@ -52,36 +53,42 @@
       - exp, lvls, how stats grow
       - stat points to add in char view
 
-      [need some remaking ]
+** 9. map for some playable  [need some remaking ]
 - other tiles types with props such water, plants, enters, doors
 - doors, open, close, kick - commands, to direction mode
-- map save load
-      - Add Tag support to key:value parser - tag separate sections or end one
-	  Not Tag - Just separate file for each entity in DSV format
+      - map change, enter to dungeons, levels change
+      - add tile data field char*, in tiles file too
+      - stairs = spec tile with map (pack) file name.
+
+- map save load - map save load with items, mobs, store player
+      Add Tag support to key:value parser - tag separate sections or end one
+	Not Tag - Just separate file for each entity in DSV format
       - +parse dsv to strings list
       - +parse line to strings array
       - +parse file to array of parsed lines
       - +test
       - +add to maps key = itemsfile:items_0_0 
 	- use to load tiles
-      - ... items
+      - ... items - items marshaling
       - mobs from map files
 	- saving player
       - saving items
-      - mobs, saving
-      - mapreplace (use map gen) to make tile map save func
-      - mapedit - save with new data
+      - mobs, saving - mobs types/race - load from file
+      - mobs/items types and instances?
+
+- mapreplace (actuallize map gen) to make tile map save func
+- mapedit - save with new data
+
+- make maps, town(heal point?, stores), dungeon
+
 
 - TECHDEBT :: 
       - Extract viewport module
 
-- items marshaling
-- mobs types/race - load from file
-- map save load with items, mobs, store player
-- map change, enter to dungeons, levels change
-- make maps, town(heal point?, stores), dungeon
-
-
+- debug commands for mobs spawn, items, heal
+- balance and fun
+- pick up from direction, view menu list items
+- items grade, power ups
 - fix, made world map
 - ! parse header and store columns indexes and get columns index and make struct
 - mobs evoluting. script based(bf like) behavior - see x:y if this = TileRock
@@ -101,6 +108,9 @@
 - item effects: effect X itemType X action
 - damage at different parts of body/armor
 - pack map files to zip/tarbz, unpack in mem (in ram space run or tmp)
+- skills - weapon health 
+- step speed action model, a little real time
+- lighting
 
 * monsters data files, spawns
  other stats, and fun and story
@@ -146,6 +156,8 @@ anim trees ...
    then other module for more complex, linked to other modules functionality
    then most complex few modules than used by main module?
 
+How make without allocating?
+
 * log [ ] make wmap from locals
 WRite and draw GP Mechanic, view, make questions and decisions, KNOW WHAT TO DO
  fun
@@ -159,12 +171,10 @@ WRite and draw GP Mechanic, view, make questions and decisions, KNOW WHAT TO DO
  data files for actors, items
  magic, skills, exp
 http://www.roguebasin.com/index.php?title=Ncursesw
-https://stackoverflow.com/questions/43834833/print-a-wide-unicode-character-with-ncurses
-	lighting
  Check map folder exist
  TODO Fix global world map
  TODO fixing mem errors
- ATTENTION: Naming convention for func = <modulename>_<action>_<opt>
+ ATTENTION: Naming convention for func = <modulename>_<obj>_<action>_<opt>
 * Utils: map editor pipe, fix global map loading
  1. separate map loader using tile_map
  1.1+print loaded to stdout
@@ -192,3 +202,4 @@ freedome, lying in island in see over a desert.
 * backlog
 make dir for src
 separate src .c for dirs/modules
+fill gcov

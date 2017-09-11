@@ -1,5 +1,5 @@
 #include "app.h"
-char version[] = "0.0.1";
+char version[] = "0.0.2";
 
 /* GLOBAL */
 extern State state;
