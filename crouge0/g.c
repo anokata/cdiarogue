@@ -4,9 +4,14 @@ void _rand_msg(G g) {
     debuglog(g, "random msg");
 }
 
+void player_regen(G g) {
+    actor_heal(g->player, actor_stat_regen(g->player));
+}
+
 GlobalEvent events[] = {
     {NULL, 50}, /* strange bug - first element has trash in f */
     {_rand_msg, 1},
+    {player_regen, 80},
 };
 
 void debuglog(G g, char *msg) {

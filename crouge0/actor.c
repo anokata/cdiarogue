@@ -77,6 +77,10 @@ int actor_stat_defence(Actor actor) {
     return def;
 }
 
+int actor_stat_regen(Actor actor) {
+    return actor->basestat_constitution / 2 - 1;
+}
+
 int actor_calc_damage(Actor attacker, Actor defender) {
     int atk = actor_stat_attack(attacker);
     int def = actor_stat_defence(defender);
@@ -85,7 +89,13 @@ int actor_calc_damage(Actor attacker, Actor defender) {
 }
 
 void actor_heal(Actor actor, int value) {
-    actor->stat_hp = (actor->stat_hp + value) % (actor_stat_maxhp(actor) + 1);
+    int hp = actor->stat_hp + value;
+    int maxhp = actor_stat_maxhp(actor);
+    if (hp > maxhp) {
+        actor->stat_hp = maxhp;
+    } else {
+        actor->stat_hp = hp; 
+    }
 }
 
 bool actor_equip(Actor actor, Item item) {

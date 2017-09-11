@@ -44,7 +44,7 @@
       [must be easy]
       - +char info mode, weared, stats 
       - +item take off
-      - player self healing by time
+      - +player self healing by time - regen event
             - +global events: event fun and probability ?bug
             - +probability dice roll
       - wait and rest 
