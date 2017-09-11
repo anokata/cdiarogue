@@ -65,3 +65,4 @@ void actor_heal(Actor actor, int value);
 
 bool actor_equip(Actor actor, Item item);
 bool actor_item_is_equiped(Actor actor, Item item);
+Item *actor_item_slot(Actor actor, Item item);

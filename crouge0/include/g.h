@@ -17,6 +17,7 @@ enum States {
     State_quaff,
     State_equip,
     State_charinfo,
+    State_takeoff,
     NUM_STATES};
 
 enum Events {

@@ -77,6 +77,16 @@ void inventory_action(Item item, G g) {
                 debuglog(g, error_msg());
             }
 
+            ss_setstate(state, State_cursor);
+            break;
+        case State_takeoff:
+            if (!actor_item_is_equiped(g->player, item)) {
+                debuglog(g, "Not equiped.");
+                break;
+            } 
+            *(actor_item_slot(g->player, item)) = NULL;
+            debuglog(g, "Taked off");
+            ss_setstate(state, State_cursor);
             break;
     }
     ss_setstate(state, State_cursor);

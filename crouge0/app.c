@@ -150,6 +150,7 @@ int cursor_key(void* data) {
             break;
         case 'd':
             ss_setstate(state, State_drop); // TODO ?inventor action state with param
+            /* array of [char, help, state, draw/key func] */
             break;
         case 'e':
             ss_setstate(state, State_equip);
@@ -159,6 +160,9 @@ int cursor_key(void* data) {
             break;
         case 'c':
             ss_setstate(state, State_charinfo);
+            break;
+        case 't':
+            ss_setstate(state, State_takeoff);
             break;
         case 'j':
             g->cursor.y++;
@@ -244,6 +248,8 @@ void state_init() {
     ss_sethander(state, State_quaff, Event_key, inventory_key);
     ss_sethander(state, State_equip, Event_draw, inventory_draw);
     ss_sethander(state, State_equip, Event_key, inventory_key);
+    ss_sethander(state, State_takeoff, Event_draw, inventory_draw);
+    ss_sethander(state, State_takeoff, Event_key, inventory_key);
     ss_sethander(state, State_charinfo, Event_draw, charinfo_draw);
     ss_sethander(state, State_charinfo, Event_key, charinfo_key);
     ss_setstate(state, State_cursor);

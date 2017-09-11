@@ -121,5 +121,16 @@ bool actor_item_is_equiped(Actor actor, Item item) {
     if (actor->equiped_legs == item) return true;
     if (actor->equiped_arms == item) return true;
     if (actor->equiped_body == item) return true;
+    /* TODO slots to array with enum? */
     return false;
+}
+
+Item *actor_item_slot(Actor actor, Item item) {
+    if (actor->equiped_right_hand == item) return &actor->equiped_right_hand;
+    if (actor->equiped_head == item) return &actor->equiped_head;
+    if (actor->equiped_foot == item) return &actor->equiped_foot;
+    if (actor->equiped_legs == item) return &actor->equiped_legs;
+    if (actor->equiped_arms == item) return &actor->equiped_arms;
+    if (actor->equiped_body == item) return &actor->equiped_body;
+    return NULL;
 }
