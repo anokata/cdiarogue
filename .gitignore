@@ -22,3 +22,6 @@ lib/*
 # Executables
 *.out
 vgcore*
+*.gcda
+*.gcno
+*.cov

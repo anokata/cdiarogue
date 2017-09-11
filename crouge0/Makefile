@@ -80,4 +80,22 @@ module:
 	@echo '\nint main() {\n\n}'  >> test_$(name).c
 	@echo successfully created.
 
+coverage:
+	# using gcov and lcov !
+	$(eval CFLAGS=$(CFLAGS) -fprofile-arcs -ftest-coverage -O0)
+	$(eval DEBUG=)
+	@echo "$(tput setaf 0; tput setab 7;)>>> Copy sources$(tput sgr 0;)"
+	cp -R . $(BUILD_DIR)/src
+	@echo ">>> Copy lib souces"
+	cp -R ../ccurses $(BUILD_DIR)/ccurses
+	mkdir $(BUILD_DIR)/lib || true
+	@echo ">>> build lib"
+	(cd $(BUILD_DIR)/ccurses; make makelib)
+	@echo ">>> build app"
+	(cd $(BUILD_DIR)/src; GCOV_PREFIX=$(BUILD_DIR) $(CC) $(OBJECTS) $(CFLAGS) -o $(BUILD_DIR)/$(P))
+	@echo ">>> run app"
+	$(BUILD_DIR)/$(P)
+	(cd $(BUILD_DIR)/src; gcov *.gcda)
+	# gcov main.gcno
+	# https://habrahabr.ru/post/244835/
 
