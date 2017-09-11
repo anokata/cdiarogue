@@ -1,5 +1,14 @@
 #include "g.h"
 
+void _rand_msg(G g) {
+    debuglog(g, "random msg");
+}
+
+GlobalEvent events[] = {
+    {NULL, 50}, /* strange bug - first element has trash in f */
+    {_rand_msg, 1},
+};
+
 void debuglog(G g, char *msg) {
     g->log_len++;
     g->log = g_list_append(g->log, g_strdup(msg));
@@ -8,6 +17,7 @@ void debuglog(G g, char *msg) {
 G new_g() {
     G g = malloc(sizeof(struct G));
 
+    g->events = events;
     g->wmap = load_wmap();
     g->gmap = load_global_tmap();
     g->cursor.x = 0;
@@ -84,4 +94,18 @@ void free_g(G g) {
 
 void add_actor(G g, Actor actor) {
     g->gmap->actors = g_list_append(g->gmap->actors, actor);
+}
+
+bool roll_dice(int probability) {
+    return (rand() % 101) <= probability;
+} 
+
+void proc_global_events(G g) {
+    int events_count = sizeof(events) / sizeof(events[0]);
+    for (int i = 1; i < events_count; i++) {
+        GlobalEvent event = g->events[i];
+        if (roll_dice(event.probability)) {
+            event.f(g);
+        }
+    }
 }

@@ -25,6 +25,17 @@ enum Events {
     Event_key, 
     NUM_EVENTS};
 
+struct G;
+
+typedef void (*EventFunc)(struct G *g);
+
+typedef struct GlobalEvent {
+    EventFunc f;
+    int probability;
+} GlobalEvent;
+
+bool roll_dice(int probability); /* probability 0..100 */
+
 typedef struct G {
     WorldMap wmap;
     TileMap gmap;
@@ -35,6 +46,7 @@ typedef struct G {
     int log_len;
     Actor player;
     Actor last_target;
+    GlobalEvent *events;
 } *G;
 
 G new_g();
@@ -43,3 +55,5 @@ void debuglog(G g, char *msg);
 void add_actor(G g, Actor actor);
 
 State state;
+
+void proc_global_events(G g);

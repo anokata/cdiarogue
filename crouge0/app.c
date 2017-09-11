@@ -12,6 +12,7 @@ void process_input(G g) {
         g->key = ch;
         status = ss_handle(state, Event_key, g);
         ss_handle(state, Event_draw, g);
+        proc_global_events(g);
         debug_draw(g);
 		ch = getch();
 	}
