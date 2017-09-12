@@ -51,7 +51,7 @@
       - wait and rest 
       [intresting]
       - +enum to/from strings (macro?)
-      - color to/from strins macros and funcs
+      - +color to/from strins macros and funcs
       - exp, lvls, how stats grow
       - stat points to add in char view
 

@@ -1,5 +1,6 @@
 #include "actor.h"
 extern EError global_error;
+extern char *ColorNames[];
 
 char *RoleNames[] = {
     FOREACH_ROLE(MAKE_STRING)
@@ -184,7 +185,7 @@ Item *actor_item_slot(Actor actor, Item item) {
 Actor actor_from_strings(Strings str) {
     Actor actor = make_actor(str[1][0], atoi(str[2]), atoi(str[3]));
     actor->name = str[0];
-    //actor->color = str[4];
+    actor->color = cc_color_from_str(str[4]);
     actor->behavior = behavior_from_str(str[5]);
     actor->status = status_from_str(str[6]);
     actor->stat_hp = atoi(str[7]);
@@ -198,11 +199,12 @@ Actor actor_from_strings(Strings str) {
 char *actor_serialize(Actor actor) {
     char buf[BUFSIZE];
     snprintf(buf, BUFSIZE, 
-        "%s:%c:%d:%d:color:%s:%s:%d:%d:%d:%s:0:\n",
+        "%s:%c:%d:%d:%s:%s:%s:%d:%d:%d:%s:0:\n",
         actor->name,
         actor->c,
         actor->x,
         actor->y,
+        ColorNames[actor->color.color],
         BehaviorNames[actor->behavior],
         StatusNames[actor->status],
         actor->stat_hp,
@@ -214,7 +216,11 @@ char *actor_serialize(Actor actor) {
 }
 
 Actor *actors_load(char* filename) {
+    UNUSED(filename);
+    return NULL;
 }
 
 void actors_save(char* filename, Actor *actors) {
+    UNUSED(filename);
+    UNUSED(actors);
 }
