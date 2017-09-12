@@ -20,6 +20,8 @@ typedef enum Role {
     FOREACH_ROLE(MAKE_ENUM)
 } Role;
 
+Role role_from_str(char *str);
+
 typedef enum Behavior { 
     BehaviorRandom=0, 
     BehaviorSimpleDirect, 

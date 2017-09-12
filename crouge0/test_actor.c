@@ -24,4 +24,12 @@ int main() {
     s = NULL;
     free(in);
     in = NULL;
+
+    printf("role: %d\n", role_from_str("RoleMonster"));
+    assert(RoleMonster == role_from_str("RoleMonster"));
+    assert(RoleNPC == role_from_str("RoleNPC"));
+    extern char *RoleNames[];
+    printf("Rolestr: %s\n", RoleNames[RoleMonster]);
+    printf("Rolestr: %s\n", RoleNames[RolePlayer]);
+    assert(role_from_str(RoleNames[RoleNPC]) == role_from_str("RoleNPC"));
 }

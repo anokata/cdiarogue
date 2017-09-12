@@ -3,7 +3,19 @@ extern EError global_error;
 
 char *RoleNames[] = {
     FOREACH_ROLE(MAKE_STRING)
+    NULL
 };
+
+Role role_from_str(char *str) {
+    char **it = RoleNames;
+    Role role = 0;
+    while (*it) {
+        if (!strcmp(*it, str)) return role;
+        role++;
+        it++;
+    }
+    return RoleLength;
+}
 
 
 Actor make_actor(char c, int x, int y) {
@@ -166,7 +178,6 @@ Actor actor_from_strings(Strings str) {
 }
 
 char *actor_serialize(Actor actor) {
-    ("pink poring:p:3:3:pink:BehaviorSimpleAttacker:StatusLive:4:2:1:RoleMonster:0:\n");
     char buf[BUFSIZE];
     snprintf(buf, BUFSIZE, 
         "%s:%c:%d:%d:color:BehaviorSimpleAttacker:StatusLive:%d:%d:%d:RoleMonster:0:\n",
