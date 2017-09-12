@@ -32,6 +32,7 @@ Actor make_actor(char c, int x, int y) {
 }
 
 void actor_free(Actor actor) {
+    if (!actor) return;
     items_free(&actor->items);
     free(actor);
 }
@@ -147,5 +148,15 @@ Item *actor_item_slot(Actor actor, Item item) {
     if (actor->equiped_legs == item) return &actor->equiped_legs;
     if (actor->equiped_arms == item) return &actor->equiped_arms;
     if (actor->equiped_body == item) return &actor->equiped_body;
+    return NULL;
+}
+
+Actor actor_from_strings(Strings str) {
+
+    return NULL;
+}
+
+char *actor_serialize(Actor actor) {
+
     return NULL;
 }

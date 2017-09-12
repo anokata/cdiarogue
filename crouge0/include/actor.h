@@ -5,6 +5,7 @@
 #include "map.h"
 #include "item.h"
 #include "util.h"
+#include "config_parser.h"
 
 #define MAKE_STRING(STR) #STR,
 #define MAKE_ENUM(X) X,
@@ -80,3 +81,7 @@ void actor_heal(Actor actor, int value);
 bool actor_equip(Actor actor, Item item);
 bool actor_item_is_equiped(Actor actor, Item item);
 Item *actor_item_slot(Actor actor, Item item);
+
+/* serialization */
+Actor actor_from_strings(Strings str);
+char *actor_serialize(Actor actor);
