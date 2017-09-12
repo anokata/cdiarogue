@@ -46,6 +46,16 @@ void test() {
     assert(BehaviorSimpleAttacker == behavior_from_str("BehaviorSimpleAttacker"));
     assert(BehaviorSimpleDirect == behavior_from_str("BehaviorSimpleDirect"));
     assert(behavior_from_str(BehaviorNames[BehaviorRandom]) == behavior_from_str("BehaviorRandom"));
+
+    GList *as = actors_load("./maps/map_1_1.actors");
+    GList *ita = as;
+    while (ita) {
+        Actor a = ita->data;
+        printf("actor loaded: %d \n", a->stat_hp); // name error
+        ita = g_list_next(ita);
+    }
+    free_actors(as);
+    printf("actor %ld\n", sizeof(struct Actor)); 
 }
 
 int main() {

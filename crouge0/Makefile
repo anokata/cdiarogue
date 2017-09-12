@@ -40,6 +40,7 @@ test_tile_map: prepare
 	$(CC) test_tile_map.c config_parser.c tile_map.c util.c $(CFLAGS) -o $(BUILD_DIR)/$@ && valgrind $(BUILD_DIR)/$@
 
 test_config_parser: prepare
+	$(eval DEBUG=-DDEBUG)
 	$(CC) test_config_parser.c config_parser.c util.c $(CFLAGS) -o $(BUILD_DIR)/$@ && valgrind $(BUILD_DIR)/$@
 
 test_events: prepare

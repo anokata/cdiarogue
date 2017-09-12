@@ -105,13 +105,14 @@ void free_dsv_strings(Strings s) {
 
 void _add_string_to_table(char *value, void *data) {
     DSVTable *table = data;
-	table->table[0] = parse_dsv_line(value, table->lines);
+	table->table[0] = parse_dsv_line(value, table->columns);
 	table->table++;
 }
 
 StringTable parse_dsv_table(char *lines) {
 	int columns = _detect_columns(lines) + 1;
 	int lines_count = _detect_lines(lines) + 1;
+    DEBUG_PRINT("C:%d L:%d\n", columns, lines_count);
 
 	StringTable table = malloc(sizeof(lines) * lines_count);
 	bzero(table, sizeof(lines) * lines_count);

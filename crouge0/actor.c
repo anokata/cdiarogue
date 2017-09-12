@@ -215,12 +215,27 @@ char *actor_serialize(Actor actor) {
     return strdup(buf);
 }
 
-Actor *actors_load(char* filename) {
-    UNUSED(filename);
-    return NULL;
+GList *actors_load(char* filename) {
+    GList *actors = NULL;
+    filename = strdup(filename);
+    StringTable st = parse_dsv_file(filename);
+    StringTable it = &st[1]; // first line is header
+    do {
+        Actor actor = actor_from_strings(*it);
+        //actor_add(&actors, actor); // wtf leak when add to list
+        actor_free(actor);
+    } while (*++it);
+
+    free_dsv_table(st);
+    free(filename);
+    return actors;
 }
 
-void actors_save(char* filename, Actor *actors) {
+void actors_save(char* filename, GList *actors) {
     UNUSED(filename);
     UNUSED(actors);
+}
+
+void actor_add(GList **actors, Actor actor) {
+    *actors = g_list_append(*actors, actor);
 }

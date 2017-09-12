@@ -77,4 +77,8 @@ int main() {
     st = parse_dsv_file("./maps/map_0_0.tiles");
     dsv_table_print(st);
     free_dsv_table(st);
+
+    st = parse_dsv_file("./maps/map_1_1.actors");
+    dsv_table_print(st);
+    free_dsv_table(st);
 }
