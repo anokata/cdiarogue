@@ -1,6 +1,11 @@
 #include "actor.h"
 extern EError global_error;
 
+char *RoleNames[] = {
+    FOREACH_ROLE(MAKE_STRING)
+};
+
+
 Actor make_actor(char c, int x, int y) {
     Actor actor = malloc(sizeof(struct Actor));
     actor->c = c;

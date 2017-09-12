@@ -1,0 +1,3 @@
+name:char:x:y:color:behavior:status:hp:con:str:role:items_file:
+# vi: filetype=sh
+pink poring:p:3:3:pink:BehaviorSimpleAttacker:StatusLive:4:2:1:RoleMonster:0:

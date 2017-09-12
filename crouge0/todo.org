@@ -50,6 +50,7 @@
             - +probability dice roll
       - wait and rest 
       [intresting]
+      - enum to/from strings (macro?)
       - exp, lvls, how stats grow
       - stat points to add in char view
 

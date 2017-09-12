@@ -6,6 +6,19 @@
 #include "item.h"
 #include "util.h"
 
+#define MAKE_STRING(STR) #STR,
+#define MAKE_ENUM(X) X,
+
+#define FOREACH_ROLE(ROLE) \
+    ROLE(RolePlayer) \
+    ROLE(RoleMonster) \
+    ROLE(RoleNPC) \
+    ROLE(RoleLength) \
+
+typedef enum Role {
+    FOREACH_ROLE(MAKE_ENUM)
+} Role;
+
 typedef enum Behavior { 
     BehaviorRandom=0, 
     BehaviorSimpleDirect, 
@@ -13,12 +26,12 @@ typedef enum Behavior {
     BehaviorSimpleAttacker 
 } Behavior;
 
-typedef enum Role { 
-    RolePlayer, 
-    RoleMonster, 
-    RoleNPC,
-    RoleLength
-} Role;
+/* typedef enum Role { */ 
+/*     RolePlayer, */ 
+/*     RoleMonster, */ 
+/*     RoleNPC, */
+/*     RoleLength */
+/* } Role; */
 
 typedef enum Status {
     StatusLive,
