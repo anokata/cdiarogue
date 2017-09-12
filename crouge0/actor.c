@@ -152,11 +152,31 @@ Item *actor_item_slot(Actor actor, Item item) {
 }
 
 Actor actor_from_strings(Strings str) {
-
-    return NULL;
+    Actor actor = make_actor(str[1][0], atoi(str[2]), atoi(str[3]));
+    actor->name = str[0];
+    //actor->color = str[4];
+    actor->behavior = BehaviorSimpleAttacker; // str[5];
+    actor->status = StatusLive; // str[6];
+    actor->stat_hp = atoi(str[7]);
+    actor->basestat_constitution = atoi(str[8]);
+    actor->basestat_strength = atoi(str[9]);
+    actor->role = RoleMonster; // str[10];
+    //actor->items = str[11];
+    return actor;
 }
 
 char *actor_serialize(Actor actor) {
-
-    return NULL;
+    ("pink poring:p:3:3:pink:BehaviorSimpleAttacker:StatusLive:4:2:1:RoleMonster:0:\n");
+    char buf[BUFSIZE];
+    snprintf(buf, BUFSIZE, 
+        "%s:%c:%d:%d:color:BehaviorSimpleAttacker:StatusLive:%d:%d:%d:RoleMonster:0:\n",
+        actor->name,
+        actor->c,
+        actor->x,
+        actor->y,
+        actor->stat_hp,
+        actor->basestat_constitution,
+        actor->basestat_strength
+        );
+    return strdup(buf);
 }

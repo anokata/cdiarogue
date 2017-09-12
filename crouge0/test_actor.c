@@ -15,6 +15,9 @@ int main() {
     }
 
     a = actor_from_strings(s);
+    char *dump = actor_serialize(a);
+    printf("actor= %s", dump);
+    free(dump);
     actor_free(a);
 
     free_dsv_strings(s);
