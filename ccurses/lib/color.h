@@ -16,8 +16,6 @@ typedef int color_index;
 #define MAKE_STRING(STR) #STR,
 #define MAKE_ENUM(X) X,
 
-#define ENUM_FROMSTR(ENUM) \
-
 #define FOREACH_COLOR(X) \
     X(_cn_red) \
     X(_cn_green) \
