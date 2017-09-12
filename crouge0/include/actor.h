@@ -97,6 +97,8 @@ Item *actor_item_slot(Actor actor, Item item);
 /* serialization */
 Actor actor_from_strings(Strings str);
 char *actor_serialize(Actor actor);
+Actor *actors_load(char* filename);
+void actors_save(char* filename, Actor *actors);
 
 Role role_from_str(char *str);
 Behavior behavior_from_str(char *str);

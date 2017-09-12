@@ -212,3 +212,9 @@ char *actor_serialize(Actor actor) {
         );
     return strdup(buf);
 }
+
+Actor *actors_load(char* filename) {
+}
+
+void actors_save(char* filename, Actor *actors) {
+}
