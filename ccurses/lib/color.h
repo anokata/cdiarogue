@@ -2,23 +2,36 @@
 #ifndef __COLOR__
 #define __COLOR__
 #include <ncurses.h>
+#include <string.h>
 
 static const int BACKGROUND = -1; // COLOR_BLACK
 
 typedef struct Color {
-    int color;
+    int color; // enum ColorID
     int attr;
 } Color;
 
 typedef int color_index;
 
-#define _cn_red 1
-#define _cn_green 2
-#define _cn_black 3
-#define _cn_white 4
-#define _cn_yellow 5
-#define _cn_blue 6
-#define _cw_white 7
+#define MAKE_STRING(STR) #STR,
+#define MAKE_ENUM(X) X,
+
+#define ENUM_FROMSTR(ENUM) \
+
+#define FOREACH_COLOR(X) \
+    X(_cn_red) \
+    X(_cn_green) \
+    X(_cn_black) \
+    X(_cn_white) \
+    X(_cn_yellow) \
+    X(_cn_blue) \
+    X(_cw_white) \
+
+enum ColorID {
+    FOREACH_COLOR(MAKE_ENUM)
+};
+
+
 static const struct Color cn_red = {_cn_red, A_NORMAL};
 static const struct Color cb_red = {_cn_red, A_BOLD};
 static const struct Color cd_red = {_cn_red, A_DIM};
@@ -57,5 +70,6 @@ static const Color cc_all_colors[] = {
 
 void cc_init_colors();
 Color cc_get_color_by_id(int id);
+Color cc_color_from_str(char *str);
 
 #endif

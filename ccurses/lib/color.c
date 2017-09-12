@@ -1,5 +1,20 @@
 #include "color.h"
 
+char *ColorNames[] = {
+    FOREACH_COLOR(MAKE_STRING)
+};
+
+Color cc_color_from_str(char *str) {
+    char **it = ColorNames;
+    enum ColorID val = 0;
+    while (*it) {
+        if (!strcmp(*it, str)) return cc_get_color_by_id(val);
+        val++;
+        it++;
+    }
+    return cc_get_color_by_id(_cn_white);
+}
+
 void cc_init_colors() {
 	init_pair(_cn_red, COLOR_RED, BACKGROUND);
 	init_pair(_cn_blue, COLOR_BLUE, BACKGROUND);

@@ -1,4 +1,5 @@
 #include "app.h"
+#include <assert.h>
 
 enum States {State_run, State_end,  NUM_STATES};
 enum Events {Event_draw, Event_key,  NUM_EVENTS};
@@ -54,4 +55,8 @@ void start() {
     processInput();
     ss_free_state(state);
     curses_end();
+    /* tests */
+    extern char *ColorNames[];
+    printf("%s \n", ColorNames[_cn_blue]);
+    assert(cc_color_from_str(ColorNames[_cn_yellow]).color == _cn_yellow);
 }
