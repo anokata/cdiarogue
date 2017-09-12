@@ -257,6 +257,8 @@ void state_init() {
 }
 
 void start() {
+    /* tests if debug */
+        // TODO
     G g = new_g();
     curses_init();
     state_init();

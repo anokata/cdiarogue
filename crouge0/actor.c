@@ -17,6 +17,24 @@ Role role_from_str(char *str) {
     return RoleLength;
 }
 
+char *BehaviorNames[] = {
+    FOREACH_BEHAVIOR(MAKE_STRING)
+    NULL
+};
+
+char *StatusNames[] = {
+    FOREACH_STATUS(MAKE_STRING)
+    NULL
+};
+
+Behavior behavior_from_str(char *str) {
+    ENUM_FROMSTR(Behavior)
+}
+
+Status status_from_str(char *str) {
+    ENUM_FROMSTR(Status)
+}
+
 
 Actor make_actor(char c, int x, int y) {
     Actor actor = malloc(sizeof(struct Actor));
@@ -167,8 +185,8 @@ Actor actor_from_strings(Strings str) {
     Actor actor = make_actor(str[1][0], atoi(str[2]), atoi(str[3]));
     actor->name = str[0];
     //actor->color = str[4];
-    actor->behavior = BehaviorSimpleAttacker; // str[5];
-    actor->status = StatusLive; // str[6];
+    actor->behavior = behavior_from_str(str[5]);
+    actor->status = status_from_str(str[6]);
     actor->stat_hp = atoi(str[7]);
     actor->basestat_constitution = atoi(str[8]);
     actor->basestat_strength = atoi(str[9]);
@@ -180,11 +198,13 @@ Actor actor_from_strings(Strings str) {
 char *actor_serialize(Actor actor) {
     char buf[BUFSIZE];
     snprintf(buf, BUFSIZE, 
-        "%s:%c:%d:%d:color:BehaviorSimpleAttacker:StatusLive:%d:%d:%d:%s:0:\n",
+        "%s:%c:%d:%d:color:%s:%s:%d:%d:%d:%s:0:\n",
         actor->name,
         actor->c,
         actor->x,
         actor->y,
+        BehaviorNames[actor->behavior],
+        StatusNames[actor->status],
         actor->stat_hp,
         actor->basestat_constitution,
         actor->basestat_strength,

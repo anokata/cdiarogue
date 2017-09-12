@@ -10,6 +10,17 @@
 #define MAKE_STRING(STR) #STR,
 #define MAKE_ENUM(X) X,
 
+
+#define ENUM_FROMSTR(ENUM) \
+    char **it = ENUM##Names;\
+    ENUM val = 0;\
+    while (*it) {\
+        if (!strcmp(*it, str)) return val;\
+        val++;\
+        it++;\
+    }\
+    return 0;\
+
 #define FOREACH_ROLE(ROLE) \
     ROLE(RolePlayer) \
     ROLE(RoleMonster) \
@@ -22,24 +33,23 @@ typedef enum Role {
 
 Role role_from_str(char *str);
 
-typedef enum Behavior { 
-    BehaviorRandom=0, 
-    BehaviorSimpleDirect, 
-    BehaviorStand, 
-    BehaviorSimpleAttacker 
+#define FOREACH_BEHAVIOR(X) \
+    X(BehaviorRandom) \
+    X(BehaviorSimpleDirect) \
+    X(BehaviorStand) \
+    X(BehaviorSimpleAttacker) \
+
+typedef enum Behavior {
+    FOREACH_BEHAVIOR(MAKE_ENUM)
 } Behavior;
 
-/* typedef enum Role { */ 
-/*     RolePlayer, */ 
-/*     RoleMonster, */ 
-/*     RoleNPC, */
-/*     RoleLength */
-/* } Role; */
+#define FOREACH_STATUS(X) \
+    X(StatusLive) \
+    X(StatusDead) \
+    X(StatusSleep) \
 
 typedef enum Status {
-    StatusLive,
-    StatusDead,
-    StatusSleep
+    FOREACH_STATUS(MAKE_ENUM)
 } Status;
 
 typedef struct Actor {
@@ -87,3 +97,7 @@ Item *actor_item_slot(Actor actor, Item item);
 /* serialization */
 Actor actor_from_strings(Strings str);
 char *actor_serialize(Actor actor);
+
+Role role_from_str(char *str);
+Behavior behavior_from_str(char *str);
+Status status_from_str(char *str);
