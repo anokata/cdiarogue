@@ -172,7 +172,7 @@ Actor actor_from_strings(Strings str) {
     actor->stat_hp = atoi(str[7]);
     actor->basestat_constitution = atoi(str[8]);
     actor->basestat_strength = atoi(str[9]);
-    actor->role = RoleMonster; // str[10];
+    actor->role = role_from_str(str[10]);
     //actor->items = str[11];
     return actor;
 }
@@ -180,14 +180,15 @@ Actor actor_from_strings(Strings str) {
 char *actor_serialize(Actor actor) {
     char buf[BUFSIZE];
     snprintf(buf, BUFSIZE, 
-        "%s:%c:%d:%d:color:BehaviorSimpleAttacker:StatusLive:%d:%d:%d:RoleMonster:0:\n",
+        "%s:%c:%d:%d:color:BehaviorSimpleAttacker:StatusLive:%d:%d:%d:%s:0:\n",
         actor->name,
         actor->c,
         actor->x,
         actor->y,
         actor->stat_hp,
         actor->basestat_constitution,
-        actor->basestat_strength
+        actor->basestat_strength,
+        RoleNames[actor->role]
         );
     return strdup(buf);
 }
