@@ -85,8 +85,8 @@ void gfree(gpointer data, gpointer user_data) {
 void free_g(G g) {
     free_wmap(g->wmap);
 
-    free_actors(g->gmap->actors);
-    g_list_free(g->gmap->actors);
+    free_actors(&g->gmap->actors);
+    //g_list_free(g->gmap->actors);
     g->gmap->actors = NULL;
 
     free_tile_map(g->gmap);

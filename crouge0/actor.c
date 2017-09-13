@@ -68,12 +68,15 @@ void actor_free(Actor actor) {
     free(actor);
 }
 
-void free_actors(GList *actors) {
-    while (actors) {
-        Actor actor = actors->data;
+void free_actors(GList **actors) {
+    GList *it = *actors;
+    while (it) {
+        Actor actor = it->data;
         actor_free(actor);
-        actors = g_list_next(actors);
+        it = g_list_next(it);
     }
+    g_list_free(*actors);
+    *actors = NULL;
 }
 
 bool _actor_isat_directed_place(Actor actor) { 
@@ -216,14 +219,13 @@ char *actor_serialize(Actor actor) {
 }
 
 GList *actors_load(char* filename) {
-    GList *actors = NULL;
+    GList *actors = NULL; // do not forget free GList itself
     filename = strdup(filename);
     StringTable st = parse_dsv_file(filename);
     StringTable it = &st[1]; // first line is header
     do {
         Actor actor = actor_from_strings(*it);
-        //actor_add(&actors, actor); // wtf leak when add to list
-        actor_free(actor);
+        actor_add(&actors, actor); 
     } while (*++it);
 
     free_dsv_table(st);

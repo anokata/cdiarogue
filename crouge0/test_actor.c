@@ -54,7 +54,7 @@ void test() {
         printf("actor loaded: %d \n", a->stat_hp); // name error
         ita = g_list_next(ita);
     }
-    free_actors(as);
+    free_actors(&as);
     printf("actor %ld\n", sizeof(struct Actor)); 
 }
 
