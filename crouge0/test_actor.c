@@ -48,6 +48,7 @@ void test() {
     assert(behavior_from_str(BehaviorNames[BehaviorRandom]) == behavior_from_str("BehaviorRandom"));
 
     GList *as = actors_load("./maps/map_1_1.actors");
+    actors_save("/tmp/as", as);
     GList *ita = as;
     while (ita) {
         Actor a = ita->data;

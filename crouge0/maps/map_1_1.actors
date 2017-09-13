@@ -1,5 +1,5 @@
 name:char:x:y:color:behavior:status:hp:con:str:role:items_file:
 # vi: filetype=sh
-pinkporing:p:3:3:pink:BehaviorSimpleAttacker:StatusLive:4:2:1:RoleMonster:0:
-ring:p:3:3:pink:BehaviorSimpleAttacker:StatusLive:4:2:1:RoleMonster:0:
-ring:p:3:3:pnk:BehaviorSimpleDirect:StatusSleep:4:2:1:RoleNPC:0:
+pinkporing:p:3:3:_cn_white:BehaviorSimpleAttacker:StatusLive:4:2:1:RoleMonster:0:
+ring:p:3:3:_cn_white:BehaviorSimpleAttacker:StatusLive:4:2:1:RoleMonster:0:
+ring:p:3:3:_cn_white:BehaviorSimpleDirect:StatusSleep:4:2:1:RoleNPC:0:

@@ -47,7 +47,7 @@ Actor make_actor(char c, int x, int y) {
     actor->behavior = BehaviorRandom;
     actor->color = cn_white;
     actor->role = RoleMonster;
-    actor->name = "poring";
+    actor->name = NULL;
     actor->status = StatusLive;
     actor->items = NULL;
     actor->basestat_constitution = 1;
@@ -65,6 +65,7 @@ Actor make_actor(char c, int x, int y) {
 void actor_free(Actor actor) {
     if (!actor) return;
     items_free(&actor->items);
+    if (actor->name) free(actor->name);
     free(actor);
 }
 
@@ -187,7 +188,7 @@ Item *actor_item_slot(Actor actor, Item item) {
 
 Actor actor_from_strings(Strings str) {
     Actor actor = make_actor(str[1][0], atoi(str[2]), atoi(str[3]));
-    actor->name = str[0];
+    actor->name = strdup(str[0]);
     actor->color = cc_color_from_str(str[4]);
     actor->behavior = behavior_from_str(str[5]);
     actor->status = status_from_str(str[6]);
@@ -236,6 +237,22 @@ GList *actors_load(char* filename) {
 void actors_save(char* filename, GList *actors) {
     UNUSED(filename);
     UNUSED(actors);
+    GList *it = actors;
+    FILE *out = fopen(filename, "w+");
+    static const char header[] = "name:char:x:y:color:behavior:status:hp:con:str:role:items_file:\n";
+    static const char type[] = "# vi: filetype=sh\n";
+    fwrite(header, sizeof(header) - 1, 1, out);
+    fwrite(type, sizeof(type) - 1, 1, out);
+
+    while (it) {
+        Actor actor = it->data;
+        char *line = actor_serialize(actor);
+        fwrite(line, strlen(line), 1, out);
+        free(line);
+        it = g_list_next(it);
+    }
+
+    fclose(out);
 }
 
 void actor_add(GList **actors, Actor actor) {

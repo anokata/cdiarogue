@@ -7,3 +7,4 @@ passb:tft
 colrs:123
 tiles_count:3
 tiles_file:./maps/map_1_1.tiles
+actors_file:./maps/map_1_1.actors

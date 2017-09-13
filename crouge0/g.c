@@ -49,7 +49,7 @@ G new_g() {
     g->player->role = RolePlayer;
     g->player->color = cb_white;
     g->player->behavior = BehaviorStand;
-    g->player->name = "you";
+    g->player->name = strdup("you");
     g->player->stat_hp = 27;
     g->player->basestat_constitution = 7;
     add_actor(g, g->player);
