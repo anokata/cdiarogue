@@ -2,3 +2,4 @@ x_segments:2
 y_segments:2
 map_width:20
 map_height:10
+actors:./maps/map_1_1.actors

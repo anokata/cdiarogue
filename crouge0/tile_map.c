@@ -165,15 +165,21 @@ TileMap load_global_tmap() {
     int local_map_width = 6;
     int local_map_height = 3;
     /* Read params from map info file */
-    GHashTable *config = parse_file("./maps/info");
+    GHashTable *config = parse_file("./maps/loc1");
     local_map_width = atoi(g_hash_table_lookup(config, "map_width"));
     local_map_height = atoi(g_hash_table_lookup(config, "map_height"));
     local_width = atoi(g_hash_table_lookup(config, "x_segments"));
     local_height = atoi(g_hash_table_lookup(config, "y_segments"));
-    g_hash_table_destroy(config);
+    char *actors_file = g_hash_table_lookup(config, "actors");
+    if (!actors_file) {
+        printf("*-> Error: file no valid actors file option\n");
+        exit(1);
+    }
 
     global_map = make_tile_map(local_width * local_map_width, local_height * local_map_height);
     DEBUG_PRINT("Global tile map with w:%d h:%d\n", global_map->width, global_map->height);
+    global_map->actors = actors_load(actors_file);
+
     string mapname_format = "maps/map_%i_%i";
     char mapname[100];
     int block_height = local_map_width * local_width * local_map_height;
@@ -190,6 +196,7 @@ TileMap load_global_tmap() {
     }
     /* print_tile_map(global_map); */
     
+    g_hash_table_destroy(config);
     return global_map;
 }
 
