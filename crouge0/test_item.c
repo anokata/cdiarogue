@@ -11,4 +11,9 @@ int main() {
     i = items_get(is, 0, 0);
     assert(i != NULL);
     items_free(&is);
+
+    extern char *ItemClassNames[];
+    printf("item cls from str: %s\n", ItemClassNames[ItemWeaponCls]);
+    printf("item cls from str: %s\n", ItemClassNames[ItemHeadEquipCls]);
+    assert(ItemWeaponCls == ItemClass_from_str("ItemWeaponCls"));
 }

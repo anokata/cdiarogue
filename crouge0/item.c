@@ -1,5 +1,7 @@
 #include "item.h"
 
+IMPLEMENT_ENUM(ItemClass, ITEMS_CLS)
+
 char *item_types[] = {
     "potion of cure wounds",
     "wood sword",

@@ -1,0 +1,6 @@
+name:char:x:y:color:value:class:state:type:
+# columns: 9
+# vi: filetype=sh
+wood sword:/:1:1:_cn_white:1:ItemWeaponCls:ItemNormalState:ItemWeaponSword:
+potion of cure wounds:!:2:2:_cb_red:10:ItemPotionCls:ItemNormalState:ItemPotionOfCure:
+#:::::::::

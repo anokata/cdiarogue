@@ -3,17 +3,32 @@
 #include <glib.h>
 #include "util.h"
 
-typedef enum ItemClass {
-    ItemNoCls,
-    ItemPotionCls,
-    ItemWeaponCls,
-    ItemBodyEquipCls,
-    ItemFootEquipCls,
-    ItemLegsEquipCls,
-    ItemHeadEquipCls,
-    ItemFingerEquipCls,
-    ItemFoodCls,
-} ItemClass;
+#define ITEMS_CLS(X) \
+    X(ItemNoCls) \
+    X(ItemPotionCls) \
+    X(ItemWeaponCls) \
+    X(ItemBodyEquipCls) \
+    X(ItemFootEquipCls) \
+    X(ItemLegsEquipCls) \
+    X(ItemHeadEquipCls) \
+    X(ItemFingerEquipCls) \
+    X(ItemFoodCls) \
+
+#define DECLARE_ENUM(NAME, ELEMS) typedef enum NAME {\
+    ELEMS(MAKE_ENUM)\
+} NAME;\
+NAME NAME##_from_str(char *str);
+
+#define IMPLEMENT_ENUM(NAME, ELEMS) \
+char *NAME##Names[] = {\
+    ELEMS(MAKE_STRING)\
+    NULL\
+};\
+NAME NAME##_from_str(char *str) {\
+    ENUM_FROMSTR(NAME)\
+}\
+
+DECLARE_ENUM(ItemClass, ITEMS_CLS)
 
 typedef enum ItemState {
     ItemNormalState,

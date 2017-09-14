@@ -81,7 +81,16 @@
 	- +saving player
       - +load player
       - load items saving items
-            - items marshaling
+            - +sample items file
+            - items enums
+            - load item
+            - dump item
+            - load items list
+            - save items list
+            - load map items
+            - load player items
+            - save map items
+            - save player items
 
 * 10 min dia like
 - town

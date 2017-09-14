@@ -47,4 +47,19 @@ typedef enum EError {
 } EError;
 
 char *error_msg();
+
+
+#define MAKE_STRING(STR) #STR,
+#define MAKE_ENUM(X) X,
+
+#define ENUM_FROMSTR(ENUM) \
+    char **it = ENUM##Names;\
+    ENUM val = 0;\
+    while (*it) {\
+        if (!strcmp(*it, str)) return val;\
+        val++;\
+        it++;\
+    }\
+    return 0;\
+
 #endif

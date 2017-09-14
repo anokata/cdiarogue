@@ -7,20 +7,6 @@
 #include "util.h"
 #include "config_parser.h"
 
-#define MAKE_STRING(STR) #STR,
-#define MAKE_ENUM(X) X,
-
-
-#define ENUM_FROMSTR(ENUM) \
-    char **it = ENUM##Names;\
-    ENUM val = 0;\
-    while (*it) {\
-        if (!strcmp(*it, str)) return val;\
-        val++;\
-        it++;\
-    }\
-    return 0;\
-
 #define FOREACH_ROLE(ROLE) \
     ROLE(RolePlayer) \
     ROLE(RoleMonster) \
