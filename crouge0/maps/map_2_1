@@ -2,5 +2,4 @@ mode:0
 width:20
 height:10
 map:....x.x..x..........o.oo..o........ox.o....o.ox.....o.............o...oo....x......x.....o.o.xo...x.................xx.....x......x..x.o.....xo........o.oo...o........o.................x.........x...x
-tiles_count:3
 tiles_file:./maps/map_1_1.tiles
