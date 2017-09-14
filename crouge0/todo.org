@@ -52,7 +52,8 @@
       - +enum to/from strings (macro?)
       - +color to/from strins macros and funcs
       - exp, lvls, how stats grow - basic:
-            - add exp, exp gain for kill, smth else
+            - +add exp, exp gain for kill, smth else. add to struct, to save
+                    +and load, to view, to format and charview
             - add level, lvl up for exp 
             - add stat points with lvlup
                   - calc next exp 
@@ -224,6 +225,7 @@ http://www.roguebasin.com/index.php?title=Ncursesw
  beep sounds
  console animation, fake loading with fake hdd sound
  ATTENTION: Naming convention for func = <modulename>_<obj>_<action>_<opt>
+ must be single point of truth SPOT - one description of struct, types, that handle it serialization
 * Utils: map editor pipe, fix global map loading
  1. separate map loader using tile_map
  1.1+print loaded to stdout

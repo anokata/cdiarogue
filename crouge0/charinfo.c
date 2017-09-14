@@ -12,6 +12,7 @@ int charinfo_draw(void* data) {
 hp/max: %d/%d\n\
 str: %d  con: %d\n\
 atk: %d  def: %d\n\
+exp: %ld  lvl: %d\n\
 \n\
 Equiped:\n\
 weapon: %s gain %d atk \n\
@@ -27,6 +28,7 @@ body: %s gain %d def \n\
     player->basestat_constitution,
     actor_stat_attack(player),
     actor_stat_defence(player),
+    player->exp, player->lvl,
     item_descript(player->equiped_right_hand),
     item_value(player->equiped_right_hand),
     item_descript(player->equiped_head),

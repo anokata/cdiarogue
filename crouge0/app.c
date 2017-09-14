@@ -59,7 +59,7 @@ void debug_draw(G g) {
             "Viewport Left: %d\n" 
             "Viewport cx:cy = %d:%d\t" 
             "Viewport left:top = %d:%d\n" 
-            "Player x:y = %d:%d [HP: %d/%d atk: %d def: %d ]\t" 
+            "Player x:y = %d:%d [HP: %d/%d atk: %d def: %d  exp: %ld  lvl: %d ]\t" 
             "Target [HP: %d  ]\n" 
         , g->key, log_text, 
         g->view->display_left, g->view->cx, g->view->cy,
@@ -67,6 +67,7 @@ void debug_draw(G g) {
         g->player->x, g->player->y, g->player->stat_hp,
         actor_stat_maxhp(g->player), actor_stat_attack(g->player), 
         actor_stat_defence(g->player),
+        g->player->exp, g->player->lvl,
         (g->last_target ? g->last_target->stat_hp : 0)
         );
     cc_printxy(buf, cn_white, 0, 20);
@@ -260,9 +261,9 @@ void state_init() {
 
 void save_player(Actor you) {
     FILE *out = fopen(player_file, "w+");
-    static const char header[] = "name:char:x:y:color:behavior:status:hp:con:str:role:items_file:\n";
     static const char type[] = "# vi: filetype=sh\n";
-    fwrite(header, sizeof(header) - 1, 1, out);
+    extern char actor_file_header[];
+    fwrite(actor_file_header, strlen(actor_file_header), 1, out);
     fwrite(type, sizeof(type) - 1, 1, out);
 
     char *line = actor_serialize(you);

@@ -2,6 +2,8 @@
 extern EError global_error;
 extern char *ColorNames[];
 
+const char actor_file_header[] = "name:char:x:y:color:behavior:status:hp:con:str:role:items_file:exp:\n";
+
 char *RoleNames[] = {
     FOREACH_ROLE(MAKE_STRING)
     NULL
@@ -59,6 +61,8 @@ Actor make_actor(char c, int x, int y) {
     actor->equiped_legs = NULL;
     actor->equiped_arms = NULL;
     actor->equiped_body = NULL;
+    actor->exp = 1;
+    actor->lvl = 1;
     return actor;
 }
 
@@ -197,13 +201,14 @@ Actor actor_from_strings(Strings str) {
     actor->basestat_strength = atoi(str[9]);
     actor->role = role_from_str(str[10]);
     //actor->items = str[11];
+    actor->exp = atol(str[12]);
     return actor;
 }
 
 char *actor_serialize(Actor actor) {
     char buf[BUFSIZE];
     snprintf(buf, BUFSIZE, 
-        "%s:%c:%d:%d:%s:%s:%s:%d:%d:%d:%s:0:\n",
+        "%s:%c:%d:%d:%s:%s:%s:%d:%d:%d:%s:0:%ld:\n",
         actor->name,
         actor->c,
         actor->x,
@@ -214,7 +219,8 @@ char *actor_serialize(Actor actor) {
         actor->stat_hp,
         actor->basestat_constitution,
         actor->basestat_strength,
-        RoleNames[actor->role]
+        RoleNames[actor->role],
+        actor->exp
         );
     return strdup(buf);
 }
@@ -238,9 +244,8 @@ GList *actors_load(char* filename) {
 void actors_save(char* filename, GList *actors) {
     GList *it = actors;
     FILE *out = fopen(filename, "w+");
-    static const char header[] = "name:char:x:y:color:behavior:status:hp:con:str:role:items_file:\n";
     static const char type[] = "# vi: filetype=sh\n";
-    fwrite(header, sizeof(header) - 1, 1, out);
+    fwrite(actor_file_header, sizeof(actor_file_header) - 1, 1, out);
     fwrite(type, sizeof(type) - 1, 1, out);
 
     while (it) {
@@ -256,4 +261,13 @@ void actors_save(char* filename, GList *actors) {
 
 void actor_add(GList **actors, Actor actor) {
     *actors = g_list_append(*actors, actor);
+}
+
+void actor_exp_gain(Actor actor, long exp) {
+    // TODO
+    actor->exp += exp;
+}
+
+void actor_lvl_up(Actor actor) {
+    // TODO
 }

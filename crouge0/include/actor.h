@@ -49,6 +49,8 @@ typedef struct Actor {
     int stat_hp;
     int basestat_constitution; /* con -> max hp */
     int basestat_strength; /* str -> attack */
+    long exp;
+    int lvl;
     char *name;
     Role role;
     Items items;
@@ -90,3 +92,6 @@ void actors_save(char* filename, GList *actors);
 Role role_from_str(char *str);
 Behavior behavior_from_str(char *str);
 Status status_from_str(char *str);
+void actor_exp_gain(Actor actor, long exp);
+void actor_lvl_up(Actor actor);
+
