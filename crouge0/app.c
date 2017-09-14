@@ -1,5 +1,6 @@
 #include "app.h"
 char version[] = "0.0.2";
+char *player_file = "./maps/you";
 
 /* GLOBAL */
 extern State state;
@@ -256,6 +257,24 @@ void state_init() {
     ss_setstate(state, State_cursor);
 }
 
+void save_player(Actor you) {
+    FILE *out = fopen(player_file, "w+");
+    static const char header[] = "name:char:x:y:color:behavior:status:hp:con:str:role:items_file:\n";
+    static const char type[] = "# vi: filetype=sh\n";
+    fwrite(header, sizeof(header) - 1, 1, out);
+    fwrite(type, sizeof(type) - 1, 1, out);
+
+    char *line = actor_serialize(you);
+    fwrite(line, strlen(line), 1, out);
+    free(line);
+
+    fclose(out);
+}
+
+void save(G g) {
+    save_player(g->player);
+}
+
 void start() {
     /* tests if debug */
         // TODO
@@ -293,6 +312,9 @@ void start() {
     event_register(ActionCollide, RolePlayer, RoleMonster, collide_action_player_monster);
     event_register(ActionCollide, RoleMonster, RolePlayer, collide_action_monster_player);
     process_input(g);
+    // End
+    save(g);
+
     ss_free_state(state);
     curses_end();
     end_events();

@@ -77,7 +77,8 @@
 	- +use to load tiles
       - +mobs, saving load from file
       - +mobs from map files
-	- saving player
+	- +saving player
+      - load player
       - load items saving items
             - items marshaling
       - move tiles count to tiles file

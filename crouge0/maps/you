@@ -1,0 +1,3 @@
+name:char:x:y:color:behavior:status:hp:con:str:role:items_file:
+# vi: filetype=sh
+you:@:2:1:_cn_white:BehaviorStand:StatusLive:41:7:1:RolePlayer:0:

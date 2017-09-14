@@ -235,8 +235,6 @@ GList *actors_load(char* filename) {
 }
 
 void actors_save(char* filename, GList *actors) {
-    UNUSED(filename);
-    UNUSED(actors);
     GList *it = actors;
     FILE *out = fopen(filename, "w+");
     static const char header[] = "name:char:x:y:color:behavior:status:hp:con:str:role:items_file:\n";
