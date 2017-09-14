@@ -2,8 +2,5 @@ mode:0
 width:20
 height:10
 map:............................................ooooo.oooo..........o...o.o........x....oo.oo.o.oo................o.o...........ooooooo.o...................o...........oooooo.oo...........................
-tiles:.ox
-passb:tft
-colrs:623
 tiles_count:3
 tiles_file:./maps/map_1_2.tiles

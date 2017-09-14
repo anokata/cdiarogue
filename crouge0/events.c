@@ -37,7 +37,6 @@ int _3d_array_index(int x, int y, int z, int r) {
 
 ActionFunc event_get(Action action, Role object, Role subject, G g) {
     UNUSED(g);
-    UNUSED(action);
     int roles = RoleLength;
     size_t index = _3d_array_index(action, subject, object, roles);
     ActionFunc fun = *(events + index);
@@ -45,9 +44,10 @@ ActionFunc event_get(Action action, Role object, Role subject, G g) {
 }
 
 void _no_action(Action action, Actor actor, Actor subject, G g) {
+    UNUSED(g);
     UNUSED(actor);
     UNUSED(subject);
     UNUSED(action);
-    debuglog(g, "action undef");
+    /* debuglog(g, "action undef"); */
 }
 

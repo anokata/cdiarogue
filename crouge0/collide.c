@@ -12,9 +12,9 @@ void collision_effect(Actor actor, Actor subject, G g) {
     }
 
     if (actor->role == RolePlayer) {
-        debuglog(g, "collide from player");
+        /* debuglog(g, "collide from player"); */
     } else {
-        debuglog(g, "collide from monster");
+        /* debuglog(g, "collide from monster"); */
     }
 }
 
@@ -89,7 +89,7 @@ void collide_action_monster_player(Action action, Actor actor, Actor subject, G 
     UNUSED(subject);
     UNUSED(action);
     char msg[100];
-    debuglog(g, "! monster hit player");
+    /* debuglog(g, "! monster hit player"); */
 
     int dmg = actor_calc_damage(actor, subject);
     subject->stat_hp -= dmg;

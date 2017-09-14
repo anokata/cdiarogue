@@ -74,13 +74,13 @@
       - +parse file to array of parsed lines
       - +test
       - +add to maps key = itemsfile:items_0_0 
-	- use to load tiles
-      - ... items - items marshaling
-      - mobs from map files
+	- +use to load tiles
+      - +mobs, saving load from file
+      - +mobs from map files
 	- saving player
-      - saving items
-      - mobs, saving - mobs types/race - load from file
-      - mobs/items types and instances?
+      - load items saving items
+            - items marshaling
+      - move tiles count to tiles file
 
 * 10 min dia like
 - town
@@ -128,6 +128,8 @@
 - pack map files to zip/tarbz, unpack in mem (in ram space run or tmp)
 - lighting
 - wait and rest 
+- mobs generic type and inherit
+      - mobs/items types and instances?
 * big theme
 - step speed action model, a little real time
 - map gen 
