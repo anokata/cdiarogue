@@ -227,6 +227,7 @@ GList *actors_load(char* filename) {
     do {
         Actor actor = actor_from_strings(*it);
         actor_add(&actors, actor); 
+        DEBUG_PRINT("load actor: %s\n", actor->name);
     } while (*++it);
 
     free_dsv_table(st);

@@ -7,14 +7,15 @@ extern State state;
 
 void process_input(G g) {
     ss_handle(state, Event_draw, g);
+    debug_draw(g);
 	int ch = getch();
     int status = 0;
 	while(ch != 27 && !status) {
         g->key = ch;
         status = ss_handle(state, Event_key, g);
         ss_handle(state, Event_draw, g);
-        proc_global_events(g);
         debug_draw(g);
+        proc_global_events(g);
 		ch = getch();
 	}
 }
@@ -271,14 +272,53 @@ void save_player(Actor you) {
     fclose(out);
 }
 
+void load_player(Actor *you) {
+    if (*you) actor_free(*you);
+    GList *lst = actors_load(player_file);
+    Actor actor = lst->data;
+    if (actor) {
+        *you = actor;
+    } // else create player?
+    g_list_free(lst);
+}
+
 void save(G g) {
     save_player(g->player);
+}
+
+void load(G g) {
+    load_player(&g->player);
+}
+
+void init_inventory(G g) {
+    Item potion = item_new('!', 1, 1);
+    potion->type = ItemPotionOfCure;
+    potion->cls = ItemPotionCls;
+    item_add(&g->player->items, potion);
+    potion = item_new('!', 1, 1);
+    potion->type = ItemPotionOfCure;
+    potion->cls = ItemPotionCls;
+    item_add(&g->player->items, potion);
+
+    Item sword = item_new('/', 0, 0);
+    sword->cls = ItemWeaponCls;
+    sword->type = ItemWeaponSword;
+    item_add(&g->player->items, sword);
+
+    Item helm = item_new(']', 0, 0);
+    helm->cls = ItemHeadEquipCls;
+    helm->type = ItemStrawHat;
+    item_add(&g->player->items, helm);
 }
 
 void start() {
     /* tests if debug */
         // TODO
     G g = new_g();
+    load(g);
+    add_actor(g, g->player);
+    init_inventory(g);
+
     curses_init();
     state_init();
     Actor a = make_actor('o', 2, 2);

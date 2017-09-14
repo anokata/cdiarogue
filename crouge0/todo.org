@@ -79,7 +79,7 @@
       - +mobs from map files
       - +move tiles count to tiles file - not needed because not used
 	- +saving player
-      - load player
+      - +load player
       - load items saving items
             - items marshaling
 

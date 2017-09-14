@@ -21,6 +21,7 @@ void debuglog(G g, char *msg) {
 
 G new_g() {
     G g = malloc(sizeof(struct G));
+    bzero(g, sizeof(struct G));
 
     g->events = events;
     g->wmap = load_wmap();
@@ -44,35 +45,16 @@ G new_g() {
     g->log = NULL;
     g->log_len = 0;
 
-    // make_player(
-    g->player = make_actor('@', 0, 0);
-    g->player->role = RolePlayer;
-    g->player->color = cb_white;
-    g->player->behavior = BehaviorStand;
-    g->player->name = strdup("you");
-    g->player->stat_hp = 27;
-    g->player->basestat_constitution = 7;
-    add_actor(g, g->player);
+    // make_player( for selected config - new gm
+    /* g->player = make_actor('@', 0, 0); */
+    /* g->player->role = RolePlayer; */
+    /* g->player->color = cb_white; */
+    /* g->player->behavior = BehaviorStand; */
+    /* g->player->name = strdup("you"); */
+    /* g->player->stat_hp = 27; */
+    /* g->player->basestat_constitution = 7; */
+
     g->last_target = NULL;
-    // init inventory
-    Item potion = item_new('!', 1, 1);
-    potion->type = ItemPotionOfCure;
-    potion->cls = ItemPotionCls;
-    item_add(&g->player->items, potion);
-    potion = item_new('!', 1, 1);
-    potion->type = ItemPotionOfCure;
-    potion->cls = ItemPotionCls;
-    item_add(&g->player->items, potion);
-
-    Item sword = item_new('/', 0, 0);
-    sword->cls = ItemWeaponCls;
-    sword->type = ItemWeaponSword;
-    item_add(&g->player->items, sword);
-
-    Item helm = item_new(']', 0, 0);
-    helm->cls = ItemHeadEquipCls;
-    helm->type = ItemStrawHat;
-    item_add(&g->player->items, helm);
 
     return g;
 }
