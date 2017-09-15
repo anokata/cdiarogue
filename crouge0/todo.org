@@ -54,7 +54,8 @@
       - exp, lvls, how stats grow - basic:
             - +add exp, exp gain for kill, smth else. add to struct, to save
                     +and load, to view, to format and charview
-            - add level, lvl up for exp 
+            - +add level
+            - lvl up for exp 
             - add stat points with lvlup
                   - calc next exp 
             - show stat points
@@ -141,6 +142,7 @@
 - wait and rest 
 - mobs generic type and inherit
       - mobs/items types and instances?
+- viewport at load not moving to @ center
 * big theme
 - step speed action model, a little real time
 - map gen 

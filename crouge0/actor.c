@@ -2,7 +2,9 @@
 extern EError global_error;
 extern char *ColorNames[];
 
-const char actor_file_header[] = "name:char:x:y:color:behavior:status:hp:con:str:role:items_file:exp:\n";
+const char actor_file_header[] = "name:char:x:y:color:behavior:status:hp:con:str:role:items_file:exp:lvl:\n";
+const char actor_file_type[] = "# vi: filetype=sh\n";
+const char actor_dump_format[] = "%s:%c:%d:%d:%s:%s:%s:%d:%d:%d:%s:0:%ld:%d:\n";
 
 char *RoleNames[] = {
     FOREACH_ROLE(MAKE_STRING)
@@ -202,13 +204,14 @@ Actor actor_from_strings(Strings str) {
     actor->role = role_from_str(str[10]);
     //actor->items = str[11];
     actor->exp = atol(str[12]);
+    actor->lvl = atoi(str[13]);
     return actor;
 }
 
 char *actor_serialize(Actor actor) {
     char buf[BUFSIZE];
     snprintf(buf, BUFSIZE, 
-        "%s:%c:%d:%d:%s:%s:%s:%d:%d:%d:%s:0:%ld:\n",
+        actor_dump_format,
         actor->name,
         actor->c,
         actor->x,
@@ -220,7 +223,8 @@ char *actor_serialize(Actor actor) {
         actor->basestat_constitution,
         actor->basestat_strength,
         RoleNames[actor->role],
-        actor->exp
+        actor->exp,
+        actor->lvl
         );
     return strdup(buf);
 }
@@ -244,9 +248,8 @@ GList *actors_load(char* filename) {
 void actors_save(char* filename, GList *actors) {
     GList *it = actors;
     FILE *out = fopen(filename, "w+");
-    static const char type[] = "# vi: filetype=sh\n";
-    fwrite(actor_file_header, sizeof(actor_file_header) - 1, 1, out);
-    fwrite(type, sizeof(type) - 1, 1, out);
+    fwrite(actor_file_header, strlen(actor_file_header), 1, out);
+    fwrite(actor_file_type, strlen(actor_file_type), 1, out);
 
     while (it) {
         Actor actor = it->data;

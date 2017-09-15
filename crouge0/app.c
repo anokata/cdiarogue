@@ -260,11 +260,11 @@ void state_init() {
 }
 
 void save_player(Actor you) {
-    FILE *out = fopen(player_file, "w+");
-    static const char type[] = "# vi: filetype=sh\n";
     extern char actor_file_header[];
+    extern char actor_file_type[];
+    FILE *out = fopen(player_file, "w+");
     fwrite(actor_file_header, strlen(actor_file_header), 1, out);
-    fwrite(type, sizeof(type) - 1, 1, out);
+    fwrite(actor_file_type, strlen(actor_file_type), 1, out);
 
     char *line = actor_serialize(you);
     fwrite(line, strlen(line), 1, out);
