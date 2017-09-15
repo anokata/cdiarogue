@@ -312,6 +312,39 @@ void init_inventory(G g) {
     item_add(&g->player->items, helm);
 }
 
+
+void actor_debug(G g) {
+    Actor a = make_actor('b', 2, 2);
+    a->name = strdup("bug");
+    add_actor(g, a);
+    a->behavior = BehaviorSimpleDirect;
+    a->color = cb_blue;
+    a->directed.x = 2;
+    a->directed.y = 2;
+    for (int i = 0; i < 2; i++) {
+        a = make_actor('d', i + 15, 15);
+        add_actor(g, a);
+        a->color = cb_red;
+        a->name = strdup("bug");
+        a->behavior = BehaviorSimpleAttacker;
+    }
+    /* for (int i = 0; i < 20; i++) { */
+    /*     a = make_actor('s', i, 5); */
+    /*     a->color = cb_yellow; */
+    /*     a->name = strdup("bug"); */
+    /*     add_actor(g, a); */
+    /* } */
+}
+
+void item_debug(G g) {
+    Item potion = item_new('!', 1, 1);
+    potion->type = ItemPotionOfCure;
+    Item hat = item_new(']', 2, 2);
+    hat->type = ItemStrawHat;
+    tmap_add_item(g->gmap, potion);
+    tmap_add_item(g->gmap, hat);
+}
+
 void start() {
     /* tests if debug */
         // TODO
@@ -322,32 +355,9 @@ void start() {
 
     curses_init();
     state_init();
-    Actor a = make_actor('o', 2, 2);
-    add_actor(g, a);
-    /* a->behavior = BehaviorSimpleAttacker; */
-    a->behavior = BehaviorSimpleDirect;
-    //a->behavior = BehaviorRandom;
-    //a->behavior = BehaviorStand;
-    a->color = cb_blue;
-    a->directed.x = 2;
-    a->directed.y = 2;
-    for (int i = 0; i < 2; i++) {
-        a = make_actor('d', i + 15, 15);
-        add_actor(g, a);
-        a->color = cb_red;
-        a->behavior = BehaviorSimpleAttacker;
-    }
-    /* for (int i = 0; i < 20; i++) { */
-    /*     a = make_actor('s', i, 5); */
-    /*     a->color = cb_yellow; */
-    /*     add_actor(g, a); */
-    /* } */
-    Item potion = item_new('!', 1, 1);
-    potion->type = ItemPotionOfCure;
-    Item hat = item_new(']', 2, 2);
-    hat->type = ItemStrawHat;
-    tmap_add_item(g->gmap, potion);
-    tmap_add_item(g->gmap, hat);
+
+    actor_debug(g);
+    item_debug(g);
 
     start_events();
     event_register(ActionCollide, RolePlayer, RoleMonster, collide_action_player_monster);
