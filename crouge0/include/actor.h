@@ -51,6 +51,7 @@ typedef struct Actor {
     int basestat_strength; /* str -> attack */
     long exp;
     int lvl;
+    int stat_points;
     char *name;
     Role role;
     Items items;

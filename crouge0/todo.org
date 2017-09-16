@@ -61,9 +61,9 @@
                   gain (~10 * (mob lvl - your lvl)) if mob lvl more than your
                         else (~10 / (your lvl - mob lvl))
                         10 - mob exp gain by type, miniboss = 10, easy = 1
-            - add stat points with lvlup
-                  - calc next exp 
-            - show stat points
+                  - +calc next exp 
+            - +add stat points with lvlup, serialization
+            - +show stat points
             - spend SP on char view by key to base stats up
 
 ** 9. map for some playable  [need some remaking ]

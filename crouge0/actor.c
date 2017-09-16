@@ -2,9 +2,9 @@
 extern EError global_error;
 extern char *ColorNames[];
 
-const char actor_file_header[] = "name:char:x:y:color:behavior:status:hp:con:str:role:items_file:exp:lvl:\n";
+const char actor_file_header[] = "name:char:x:y:color:behavior:status:hp:con:str:role:items_file:exp:lvl:sp:\n";
 const char actor_file_type[] = "# vi: filetype=sh\n";
-const char actor_dump_format[] = "%s:%c:%d:%d:%s:%s:%s:%d:%d:%d:%s:0:%ld:%d:\n";
+const char actor_dump_format[] = "%s:%c:%d:%d:%s:%s:%s:%d:%d:%d:%s:0:%ld:%d:%d:\n";
 
 char *RoleNames[] = {
     FOREACH_ROLE(MAKE_STRING)
@@ -65,6 +65,7 @@ Actor make_actor(char c, int x, int y) {
     actor->equiped_body = NULL;
     actor->exp = 1;
     actor->lvl = 1;
+    actor->stat_points = 2;
     return actor;
 }
 
@@ -205,6 +206,7 @@ Actor actor_from_strings(Strings str) {
     //actor->items = str[11];
     actor->exp = atol(str[12]);
     actor->lvl = atoi(str[13]);
+    actor->stat_points = atoi(str[14]);
     return actor;
 }
 
@@ -224,7 +226,8 @@ char *actor_serialize(Actor actor) {
         actor->basestat_strength,
         RoleNames[actor->role],
         actor->exp,
-        actor->lvl
+        actor->lvl,
+        actor->stat_points
         );
     return strdup(buf);
 }
@@ -278,6 +281,7 @@ void actor_exp_gain(Actor actor, long exp) {
 
 void actor_lvl_up(Actor actor) {
     // TODO
+    actor->stat_points += 3; // Debug?
 }
 
 long actor_defeat(Actor actor, Actor subject) {
