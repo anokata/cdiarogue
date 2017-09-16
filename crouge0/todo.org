@@ -40,8 +40,7 @@
       - +weapon and armor effect on combat
       - +stats str, dex, endurance, !wisdome and it's effect on actions and other
 
-[ INWORK ]
-** 8. gp for minimum completed *DasHReaLM*
+** 8. +gp for minimum completed *DasHReaLM*
       [must be easy]
       - +char info mode, weared, stats 
       - +item take off
@@ -51,7 +50,7 @@
       [intresting]
       - +enum to/from strings (macro?)
       - +color to/from strins macros and funcs
-      - exp, lvls, how stats grow - basic:
+      - +exp, lvls, how stats grow - basic:
             - +add exp, exp gain for kill, smth else. add to struct, to save
                     +and load, to view, to format and charview
             - +add level
@@ -64,8 +63,9 @@
                   - +calc next exp 
             - +add stat points with lvlup, serialization
             - +show stat points
-            - spend SP on char view by key to base stats up
+            - +spend SP on char view by key to base stats up
 
+[ INWORK ]
 ** 9. map for some playable  [need some remaking ]
 - other tiles types with props such water, plants, enters, doors
 - doors, open, close, kick - commands, to direction mode
@@ -105,6 +105,8 @@
 - enter to dung
 - teleport scroll
 - stashs
+- ranged damage i.e. 2-5 
+- save and exit and exit without save
 
 * maps
 - mapreplace (actuallize map gen) to make tile map save func

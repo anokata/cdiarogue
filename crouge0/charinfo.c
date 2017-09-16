@@ -10,7 +10,7 @@ int charinfo_draw(void* data) {
     snprintf(buf, BUFSIZE * 10, 
 "Name: %s\n\
 hp/max: %d/%d\n\
-str: %d  con: %d\n\
+(s) str: %d  (c) con: %d \t press (key) to spend points to up or Shift-(key) to down\n\
 atk: %d  def: %d\n\
 exp: %ld  lvl: %d\n\
 *points to spend: %d\n\
@@ -52,10 +52,36 @@ body: %s gain %d def \n\
 int charinfo_key(void* data) {
     G g = data;
     char key = g->key;
+    Actor you = g->player;
     switch (key) {
         case 'q':
             ss_setstate(state, State_cursor);
             break;
+        case 's':
+            if (you->stat_points) {
+                you->stat_points--;
+                you->basestat_strength++;
+            }
+            break;
+        case 'c':
+            if (you->stat_points) {
+                you->stat_points--;
+                you->basestat_constitution++;
+            }
+            break;
+        case 'C': // if can? or reset points
+            if (you->basestat_constitution) {
+                you->stat_points++;
+                you->basestat_constitution--;
+            }
+            break;
+        case 'S':
+            if (you->basestat_strength) {
+                you->stat_points++;
+                you->basestat_strength--;
+            }
+            break;
+
     }
     return 0;
 }
