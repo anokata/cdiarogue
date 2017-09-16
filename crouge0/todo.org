@@ -55,7 +55,12 @@
             - +add exp, exp gain for kill, smth else. add to struct, to save
                     +and load, to view, to format and charview
             - +add level
-            - lvl up for exp 
+            - +lvl up for exp 
+                  max - 1000 lvl, 100 exp per lvl
+                  gain (~10 exp) of equal lvl mob defeating
+                  gain (~10 * (mob lvl - your lvl)) if mob lvl more than your
+                        else (~10 / (your lvl - mob lvl))
+                        10 - mob exp gain by type, miniboss = 10, easy = 1
             - add stat points with lvlup
                   - calc next exp 
             - show stat points

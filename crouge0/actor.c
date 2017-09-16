@@ -269,8 +269,78 @@ void actor_add(GList **actors, Actor actor) {
 void actor_exp_gain(Actor actor, long exp) {
     // TODO
     actor->exp += exp;
+    
+    while (is_lvl_up(actor->lvl, actor->exp)) {
+        actor->lvl++;
+        actor_lvl_up(actor);
+    }
 }
 
 void actor_lvl_up(Actor actor) {
     // TODO
+}
+
+long actor_defeat(Actor actor, Actor subject) {
+    long exp = calc_exp_gain(actor, subject);
+    actor_exp_gain(actor, exp);
+    return exp;
+}
+
+/* lvl & exp calc */
+int need_defeat_to_next_lvl(int current_lvl) {
+    return (current_lvl) + 10;
+}
+
+long calc_exp_gain(Actor actor, Actor subject) {
+    if (subject->lvl > actor->lvl) {
+        return (subject->exp) * (subject->lvl - actor->lvl);
+    } else if (subject->lvl == actor->lvl) {
+        return subject->exp;
+    } else { // less
+        return (subject->exp) / (actor->lvl - subject->lvl);
+    }
+}
+
+static long exp_road[1024] = {0};
+
+void fill_exp_road() {
+    long exp = 0;
+    int avg_gain = 5;
+    for (int lvl = 0; lvl < 1024; lvl++) {
+        int n = need_defeat_to_next_lvl(lvl);
+        exp += n * avg_gain;
+        exp_road[lvl] = exp;
+    }
+}
+
+bool is_lvl_up(int lvl, long new_exp) {
+    return exp_road[lvl + 1] <= new_exp;
+}
+
+long exp_get_to_next(int lvl) {
+    return exp_road[lvl + 1];
+}
+
+void test_exp() {
+    fill_exp_road();
+    long exp = 0;
+    long old_exp = 0;
+    int avg_gain = 5;
+    for (int lvl = 0; lvl < 100; lvl++) {
+        int n = need_defeat_to_next_lvl(lvl);
+        exp += n * avg_gain;
+        exp_road[lvl] = exp;
+        printf("lvl: %d\t exp: %ld\t n: %d\t exp diff: %ld \n", lvl, exp_road[lvl], n, exp - old_exp);
+        old_exp = exp;
+    }
+
+    for (int lvl = 0; lvl < 10; lvl++) {
+        printf("lvl: %d\t exp: %ld\n ", lvl, exp_road[lvl]);
+    }
+    for (int lvl = 200; lvl < 210; lvl++) {
+        printf("lvl: %d\t exp: %ld\n ", lvl, exp_road[lvl]);
+    }
+    for (int lvl = 900; lvl < 910; lvl++) {
+        printf("lvl: %d\t exp: %ld\n ", lvl, exp_road[lvl]);
+    }
 }

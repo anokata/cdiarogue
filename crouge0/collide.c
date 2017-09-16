@@ -72,12 +72,11 @@ void collide_action_player_monster(Action action, Actor actor, Actor subject, G 
     g->last_target = subject;
     subject->stat_hp -= dmg;
     if (subject->stat_hp <= 0) {
-        snprintf(msg, 99, "%s kill %s and gain %ld exp", actor->name, subject->name, subject->exp);
+        long gain = actor_defeat(actor, subject);
+        snprintf(msg, 99, "%s kill %s and gain %ld exp", actor->name, subject->name, gain);
         debuglog(g, msg);
         g->last_target = NULL;
-
         //actor_kill(subject, g); TODO
-        actor_exp_gain(actor, subject->exp);
         subject->status = StatusDead;
         g->gmap->actors = g_list_remove(g->gmap->actors, subject);
         actor_free(subject); // strange behavior of g_list_remove (its free data)

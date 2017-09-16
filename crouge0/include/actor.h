@@ -95,3 +95,9 @@ Status status_from_str(char *str);
 void actor_exp_gain(Actor actor, long exp);
 void actor_lvl_up(Actor actor);
 
+void test_exp();
+long actor_defeat(Actor actor, Actor subject);
+long calc_exp_gain(Actor actor, Actor subject);
+void fill_exp_road();
+bool is_lvl_up(int lvl, long new_exp);
+long exp_get_to_next(int lvl);

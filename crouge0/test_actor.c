@@ -6,7 +6,7 @@ void test() {
     Actor a = make_actor('a', 0, 0);
     actor_free(a);
 
-    char * in = strdup("pink poring:p:3:3:_cn_white:BehaviorSimpleAttacker:StatusLive:4:2:1:RoleMonster:0:1:1\n");
+    char * in = strdup("pink poring:p:3:3:_cn_white:BehaviorSimpleAttacker:StatusLive:4:2:1:RoleMonster:0:1:1:\n");
     Strings s = parse_dsv_line(in, 14);
     printf("%s \n", s[0]);
     Strings it = s;
@@ -57,8 +57,12 @@ void test() {
     }
     free_actors(&as);
     printf("actor %ld\n", sizeof(struct Actor)); 
+#include <limits.h>
+    long long int max = -1;
+    printf("%llu\n%llx\n", max,ULLONG_MAX);
 }
 
 int main() {
     test();
+    test_exp();
 }

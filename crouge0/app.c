@@ -61,6 +61,7 @@ void debug_draw(G g) {
             "Viewport left:top = %d:%d\n" 
             "Player x:y = %d:%d [HP: %d/%d atk: %d def: %d  exp: %ld  lvl: %d ]\t" 
             "Target [HP: %d  ]\n" 
+            "next lvl exp: %ld\n" 
         , g->key, log_text, 
         g->view->display_left, g->view->cx, g->view->cy,
         viewport_left(g->view), viewport_top(g->view),
@@ -68,7 +69,8 @@ void debug_draw(G g) {
         actor_stat_maxhp(g->player), actor_stat_attack(g->player), 
         actor_stat_defence(g->player),
         g->player->exp, g->player->lvl,
-        (g->last_target ? g->last_target->stat_hp : 0)
+        (g->last_target ? g->last_target->stat_hp : 0),
+        exp_get_to_next(g->player->lvl)
         );
     cc_printxy(buf, cn_white, 0, 20);
 }
@@ -284,7 +286,7 @@ void load_player(Actor *you) {
 }
 
 void save(G g) {
-    save_player(g->player);
+    //save_player(g->player); // unplug for debug 
 }
 
 void load(G g) {
@@ -348,6 +350,7 @@ void item_debug(G g) {
 void start() {
     /* tests if debug */
         // TODO
+    fill_exp_road();
     G g = new_g();
     load(g);
     add_actor(g, g->player);
