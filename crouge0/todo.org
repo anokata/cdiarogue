@@ -99,25 +99,26 @@
             - save map items
             - save player items
 
-* 10 min dia like
-- town
-- shops
-- enter to dung
-- teleport scroll
-- stashs
-- ranged damage i.e. 2-5 
-- save and exit and exit without save
-
 * maps
 - mapreplace (actuallize map gen) to make tile map save func
 - mapedit - save with new data
 - make maps, town(heal point?, stores), dungeon
+
+* 10 min dia like
+- town
+- shops
+- enter to dung
+- teleport scroll with P
+- stashs bushs barrels stones garbage
+- ranged damage i.e. 2-5 
+- save and exit and exit without save
 
 
 - TECHDEBT :: 
       - Extract viewport module
       - tests and coverage
 
+- map edit mode, add items, mobs, tiles
 - exp lvls stats growing full mechanic
 - endurance wisdom intelegence dex (4 base stats?)
 - dodging chance
@@ -165,10 +166,8 @@
 
 * future features
 menu (not up down - use vi like.)
-ascii art pic editor mode, terminal again vi keys... + animation.
 Idea and world First! get old records and generate mechanic
-First - fun therefore slash like dia
-but not clone dia.
+First - fun therefore slash like dia, but not clone dia.
  choise color of your avatar
  Color Elements! sword of red, blue poring, dark green - acid, light green - life
  Collect souls(of colors, grades) to equip, grade up it to cristalize?
@@ -209,6 +208,7 @@ anim trees ...
 
 
 * What I LEARNED
+   Remember fixing mem errors, use valgrind
    make simple structures and basic methods in module
    then other module for more complex, linked to other modules functionality
    then most complex few modules than used by main module?
@@ -222,25 +222,20 @@ WRite and draw GP Mechanic, view, make questions and decisions, KNOW WHAT TO DO
  drop from actors
  wild simulations, population, born, old, learn, work, eat, sleep
 	Display turns.
- UI progress bar with value
  unicode ncursesw
- save load
- data files for actors, items
+ save load, data files for actors, items
  magic, skills, exp
 http://www.roguebasin.com/index.php?title=Ncursesw
- Check map folder exist
- TODO Fix global world map
- TODO fixing mem errors
+ TODO Check map folder exist
  beep sounds
- console animation, fake loading with fake hdd sound
  ATTENTION: Naming convention for func = <modulename>_<obj>_<action>_<opt>
  must be single point of truth SPOT - one description of struct, types, that handle it serialization
 * Utils: map editor pipe, fix global map loading
  1. separate map loader using tile_map
  1.1+print loaded to stdout
- 1.2 input map path-name to view
- 2. make map converter from viewable format to string like in data
- 2.1 load by lines from file and out to one line - script : tr -d \n 
+ 1.2 +input map path-name to view
+ 2. +make map converter from viewable format to string like in data
+ 2.1 +load by lines from file and out to one line - script : tr -d \n 
  2.2 save converted to map file
 
 * quests types
@@ -259,7 +254,17 @@ You hear that artifact deep in cave near forest. You go there and get lost.
 ... you find artifact and it traped in crystal, you need find magic wand of
 freedome, lying in island in see over a desert.
 
+* things to do may separate
+- genetic evolve 
+- sound
+- map gen
+- ascii art pic editor mode, terminal again vi keys... + animation.
+- UI progress bar with value
+- console animation, fake loading with fake hdd sound
+
+
 * backlog
 make dir for src
 separate src .c for dirs/modules
 fill gcov
+m4 proc
