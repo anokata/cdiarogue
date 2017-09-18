@@ -3,17 +3,6 @@
 #include <glib.h>
 #include "util.h"
 
-#define ITEMS_CLS(X) \
-    X(ItemNoCls) \
-    X(ItemPotionCls) \
-    X(ItemWeaponCls) \
-    X(ItemBodyEquipCls) \
-    X(ItemFootEquipCls) \
-    X(ItemLegsEquipCls) \
-    X(ItemHeadEquipCls) \
-    X(ItemFingerEquipCls) \
-    X(ItemFoodCls) \
-
 #define DECLARE_ENUM(NAME, ELEMS) typedef enum NAME {\
     ELEMS(MAKE_ENUM)\
 } NAME;\
@@ -28,19 +17,32 @@ NAME NAME##_from_str(char *str) {\
     ENUM_FROMSTR(NAME)\
 }\
 
+#define ITEMS_CLS(X) \
+    X(ItemNoCls) \
+    X(ItemPotionCls) \
+    X(ItemWeaponCls) \
+    X(ItemBodyEquipCls) \
+    X(ItemFootEquipCls) \
+    X(ItemLegsEquipCls) \
+    X(ItemHeadEquipCls) \
+    X(ItemFingerEquipCls) \
+    X(ItemFoodCls) \
+
 DECLARE_ENUM(ItemClass, ITEMS_CLS)
 
-typedef enum ItemState {
-    ItemNormalState,
-    ItemBlessedState,
-    ItemCursedState,
-} ItemState;
+#define ITEMS_STATE(X) \
+    X(ItemNormalState) \
+    X(ItemBlessedState) \
+    X(ItemCursedState) \
 
-typedef enum ItemType {
-    ItemPotionOfCure,
-    ItemWeaponSword,
-    ItemStrawHat,
-} ItemType;
+DECLARE_ENUM(ItemState, ITEMS_STATE)
+
+#define ITEMS_TYPES(X) \
+    X(ItemPotionOfCure) \
+    X(ItemWeaponSword) \
+    X(ItemStrawHat) \
+
+DECLARE_ENUM(ItemType, ITEMS_TYPES)
 
 typedef struct Item {
     char c;

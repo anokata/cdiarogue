@@ -89,7 +89,7 @@
       - +load player
       - load items saving items
             - +sample items file
-            - items enums
+            - +items enums
             - load item
             - dump item
             - load items list

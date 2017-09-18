@@ -1,6 +1,8 @@
 #include "item.h"
 
 IMPLEMENT_ENUM(ItemClass, ITEMS_CLS)
+IMPLEMENT_ENUM(ItemState, ITEMS_STATE)
+IMPLEMENT_ENUM(ItemType, ITEMS_TYPES)
 
 char *item_types[] = {
     "potion of cure wounds",
