@@ -4,6 +4,11 @@ IMPLEMENT_ENUM(ItemClass, ITEMS_CLS)
 IMPLEMENT_ENUM(ItemState, ITEMS_STATE)
 IMPLEMENT_ENUM(ItemType, ITEMS_TYPES)
 
+
+const char item_file_header[] = "name:char:x:y:color:value:class:state:type:\n";
+const char item_file_type[] = "# vi: filetype=sh\n";
+const char item_dump_format[] = "%s:%c:%d:%d:%s:%d:%s:%s:%s:\n";
+
 char *item_types[] = {
     "potion of cure wounds",
     "wood sword",
@@ -85,4 +90,18 @@ char *item_descript(Item item) {
 int item_value(Item item) {
     if (!item) return 0;
     return item->value;
+}
+
+Item item_deserialize(Strings str) {
+    char c = str[1][0];
+    int x = atoi(str[2]);
+    int y = atoi(str[3]);
+    Item item = item_new(c, x, y);
+    //item->name = strdup(str[0]);
+    item->color = cc_color_from_str(str[4]);
+    item->value = atoi(str[5]);
+    item->cls = ItemClass_from_str(str[6]);
+    item->state = ItemState_from_str(str[7]);
+    item->type = ItemType_from_str(str[8]);
+    return item;
 }

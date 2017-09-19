@@ -22,4 +22,13 @@ int main() {
     assert(ItemNormalState == ItemState_from_str("ItemNormalState"));
     printf("item type from str: %s\n", ItemTypeNames[ItemStrawHat]);
     printf("item state from str: %s\n", ItemStateNames[ItemBlessedState]);
+
+    printf("Load: \n");
+    char *test = strdup("wood sword:/:1:1:_cn_white:1:ItemWeaponCls:ItemNormalState:ItemWeaponSword:");
+    Strings s = parse_dsv_line(test, 9);
+    Item item = item_deserialize(s);
+
+    item_free(item);
+    free_dsv_strings(s);
+    free(test);
 }

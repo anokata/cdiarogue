@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <glib.h>
 #include "util.h"
+#include "config_parser.h"
 
 #define DECLARE_ENUM(NAME, ELEMS) typedef enum NAME {\
     ELEMS(MAKE_ENUM)\
@@ -69,3 +70,5 @@ Item items_get(Items items, int x, int y);
 
 char *item_descript(Item item);
 int item_value(Item item);
+
+Item item_deserialize(Strings str);
