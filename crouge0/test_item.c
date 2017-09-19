@@ -39,5 +39,7 @@ int main() {
     free(test);
 
     /* load/save list of items */
-
+    Items items = items_load("./maps/map_1_1.items");
+    items_save("/tmp/items", items);
+    items_free(&items);
 }

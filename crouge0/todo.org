@@ -90,10 +90,10 @@
       - load items saving items
             - +sample items file
             - +items enums
-            - load item
-            - dump item
-            - load items list
-            - save items list
+            - +load item
+            - +dump item
+            - +load items list
+            - +save items list
             - load map items
             - load player items
             - save map items

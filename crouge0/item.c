@@ -123,3 +123,36 @@ char *item_serialize(Item item) {
     );
     return buf;
 }
+
+Items items_load(char *filename) {
+    Items items = NULL; 
+    filename = strdup(filename);
+    StringTable st = parse_dsv_file(filename);
+    StringTable it = &st[1]; // first line is header
+    do {
+        Item item = item_deserialize(*it);
+        item_add(&items, item); 
+        DEBUG_PRINT("load item: %s\n", item->name);
+    } while (*++it);
+
+    free_dsv_table(st);
+    free(filename);
+    return items;
+}
+
+void items_save(char *filename, Items items) {
+    GList *it = items;
+    FILE *out = fopen(filename, "w+");
+    fwrite(item_file_header, strlen(item_file_header), 1, out);
+    fwrite(item_file_type, strlen(item_file_type), 1, out);
+
+    while (it) {
+        Item item = it->data;
+        char *line = item_serialize(item);
+        fwrite(line, strlen(line), 1, out);
+        free(line);
+        it = g_list_next(it);
+    }
+
+    fclose(out);
+}
