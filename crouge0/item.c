@@ -36,6 +36,7 @@ Item item_new(char c, int x, int y) {
 }
 
 void item_free(Item item) {
+    if (item->name) free(item->name);
     free(item);
 }
 
@@ -97,7 +98,7 @@ Item item_deserialize(Strings str) {
     int x = atoi(str[2]);
     int y = atoi(str[3]);
     Item item = item_new(c, x, y);
-    //item->name = strdup(str[0]);
+    item->name = strdup(str[0]);
     item->color = cc_color_from_str(str[4]);
     item->value = atoi(str[5]);
     item->cls = ItemClass_from_str(str[6]);
