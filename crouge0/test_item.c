@@ -23,12 +23,21 @@ int main() {
     printf("item type from str: %s\n", ItemTypeNames[ItemStrawHat]);
     printf("item state from str: %s\n", ItemStateNames[ItemBlessedState]);
 
+    /* (de)serialize one item */
     printf("Load: \n");
-    char *test = strdup("wood sword:/:1:1:_cn_white:1:ItemWeaponCls:ItemNormalState:ItemWeaponSword:");
+    char *test = strdup("wood sword:/:1:1:_cn_white:1:ItemWeaponCls:ItemNormalState:ItemWeaponSword:\n");
     Strings s = parse_dsv_line(test, 9);
     Item item = item_deserialize(s);
 
+    char *dump = item_serialize(item);
+    printf("serialized: %s\n", dump);
+    assert(strcmp(dump, test) == 0);
+
+    free(dump);
     item_free(item);
     free_dsv_strings(s);
     free(test);
+
+    /* load/save list of items */
+
 }

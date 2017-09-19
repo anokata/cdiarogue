@@ -72,3 +72,4 @@ char *item_descript(Item item);
 int item_value(Item item);
 
 Item item_deserialize(Strings str);
+char *item_serialize(Item item);

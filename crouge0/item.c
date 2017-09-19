@@ -5,6 +5,7 @@ IMPLEMENT_ENUM(ItemState, ITEMS_STATE)
 IMPLEMENT_ENUM(ItemType, ITEMS_TYPES)
 
 
+extern char *ColorNames[];
 const char item_file_header[] = "name:char:x:y:color:value:class:state:type:\n";
 const char item_file_type[] = "# vi: filetype=sh\n";
 const char item_dump_format[] = "%s:%c:%d:%d:%s:%d:%s:%s:%s:\n";
@@ -105,4 +106,20 @@ Item item_deserialize(Strings str) {
     item->state = ItemState_from_str(str[7]);
     item->type = ItemType_from_str(str[8]);
     return item;
+}
+
+char *item_serialize(Item item) {
+    char *buf = malloc(BUFSIZE);
+    snprintf(buf, BUFSIZE, item_dump_format,
+            item->name,
+            item->c,
+            item->x,
+            item->y,
+            ColorNames[item->color.color],
+            item->value,
+            ItemClassNames[item->cls],
+            ItemStateNames[item->state],
+            ItemTypeNames[item->type]
+    );
+    return buf;
 }
