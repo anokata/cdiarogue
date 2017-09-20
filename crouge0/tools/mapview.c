@@ -1,6 +1,10 @@
 #include <stdio.h>
 #include "tile_map.h"
 
+void dispatch(char *argv[]) {
+    // fow get wh
+}
+
 int main(int argc, char* argv[]) {
     UNUSED(argc);
     UNUSED(argv);

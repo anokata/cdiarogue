@@ -42,4 +42,12 @@ int main() {
     Items items = items_load("./maps/map_1_1.items");
     items_save("/tmp/items", items);
     items_free(&items);
+
+
+#include <libgen.h>
+    char *full_mapname = strdup("../maps/map_1_1");
+    char *base_path = strdup(dirname(full_mapname));
+    free(full_mapname);
+    printf("%s\n", base_path);
+    free(base_path);
 }

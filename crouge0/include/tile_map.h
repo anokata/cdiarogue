@@ -7,6 +7,7 @@
 #include "config_parser.h"
 #include <stdbool.h>
 #include <glib.h>
+#include <libgen.h>
 
 typedef struct Tile {
     Color color;

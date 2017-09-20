@@ -100,12 +100,15 @@ bool _get_tile_passable(GHashTable *config, int i) {
     return _get_tile_opt(config, i, "passb") == 't';
 }
 
-void load_colors(TileMap map, GHashTable *config) {
+void load_colors(TileMap map, GHashTable *config, char* base_path) {
+    char tiles_file_path[BUFSIZE];
     char *tiles_file = g_hash_table_lookup(config, "tiles_file");
-    StringTable tiles_config = parse_dsv_file(tiles_file);
+    snprintf(tiles_file_path, BUFSIZE, "%s/%s", base_path, tiles_file);
+
+    StringTable tiles_config = parse_dsv_file(tiles_file_path);
     StringTable it = tiles_config;
 
-    DEBUG_PRINT("Tiles@%s\n", tiles_file);
+    DEBUG_PRINT("Tiles@%s %s\n", tiles_file, tiles_file_path);
     /* dsv_table_print(tiles_config); */
     it++; // skip first header line
     while (*it) {
@@ -132,12 +135,16 @@ TileMap load_tile_map(string filename) {
     char *map_data = g_hash_table_lookup(config, "map");
     DEBUG_PRINT("Loading tile map with w:%d h:%d\n", width, height);
 
+    char *full_mapname = strdup(filename);
+    char *base_path = strdup(dirname(full_mapname));
+    free(full_mapname);
+
     map = make_tile_map(width, height);
 
     if (mode == 0) { 
         /* Local map */
         copy_map2tiles(map, map_data, strlen(map_data), 0);
-        load_colors(map, config); 
+        load_colors(map, config, base_path); 
     } else if (mode == 1) { 
         /* Global map by line */
         copy_map2tiles(map, map_data, strlen(map_data), 0);
@@ -147,6 +154,7 @@ TileMap load_tile_map(string filename) {
     }
     /* print_tile_map(map); */
     g_hash_table_destroy(config);
+    free(base_path);
 
     return map;
 }
@@ -180,6 +188,7 @@ TileMap load_global_tmap() {
     DEBUG_PRINT("Global tile map with w:%d h:%d\n", global_map->width, global_map->height);
     global_map->actors = actors_load(actors_file);
 
+    /* TODO From location */
     string mapname_format = "maps/map_%i_%i";
     char mapname[100];
     int block_height = local_map_width * local_width * local_map_height;
