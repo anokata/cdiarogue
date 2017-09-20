@@ -51,3 +51,11 @@ char *error_msg() {
 
     return error_messages[global_error];
 }
+
+void ensure_file(char *filename) {
+	if (access(filename, F_OK) == -1) {
+		fprintf(stderr, "File %s not accessible.\n", filename);
+		exit(1);
+	}
+}
+

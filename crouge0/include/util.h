@@ -35,6 +35,7 @@ typedef void (*EachStrFunc)(char* str, void *data);
 void for_every_part(char *text, char delim, EachStrFunc f, void *data);
 
 char *read_whole_file(char *filename);
+void ensure_file(char *filename);
 
 #define max(x, y) ((x) > (y) ? (x) : (y))
 #define min(x, y) ((x) < (y) ? (x) : (y))

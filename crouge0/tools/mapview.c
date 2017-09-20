@@ -1,5 +1,7 @@
 #include <stdio.h>
+#include <unistd.h>
 #include "tile_map.h"
+#include "util.h"
 #define DEBUG
 
 /* cmd */
@@ -15,7 +17,28 @@ typedef struct Command {
 Command cmd_get(char *name);
 /* cmd end */
 
+void calc_hw(char *filename) {
+	ensure_file(filename);
+
+	int height = 0, width = 0;
+	char *content = read_whole_file(filename);
+	char *it = content;
+
+	while (*it != '\n') {
+		width++;
+		it++;
+	}
+	height++;
+	while (*it) {
+		if (*it++ == '\n') height++;
+	}
+	
+	free(content);
+	printf("%d\n%d\n", width, height);
+}
+
 void show_map(char *map_name) {
+	ensure_file(map_name);
     TileMap l = load_tile_map(map_name);
     print_tile_map(l);
     free_tile_map(l);
@@ -28,9 +51,16 @@ UNUSED(argc);
 }
 
 
+void hw_calc_cmd(int argc, char *argv[]) {
+UNUSED(argc);
+    char *map_name = argv[2];
+	calc_hw(map_name);
+}
+
+
 Command Commands[] = {
     {"show", show_map_cmd},
-    /* {"hw", calc_hw}, */
+    {"hw", hw_calc_cmd},
 };
 static int commands_count = sizeof(Commands)/sizeof(Command);
 
