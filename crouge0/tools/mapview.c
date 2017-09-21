@@ -37,6 +37,14 @@ void calc_hw(char *filename) {
 	printf("%d\n%d\n", width, height);
 }
 
+void set_map_data(char *map_name, char *map_data_file) {
+	ensure_file(map_name);
+	ensure_file(map_data_file);
+	char *content = read_whole_file(map_data_file);
+    // need map save
+    free(content);
+}
+
 void show_map(char *map_name) {
 	ensure_file(map_name);
     TileMap l = load_tile_map(map_name);
@@ -58,9 +66,21 @@ UNUSED(argc);
 }
 
 
+void set_map_data_cmd(int argc, char *argv[]) {
+    if (argc < 3) {
+        printf("Not enoght arguments\n");
+        exit(1);
+    }
+    char *map_name = argv[2];
+    char *map_data_file = argv[3];
+    set_map_data(map_name, map_data_file);
+}
+
+
 Command Commands[] = {
     {"show", show_map_cmd},
     {"hw", hw_calc_cmd},
+    {"setmap", set_map_data_cmd},
 };
 static int commands_count = sizeof(Commands)/sizeof(Command);
 
