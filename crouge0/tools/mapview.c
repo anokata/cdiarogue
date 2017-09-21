@@ -41,7 +41,7 @@ void set_map_data(char *map_name, char *map_data_file) {
 	ensure_file(map_name);
 	ensure_file(map_data_file);
 	char *content = read_whole_file(map_data_file);
-    // need map save
+    // need TILE map save
     free(content);
 }
 

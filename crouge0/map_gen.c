@@ -113,3 +113,6 @@ void save_map(Map map, char *filename) {
     DEBUG_PRINT("Saved to %s\n", filename);
     free_map(map);
 }
+
+void save_tilemap(TileMap map, char *filename) {
+}
