@@ -189,6 +189,13 @@ First - fun therefore slash like dia, but not clone dia.
  - unlimited levels, K M G .. grades of stats, exp, money, souls  or reform
  - mood
  - craft
+ - map gen - rooms without coridors hallways - just rooms connected with doors
+      make random H or V split space until all rooms squares become less X.  make it walls
+      drop Y% rooms
+      drop all unaccessible - not has common side
+      make doors in common sides (all or % then drop unaccessible)
+      - add special zones
+ - map gen - rooms grow from one rect on random side other random rect
 
 2. Magic and skill grows like morow
 3. World height? it difficult for first try, lets it be simple dung with wild
@@ -270,9 +277,11 @@ freedome, lying in island in see over a desert.
 - UI progress bar with value
 - console animation, fake loading with fake hdd sound
 
+Paw of day darkness
 
 * backlog
 make dir for src
 separate src .c for dirs/modules
 fill gcov
 m4 proc
+calc width or height

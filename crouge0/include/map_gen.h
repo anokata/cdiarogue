@@ -23,6 +23,7 @@ int fget_int_line(FILE *file);
 char map_char_at(TileMap map, int x, int y);
 void save_map(Map map, char *filename);
 void save_tilemap(TileMap map, char *filename);
+Map gen_map(int width, int height);
 
 
 #endif

@@ -1,12 +1,12 @@
 # vim: filetype=make
 OBJECTS=app.c main.c map_gen.c world_map.c g.c tile_map.c util.c config_parser.c actor.c render.c collide.c events.c behavior.c item.c inventory.c charinfo.c
-MAP_OBJECTS=mapgen_main.c map_gen.c tile_map.c util.c config_parser.c actor.c item.c
+MAP_OBJECTS=test_mapgen.c map_gen.c tile_map.c util.c config_parser.c actor.c item.c
 TMAP_OBJECTS=tile_map.c test_tile_map.c util.c
 
 BUILD_DIR=/tmp/build
 
 P=rouge0
-MAPGEN=mapgen_main
+MAPGEN=test_mapgen
 LIB=libccurses.a
 CC=gcc
 LFLAGS=-L../lib -lccurses -lncurses 
@@ -30,7 +30,7 @@ prepare:
 lint:
 	splint main.c $(IFLAGS)
 
-mapgen_main: prepare
+test_mapgen: prepare
 	$(CC) $(MAP_OBJECTS) $(CFLAGS) -o $(BUILD_DIR)/$@ && valgrind $(BUILD_DIR)/$@ && ls -l $(BUILD_DIR)/*.map
 
 test_sky: prepare
