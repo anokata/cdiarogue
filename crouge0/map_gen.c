@@ -3,14 +3,10 @@
 Map make_map(int width, int height) { // OK 
     Map map = malloc(sizeof(struct Map));
     char *data = calloc(width * height, 1);
+    memset(data, '.', width * height);
     map->data = data;
     map->width = width;
     map->height = height;
-    for (int i=0; i < height; i++) {
-        for (int j=0; j < width; j++) {
-            data[i * width + j] = ' ';
-        }
-    }
     return map;
 }
 
@@ -56,6 +52,51 @@ Map gen_map(int width, int height) {
             map->data[i * width + j] = rand_char();
         }
     }
+    return map;
+}
+
+static const char wall = '#';
+static const char floor = '.';
+
+void map_horizont_line(Map map, int y) {
+    for (int i = 0; i < map->width; i++) {
+        map->data[y * map->width + i] = wall;
+    }
+}
+
+void map_vetical_line(Map map, int x) {
+    for (int i = 0; i < map->height; i++) {
+        map->data[i * map->width + x] = wall;
+    }
+}
+
+// Test it
+void map_vetical_line_to(Map map, int x, int y) {
+    for (int i = y; i < map->height && map->data[i * map->width + x] == floor; i++) {
+        map->data[i * map->width + x] = wall;
+    }
+}
+
+Map gen_map_rooms_split(int width, int height) {
+    time_t t;
+    srand((unsigned) time(&t));
+    map_chars_count = strlen(map_chars);
+
+    Map map = make_map(width, height);
+
+    // TODO save old, not do close?
+    for (int i = 0; i < 1; i++) {
+        int x = rand() % width;
+        int y = rand() % height;
+        int hv = rand() % 2;
+        if (hv) {
+            map_horizont_line(map, y);
+        } else {
+            /* map_vetical_line(map, x); */
+            map_vetical_line_to(map, x, y);
+        }
+    }
+
     return map;
 }
 
@@ -114,5 +155,5 @@ void save_map(Map map, char *filename) {
     free_map(map);
 }
 
-void save_tilemap(TileMap map, char *filename) {
-}
+/* void save_tilemap(TileMap map, char *filename) { */
+/* } */

@@ -24,6 +24,9 @@ char map_char_at(TileMap map, int x, int y);
 void save_map(Map map, char *filename);
 void save_tilemap(TileMap map, char *filename);
 Map gen_map(int width, int height);
+Map gen_map_rooms_split(int width, int height);
+void print_map(Map map);
+void free_map(Map map);
 
 
 #endif
