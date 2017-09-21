@@ -91,6 +91,11 @@ void print_map(Map map) { // OK DEPRECATED
 
 int out_map(char *filename, int width, int height) {
     Map map = gen_map(width, height);
+    save_map(map, filename);
+    return 0;
+}
+
+void save_map(Map map, char *filename) {
     FILE *file = fopen(filename, "w");
 
     char *buf = malloc(100);
@@ -107,6 +112,4 @@ int out_map(char *filename, int width, int height) {
     print_map(map);
     DEBUG_PRINT("Saved to %s\n", filename);
     free_map(map);
-    return 0;
 }
-

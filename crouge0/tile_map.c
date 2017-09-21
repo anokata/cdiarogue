@@ -104,6 +104,7 @@ void load_colors(TileMap map, GHashTable *config, char* base_path) {
     char tiles_file_path[BUFSIZE];
     char *tiles_file = g_hash_table_lookup(config, "tiles_file");
     snprintf(tiles_file_path, BUFSIZE, "%s/%s", base_path, tiles_file);
+    if (!tiles_file) return;
 
     StringTable tiles_config = parse_dsv_file(tiles_file_path);
     StringTable it = tiles_config;
