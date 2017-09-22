@@ -147,6 +147,16 @@ Map tilemap_convert2map(TileMap tmap) {
     return map;
 }
 
+TileMap map_convert2tilemap(Map map) {
+    TileMap tmap = make_tile_map(map->width, map->height);
+    for (int i=0; i < map->height; i++) {
+        for (int j=0; j < map->width; j++) {
+            tmap->tiles[i * map->width + j].c = map->data[i * map->width + j];
+        }
+    }
+    return tmap;
+}
+
 void save_map(Map map, char *filename) {
     FILE *file = fopen(filename, "w");
 

@@ -21,6 +21,10 @@ void test() {
     m = load_tile_map(filename);
     map = tilemap_convert2map(m);
     print_map(map);
+    memset(map->data, '*', 30);
+    free_tile_map(m);
+    m = map_convert2tilemap(map);
+    print_tile_map(m);
     free_tile_map(m);
     free_map(map);
 }

@@ -42,6 +42,10 @@ void set_map_data(char *map_name, char *map_data_file) {
 	ensure_file(map_data_file);
 	char *content = read_whole_file(map_data_file);
     // need TILE map save
+    TileMap tmap = load_tile_map(map_name);
+    tilemap_setchars(tmap, content);
+    // save_tilemap(tmap)
+    free_tile_map(tmap);
     free(content);
 }
 
