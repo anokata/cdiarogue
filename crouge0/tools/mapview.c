@@ -39,10 +39,12 @@ void calc_hw(char *filename) {
 }
 
 void set_map_data(char *map_name, char *map_data_file) {
+    // !! TODO Recalc Width Height
 	ensure_file(map_name);
 	ensure_file(map_data_file);
     printf("Set map data to %s from %s\n", map_name, map_data_file);
 	char *content = read_whole_file(map_data_file);
+    // TODO Refactor
     TileMap tmap = load_tile_map(map_name);
     Map map = tilemap_convert2map(tmap);
     /* tilemap_setchars(tmap, content); */
@@ -57,11 +59,22 @@ void set_map_data(char *map_name, char *map_data_file) {
             }
         }
         memcpy(map->data, mapdata, size);
-    // save_tilemap(tmap)
-    // TODO save to ?
-    save_map(map, "/tmp/out");
+
+    char newmapname[BUFSIZE];
+    snprintf(newmapname, BUFSIZE, "%s.new", map_name);
+    
+    TileMap smap = map_convert2tilemap(map);
+    void *tmp = tmap->tiles;
+    tmap->tiles = smap->tiles;
+    save_tilemap(tmap, newmapname);
+        printf("Saved to %s\n", newmapname);
+    
+    tmap->tiles = tmp;
+
     free(mapdata);
+    free_tile_map(smap);
     free_tile_map(tmap);
+    free_map(map);
     free(content);
 }
 

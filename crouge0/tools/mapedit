@@ -20,12 +20,13 @@ if [ ! -x "$MAPVIEW" ]; then
     make mapview
 fi
 
-cd ../
-$MAPVIEW $MAPNAME > $MAPFILE
-cd /tmp
+#cd ../ # TODO fix rel path problems
+$MAPVIEW showmap $MAPNAME > $MAPFILE
+#cd /tmp
 $EDITOR $MAPFILE
-cat $MAPFILE | tr -d "\n" 
-
+#cat $MAPFILE | tr -d "\n" 
+$MAPVIEW setmap $MAPNAME $MAPFILE
+$EDITOR $MAPNAME.new
 
 
 

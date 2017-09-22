@@ -107,8 +107,9 @@
         We have to add to it base path to correct
         First need make use files path relative map dir
       - +make tiles files path relative map dir
-      - make out tiles to tiles file in map save 
+      - +make out tiles to tiles file in map save 
             and set tiles file in map file
+      - make recalc new width n height
 
 - make maps, town(heal point?, stores), dungeon
 
