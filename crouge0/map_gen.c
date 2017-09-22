@@ -70,7 +70,7 @@ void map_vetical_line(Map map, int x) {
     }
 }
 
-// Test it
+// Test it TODO
 void map_vetical_line_to(Map map, int x, int y) {
     for (int i = y; i < map->height && map->data[i * map->width + x] == floor; i++) {
         map->data[i * map->width + x] = wall;
@@ -167,14 +167,28 @@ void save_map(Map map, char *filename) {
 
     fwrite(map->data, get_map_size(map), 1, file);
     fwrite("\n", 1, 1, file);
-    // TODO tiles_count colors etc
     fclose(file);
 
     DEBUG_PRINT("Map:\n");
     /* print_map(map); */
     DEBUG_PRINT("Saved to %s\n", filename);
-    free_map(map);
+    free_map(map); //TODO don't save
 }
 
-/* void save_tilemap(TileMap map, char *filename) { */
-/* } */
+void save_tilemap(TileMap map, char *filename) {
+    FILE *file = fopen(filename, "w");
+
+    char *buf = malloc(100);
+    sprintf(buf, "mode:%d\nwidth:%d\nheight:%d\nmap:", 0, map->width, map->height); 
+    fwrite(buf, strlen(buf), 1, file);
+
+    Map m = tilemap_convert2map(map);
+    fwrite(m->data, get_map_size(m), 1, file);
+    fwrite("\n", 1, 1, file);
+    sprintf(buf, "tiles_file:%s\n", map->tiles_file); 
+    fwrite(buf, strlen(buf), 1, file);
+
+    fclose(file);
+    free(buf);
+    free_map(m);
+}

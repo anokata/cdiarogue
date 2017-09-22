@@ -24,6 +24,7 @@ void test() {
     memset(map->data, '*', 30);
     free_tile_map(m);
     m = map_convert2tilemap(map);
+    save_tilemap(m, "/tmp/out");
     print_tile_map(m);
     free_tile_map(m);
     free_map(map);

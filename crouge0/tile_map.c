@@ -8,12 +8,17 @@ TileMap make_tile_map(int width, int height) {
     map->height = height;
     map->actors = NULL;
     map->items = NULL;
+    map->tiles_file = NULL;
     for (int i=0; i < height; i++) {
         for (int j=0; j < width; j++) {
             tiles[i * width + j].c = ' ';
         }
     }
     return map;
+}
+
+void afree(void *data) {
+    if (data) free(data);
 }
 
 void free_tile_map(TileMap map) {
@@ -23,6 +28,7 @@ void free_tile_map(TileMap map) {
     }
     items_free(&map->items);
     free(map->tiles);
+    afree(map->tiles_file);
     free(map);
 }
 
@@ -105,6 +111,7 @@ void load_colors(TileMap map, GHashTable *config, char* base_path) {
     char *tiles_file = g_hash_table_lookup(config, "tiles_file");
     snprintf(tiles_file_path, BUFSIZE, "%s/%s", base_path, tiles_file);
     if (!tiles_file) return;
+    map->tiles_file = strdup(tiles_file);
 
     StringTable tiles_config = parse_dsv_file(tiles_file_path);
     StringTable it = tiles_config;

@@ -27,6 +27,7 @@ typedef struct TileMap {
     int height;
     GList *actors;
     Items items;
+    char *tiles_file;
 } *TileMap;
 
 typedef struct WorldMap {
