@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <unistd.h>
 #include "tile_map.h"
+#include "map_gen.h"
 #include "util.h"
 #define DEBUG
 
@@ -40,11 +41,26 @@ void calc_hw(char *filename) {
 void set_map_data(char *map_name, char *map_data_file) {
 	ensure_file(map_name);
 	ensure_file(map_data_file);
+    printf("Set map data to %s from %s\n", map_name, map_data_file);
 	char *content = read_whole_file(map_data_file);
-    // need TILE map save
     TileMap tmap = load_tile_map(map_name);
-    tilemap_setchars(tmap, content);
+    Map map = tilemap_convert2map(tmap);
+    /* tilemap_setchars(tmap, content); */
+    // content drop \n
+        size_t size = get_map_size(map);
+        char *mapdata = malloc(size);
+        memset(mapdata, ' ', size);
+        int j = 0;
+        for (size_t i = 0; i < size; i++) {
+            if (content[i] != '\n') {
+                mapdata[j++] = content[i];
+            }
+        }
+        memcpy(map->data, mapdata, size);
     // save_tilemap(tmap)
+    // TODO save to ?
+    save_map(map, "/tmp/out");
+    free(mapdata);
     free_tile_map(tmap);
     free(content);
 }

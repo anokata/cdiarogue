@@ -171,7 +171,7 @@ void save_map(Map map, char *filename) {
     fclose(file);
 
     DEBUG_PRINT("Map:\n");
-    print_map(map);
+    /* print_map(map); */
     DEBUG_PRINT("Saved to %s\n", filename);
     free_map(map);
 }
