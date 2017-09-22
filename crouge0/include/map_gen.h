@@ -27,6 +27,7 @@ Map gen_map(int width, int height);
 Map gen_map_rooms_split(int width, int height);
 void print_map(Map map);
 void free_map(Map map);
+Map tilemap_convert2map(TileMap tmap);
 
 
 #endif

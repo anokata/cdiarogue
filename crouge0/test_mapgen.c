@@ -17,6 +17,12 @@ void test() {
     map = gen_map_rooms_split(width, height);
     print_map(map);
     free_map(map);
+
+    m = load_tile_map(filename);
+    map = tilemap_convert2map(m);
+    print_map(map);
+    free_tile_map(m);
+    free_map(map);
 }
 
 int main() {
