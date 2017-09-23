@@ -65,6 +65,21 @@
             - +show stat points
             - +spend SP on char view by key to base stats up
 
+* +maps
+- /mapreplace (actuallize map gen) to make tile map save func
+- +mapedit - save with new data
+        Reading by relative crash tile loading because there not valid filenames
+        In map we have relative path - it's ok
+        We have to add to it base path to correct
+        First need make use files path relative map dir
+      - +make tiles files path relative map dir
+      - +make out tiles to tiles file in map save 
+            and set tiles file in map file
+      - +make recalc new width n height
+      - +save to tmp old map, replace new
+
+- +fix viewport moving to end and init at player
+
 [ INWORK ]
 ** 9. map for some playable  [need some remaking ]
 - other tiles types with props such water, plants, enters, doors
@@ -99,23 +114,8 @@
             - save map items
             - save player items
 
-* maps
-- /mapreplace (actuallize map gen) to make tile map save func
-- mapedit - save with new data
-        Reading by relative crash tile loading because there not valid filenames
-        In map we have relative path - it's ok
-        We have to add to it base path to correct
-        First need make use files path relative map dir
-      - +make tiles files path relative map dir
-      - +make out tiles to tiles file in map save 
-            and set tiles file in map file
-      - +make recalc new width n height
-      - save to tmp old map, replace new
-
-- fix viewport moving to end and init at player
-- make maps, town(heal point?, stores), dungeon
-
 * 10 min dia like
+- make maps, town(heal point?, stores), dungeon
 - town
 - shops
 - enter to dung

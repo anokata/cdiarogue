@@ -34,7 +34,7 @@ struct IntPair calc_heightNwidth(char *filename) {
 		width++;
 		it++;
 	}
-	height++;
+	/* height++; */
 	while (*it) {
 		if (*it++ == '\n') height++;
 	}
@@ -76,7 +76,9 @@ void set_map_data(char *map_name, char *map_data_file) {
         memcpy(map->data, mapdata, size);
 
     char newmapname[BUFSIZE];
-    snprintf(newmapname, BUFSIZE, "%s.new", map_name);
+    char *dup_map_name = strdup(map_name);
+    char *name = basename(dup_map_name);
+    snprintf(newmapname, BUFSIZE, "/tmp/%s.new", name);
     
     TileMap smap = map_convert2tilemap(map);
     tmap->width = wh.a;
@@ -89,6 +91,7 @@ void set_map_data(char *map_name, char *map_data_file) {
     tmap->tiles = tmp;
 
     free(mapdata);
+    free(dup_map_name);
     free_tile_map(smap);
     free_tile_map(tmap);
     free_map(map);
