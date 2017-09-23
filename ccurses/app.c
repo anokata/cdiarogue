@@ -32,6 +32,13 @@ int draw(void* data) {
     cc_printi(123, cb_green);
     cc_printxy("cc_printxy", cn_blue, 2, 3);
     cc_put('X', cb_blue);
+    cc_putxy('x', cb_yellow, 1, 5);
+    cc_putxy('x', cb_yellow, 2, 5);
+    cc_putxy('x', cb_yellow, 3, 5);
+    cc_putxy('x', cb_yellow, 4, 5);
+    cc_putxy('x', cb_yellow, 5, 5);
+    cc_putxy('x', cb_yellow, 6, 5);
+    cc_putxy('x', cb_yellow, 7, 5);
     return 0;
 }
 
