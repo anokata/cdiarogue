@@ -53,7 +53,7 @@ void set_map_data(char *map_name, char *map_data_file) {
         char *mapdata = malloc(size);
         memset(mapdata, ' ', size);
         int j = 0;
-        for (size_t i = 0; i < size; i++) {
+        for (size_t i = 0; i < strlen(content); i++) {
             if (content[i] != '\n') {
                 mapdata[j++] = content[i];
             }

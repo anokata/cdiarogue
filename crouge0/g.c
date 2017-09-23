@@ -29,7 +29,8 @@ G new_g() {
     g->cursor.x = 0;
     g->cursor.y = 0;
 
-    g->view = malloc(sizeof(Viewport));
+    g->view = malloc(sizeof(struct Viewport));
+    // TODO move to loaded player 
     g->view->cx = 0;
     g->view->cy = 0;
 #ifndef WORK
@@ -45,15 +46,6 @@ G new_g() {
     g->log = NULL;
     g->log_len = 0;
 
-    // make_player( for selected config - new gm
-    /* g->player = make_actor('@', 0, 0); */
-    /* g->player->role = RolePlayer; */
-    /* g->player->color = cb_white; */
-    /* g->player->behavior = BehaviorStand; */
-    /* g->player->name = strdup("you"); */
-    /* g->player->stat_hp = 27; */
-    /* g->player->basestat_constitution = 7; */
-
     g->last_target = NULL;
 
     return g;
@@ -68,14 +60,12 @@ void free_g(G g) {
     free_wmap(g->wmap);
 
     free_actors(&g->gmap->actors);
-    //g_list_free(g->gmap->actors);
     g->gmap->actors = NULL;
 
     free_tile_map(g->gmap);
     free(g->view);
     g_list_foreach(g->log, gfree, NULL);
     g_list_free(g->log);
-    //free(g->player);
     free(g);
 }
 

@@ -1,5 +1,5 @@
 #include "app.h"
-char version[] = "0.0.2";
+char version[] = "0.0.3";
 char *player_file = "./maps/you";
 
 /* GLOBAL */
@@ -287,7 +287,7 @@ void load_player(Actor *you) {
 
 void save(G g) {
     // TODO
-    save_player(g->player); // unplug for debug 
+    //save_player(g->player); // unplug for debug 
 }
 
 void load(G g) {

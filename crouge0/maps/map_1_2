@@ -1,5 +1,6 @@
+# vi: filetype=sh
 mode:0
 width:20
 height:10
-map:oooooooooooooooooooo........................oooooooooo..........o........o..........o........o...................o..........o........o..........o...................oooooooooo.................         
-tiles_file:map_1_2.tiles
+map:oooooooooooooooooooo........................oooooooooo..........o........o..........o........o...................o..........o........o..........o...................oooooooooo..........................
+tiles_file:map_1_1.tiles

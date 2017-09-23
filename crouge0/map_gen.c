@@ -185,8 +185,11 @@ void save_tilemap(TileMap map, char *filename) {
     Map m = tilemap_convert2map(map);
     fwrite(m->data, get_map_size(m), 1, file);
     fwrite("\n", 1, 1, file);
-    sprintf(buf, "tiles_file:%s\n", map->tiles_file); 
-    fwrite(buf, strlen(buf), 1, file);
+
+    if (map->tiles_file) {
+        sprintf(buf, "tiles_file:%s\n", map->tiles_file); 
+        fwrite(buf, strlen(buf), 1, file);
+    }
 
     fclose(file);
     free(buf);

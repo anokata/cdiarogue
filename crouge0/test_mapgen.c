@@ -19,15 +19,30 @@ void test() {
     free_map(map);
 
     m = load_tile_map(filename);
+    print_tile_map(m);
+
     map = tilemap_convert2map(m);
     print_map(map);
+
     memset(map->data, '*', 30);
+    print_map(map);
+
     free_tile_map(m);
     m = map_convert2tilemap(map);
+    print_tile_map(m);
     save_tilemap(m, "/tmp/out");
     print_tile_map(m);
+
     free_tile_map(m);
     free_map(map);
+
+
+    m = load_tile_map(filename);
+    save_tilemap(m, "/tmp/out2");
+    free_tile_map(m);
+    m = load_tile_map("/tmp/out2");
+    print_tile_map(m);
+    free_tile_map(m);
 }
 
 int main() {
