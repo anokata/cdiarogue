@@ -287,7 +287,7 @@ void load_player(Actor *you) {
 
 void save(G g) {
     // TODO
-    //save_player(g->player); // unplug for debug 
+    save_player(g->player); // unplug for debug 
 }
 
 void load(G g) {

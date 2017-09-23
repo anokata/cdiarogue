@@ -123,6 +123,7 @@ void load_colors(TileMap map, GHashTable *config, char* base_path) {
         Strings line = it[0];
         char tile_char = line[0][0];
         int color_index = atoi(line[2]);
+        /* char *color_name = */ 
         bool passable = strcmp(line[1], "f");
         DEBUG_PRINT("char: %c color: %d  pass %d\n", tile_char, color_index, passable);
 

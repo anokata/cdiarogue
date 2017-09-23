@@ -116,6 +116,7 @@
 
 * 10 min dia like
 - make maps, town(heal point?, stores), dungeon
+- make tiles color from str
 - town
 - shops
 - enter to dung
