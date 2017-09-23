@@ -39,6 +39,14 @@ int draw(void* data) {
     cc_putxy('x', cb_yellow, 5, 5);
     cc_putxy('x', cb_yellow, 6, 5);
     cc_putxy('x', cb_yellow, 7, 5);
+    cc_putxy('x', cb_yellow, 1, 6);
+    cc_putxy('x', cb_yellow, 2, 6);
+    cc_putxy('.', cb_yellow, 3, 6);
+    cc_putxy('x', cb_yellow, 4, 6);
+    cc_putxy('x', cb_yellow, 5, 6);
+    cc_putxy('x', cb_yellow, 6, 6);
+    cc_putxy('x', cb_yellow, 7, 6);
+    cc_printxy(".xxxxxxx.", cn_blue, 1, 7);
     return 0;
 }
 
