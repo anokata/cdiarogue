@@ -18,7 +18,12 @@ typedef struct Command {
 Command cmd_get(char *name);
 /* cmd end */
 
-void calc_hw(char *filename) {
+struct IntPair {
+    int a;
+    int b;
+};
+
+struct IntPair calc_heightNwidth(char *filename) {
 	ensure_file(filename);
 
 	int height = 0, width = 0;
@@ -35,7 +40,15 @@ void calc_hw(char *filename) {
 	}
 	
 	free(content);
-	printf("%d\n%d\n", width, height);
+    struct IntPair p;
+    p.a = width;
+    p.b = height;
+    return p;
+}
+
+void calc_hw(char *filename) {
+    struct IntPair p = calc_heightNwidth(filename);
+	printf("%d\n%d\n", p.a, p.b);
 }
 
 void set_map_data(char *map_name, char *map_data_file) {

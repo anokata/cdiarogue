@@ -100,7 +100,7 @@
             - save player items
 
 * maps
-- mapreplace (actuallize map gen) to make tile map save func
+- /mapreplace (actuallize map gen) to make tile map save func
 - mapedit - save with new data
         Reading by relative crash tile loading because there not valid filenames
         In map we have relative path - it's ok
@@ -110,7 +110,9 @@
       - +make out tiles to tiles file in map save 
             and set tiles file in map file
       - make recalc new width n height
+      - save to tmp old map, replace new
 
+- fix viewport moving to end and init at player
 - make maps, town(heal point?, stores), dungeon
 
 * 10 min dia like
@@ -121,6 +123,7 @@
 - stashs bushs barrels stones garbage
 - ranged damage i.e. 2-5 
 - save and exit and exit without save
+- spawn at enter? in some dungs
 
 
 - TECHDEBT :: 
