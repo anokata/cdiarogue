@@ -115,9 +115,9 @@
             - save player items
 
 * 10 min dia like
+- +make tiles color from str
 - make maps, town(heal point?, stores), dungeon
-- make tiles color from str
-- town
+- detect maps wh from first? or?
 - shops
 - enter to dung
 - teleport scroll with P
