@@ -70,11 +70,11 @@ void copy_map2tiles(TileMap map, char *line, int len, int offset) {
     }
 }
 
-void apply_color(TileMap map, char c, int color_index) {
+void apply_color(TileMap map, char c, Color color) {
     for (int y = 0; y < map->height; ++y) {
         for (int x = 0; x < map->width; ++x) {
             if (tile_at(map, x, y)->c == c) {
-                tile_at(map, x, y)->color = cc_get_color_by_id(color_index);
+                tile_at(map, x, y)->color = color;
             }
         }
     }
@@ -122,12 +122,13 @@ void load_colors(TileMap map, GHashTable *config, char* base_path) {
     while (*it) {
         Strings line = it[0];
         char tile_char = line[0][0];
-        int color_index = atoi(line[2]);
-        /* char *color_name = */ 
         bool passable = strcmp(line[1], "f");
-        DEBUG_PRINT("char: %c color: %d  pass %d\n", tile_char, color_index, passable);
 
-        apply_color(map, tile_char, color_index);
+        char *color_name = line[2];
+        Color color = cc_color_from_str(color_name);
+        DEBUG_PRINT("char: %c color: %d  pass %d\n", tile_char, color.color, passable);
+        apply_color(map, tile_char, color);
+
         foreach_tile_set(map, _set_tile_passable, (void*)passable, tile_char);
         it++;
     }

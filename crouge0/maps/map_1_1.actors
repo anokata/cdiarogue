@@ -2,4 +2,4 @@ name:char:x:y:color:behavior:status:hp:con:str:role:items_file:exp:lvl:sp:
 # vi: filetype=sh
 pinkporing:p:5:3:_cn_white:BehaviorSimpleAttacker:StatusLive:4:2:1:RoleMonster:0:1:1:0:
 ring:p:3:4:_cn_white:BehaviorSimpleAttacker:StatusLive:4:2:1:RoleMonster:0:1:1:0:
-Kain:K:4:3:_cn_blue:BehaviorStand:StatusLive:4:2:1:RoleNPC:0:1:1:0:
+Kain:K:4:3:_cb_blue:BehaviorStand:StatusLive:4:2:1:RoleNPC:0:1:1:0:
