@@ -5,17 +5,23 @@ char *player_file = "./maps/you";
 /* GLOBAL */
 extern State state;
 
+void ui_draw(G g);
+
 void process_input(G g) {
     ss_handle(state, Event_draw, g);
     debug_draw(g);
+    ui_draw(g);
 	int ch = getch();
     int status = 0;
 	while(ch != 27 && !status) {
         g->key = ch;
         status = ss_handle(state, Event_key, g);
         ss_handle(state, Event_draw, g);
-        debug_draw(g);
         proc_global_events(g);
+
+        if (g->debug) {
+            debug_draw(g);
+        }
 		ch = getch();
 	}
 }
@@ -35,42 +41,50 @@ int key_run(void* data) {
     return 0;
 }
 
-void debug_draw(G g) {
-    char buf[1024];
-    // LOG
-    char log_text[1024];
-    log_text[0] = '\0';
-    /* debuglog(g, "abc"); */
-    g_debug("hi");
-    g_log(NULL, G_LOG_LEVEL_DEBUG, "MSG");
-
-    int log_end = g->log_len - 1;
+void ui_draw(G g) {
+#define UI_X 50
+    int log_end = g->log_len;
     int log_start = (g->log_len > 8) ? g->log_len - 8 : 0;
 
+    int y = 1;
+
+    char buf[BUFSIZE];
+    snprintf(buf, BUFSIZE, 
+        "@ x:y = %d:%d [HP: %d/%d atk: %d def: %d  exp: %ld  lvl: %d ]",
+        g->player->x, g->player->y, g->player->stat_hp,
+        actor_stat_maxhp(g->player), actor_stat_attack(g->player), 
+        actor_stat_defence(g->player),
+        g->player->exp, g->player->lvl
+        );
+    cc_printxy(buf, cn_white, UI_X, y++);
+
+    snprintf(buf, BUFSIZE, 
+        "Target [HP: %d ]\t next lvl exp: %ld\n",
+        (g->last_target ? g->last_target->stat_hp : 0),
+        exp_get_to_next(g->player->lvl)
+    );
+    cc_printxy(buf, cn_white, UI_X, y++);
+
     for (int i = log_start; i < log_end; i++) {
-        strcat(log_text, g_list_nth_data(g->log, i));
-        strcat(log_text, "\n");
+        char *msg = g_list_nth_data(g->log, i);
+        cc_printxy(msg, cn_white, UI_X, y++);
     }
+}
+
+void debug_draw(G g) {
+    char buf[1024];
+    g_debug("hi");
+    g_log(NULL, G_LOG_LEVEL_DEBUG, "MSG");
 
     snprintf(buf, 1024, 
             "Debug: \t"
             "Key: %d\n" 
-            "Log:\n%s\n" 
-            "Viewport Left: %d\n" 
-            "Viewport cx:cy = %d:%d\t" 
-            "Viewport left:top = %d:%d\n" 
-            "Player x:y = %d:%d [HP: %d/%d atk: %d def: %d  exp: %ld  lvl: %d ]\t" 
-            "Target [HP: %d  ]\n" 
-            "next lvl exp: %ld\n" 
-        , g->key, log_text, 
+            "VLeft: %d\t" 
+            "Vcx:cy = %d:%d\t" 
+            "Vleft:top = %d:%d\n" 
+        , g->key, 
         g->view->display_left, g->view->cx, g->view->cy,
-        viewport_left(g->view), viewport_top(g->view),
-        g->player->x, g->player->y, g->player->stat_hp,
-        actor_stat_maxhp(g->player), actor_stat_attack(g->player), 
-        actor_stat_defence(g->player),
-        g->player->exp, g->player->lvl,
-        (g->last_target ? g->last_target->stat_hp : 0),
-        exp_get_to_next(g->player->lvl)
+        viewport_left(g->view), viewport_top(g->view)
         );
     cc_printxy(buf, cn_white, 0, 20);
 }
@@ -87,6 +101,7 @@ int draw(void* data) {
         d drop an item \n\
         q quaff a potion \n\
         e equip something \n\
+        / debug info on/of\n\
         ", 
             cn_white, 0, 0);
     return 0;
@@ -148,6 +163,9 @@ int cursor_key(void* data) {
     char key = g->key;
     char *msg;
     switch (key) {
+        case '/':
+            g->debug = !g->debug;
+            break;
         case 'r':
             ss_setstate(state, State_run);
             break;
@@ -235,6 +253,7 @@ int cursor_draw(void* data) {
     draw_charpoints(g->gmap->items, g->view);
     draw_charpoints(g->gmap->actors, g->view);
     draw_actor_self(g->player, g->view);
+    ui_draw(g);
     return 0;
 }
 

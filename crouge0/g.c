@@ -23,6 +23,7 @@ G new_g() {
     G g = malloc(sizeof(struct G));
     bzero(g, sizeof(struct G));
 
+    g->debug = 0;
     g->events = events;
     g->wmap = load_wmap();
     g->gmap = load_global_tmap();

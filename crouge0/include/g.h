@@ -47,6 +47,7 @@ typedef struct G {
     Actor player;
     Actor last_target;
     GlobalEvent *events;
+    int debug;
 } *G;
 
 G new_g();
