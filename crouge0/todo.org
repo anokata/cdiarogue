@@ -125,6 +125,7 @@
 - ranged damage i.e. 2-5 
 - save and exit and exit without save
 - spawn at enter? in some dungs
+- ?I need same char with different colors on same map 
 
 
 - TECHDEBT :: 
