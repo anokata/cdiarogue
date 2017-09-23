@@ -60,8 +60,9 @@ static const char wall = '#';
 static const char floor = '.';
 
 char char_at(Map map, int x, int y) {
-    if (x >= map->width) return floor;
-    if (y >= map->height) return floor;
+    /* printf("char@ %d %d\n", x, y); */
+    if (x >= map->width || x < 0) return floor;
+    if (y >= map->height || y < 0) return floor;
     return map->data[y * map->width + x];
 }
 
@@ -138,10 +139,10 @@ Map gen_map_rooms_split(int width, int height) {
     int x = rand() % width;
     int y = rand() % height;
     for (int i = 0; i < 20; i++) {
-        while (char_at(map, x, y) != floor) {
-            x = rand() % width;
-            y = rand() % height;
-        }
+        /* while (char_at(map, x, y) != floor) { */
+        struct IntPair point = gen_get_nine_space(map);
+        x = point.a;
+        y = point.b;
         int hv = rand() % 2;
         if (hv) {
             map_horizont_line_to(map, x, y);
