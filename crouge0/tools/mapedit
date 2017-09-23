@@ -17,7 +17,7 @@ if [ -z "$MAPNAME" ]; then
 fi
 
 if [ ! -x "$MAPVIEW" ]; then
-    make mapview
+    (cd tools;make mapview)
 fi
 
 #cd ../ # TODO fix rel path problems

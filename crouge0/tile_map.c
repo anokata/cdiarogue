@@ -60,7 +60,7 @@ void print_tile_map(TileMap map) {
     string m2;
     m2 = tilemap_to2d(map);
     DEBUG_PRINT("w:%d h:%d\n", map->width, map->height);
-    printf("%s\n", m2);
+    printf("%s", m2);
     free(m2);
 }
 
