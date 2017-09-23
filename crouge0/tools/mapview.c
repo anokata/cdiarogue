@@ -52,16 +52,18 @@ void calc_hw(char *filename) {
 }
 
 void set_map_data(char *map_name, char *map_data_file) {
-    // !! TODO Recalc Width Height
 	ensure_file(map_name);
 	ensure_file(map_data_file);
+    struct IntPair wh = calc_heightNwidth(map_data_file);
+
     printf("Set map data to %s from %s\n", map_name, map_data_file);
 	char *content = read_whole_file(map_data_file);
     // TODO Refactor
     TileMap tmap = load_tile_map(map_name);
-    Map map = tilemap_convert2map(tmap);
+    Map map = make_map(wh.a, wh.b);
     /* tilemap_setchars(tmap, content); */
     // content drop \n
+	printf("New w h %d:%d\n", wh.a, wh.b);
         size_t size = get_map_size(map);
         char *mapdata = malloc(size);
         memset(mapdata, ' ', size);
@@ -77,6 +79,8 @@ void set_map_data(char *map_name, char *map_data_file) {
     snprintf(newmapname, BUFSIZE, "%s.new", map_name);
     
     TileMap smap = map_convert2tilemap(map);
+    tmap->width = wh.a;
+    tmap->height = wh.b;
     void *tmp = tmap->tiles;
     tmap->tiles = smap->tiles;
     save_tilemap(tmap, newmapname);
@@ -125,8 +129,11 @@ void set_map_data_cmd(int argc, char *argv[]) {
 
 Command Commands[] = {
     {"show", show_map_cmd},
+    {"view", show_map_cmd},
     {"hw", hw_calc_cmd},
+    {"wh", hw_calc_cmd},
     {"setmap", set_map_data_cmd},
+    {"mapset", set_map_data_cmd},
 };
 static int commands_count = sizeof(Commands)/sizeof(Command);
 

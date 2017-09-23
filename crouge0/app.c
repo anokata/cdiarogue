@@ -292,6 +292,8 @@ void save(G g) {
 
 void load(G g) {
     load_player(&g->player);
+    g->view->cx = g->player->x;
+    g->view->cy = g->player->y;
 }
 
 void init_inventory(G g) {

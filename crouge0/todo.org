@@ -109,7 +109,7 @@
       - +make tiles files path relative map dir
       - +make out tiles to tiles file in map save 
             and set tiles file in map file
-      - make recalc new width n height
+      - +make recalc new width n height
       - save to tmp old map, replace new
 
 - fix viewport moving to end and init at player

@@ -14,9 +14,7 @@
 #include "tile_map.h"
 
 
-/* Map make_map(int width, int height); */
-/* void free_map(Map map); */
-/* void print_map(TileMap map); */
+Map make_map(int width, int height);
 int out_map(char *filename, int width, int height);
 
 int fget_int_line(FILE *file);
