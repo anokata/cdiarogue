@@ -49,6 +49,11 @@ typedef enum EError {
 
 char *error_msg();
 
+struct IntPair {
+    int a;
+    int b;
+};
+
 
 #define MAKE_STRING(STR) #STR,
 #define MAKE_ENUM(X) X,

@@ -13,11 +13,6 @@ void test() {
     print_tile_map(m);
     free_tile_map(m);
 
-    printf("\n***Creating map gen rooms\n");
-    map = gen_map_rooms_split(width, height);
-    print_map(map);
-    free_map(map);
-
     m = load_tile_map(filename);
     print_tile_map(m);
 
@@ -45,7 +40,17 @@ void test() {
     free_tile_map(m);
 }
 
+void test_gen() {
+    int width = 40;
+    int height = 20;
+    printf("\n***Creating map gen rooms\n");
+    Map map = gen_map_rooms_split(width, height);
+    print_map(map);
+    free_map(map);
+}
+
 int main() {
-    test();
+    //test();
+    test_gen();
 }
 

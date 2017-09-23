@@ -18,11 +18,6 @@ typedef struct Command {
 Command cmd_get(char *name);
 /* cmd end */
 
-struct IntPair {
-    int a;
-    int b;
-};
-
 struct IntPair calc_heightNwidth(char *filename) {
 	ensure_file(filename);
 

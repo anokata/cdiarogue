@@ -55,8 +55,19 @@ Map gen_map(int width, int height) {
     return map;
 }
 
+
 static const char wall = '#';
 static const char floor = '.';
+
+char char_at(Map map, int x, int y) {
+    if (x >= map->width) return floor;
+    if (y >= map->height) return floor;
+    return map->data[y * map->width + x];
+}
+
+char *pchar_at(Map map, struct IntPair p) {
+    return &map->data[p.b * map->width + p.a];
+}
 
 void map_horizont_line(Map map, int y) {
     for (int i = 0; i < map->width; i++) {
@@ -70,11 +81,50 @@ void map_vetical_line(Map map, int x) {
     }
 }
 
-// Test it TODO
+void map_horizont_line_to(Map map, int x, int y) {
+    for (int i = x; (i < map->width) && (char_at(map, i, y) == floor); i++) {
+        map->data[y * map->width + i] = wall;
+    }
+    for (int i = x - 1; (i >= 0) && (char_at(map, i, y) == floor); i--) {
+        map->data[y * map->width + i] = wall;
+    }
+}
+
 void map_vetical_line_to(Map map, int x, int y) {
     for (int i = y; i < map->height && map->data[i * map->width + x] == floor; i++) {
         map->data[i * map->width + x] = wall;
     }
+    for (int i = y - 1; i >= 0 && map->data[i * map->width + x] == floor; i--) {
+        map->data[i * map->width + x] = wall;
+    }
+}
+
+bool gen_is_9_space(Map map, int x, int y) {
+    return (
+        (char_at(map, x, y)       == floor) && 
+        (char_at(map, x, y-1)     == floor) && 
+        (char_at(map, x, y+1)     == floor) && 
+        (char_at(map, x-1, y)     == floor) && 
+        (char_at(map, x-1, y-1)   == floor) && 
+        (char_at(map, x-1, y+1)   == floor) && 
+        (char_at(map, x+1, y)     == floor) && 
+        (char_at(map, x+1, y-1)   == floor) && 
+        (char_at(map, x+1, y+1)   == floor)
+    );
+}
+
+struct IntPair gen_get_nine_space(Map map) {
+    struct IntPair p= {0, 0};
+    p.a = rand() % map->width;
+    p.b = rand() % map->height;
+    int limit = 1000;
+    while (!gen_is_9_space(map, p.a, p.b) && limit) {
+        p.a = rand() % map->width;
+        p.b = rand() % map->height;
+        printf("try %d %d\n", p.a, p.b);
+        limit--;
+    }
+    return p;
 }
 
 Map gen_map_rooms_split(int width, int height) {
@@ -85,17 +135,23 @@ Map gen_map_rooms_split(int width, int height) {
     Map map = make_map(width, height);
 
     // TODO save old, not do close?
-    for (int i = 0; i < 1; i++) {
-        int x = rand() % width;
-        int y = rand() % height;
+    int x = rand() % width;
+    int y = rand() % height;
+    for (int i = 0; i < 20; i++) {
+        while (char_at(map, x, y) != floor) {
+            x = rand() % width;
+            y = rand() % height;
+        }
         int hv = rand() % 2;
         if (hv) {
-            map_horizont_line(map, y);
+            map_horizont_line_to(map, x, y);
         } else {
-            /* map_vetical_line(map, x); */
             map_vetical_line_to(map, x, y);
         }
     }
+
+    struct IntPair point = gen_get_nine_space(map);
+    *pchar_at(map, point) = '>';
 
     return map;
 }
