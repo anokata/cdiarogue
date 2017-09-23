@@ -17,13 +17,26 @@ typedef int color_index;
 #define MAKE_ENUM(X) X,
 
 #define FOREACH_COLOR(X) \
+    X(_cn_no) \
     X(_cn_red) \
+    X(_cb_red) \
+    X(_cw_red) \
     X(_cn_green) \
+    X(_cb_green) \
+    X(_cw_green) \
     X(_cn_black) \
+    X(_cb_black) \
+    X(_cw_black) \
     X(_cn_white) \
-    X(_cn_yellow) \
-    X(_cn_blue) \
+    X(_cb_white) \
     X(_cw_white) \
+    X(_cc_white) \
+    X(_cn_yellow) \
+    X(_cb_yellow) \
+    X(_cw_yellow) \
+    X(_cn_blue) \
+    X(_cb_blue) \
+    X(_cw_blue) \
 
 enum ColorID {
     FOREACH_COLOR(MAKE_ENUM)
@@ -49,21 +62,24 @@ static const struct Color cw_white = {_cw_white, A_NORMAL};
 
 static const Color cc_all_colors[] = {
     {_cn_red, A_NORMAL},
-    {_cn_red, A_BOLD},
-    {_cn_red, A_DIM},
+    {_cb_red, A_BOLD},
+    {_cw_red, A_DIM},
     {_cn_blue, A_NORMAL},
-    {_cn_blue, A_BOLD},
-    {_cn_blue, A_DIM},
+    {_cb_blue, A_BOLD},
+    {_cw_blue, A_DIM},
     {_cn_yellow, A_NORMAL},
-    {_cn_yellow, A_BOLD},
-    {_cn_yellow, A_DIM},
+    {_cb_yellow, A_BOLD},
+    {_cw_yellow, A_DIM},
     {_cn_white, A_NORMAL},
-    {_cn_white, A_BOLD},
-    {_cn_white, A_DIM},
+    {_cb_white, A_BOLD},
+    {_cw_white, A_DIM},
+    {_cc_white, A_NORMAL},
     {_cn_green, A_NORMAL},
-    {_cn_green, A_BOLD},
-    {_cn_green, A_DIM}
-
+    {_cb_green, A_BOLD},
+    {_cw_green, A_DIM},
+    {_cn_black, A_NORMAL},
+    {_cb_black, A_BOLD},
+    {_cw_black, A_DIM},
 };
 
 void cc_init_colors();
