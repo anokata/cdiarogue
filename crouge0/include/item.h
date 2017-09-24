@@ -65,6 +65,7 @@ void item_free(Item item);
 void items_free(Items *items);
 void item_add(Items *items, Item item);
 void item_remove(Items *items, Item item);
+void item_detach(Items *items, Item item);
 CharPoint item_as_charpoint_cast(Item item);
 Item items_get(Items items, int x, int y);
 

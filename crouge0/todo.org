@@ -117,6 +117,7 @@
 * 10 min dia like
 - +make tiles color from str
 - + \escape!
+- +fix items drop - not free item, just move from player list to map list
 - make maps, town(heal point?, stores), dungeon
 - detect maps wh from first? or?
 - shops

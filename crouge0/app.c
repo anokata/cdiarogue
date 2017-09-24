@@ -361,9 +361,9 @@ void actor_debug(G g) {
 }
 
 void item_debug(G g) {
-    Item potion = item_new('!', 1, 1);
+    Item potion = item_new('!', 10, 10);
     potion->type = ItemPotionOfCure;
-    Item hat = item_new(']', 2, 2);
+    Item hat = item_new(']', 12, 12);
     hat->type = ItemStrawHat;
     tmap_add_item(g->gmap, potion);
     tmap_add_item(g->gmap, hat);

@@ -31,7 +31,7 @@ void drop_item(Actor actor, TileMap map, Item item) {
     /* place to map */
     tmap_add_item(map, item);
     /* remove from inventory */
-    item_remove(&actor->items, item);
+    item_detach(&actor->items, item);
 }
 
 void inventory_action(Item item, G g) {

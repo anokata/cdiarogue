@@ -45,9 +45,13 @@ void item_add(Items *items, Item item) {
     *items = g_list_append(*items, item);
 }
 
+void item_detach(Items *items, Item item) {
+    *items = g_list_remove(*items, item);
+}
+
 void item_remove(Items *items, Item item) {
     *items = g_list_remove(*items, item);
-    free(item);
+    item_free(item);
 }
 
 void items_free(Items *items) {
