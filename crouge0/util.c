@@ -13,7 +13,17 @@ int fget_int_line(FILE *file) {
 
 void for_every_part(char *text, char delim, EachStrFunc f, void *data) { 
     while (*text) {
-        char *end = strchr(text, delim);
+        char *end;
+        bool escape = true;
+        char *last_end = text;
+        /* skip escaped delim */
+        while (escape) { 
+            end = strchr(last_end, delim);
+            if (!end) break;
+            escape = (*(end - 1) == '\\');
+            if (escape) last_end = end + 1;
+            /* printf("delim: %c %p pred %c\n", *end, end, *(end-1)); */
+        }
         if (!end) break;
         /* trim leading whitespaces */
         char *start = text + strspn(text, " \t");

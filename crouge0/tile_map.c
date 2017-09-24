@@ -121,6 +121,7 @@ void load_colors(TileMap map, GHashTable *config, char* base_path) {
     it++; // skip first header line
     while (*it) {
         Strings line = it[0];
+        /* escaping ? */
         char tile_char = line[0][0];
         bool passable = strcmp(line[1], "f");
 

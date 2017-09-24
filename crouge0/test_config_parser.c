@@ -38,7 +38,7 @@ int main() {
     assert(strcmp(p.value, "123") == 0);
     free(test1);
 
-    test1 = strdup("abcd:123:xxx:1231");
+    test1 = strdup("abcd:123\\:xxx:1231");
     for_every_part(test1, ':', testfun, NULL);
     free(test1);
 
@@ -64,7 +64,7 @@ int main() {
     free_dsv_strings(ss);
     free(test1);
 
-    test_dsv_line("a:________13:zxcvzvvxzvvvvxxzvzxvxcvxzv*#!##!#z:00:", 4);
+    test_dsv_line("a:_______\\:_13:zxcvzvvxzvvvvxxzvzxvxcvxzv*#!##!#z:00:", 4);
 
     printf("\nDSV lines TEST\n");
 	test1 = strdup("ab:cd:\n12:34:\n");
@@ -81,4 +81,10 @@ int main() {
     st = parse_dsv_file("./maps/map_1_1.actors");
     dsv_table_print(st);
     free_dsv_table(st);
+
+    /* escape tst */
+    test1 = strdup("\\:x:1:2\\::3");
+    for_every_part(test1, ':', testfun, NULL);
+    free(test1);
+
 }

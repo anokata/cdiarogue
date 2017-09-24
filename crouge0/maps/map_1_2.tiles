@@ -1,6 +1,8 @@
 char:passable:color:
 # vi: filetype=sh
-.:t:_cw_red:
+.:t:_cn_green:
+\::t:_cn_green:
+\#:t:_cb_green:
 o:f:_cn_green:
 x:t:_cn_yellow:
 +:t:_cn_white:

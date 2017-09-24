@@ -116,8 +116,8 @@
 
 * 10 min dia like
 - +make tiles color from str
+- + \escape!
 - make maps, town(heal point?, stores), dungeon
-- \escape!
 - detect maps wh from first? or?
 - shops
 - enter to dung

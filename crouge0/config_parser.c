@@ -79,7 +79,8 @@ void _add_to_strings(char *value, void *data) {
 	/* cast data to pointer to array to strings */
     Strings strings = *(char ***)data;
     Strings *pstrings = (char ***)data;
-    strings[0] = strdup(value);
+    /* duplicate with convert escaped chars */
+    strings[0] = g_strcompress(value);
     (*pstrings)++;
 }
 
