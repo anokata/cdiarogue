@@ -20,7 +20,7 @@ void for_every_part(char *text, char delim, EachStrFunc f, void *data) {
         while (escape) { 
             end = strchr(last_end, delim);
             if (!end) break;
-            escape = (*(end - 1) == '\\');
+            escape = (*(end - 1) == '\\') && (*(end - 2) != '\\'); // for escape \ itself
             if (escape) last_end = end + 1;
             /* printf("delim: %c %p pred %c\n", *end, end, *(end-1)); */
         }
