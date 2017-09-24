@@ -1,17 +1,21 @@
 char:passable:color:
 # vi: filetype=sh
-.:t:_cn_green:
+.:t:_cw_white:
 \::t:_cn_green:
-\#:t:_cb_green:
+\#:t:_cb_yellow:
 o:f:_cn_green:
+?:f:_cb_red:
+H:t:_cw_white:
+[:t:_cw_white:
 x:t:_cn_yellow:
 +:t:_cn_white:
 ~:f:_cn_blue:
 =:t:_cw_white:
-|:f:_cn_white:
+|:f:_cb_white:
+_:f:_cb_white:
 -:f:_cn_white:
 T:f:_cb_green:
-*:t:_cb_green:
+*:f:_cw_yellow:
 >:t:_cb_white:
 <:t:_cb_white:
 0:t:_cw_red:
@@ -33,5 +37,11 @@ f:t:_cn_black:
 g:t:_cb_blue:
 h:t:_cw_blue:
 ':t:_cw_yellow:
+,:t:_cw_green:
+':t:_cw_yellow:
+`:t:_cb_green:
+v:t:_cw_green:
+l:t:_cb_green:
+;:t:_cn_green:
 
 # need \#

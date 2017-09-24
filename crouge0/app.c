@@ -352,12 +352,6 @@ void actor_debug(G g) {
         a->name = strdup("bug");
         a->behavior = BehaviorSimpleAttacker;
     }
-    /* for (int i = 0; i < 20; i++) { */
-    /*     a = make_actor('s', i, 5); */
-    /*     a->color = cb_yellow; */
-    /*     a->name = strdup("bug"); */
-    /*     add_actor(g, a); */
-    /* } */
 }
 
 void item_debug(G g) {

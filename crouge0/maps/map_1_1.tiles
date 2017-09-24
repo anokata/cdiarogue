@@ -1,9 +1,15 @@
 char:passable:color:
-# vi: filetype=sh
-.:t:_cw_red:
+# vi: filetype=none
+.:t:_cw_white:
 \::t:_cb_red:
-\\\\:t:_cb_red:
+\\:t:_cb_red:
 o:f:_cn_green:
+,:t:_cw_green:
+':t:_cw_yellow:
+`:t:_cb_green:
+v:t:_cw_green:
+l:t:_cb_green:
+;:t:_cn_green:
 x:t:_cn_yellow:
 +:t:_cn_white:
 ~:f:_cn_blue:
@@ -14,6 +20,5 @@ x:t:_cn_yellow:
 T:f:_cb_red:
 >:t:_cb_white:
 <:t:_cb_white:
-':t:_cw_yellow:
 
 # need \#
