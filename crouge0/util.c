@@ -28,10 +28,12 @@ void for_every_part(char *text, char delim, EachStrFunc f, void *data) {
 }
 
 char *read_whole_file(char *filename) {
+    ensure_file(filename);
     FILE *fin = fopen(filename, "r");
-    fseek(fin, 0, SEEK_END);
+    fseek(fin, 0L, SEEK_END);
     long fsize = ftell(fin);
-    fseek(fin, 0, SEEK_SET);
+    /* fseek(fin, 0, SEEK_SET); */
+    rewind(fin);
     char *content = malloc(fsize + 1);
     fread(content, fsize, 1, fin);
     content[fsize] = 0;

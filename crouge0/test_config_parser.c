@@ -42,7 +42,7 @@ int main() {
     for_every_part(test1, ':', testfun, NULL);
     free(test1);
 
-    GHashTable *t = parse_file("./maps/info");
+    GHashTable *t = parse_file("./maps/map_0_0");
     g_hash_table_destroy(t);
 
     t = parse_file("./maps/map_0_0");
