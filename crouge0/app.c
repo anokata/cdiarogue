@@ -6,6 +6,7 @@ char *player_file = "./maps/you";
 extern State state;
 
 void ui_draw(G g);
+void save_player(Actor you);
 
 void process_input(G g) {
     ss_handle(state, Event_draw, g);
@@ -50,10 +51,14 @@ void ui_draw(G g) {
 
     char buf[BUFSIZE];
     snprintf(buf, BUFSIZE, 
-        "@ x:y = %d:%d [HP: %d/%d atk: %d def: %d  exp: %ld  lvl: %d ]",
+        "@ x:y = %d:%d [HP: %d/%d atk: %d def: %d ]",
         g->player->x, g->player->y, g->player->stat_hp,
         actor_stat_maxhp(g->player), actor_stat_attack(g->player), 
-        actor_stat_defence(g->player),
+        actor_stat_defence(g->player)
+        );
+    cc_printxy(buf, cn_white, UI_X, y++);
+    snprintf(buf, BUFSIZE, 
+        "\t\t[exp: %ld  lvl: %d ]",
         g->player->exp, g->player->lvl
         );
     cc_printxy(buf, cn_white, UI_X, y++);
@@ -163,6 +168,10 @@ int cursor_key(void* data) {
     char key = g->key;
     char *msg;
     switch (key) {
+        case 's':
+            save_player(g->player);
+            debuglog(g, "Saved");
+            break;
         case '/':
             g->debug = !g->debug;
             break;
@@ -305,8 +314,8 @@ void load_player(Actor *you) {
 }
 
 void save(G g) {
-    // TODO
-    save_player(g->player); // unplug for debug 
+    //save_player(g->player); // unplug for debug 
+    UNUSED(g);
 }
 
 void load(G g) {
@@ -334,6 +343,12 @@ void init_inventory(G g) {
     helm->cls = ItemHeadEquipCls;
     helm->type = ItemStrawHat;
     item_add(&g->player->items, helm);
+
+    potion = item_new('1', 8, 8);
+    potion->type = ItemPotionOfCure;
+    potion->cls = ItemPotionCls;
+    potion->name = strdup("potion #32 GEX UHT");
+    item_add(&g->gmap->items, potion);
 }
 
 
