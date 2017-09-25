@@ -1,0 +1,3 @@
+name:char:x:y:color:value:class:state:type:
+# vi: filetype=sh
+paw of day darkness:8:2:2:_cb_red:10:ItemWeaponCls:ItemNormalState:ItemPoDDKnuckles:

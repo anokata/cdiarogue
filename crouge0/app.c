@@ -1,6 +1,7 @@
 #include "app.h"
 char version[] = "0.0.3";
 char *player_file = "./maps/you";
+char *player_items_file = "./maps/you.items";
 
 /* GLOBAL */
 extern State state;
@@ -320,6 +321,7 @@ void save(G g) {
 
 void load(G g) {
     load_player(&g->player);
+    g->player->items = items_load(player_items_file);
     g->view->cx = g->player->x;
     g->view->cy = g->player->y;
 }
@@ -343,12 +345,6 @@ void init_inventory(G g) {
     helm->cls = ItemHeadEquipCls;
     helm->type = ItemStrawHat;
     item_add(&g->player->items, helm);
-
-    potion = item_new('1', 8, 8);
-    potion->type = ItemPotionOfCure;
-    potion->cls = ItemPotionCls;
-    potion->name = strdup("potion #32 GEX UHT");
-    item_add(&g->gmap->items, potion);
 }
 
 
@@ -376,6 +372,12 @@ void item_debug(G g) {
     hat->type = ItemStrawHat;
     tmap_add_item(g->gmap, potion);
     tmap_add_item(g->gmap, hat);
+
+    potion = item_new('1', 8, 8);
+    potion->type = ItemPotionOfCure;
+    potion->cls = ItemPotionCls;
+    potion->name = strdup("potion #32 GEX UHT");
+    item_add(&g->gmap->items, potion);
 }
 
 void start() {
@@ -385,7 +387,7 @@ void start() {
     G g = new_g();
     load(g);
     add_actor(g, g->player);
-    init_inventory(g);
+    /* init_inventory(g); */
 
     curses_init();
     state_init();

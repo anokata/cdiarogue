@@ -42,6 +42,7 @@ DECLARE_ENUM(ItemState, ITEMS_STATE)
     X(ItemPotionOfCure) \
     X(ItemWeaponSword) \
     X(ItemStrawHat) \
+    X(ItemPoDDKnuckles) \
 
 DECLARE_ENUM(ItemType, ITEMS_TYPES)
 

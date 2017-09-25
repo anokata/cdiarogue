@@ -14,6 +14,7 @@ char *item_types[] = {
     "potion of cure wounds",
     "wood sword",
     "simple straw hat",
+    "paw of day darkness knuckles",
 };
 
 char *item_states[] = {
