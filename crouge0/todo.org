@@ -95,7 +95,7 @@
       - +move tiles count to tiles file - not needed because not used
 	- +saving player
       - +load player
-      - load items saving items
+      - +load items saving items
             - +sample items file
             - +items enums
             - +load item
@@ -109,6 +109,15 @@
 
 [ INWORK ]
 * 10 min dia like
+** dung
+      - enter to dung
+            - event on collide with portal obj? or > cmd
+            - load other map
+            - generate dungeon
+                  - with mobs
+                  - with items
+                  - with exit
+
 - cleanup, rem unused, see todo
 - other tiles types with props such water, plants, enters, doors
 - doors, open, close, kick - commands, to direction mode
@@ -116,66 +125,70 @@
       - add tile data field char*, in tiles file too
       - stairs = spec tile with map (pack) file name.
 
-- +make tiles color from str
-- + \escape!
-- +fix items drop - not free item, just move from player list to map list
 - make maps, town(heal point?, stores), dungeon
+- balance: hp restore down - only in town space
 - detect maps wh from first? or?
-- shops
-- enter to dung
-      - event on collide with portal obj? or > cmd
-      - load other map
-      - generate dungeon
-            - with mobs
-            - with items
-            - with exit
 
-- teleport scroll with P
 - stashs bushs barrels stones garbage
 - ranged damage i.e. 2-5 
 - save and exit and exit without save
 - spawn at enter? in some dungs
 - ?I need same char with different colors on same map 
 - save/load player equiped state items (item equiped flag?)
+- teleport scroll with P
 
 
 - TECHDEBT :: 
       - Extract viewport module
       - tests and coverage
 
-- map edit mode, add items, mobs, tiles
-- exp lvls stats growing full mechanic
-- endurance wisdom intelegence dex (4 base stats?)
-- dodging chance
-- crit hits
-- balance and fun
-- pick up from direction, view menu list items
-- items grade, power ups
-- fix, made world map
-- ! parse header and store columns indexes and get columns index and make struct
-- mobs evoluting. script based(bf like) behavior - see x:y if this = TileRock
-  ... move to, attack, take, eat.
-- more map tiles types, plants, rocks, sand
-- loot, paws, wool, skin, bone, meet, jelly
-- mobs minds
-- item eat, activate, use
-- item actions - pass func
-- read scrolls, books to effect on stats, skills, spells
-- zap wands
-- fire, bows
-- item effects: effect X itemType X action
-- damage at different parts of body/armor
-- skills - weapon health 
+
 * improvements features
+** combat
+      - dodging chance
+      - crit hits
+      - damage at different parts of body/armor
+      - fire, bows
+      - skills - weapon health 
+      - balance and fun
+      - endurance wisdom intelegence dex (4 base stats?)
+
+** mobs
+      - mobs minds
+      - mobs evoluting. script based(bf like) behavior - see x:y if this = TileRock
+        ... move to, attack, take, eat.
+      - mobs generic type and inherit
+            - mobs/items types and instances?
+
+** shop
+      - shops
+      - npc, dialogs
+      - loot, paws, wool, skin, bone, meet, jelly
+** items
+      - read scrolls, books to effect on stats, skills, spells
+      - item eat, activate, use
+      - zap wands
+      - items grade, power ups
+      - pick up from direction, view menu list items
+      - same items to stack with number
+      - better inventory by category
+      - item effects: effect X itemType X action
+      - item actions - pass func
+** map
+      - more map tiles types, plants, rocks, sand
+      - made world map
+      - pack map files to zip/tarbz, unpack in mem (in ram space run or tmp)
+      - lighting
+      - map edit mode, add items, mobs, tiles
+
+- ! parse header and store columns indexes and get columns index and make struct
 - debug commands for mobs spawn, items, heal
-- same items to stack with number
-- better inventory by category
-- pack map files to zip/tarbz, unpack in mem (in ram space run or tmp)
-- lighting
-- wait and rest 
-- mobs generic type and inherit
-      - mobs/items types and instances?
-- viewport at load not moving to @ center
+
+- +wait and rest 
+- +viewport at load not moving to @ center
+- +make tiles color from str
+- + \escape!
+- +fix items drop - not free item, just move from player list to map list
 * big theme
 - step speed action model, a little real time
 - map gen 
