@@ -27,7 +27,10 @@ typedef struct TileMap {
     int height;
     GList *actors;
     Items items;
+    /* location fields TODO make it sep struct with cast to basic */
     char *tiles_file;
+    char *items_file;
+    char *actors_file;
 } *TileMap;
 
 typedef struct WorldMap {

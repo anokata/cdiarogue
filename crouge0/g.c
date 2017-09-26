@@ -20,13 +20,14 @@ void debuglog(G g, char *msg) {
 }
 
 G new_g() {
+    char *location_path = "./maps/loc1";
     G g = malloc(sizeof(struct G));
     bzero(g, sizeof(struct G));
 
     g->debug = 0;
     g->events = events;
     g->wmap = load_wmap();
-    g->gmap = load_global_tmap();
+    g->gmap = load_global_tmap(location_path);
     g->cursor.x = 0;
     g->cursor.y = 0;
 

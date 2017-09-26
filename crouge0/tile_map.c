@@ -9,6 +9,8 @@ TileMap make_tile_map(int width, int height) {
     map->actors = NULL;
     map->items = NULL;
     map->tiles_file = NULL;
+    map->items_file = NULL;
+    map->actors_file = NULL;
     for (int i=0; i < height; i++) {
         for (int j=0; j < width; j++) {
             tiles[i * width + j].c = ' ';
@@ -29,6 +31,8 @@ void free_tile_map(TileMap map) {
     items_free(&map->items);
     free(map->tiles);
     afree(map->tiles_file);
+    afree(map->items_file);
+    afree(map->actors_file);
     free(map);
 }
 
@@ -187,8 +191,7 @@ void _copy_tileloc2glob(TileMap gmap, TileMap lmap, int offset) {
     }
 }
 
-TileMap load_global_tmap() {
-    char *location_path = "./maps/loc1";
+TileMap load_global_tmap(char *location_path) {
     TileMap global_map;
     int local_width = 2;
     int local_height = 2;
@@ -216,6 +219,8 @@ TileMap load_global_tmap() {
     DEBUG_PRINT("Global tile map with w:%d h:%d\n", global_map->width, global_map->height);
     global_map->actors = actors_load(actors_file);
     global_map->items = items_load(items_full_path);
+    global_map->items_file = items_full_path;
+    global_map->actors_file = strdup(actors_file);
 
     /* TODO From location */
     string mapname_format = "maps/map_%i_%i";
@@ -234,7 +239,7 @@ TileMap load_global_tmap() {
     }
     /* print_tile_map(global_map); */
     
-    free(items_full_path);
+    /* free(items_full_path); */
     g_hash_table_destroy(config);
     return global_map;
 }
