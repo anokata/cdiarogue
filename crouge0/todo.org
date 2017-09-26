@@ -112,7 +112,7 @@
             - load map items
             - +load player items
             - save map items
-            - save player items
+            - +save player items
             - save/load player equiped state items (item equiped flag?)
 
 * 10 min dia like

@@ -302,6 +302,8 @@ void save_player(Actor you) {
     free(line);
 
     fclose(out);
+
+    items_save(player_items_file, you->items);
 }
 
 void load_player(Actor *you) {
