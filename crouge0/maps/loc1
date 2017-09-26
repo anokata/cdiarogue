@@ -3,3 +3,4 @@ y_segments:2
 map_width:30
 map_height:20
 actors:./maps/map_1_1.actors
+items:map_1_1.items

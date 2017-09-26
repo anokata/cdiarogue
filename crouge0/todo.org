@@ -109,9 +109,9 @@
             - +dump item
             - +load items list
             - +save items list
-            - load map items
+            - +load location items
             - +load player items
-            - save map items
+            - save location items
             - +save player items
             - save/load player equiped state items (item equiped flag?)
 

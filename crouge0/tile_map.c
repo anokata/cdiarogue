@@ -136,6 +136,16 @@ void load_colors(TileMap map, GHashTable *config, char* base_path) {
     free_dsv_table(tiles_config);
 }
 
+char *build_path(char *basepath_file, char *filename) {
+    char *fullname = strdup(basepath_file);
+    char *base_path = strdup(dirname(fullname));
+    free(fullname);
+    char *path = malloc(BUFSIZE);
+    snprintf(path, BUFSIZE, "%s/%s", base_path, filename);
+    free(base_path);
+    return path;
+}
+
 TileMap load_tile_map(string filename) {
     TileMap map = NULL;
     GHashTable *config = parse_file(filename);
@@ -178,13 +188,14 @@ void _copy_tileloc2glob(TileMap gmap, TileMap lmap, int offset) {
 }
 
 TileMap load_global_tmap() {
+    char *location_path = "./maps/loc1";
     TileMap global_map;
     int local_width = 2;
     int local_height = 2;
     int local_map_width = 6;
     int local_map_height = 3;
     /* Read params from map info file */
-    GHashTable *config = parse_file("./maps/loc1");
+    GHashTable *config = parse_file(location_path);
     local_map_width = atoi(g_hash_table_lookup(config, "map_width"));
     local_map_height = atoi(g_hash_table_lookup(config, "map_height"));
     local_width = atoi(g_hash_table_lookup(config, "x_segments"));
@@ -194,10 +205,17 @@ TileMap load_global_tmap() {
         printf("*-> Error: file no valid actors file option\n");
         exit(1);
     }
+    char *items_file = g_hash_table_lookup(config, "items");
+    if (!items_file) {
+        printf("*-> Error: file no valid items file option\n");
+        exit(1);
+    }
+    char *items_full_path = build_path(location_path, items_file);
 
     global_map = make_tile_map(local_width * local_map_width, local_height * local_map_height);
     DEBUG_PRINT("Global tile map with w:%d h:%d\n", global_map->width, global_map->height);
     global_map->actors = actors_load(actors_file);
+    global_map->items = items_load(items_full_path);
 
     /* TODO From location */
     string mapname_format = "maps/map_%i_%i";
@@ -216,6 +234,7 @@ TileMap load_global_tmap() {
     }
     /* print_tile_map(global_map); */
     
+    free(items_full_path);
     g_hash_table_destroy(config);
     return global_map;
 }
