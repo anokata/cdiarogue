@@ -1,7 +1,6 @@
 name:char:x:y:color:value:class:state:type:
 # vi: filetype=sh
-wood sword:/:5:4:_cn_white:1:ItemWeaponCls:ItemNormalState:ItemWeaponSword:
 potion of cure wounds:!:2:2:_cb_red:10:ItemPotionCls:ItemNormalState:ItemPotionOfCure:
-#Paw of day darkness
-# columns: 9
-#:::::::::
+potion #32 GEX UHT:1:8:8:_cn_white:1:ItemPotionCls:ItemNormalState:ItemPotionOfCure:
+wood sword:/:8:4:_cn_white:1:ItemWeaponCls:ItemNormalState:ItemWeaponSword:
+potion #32 GEX UHT:1:8:3:_cn_white:1:ItemPotionCls:ItemNormalState:ItemPotionOfCure:

@@ -80,15 +80,8 @@
 
 - +fix viewport moving to end and init at player
 
-[ INWORK ]
 ** 9. map for some playable  [need some remaking ]
-- other tiles types with props such water, plants, enters, doors
-- doors, open, close, kick - commands, to direction mode
-      - map change, enter to dungeons, levels change
-      - add tile data field char*, in tiles file too
-      - stairs = spec tile with map (pack) file name.
-
-- map save load - map save load with items, mobs, store player
+- +map save load - map save load with items, mobs, store player
       Add Tag support to key:value parser - tag separate sections or end one
 	Not Tag - Just separate file for each entity in DSV format
       - +parse dsv to strings list
@@ -111,11 +104,18 @@
             - +save items list
             - +load location items
             - +load player items
-            - save location items
             - +save player items
-            - save/load player equiped state items (item equiped flag?)
+            - +save location items
 
+[ INWORK ]
 * 10 min dia like
+- cleanup, rem unused, see todo
+- other tiles types with props such water, plants, enters, doors
+- doors, open, close, kick - commands, to direction mode
+      - map change, enter to dungeons, levels change
+      - add tile data field char*, in tiles file too
+      - stairs = spec tile with map (pack) file name.
+
 - +make tiles color from str
 - + \escape!
 - +fix items drop - not free item, just move from player list to map list
@@ -136,6 +136,7 @@
 - save and exit and exit without save
 - spawn at enter? in some dungs
 - ?I need same char with different colors on same map 
+- save/load player equiped state items (item equiped flag?)
 
 
 - TECHDEBT :: 

@@ -8,6 +8,7 @@ extern State state;
 
 void ui_draw(G g);
 void save_player(Actor you);
+void save_location(TileMap map);
 
 void process_input(G g) {
     ss_handle(state, Event_draw, g);
@@ -171,6 +172,7 @@ int cursor_key(void* data) {
     switch (key) {
         case 's':
             save_player(g->player);
+            save_location(g->gmap);
             debuglog(g, "Saved");
             break;
         case '/':
@@ -290,6 +292,10 @@ void state_init() {
     ss_setstate(state, State_cursor);
 }
 
+void save_location(TileMap map) {
+    items_save(map->items_file, map->items);
+}
+
 void save_player(Actor you) {
     extern char actor_file_header[];
     extern char actor_file_type[];
@@ -395,7 +401,7 @@ void start() {
     state_init();
 
     actor_debug(g);
-    item_debug(g);
+    /* item_debug(g); */
 
     start_events();
     event_register(ActionCollide, RolePlayer, RoleMonster, collide_action_player_monster);
