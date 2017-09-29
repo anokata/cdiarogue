@@ -11,6 +11,7 @@ makelib:
 	$(CC) -std=c11 lib/*.c -c
 	ar rvs libccurses.a *.o
 	rm *.o
+	mkdir ../lib || true
 	mv libccurses.a ../lib
 	# make to temp
 
