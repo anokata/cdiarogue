@@ -43,7 +43,7 @@ void test() {
 void test_gen() {
     int width = 40;
     int height = 20;
-    printf("\n***Creating map gen rooms\n");
+    DEBUG_PRINT("\n***Creating map gen rooms\n");
     Map map = gen_map_rooms_split(width, height);
     print_map(map);
     free_map(map);

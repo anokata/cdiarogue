@@ -122,7 +122,7 @@ struct IntPair gen_get_nine_space(Map map) {
     while (!gen_is_9_space(map, p.a, p.b) && limit) {
         p.a = rand() % map->width;
         p.b = rand() % map->height;
-        printf("try %d %d\n", p.a, p.b);
+        DEBUG_PRINT("try %d %d\n", p.a, p.b);
         limit--;
     }
     return p;
