@@ -22,6 +22,9 @@ main: prepare
 	$(eval DEBUG=)
 	$(CC) $(OBJECTS) $(CFLAGS) -o $(BUILD_DIR)/$(P) && $(BUILD_DIR)/$(P)
 
+debug: prepare
+	$(CC) $(OBJECTS) $(CFLAGS) -o $(BUILD_DIR)/$(P) && $(BUILD_DIR)/$(P)
+
 prepare:
 	if [ ! -e ../lib ]; then mkdir ../lib; fi
 	if [ ! -e ../lib/$(LIB) ]; then cd ../ccurses; make makelib; cd -; fi

@@ -20,7 +20,7 @@ void debuglog(G g, char *msg) {
 }
 
 G new_g() {
-    char *location_path = "./maps/loc1";
+    char *location_path = "./maps/loc2";
     G g = malloc(sizeof(struct G));
     bzero(g, sizeof(struct G));
 

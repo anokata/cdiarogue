@@ -203,6 +203,9 @@ TileMap load_global_tmap(char *location_path) {
     local_map_height = atoi(g_hash_table_lookup(config, "map_height"));
     local_width = atoi(g_hash_table_lookup(config, "x_segments"));
     local_height = atoi(g_hash_table_lookup(config, "y_segments"));
+    char *map_name_prefix = g_hash_table_lookup(config, "map_name_prefix");
+    char *d_location_path = strdup(location_path);
+    char *basepath = dirname(d_location_path);
     char *actors_file = g_hash_table_lookup(config, "actors");
     if (!actors_file) {
         printf("*-> Error: file no valid actors file option\n");
@@ -223,13 +226,13 @@ TileMap load_global_tmap(char *location_path) {
     global_map->actors_file = strdup(actors_file);
 
     /* TODO From location */
-    string mapname_format = "maps/map_%i_%i";
+    string mapname_format = "%s/%s%i_%i";
     char mapname[100];
     int block_height = local_map_width * local_width * local_map_height;
 
     for (int i = 1; i <= local_height; i++) {
         for (int j = 1; j <= local_width; j++) {
-            sprintf(mapname, mapname_format, i, j);
+            sprintf(mapname, mapname_format, basepath, map_name_prefix, i, j);
             DEBUG_PRINT("name: %s @ (%d:%d)\n", mapname, i, j);
 			TileMap lmap = load_tile_map(mapname);
             _copy_tileloc2glob(global_map, lmap, 
@@ -240,6 +243,7 @@ TileMap load_global_tmap(char *location_path) {
     /* print_tile_map(global_map); */
     
     /* free(items_full_path); */
+    free(d_location_path);
     g_hash_table_destroy(config);
     return global_map;
 }
