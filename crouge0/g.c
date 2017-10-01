@@ -20,7 +20,7 @@ void debuglog(G g, char *msg) {
 }
 
 G new_g() {
-    char *location_path = "./maps/loc2";
+    char *location_path = "./maps/loc1";
     G g = malloc(sizeof(struct G));
     bzero(g, sizeof(struct G));
 
@@ -64,6 +64,7 @@ void free_g(G g) {
     free_actors(&g->gmap->actors);
     g->gmap->actors = NULL;
 
+    /* free_tiles(g->gmap->tiles, g->gmap->width * g->gmap->height); */
     free_tile_map(g->gmap);
     free(g->view);
     g_list_foreach(g->log, gfree, NULL);

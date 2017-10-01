@@ -1,47 +1,47 @@
-char:passable:color:
+char:passable:color:strparam:
 # vi: filetype=sh
-.:t:_cw_white:
-\::t:_cn_green:
-\#:t:_cb_yellow:
-o:f:_cn_green:
-?:f:_cb_red:
-H:t:_cw_white:
-[:t:_cw_white:
-x:t:_cn_yellow:
-+:t:_cn_white:
-~:f:_cn_blue:
-=:t:_cw_white:
-|:f:_cb_white:
-_:f:_cb_white:
--:f:_cn_white:
-T:f:_cb_green:
-*:f:_cw_yellow:
->:t:_cb_white:
-<:t:_cb_white:
-0:t:_cw_red:
-1:t:_cb_red:
-2:t:_cn_green:
-3:t:_cw_green:
-4:t:_cb_green:
-5:t:_cn_yellow:
-6:t:_cw_yellow:
-7:t:_cb_yellow:
-8:t:_cb_red:
-9:t:_cn_red:
-a:t:_cn_white:
-b:t:_cb_white:
-c:t:_cc_white:
-d:t:_cw_white:
-e:t:_cn_black:
-f:t:_cn_black:
-g:t:_cb_blue:
-h:t:_cw_blue:
-':t:_cw_yellow:
-,:t:_cw_green:
-':t:_cw_yellow:
-`:t:_cb_green:
-v:t:_cw_green:
-l:t:_cb_green:
-;:t:_cn_green:
+.:t:_cw_white:dirt:
+\::t:_cn_green: :
+\#:t:_cb_yellow: :
+o:f:_cn_green: :
+?:f:_cb_red: :
+H:t:_cw_white: :
+[:t:_cw_white: :
+x:t:_cn_yellow: :
++:t:_cn_white: :
+~:f:_cn_blue: :
+=:t:_cw_white: :
+|:f:_cb_white: :
+_:f:_cb_white: :
+-:f:_cn_white: :
+T:f:_cb_green: :
+*:f:_cw_yellow: :
+>:t:_cb_white: :
+<:t:_cb_white: :
+0:t:_cw_red: :
+1:t:_cb_red: :
+2:t:_cn_green: :
+3:t:_cw_green: :
+4:t:_cb_green: :
+5:t:_cn_yellow: :
+6:t:_cw_yellow: :
+7:t:_cb_yellow: :
+8:t:_cb_red: :
+9:t:_cn_red: :
+a:t:_cn_white: :
+b:t:_cb_white: :
+c:t:_cc_white: :
+d:t:_cw_white: :
+e:t:_cn_black: :
+f:t:_cn_black: :
+g:t:_cb_blue: :
+h:t:_cw_blue: :
+':t:_cw_yellow: :
+,:t:_cw_green: :
+':t:_cw_yellow: :
+`:t:_cb_green: :
+v:t:_cw_green: :
+l:t:_cb_green: :
+;:t:_cn_green: :
 
 # need \#

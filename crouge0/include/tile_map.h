@@ -8,11 +8,14 @@
 #include <stdbool.h>
 #include <glib.h>
 #include <libgen.h>
+#include <string.h>
 
 typedef struct Tile {
     Color color;
     char c;
     bool passable;
+    char *strparam;
+    /* type of tile enum TileKind */
 } Tile;
 
 typedef struct MapTile {
@@ -81,3 +84,4 @@ struct Actor* map_get_player(TileMap map);
 void tmap_add_item(TileMap map, Item item);
 char *actor_take_from(Actor actor, TileMap map, int x, int y);
 void copy_map2tiles(TileMap map, char *line, int len, int offset);
+void free_tiles(Tile *tiles, int count);

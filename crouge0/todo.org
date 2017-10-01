@@ -112,6 +112,7 @@
 ** dung
       - enter to dung
             - event on collide with portal obj? or > cmd
+            - tiles with param - map name
             - load other map
             - generate dungeon
                   - with mobs

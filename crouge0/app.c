@@ -90,9 +90,11 @@ void debug_draw(G g) {
             "VLeft: %d\t" 
             "Vcx:cy = %d:%d\t" 
             "Vleft:top = %d:%d\n" 
+            "tile data: %s\n" 
         , g->key, 
         g->view->display_left, g->view->cx, g->view->cy,
-        viewport_left(g->view), viewport_top(g->view)
+        viewport_left(g->view), viewport_top(g->view),
+        tile_at(g->gmap, g->player->x, g->player->y)->strparam
         );
     cc_printxy(buf, cn_white, 0, 20);
 }

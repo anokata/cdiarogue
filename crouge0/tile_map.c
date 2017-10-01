@@ -3,6 +3,7 @@
 TileMap make_tile_map(int width, int height) {
     TileMap map = malloc(sizeof(struct TileMap));
     Tile *tiles = calloc(width * height, sizeof(struct Tile));
+    bzero(tiles, width * height * sizeof(struct Tile));
     map->tiles = tiles;
     map->width = width;
     map->height = height;
@@ -23,13 +24,25 @@ void afree(void *data) {
     if (data) free(data);
 }
 
+void free_tiles(Tile *tiles, int count) {
+    Tile *it = tiles;
+    for (int i = 0; i < count; i++) {
+        /* printf("%p %s\n", it->strparam, it->strparam); */
+        afree(it->strparam);
+        it->strparam = NULL;
+        it++;
+    }
+    afree(tiles);
+}
+
 void free_tile_map(TileMap map) {
     if (map->actors) {
         //free_actors(map->actors);
         g_list_free(map->actors);
     }
     items_free(&map->items);
-    free(map->tiles);
+    /* free(map->tiles); */
+    free_tiles(map->tiles, map->width * map->height);
     afree(map->tiles_file);
     afree(map->items_file);
     afree(map->actors_file);
@@ -91,24 +104,18 @@ void _set_tile_passable(Tile *tile, int x, int y, void *data) {
     UNUSED(y);
 }
 
+void _set_tile_param(Tile *tile, int x, int y, void *data) {
+    char *strparam= (char*)data;
+    tile->strparam = strdup(strparam);
+    UNUSED(x);
+    UNUSED(y);
+}
+
 char _get_tile_opt(GHashTable *config, int i, char *params) {
     char *values = g_hash_table_lookup(config, params);
     return values[i - 1];
 }
 
-
-char _get_tile_char(GHashTable *config, int i) {
-    return _get_tile_opt(config, i, "tiles");
-    // for other method: return g_hash_table_lookup(config, tile_char_name);
-}
-
-char _get_tile_color(GHashTable *config, int i) {
-    return _get_tile_opt(config, i, "colrs") - '0';
-}
-
-bool _get_tile_passable(GHashTable *config, int i) {
-    return _get_tile_opt(config, i, "passb") == 't';
-}
 
 void load_colors(TileMap map, GHashTable *config, char* base_path) {
     char tiles_file_path[BUFSIZE];
@@ -131,10 +138,13 @@ void load_colors(TileMap map, GHashTable *config, char* base_path) {
 
         char *color_name = line[2];
         Color color = cc_color_from_str(color_name);
-        DEBUG_PRINT("char: %c color: %d  pass %d\n", tile_char, color.color, passable);
+        char *tile_strparam = line[3];
+        DEBUG_PRINT("char: %c color: %d  pass %d str: %s\n", tile_char, color.color, passable, tile_strparam);
         apply_color(map, tile_char, color);
 
         foreach_tile_set(map, _set_tile_passable, (void*)passable, tile_char);
+        /* printf("%p %s\n", tile_strparam, tile_strparam); */
+        foreach_tile_set(map, _set_tile_param, (void*)tile_strparam, tile_char);
         it++;
     }
     free_dsv_table(tiles_config);

@@ -1,24 +1,24 @@
-char:passable:color:
+char:passable:color:strparam:
 # vi: filetype=none
-.:t:_cw_white:
-\::t:_cb_red:
-\\:t:_cb_red:
-o:f:_cn_green:
-,:t:_cw_green:
-':t:_cw_yellow:
-`:t:_cb_green:
-v:t:_cw_green:
-l:t:_cb_green:
-;:t:_cn_green:
-x:t:_cn_yellow:
-+:t:_cn_white:
-~:f:_cn_blue:
-*:f:_cw_yellow:
-=:t:_cw_white:
-|:f:_cn_red:
--:f:_cn_red:
-T:f:_cb_red:
->:t:_cb_white:
-<:t:_cb_white:
+.:t:_cw_white:ground:
+\::t:_cb_red: :
+\\:t:_cb_red: :
+o:f:_cn_green: :
+,:t:_cw_green: :
+':t:_cw_yellow: :
+`:t:_cb_green: :
+v:t:_cw_green: :
+l:t:_cb_green: :
+;:t:_cn_green: :
+x:t:_cn_yellow: :
++:t:_cn_white: :
+~:f:_cn_blue: :
+*:f:_cw_yellow: :
+=:t:_cw_white: :
+|:f:_cn_red: :
+-:f:_cn_red: :
+T:f:_cb_red: :
+>:t:_cb_white:enter:
+<:t:_cb_white:exit:
 
 # need \#
