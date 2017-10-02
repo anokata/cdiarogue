@@ -1,6 +1,7 @@
 #pragma once
 #include "util.h"
 #include "string.h"
+#include "config_parser.h"
 #include <glib.h>
 
 typedef struct Object {
@@ -14,3 +15,5 @@ typedef struct Object {
 Object object_new(int x, int y, char c);
 void object_free(Object object);
 void object_print(Object object);
+char *object_serialize(Object obj);
+Object object_deserialize(Strings str);

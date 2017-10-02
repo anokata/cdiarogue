@@ -112,8 +112,8 @@
 ** dung
       - add objects
             - +add object struct
-            - save object
-            - load object
+            - +save object
+            - +load object
             - save objects
             - load objects
             - objects of location
