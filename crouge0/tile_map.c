@@ -19,10 +19,6 @@ TileMap make_tile_map(int width, int height) {
     return map;
 }
 
-void afree(void *data) {
-    if (data) free(data);
-}
-
 void free_tile_map(TileMap map) {
     if (map->actors) {
         //free_actors(map->actors);

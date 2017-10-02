@@ -71,3 +71,7 @@ void ensure_file(char *filename) {
 	}
 }
 
+void afree(void *data) {
+    if (data) free(data);
+}
+

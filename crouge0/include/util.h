@@ -69,3 +69,5 @@ struct IntPair {
     return 0;\
 
 #endif
+
+void afree(void *data);

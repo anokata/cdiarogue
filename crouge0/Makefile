@@ -1,5 +1,5 @@
 # vim: filetype=make
-OBJECTS=app.c main.c map_gen.c world_map.c g.c tile_map.c util.c config_parser.c actor.c render.c collide.c events.c behavior.c item.c inventory.c charinfo.c
+OBJECTS=app.c main.c map_gen.c world_map.c g.c tile_map.c util.c config_parser.c actor.c render.c collide.c events.c behavior.c item.c inventory.c charinfo.c object.c
 MAP_OBJECTS=test_mapgen.c map_gen.c tile_map.c util.c config_parser.c actor.c item.c
 TMAP_OBJECTS=tile_map.c test_tile_map.c util.c
 
@@ -56,6 +56,9 @@ test_item: prepare
 test_actor: prepare
 	$(CC) $@.c item.c actor.c events.c util.c tile_map.c config_parser.c g.c world_map.c map_gen.c  $(CFLAGS) -o $(BUILD_DIR)/$@ && valgrind $(BUILD_DIR)/$@
 
+test_object: prepare
+	$(CC) $@.c object.c item.c actor.c events.c util.c tile_map.c config_parser.c g.c world_map.c map_gen.c  $(CFLAGS) -o $(BUILD_DIR)/$@ && valgrind $(BUILD_DIR)/$@
+
 val:
 	valgrind $(BUILD_DIR)/$(P)
 
@@ -84,7 +87,7 @@ module:
 	@echo '#include "$(name).h"' >> test_$(name).c
 	@echo '#include <stdio.h>'   >> test_$(name).c
 	@echo '#include <assert.h>'  >> test_$(name).c
-	@echo '\nint main() {\n\n}'  >> test_$(name).c
+	@echo -e '\nint main() {\n\n}'  >> test_$(name).c
 	@echo successfully created.
 
 coverage:
