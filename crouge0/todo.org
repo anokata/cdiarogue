@@ -110,6 +110,16 @@
 [ INWORK ]
 * 10 min dia like
 ** dung
+      - add objects
+            - +add object struct
+            - save object
+            - load object
+            - save objects
+            - load objects
+            - objects of location
+            - draw objects
+            - acting objects
+                  > on portal
       - enter to dung
             - event on collide with portal obj? or > cmd
             - load other map
@@ -119,23 +129,11 @@
                   - with exit
 
 - cleanup, rem unused, see todo
-- other tiles types with props such water, plants, enters, doors
-- doors, open, close, kick - commands, to direction mode
-      - map change, enter to dungeons, levels change
-      - add tile data field char*, in tiles file too
-      - stairs = spec tile with map (pack) file name.
-
-- make maps, town(heal point?, stores), dungeon
-- balance: hp restore down - only in town space
 - detect maps wh from first? or?
-
-- stashs bushs barrels stones garbage
-- ranged damage i.e. 2-5 
-- save and exit and exit without save
+- save and exit and exit without save with confirmation
 - spawn at enter? in some dungs
-- ?I need same char with different colors on same map 
+- if ?I need same char with different colors on same map 
 - save/load player equiped state items (item equiped flag?)
-- teleport scroll with P
 
 
 - TECHDEBT :: 
@@ -145,6 +143,8 @@
 
 * improvements features
 ** combat
+      - balance: hp restore down - only in town space
+      - ranged damage i.e. 2-5 
       - dodging chance
       - crit hits
       - damage at different parts of body/armor
@@ -159,9 +159,10 @@
         ... move to, attack, take, eat.
       - mobs generic type and inherit
             - mobs/items types and instances?
+      - gold drop
 
 ** shop
-      - shops
+      - shops, buy potions
       - npc, dialogs
       - loot, paws, wool, skin, bone, meet, jelly
 ** items
@@ -174,12 +175,18 @@
       - better inventory by category
       - item effects: effect X itemType X action
       - item actions - pass func
+      - teleport scroll with P
 ** map
       - more map tiles types, plants, rocks, sand
       - made world map
       - pack map files to zip/tarbz, unpack in mem (in ram space run or tmp)
       - lighting
       - map edit mode, add items, mobs, tiles
+      - other tiles types with props such water, plants?
+      - more objects: doors, open, close, kick - commands, to direction mode
+            - stashs bushs barrels stones garbage
+      - heal point
+
 
 - ! parse header and store columns indexes and get columns index and make struct
 - debug commands for mobs spawn, items, heal

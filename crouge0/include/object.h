@@ -8,6 +8,7 @@ typedef struct Object {
     int y;
     char c;
     char *param;
+    Funcvp action;
 } *Object;
 
 Object object_new(int x, int y, char c);

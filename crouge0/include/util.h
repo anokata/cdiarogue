@@ -70,4 +70,6 @@ struct IntPair {
 
 #endif
 
+typedef void (*Funcvp)(void *);
+
 void afree(void *data);
