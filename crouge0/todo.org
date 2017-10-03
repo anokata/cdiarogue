@@ -116,7 +116,7 @@
             - +load object
             - +save objects
             - +load objects
-            - objects of location
+            - +objects of location
             - draw objects
             - acting objects
                   > on portal
