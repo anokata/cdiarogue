@@ -164,28 +164,36 @@
 ** shop
       - shops, buy potions
       - npc, dialogs
+            - chat command
+            - dialogs of actor
+            - file for dialog of actor
+            - choice > func or choice > text, remark
+            - one level, but visible status dependend of event - global quest status (plot)
+            - remark = struct {name, func_id, text}
+                  dialog = array of remarks
+      - simple enter to shop by move (npc shop type)
       - loot, paws, wool, skin, bone, meet, jelly
 ** items
-      - read scrolls, books to effect on stats, skills, spells
+      - teleport scroll with P
+      - stash items - item count - same items to stack with number
       - item eat, activate, use
-      - zap wands
       - items grade, power ups
+      - zap wands
       - pick up from direction, view menu list items
-      - same items to stack with number
       - better inventory by category
       - item effects: effect X itemType X action
       - item actions - pass func
-      - teleport scroll with P
+      - read scrolls, books to effect on stats, skills, spells
 ** map
+      - heal point
       - more map tiles types, plants, rocks, sand
-      - made world map
-      - pack map files to zip/tarbz, unpack in mem (in ram space run or tmp)
       - lighting
-      - map edit mode, add items, mobs, tiles
-      - other tiles types with props such water, plants?
       - more objects: doors, open, close, kick - commands, to direction mode
             - stashs bushs barrels stones garbage
-      - heal point
+      - other tiles types with props such water, plants?
+      - map edit mode, add items, mobs, tiles
+      - made world map
+      - pack map files to zip/tarbz, unpack in mem (in ram space run or tmp)
 
 
 - ! parse header and store columns indexes and get columns index and make struct

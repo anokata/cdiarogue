@@ -5,3 +5,4 @@ map_height:20
 actors:./maps/map_1_1.actors
 items:map_1_1.items
 map_name_prefix:dun_
+objects:loc1.objs
