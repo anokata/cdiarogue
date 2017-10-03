@@ -69,6 +69,7 @@ TileMap make_tile_map(int width, int height);
 TileMap load_tile_map(string filename);
 TileMap load_global_tmap();
 void free_tile_map(TileMap map);
+void free_global_map(TileMap map);
 
 void print_tile_map(TileMap map);
 string tilemap_to2d(TileMap map);

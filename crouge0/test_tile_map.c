@@ -16,7 +16,7 @@ void test_tmap_create_load() {
 void test_load_loc() {
     TileMap g = load_global_tmap("maps/loc1");
     /* print_tile_map(l); */
-    free_tile_map(g);
+    free_global_map(g);
 }
 
 int main() {

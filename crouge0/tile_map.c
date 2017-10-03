@@ -187,6 +187,15 @@ void _copy_tileloc2glob(TileMap gmap, TileMap lmap, int offset) {
     }
 }
 
+char *_ensure_param_get(GHashTable *config, char *param_name) {
+    char *param = g_hash_table_lookup(config, param_name);
+    if (!param) {
+        printf("*-> Error: file no valid %s option\n", param_name);
+        exit(1);
+    }
+    return param;
+}
+
 TileMap load_global_tmap(char *location_path) {
     TileMap global_map;
     int local_width = 2;
@@ -202,16 +211,8 @@ TileMap load_global_tmap(char *location_path) {
     char *map_name_prefix = g_hash_table_lookup(config, "map_name_prefix");
     char *d_location_path = strdup(location_path);
     char *basepath = dirname(d_location_path);
-    char *actors_file = g_hash_table_lookup(config, "actors");
-    if (!actors_file) {
-        printf("*-> Error: file no valid actors file option\n");
-        exit(1);
-    }
-    char *items_file = g_hash_table_lookup(config, "items");
-    if (!items_file) {
-        printf("*-> Error: file no valid items file option\n");
-        exit(1);
-    }
+    char *actors_file = _ensure_param_get(config, "actors");
+    char *items_file = _ensure_param_get(config, "items");
     char *items_full_path = build_path(location_path, items_file);
 
     global_map = make_tile_map(local_width * local_map_width, local_height * local_map_height);
@@ -242,6 +243,12 @@ TileMap load_global_tmap(char *location_path) {
     free(d_location_path);
     g_hash_table_destroy(config);
     return global_map;
+}
+
+void free_global_map(TileMap map) {
+    free_actors(&map->actors);
+    map->actors = NULL;
+    free_tile_map(map);
 }
 
 void foreach_tile_viewport(TileMap map, TileFunc f, Viewport v) {
