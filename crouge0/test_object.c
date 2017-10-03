@@ -24,6 +24,21 @@ void test_serialization() {
     free(test);
     free_dsv_strings(s);
 
+    Objects objs = NULL;
+    Object obj = object_new(1, 2, 'z');
+    object_add(&objs, obj);
+    obj = object_new(1, 2, 'a');
+    object_add(&objs, obj);
+    objects_save("/tmp/objs", objs);
+    objects_free(&objs);
+
+    objs = objects_load("/tmp/objs");
+    GList *it = objs;
+    while (it) {
+        object_print(it->data);
+        it = g_list_next(it);
+    }
+    objects_free(&objs);
 }
 
 int main() {

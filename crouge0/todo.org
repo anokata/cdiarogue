@@ -114,8 +114,8 @@
             - +add object struct
             - +save object
             - +load object
-            - save objects
-            - load objects
+            - +save objects
+            - +load objects
             - objects of location
             - draw objects
             - acting objects
