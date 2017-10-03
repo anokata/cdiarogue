@@ -41,7 +41,7 @@ test_sky: prepare
 
 # TODO make build *.o to BUILD_DIR and *.c depened and target dep
 test_tile_map: prepare
-	$(CC) test_tile_map.c config_parser.c tile_map.c util.c $(CFLAGS) -o $(BUILD_DIR)/$@ && valgrind $(BUILD_DIR)/$@
+	$(CC) test_tile_map.c config_parser.c tile_map.c item.c object.c actor.c util.c $(CFLAGS) -o $(BUILD_DIR)/$@ && valgrind $(BUILD_DIR)/$@
 
 test_config_parser: prepare
 	$(eval DEBUG=-DDEBUG)
