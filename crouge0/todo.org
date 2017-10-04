@@ -118,7 +118,7 @@
             - +load objects
             - +objects of location
             - +draw objects
-            - acting objects
+            - ~acting objects
                   > on portal
       - enter to dung
             - event on collide with portal obj? or > cmd
@@ -273,6 +273,7 @@ anim trees ...
    make simple structures and basic methods in module
    then other module for more complex, linked to other modules functionality
    then most complex few modules than used by main module?
+   More tests, little testing apps.
 
 How make without allocating?
 

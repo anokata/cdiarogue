@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <glib.h>
 #include "lib/ccurses.h"
 
 #define BUFSIZE 128
@@ -73,3 +74,4 @@ struct IntPair {
 typedef void (*Funcvp)(void *);
 
 void afree(void *data);
+CharPoint charpoint_at(GList *lst, int x, int y);

@@ -75,3 +75,15 @@ void afree(void *data) {
     if (data) free(data);
 }
 
+CharPoint charpoint_at(GList *lst, int x, int y) {
+    GList *it = lst;
+    while (it) {
+        CharPoint elem = it->data;
+        if ((elem->x == x) && (elem->y == y)) {
+            return elem;
+        }
+        it = g_list_next(it);
+    }
+    return NULL;
+}
+

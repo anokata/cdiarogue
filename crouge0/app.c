@@ -166,11 +166,29 @@ int wmap_draw(void* data) {
     return 0;
 }
 
+void change_map(G g, char *location_filename) {
+}
+
+void enter_location(G g) {
+    CharPoint cp = charpoint_at(g->gmap->objects, g->player->x, g->player->y);
+    Object obj = (Object) cp;
+        // if obj type portal
+    if (obj && obj->c == '>') {
+        debuglog(g, obj->param);
+        change_map(g, obj->param);
+    } else {
+        debuglog(g, "Can not enter down here");
+    }
+}
+
 int cursor_key(void* data) {
     G g = data;
     char key = g->key;
     char *msg;
     switch (key) {
+        case '>':
+            enter_location(g);
+            break;
         case 's':
             save_player(g->player);
             save_location(g->gmap);
