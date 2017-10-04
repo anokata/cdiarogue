@@ -10,6 +10,7 @@ extern State state;
 void ui_draw(G g);
 void save_player(Actor you);
 void save_location(TileMap map);
+void load(G g);
 
 void process_input(G g) {
     ss_handle(state, Event_draw, g);
@@ -167,6 +168,16 @@ int wmap_draw(void* data) {
 }
 
 void change_map(G g, char *location_filename) {
+    // save player
+
+    /* because location_filename stored in global map */
+    char *location_filename_d = strdup(location_filename);
+    free_global_map(g->gmap);
+    g->player = NULL;
+    g->gmap = load_global_tmap(location_filename_d);
+    load(g);
+    add_actor(g, g->player);
+    free(location_filename_d);
 }
 
 void enter_location(G g) {

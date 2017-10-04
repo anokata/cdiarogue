@@ -2,4 +2,4 @@ x:y:char:param:
 # vi: filetype=sh
 1:2:z:zu:
 2:2:a:au:
-3:2:>:maps/loc1:
+6:4:>:./maps/loc1:

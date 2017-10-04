@@ -110,7 +110,7 @@
 [ INWORK for this week: to 8.10.2017]
 * 10 min dia like
 ** dung
-      - add objects
+      - +add objects
             - +add object struct
             - +save object
             - +load object
@@ -118,12 +118,13 @@
             - +load objects
             - +objects of location
             - +draw objects
-            - ~acting objects
-                  > on portal
-      - enter to dung
-            - event on collide with portal obj? or > cmd
-            - add objects - i.e. portal, chest, trap
-            - load other map
+            + > on portal
+            - +event on collide with portal obj? or > cmd
+
+      - dungeons
+            - add objects - i.e. chest, trap
+                  - acting objects
+            - make some portaled maps with different objs and itms and mobs
             - generate dungeon
                   - with mobs
                   - with items
