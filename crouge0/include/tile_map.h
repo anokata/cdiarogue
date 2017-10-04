@@ -4,6 +4,7 @@
 #include "util.h"
 #include "actor.h"
 #include "item.h"
+#include "object.h"
 #include "config_parser.h"
 #include <stdbool.h>
 #include <glib.h>
@@ -27,10 +28,12 @@ typedef struct TileMap {
     int height;
     GList *actors;
     Items items;
+    Objects objects;
     /* location fields TODO make it sep struct with cast to basic */
     char *tiles_file;
     char *items_file;
     char *actors_file;
+    char *objects_file;
 } *TileMap;
 
 typedef struct WorldMap {
@@ -69,6 +72,7 @@ TileMap make_tile_map(int width, int height);
 TileMap load_tile_map(string filename);
 TileMap load_global_tmap();
 void free_tile_map(TileMap map);
+void free_global_map(TileMap map);
 
 void print_tile_map(TileMap map);
 string tilemap_to2d(TileMap map);

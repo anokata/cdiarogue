@@ -110,6 +110,16 @@
 [ INWORK ]
 * 10 min dia like
 ** dung
+      - add objects
+            - +add object struct
+            - +save object
+            - +load object
+            - +save objects
+            - +load objects
+            - +objects of location
+            - draw objects
+            - acting objects
+                  > on portal
       - enter to dung
             - event on collide with portal obj? or > cmd
             - add objects - i.e. portal, chest, trap
@@ -120,23 +130,11 @@
                   - with exit
 
 - cleanup, rem unused, see todo
-- other tiles types with props such water, plants, enters, doors
-- doors, open, close, kick - commands, to direction mode
-      - map change, enter to dungeons, levels change
-      - add tile data field char*, in tiles file too
-      - stairs = spec tile with map (pack) file name.
-
-- make maps, town(heal point?, stores), dungeon
-- balance: hp restore down - only in town space
 - detect maps wh from first? or?
-
-- stashs bushs barrels stones garbage
-- ranged damage i.e. 2-5 
-- save and exit and exit without save
+- save and exit and exit without save with confirmation
 - spawn at enter? in some dungs
-- ?I need same char with different colors on same map 
+- if ?I need same char with different colors on same map 
 - save/load player equiped state items (item equiped flag?)
-- teleport scroll with P
 
 
 - TECHDEBT :: 
@@ -146,6 +144,8 @@
 
 * improvements features
 ** combat
+      - balance: hp restore down - only in town space
+      - ranged damage i.e. 2-5 
       - dodging chance
       - crit hits
       - damage at different parts of body/armor
@@ -160,27 +160,42 @@
         ... move to, attack, take, eat.
       - mobs generic type and inherit
             - mobs/items types and instances?
+      - gold drop
 
 ** shop
-      - shops
+      - shops, buy potions
       - npc, dialogs
+            - chat command
+            - dialogs of actor
+            - file for dialog of actor
+            - choice > func or choice > text, remark
+            - one level, but visible status dependend of event - global quest status (plot)
+            - remark = struct {name, func_id, text}
+                  dialog = array of remarks
+      - simple enter to shop by move (npc shop type)
       - loot, paws, wool, skin, bone, meet, jelly
 ** items
-      - read scrolls, books to effect on stats, skills, spells
+      - teleport scroll with P
+      - stash items - item count - same items to stack with number
       - item eat, activate, use
-      - zap wands
       - items grade, power ups
+      - zap wands
       - pick up from direction, view menu list items
-      - same items to stack with number
       - better inventory by category
       - item effects: effect X itemType X action
       - item actions - pass func
+      - read scrolls, books to effect on stats, skills, spells
 ** map
+      - heal point
       - more map tiles types, plants, rocks, sand
+      - lighting
+      - more objects: doors, open, close, kick - commands, to direction mode
+            - stashs bushs barrels stones garbage
+      - other tiles types with props such water, plants?
+      - map edit mode, add items, mobs, tiles
       - made world map
       - pack map files to zip/tarbz, unpack in mem (in ram space run or tmp)
-      - lighting
-      - map edit mode, add items, mobs, tiles
+
 
 - ! parse header and store columns indexes and get columns index and make struct
 - debug commands for mobs spawn, items, heal

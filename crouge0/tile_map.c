@@ -2,6 +2,7 @@
 
 TileMap make_tile_map(int width, int height) {
     TileMap map = malloc(sizeof(struct TileMap));
+    memset(map, 0, sizeof(struct TileMap));
     Tile *tiles = calloc(width * height, sizeof(struct Tile));
     map->tiles = tiles;
     map->width = width;
@@ -19,10 +20,6 @@ TileMap make_tile_map(int width, int height) {
     return map;
 }
 
-void afree(void *data) {
-    if (data) free(data);
-}
-
 void free_tile_map(TileMap map) {
     if (map->actors) {
         //free_actors(map->actors);
@@ -33,6 +30,7 @@ void free_tile_map(TileMap map) {
     afree(map->tiles_file);
     afree(map->items_file);
     afree(map->actors_file);
+    afree(map->objects_file);
     free(map);
 }
 
@@ -191,6 +189,15 @@ void _copy_tileloc2glob(TileMap gmap, TileMap lmap, int offset) {
     }
 }
 
+char *_ensure_param_get(GHashTable *config, char *param_name) {
+    char *param = g_hash_table_lookup(config, param_name);
+    if (!param) {
+        printf("*-> Error: file no valid %s option\n", param_name);
+        exit(1);
+    }
+    return param;
+}
+
 TileMap load_global_tmap(char *location_path) {
     TileMap global_map;
     int local_width = 2;
@@ -206,17 +213,11 @@ TileMap load_global_tmap(char *location_path) {
     char *map_name_prefix = g_hash_table_lookup(config, "map_name_prefix");
     char *d_location_path = strdup(location_path);
     char *basepath = dirname(d_location_path);
-    char *actors_file = g_hash_table_lookup(config, "actors");
-    if (!actors_file) {
-        printf("*-> Error: file no valid actors file option\n");
-        exit(1);
-    }
-    char *items_file = g_hash_table_lookup(config, "items");
-    if (!items_file) {
-        printf("*-> Error: file no valid items file option\n");
-        exit(1);
-    }
+    char *actors_file = _ensure_param_get(config, "actors");
+    char *items_file = _ensure_param_get(config, "items");
     char *items_full_path = build_path(location_path, items_file);
+    char *objects_file = _ensure_param_get(config, "objects");
+    char *objects_full_path = build_path(location_path, objects_file);
 
     global_map = make_tile_map(local_width * local_map_width, local_height * local_map_height);
     DEBUG_PRINT("Global tile map with w:%d h:%d\n", global_map->width, global_map->height);
@@ -224,6 +225,8 @@ TileMap load_global_tmap(char *location_path) {
     global_map->items = items_load(items_full_path);
     global_map->items_file = items_full_path;
     global_map->actors_file = strdup(actors_file);
+    global_map->objects_file = objects_full_path;
+    global_map->objects = objects_load(objects_full_path);
 
     /* TODO From location */
     string mapname_format = "%s/%s%i_%i";
@@ -246,6 +249,14 @@ TileMap load_global_tmap(char *location_path) {
     free(d_location_path);
     g_hash_table_destroy(config);
     return global_map;
+}
+
+void free_global_map(TileMap map) {
+    free_actors(&map->actors);
+    map->actors = NULL;
+    objects_free(&map->objects);
+    map->objects = NULL;
+    free_tile_map(map);
 }
 
 void foreach_tile_viewport(TileMap map, TileFunc f, Viewport v) {

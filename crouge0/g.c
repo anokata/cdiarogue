@@ -60,11 +60,8 @@ void gfree(gpointer data, gpointer user_data) {
 
 void free_g(G g) {
     free_wmap(g->wmap);
+    free_global_map(g->gmap);
 
-    free_actors(&g->gmap->actors);
-    g->gmap->actors = NULL;
-
-    free_tile_map(g->gmap);
     free(g->view);
     g_list_foreach(g->log, gfree, NULL);
     g_list_free(g->log);
