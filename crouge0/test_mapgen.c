@@ -40,7 +40,7 @@ void test() {
     free_tile_map(m);
 }
 
-void test_gen() {
+void test_gen_rooms() {
     int width = 40;
     int height = 20;
     DEBUG_PRINT("\n***Creating map gen rooms\n");
@@ -49,8 +49,18 @@ void test_gen() {
     free_map(map);
 }
 
+void test_gen() {
+    int width = 40;
+    int height = 20;
+    DEBUG_PRINT("\n***Creating map gen\n");
+    Map map = gen_map(width, height);
+    print_map(map);
+    free_map(map);
+}
+
 int main() {
-    //test();
+    /* test(); */
+    /* test_gen_rooms(); */
     test_gen();
 }
 

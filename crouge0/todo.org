@@ -130,6 +130,20 @@
                   - with items
                   - with exit
 
+* 11 gameplay
+** combat
+      - balance: hp restore down - only in town space and rest cmd
+      - ranged damage i.e. 2-5 
+      - dodging chance
+      - crit hits
+** mobs
+      - gold drop
+** items
+      - stash items - item count - same items to stack with number
+** maps
+      - move player to map enter : spawn point in location
+
+
 - cleanup, rem unused, see todo
 - detect maps wh from first? or?
 - save and exit and exit without save with confirmation
@@ -145,10 +159,6 @@
 
 * improvements features
 ** combat
-      - balance: hp restore down - only in town space
-      - ranged damage i.e. 2-5 
-      - dodging chance
-      - crit hits
       - damage at different parts of body/armor
       - fire, bows
       - skills - weapon health 
@@ -161,7 +171,6 @@
         ... move to, attack, take, eat.
       - mobs generic type and inherit
             - mobs/items types and instances?
-      - gold drop
 
 ** shop
       - shops, buy potions
@@ -177,22 +186,23 @@
       - loot, paws, wool, skin, bone, meet, jelly
 ** items
       - teleport scroll with P
-      - stash items - item count - same items to stack with number
       - item eat, activate, use
       - items grade, power ups
       - zap wands
+
       - pick up from direction, view menu list items
       - better inventory by category
       - item effects: effect X itemType X action
       - item actions - pass func
       - read scrolls, books to effect on stats, skills, spells
 ** map
+      - lighting
       - heal point
       - more map tiles types, plants, rocks, sand
-      - lighting
       - more objects: doors, open, close, kick - commands, to direction mode
             - stashs bushs barrels stones garbage
       - other tiles types with props such water, plants?
+
       - map edit mode, add items, mobs, tiles
       - made world map
       - pack map files to zip/tarbz, unpack in mem (in ram space run or tmp)

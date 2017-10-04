@@ -177,6 +177,7 @@ void change_map(G g, char *location_filename) {
     g->gmap = load_global_tmap(location_filename_d);
     load(g);
     add_actor(g, g->player);
+    // TODO move player to map enter : spawn point
     free(location_filename_d);
 }
 

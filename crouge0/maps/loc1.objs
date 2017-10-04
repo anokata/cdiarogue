@@ -1,5 +1,5 @@
 x:y:char:param:
 # vi: filetype=sh
-1:2:z:zu:
-2:2:a:au:
-6:4:>:./maps/loc1:
+5:4:^:trap:
+5:6:0:1 gold box:
+6:4:>:./maps/loc2:
