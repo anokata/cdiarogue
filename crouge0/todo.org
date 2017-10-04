@@ -112,6 +112,7 @@
 ** dung
       - enter to dung
             - event on collide with portal obj? or > cmd
+            - add objects - i.e. portal, chest, trap
             - load other map
             - generate dungeon
                   - with mobs
