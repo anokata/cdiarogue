@@ -197,6 +197,11 @@
       - read scrolls, books to effect on stats, skills, spells
 ** map
       - lighting
+            - create, clear light map
+            - calc rays (radius, center, angle)
+            - light on by rays
+            - recalc light every step = clear, lightup
+            - draw only lighted tiles
       - heal point
       - more map tiles types, plants, rocks, sand
       - more objects: doors, open, close, kick - commands, to direction mode

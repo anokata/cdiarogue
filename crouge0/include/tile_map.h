@@ -5,6 +5,7 @@
 #include "actor.h"
 #include "item.h"
 #include "object.h"
+#include "lightmap.h"
 #include "config_parser.h"
 #include <stdbool.h>
 #include <glib.h>
@@ -26,6 +27,7 @@ typedef struct TileMap {
     Tile *tiles;
     int width;
     int height;
+    LightMap lightmap;
     GList *actors;
     Items items;
     Objects objects;
