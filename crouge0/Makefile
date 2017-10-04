@@ -1,5 +1,5 @@
 # vim: filetype=make
-OBJECTS=app.c main.c map_gen.c world_map.c g.c tile_map.c util.c config_parser.c actor.c render.c collide.c events.c behavior.c item.c inventory.c charinfo.c object.c lightmap.c
+OBJECTS=app.c main.c map_gen.c world_map.c g.c tile_map.c util.c config_parser.c actor.c render.c collide.c events.c behavior.c item.c inventory.c charinfo.c object.c lightmap.c lightcalc.c
 MAP_OBJECTS=test_mapgen.c map_gen.c tile_map.c util.c config_parser.c actor.c item.c object.c
 TMAP_OBJECTS=tile_map.c test_tile_map.c util.c
 
@@ -9,7 +9,7 @@ P=rouge0
 MAPGEN=test_mapgen
 LIB=libccurses.a
 CC=gcc
-LFLAGS=-L../lib -lccurses -lncurses 
+LFLAGS=-L../lib -lccurses -lncurses -lm
 IFLAGS=-I./include -I../ccurses
 GLIB=$(shell pkg-config --cflags --libs glib-2.0)
 DEBUG=-DDEBUG
@@ -60,7 +60,7 @@ test_object: prepare
 	$(CC) $@.c object.c item.c actor.c events.c util.c tile_map.c config_parser.c g.c world_map.c map_gen.c  $(CFLAGS) -o $(BUILD_DIR)/$@ && valgrind $(BUILD_DIR)/$@
 
 test_lightmap: prepare
-	$(CC) $@.c lightmap.c object.c item.c actor.c events.c util.c tile_map.c config_parser.c g.c world_map.c map_gen.c  $(CFLAGS) -o $(BUILD_DIR)/$@ && valgrind $(BUILD_DIR)/$@
+	$(CC) $@.c lightmap.c lightcalc.c object.c item.c actor.c events.c util.c tile_map.c config_parser.c g.c world_map.c map_gen.c  $(CFLAGS) -o $(BUILD_DIR)/$@ && valgrind $(BUILD_DIR)/$@
 
 val:
 	valgrind $(BUILD_DIR)/$(P)

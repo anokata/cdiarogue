@@ -12,6 +12,7 @@ TileMap make_tile_map(int width, int height) {
     map->tiles_file = NULL;
     map->items_file = NULL;
     map->actors_file = NULL;
+    map->lightmap = lightmap_new(width, height);
     for (int i=0; i < height; i++) {
         for (int j=0; j < width; j++) {
             tiles[i * width + j].c = ' ';
@@ -31,6 +32,7 @@ void free_tile_map(TileMap map) {
     afree(map->items_file);
     afree(map->actors_file);
     afree(map->objects_file);
+    lightmap_free(map->lightmap);
     free(map);
 }
 
@@ -271,9 +273,10 @@ void foreach_tile_viewport(TileMap map, TileFunc f, Viewport v) {
     /* debug_file_log_format("foreach b %d  r %d.\n", bottom, right); */
     for (int y = top; y < bottom; ++y) {
         for (int x = left; x < right; ++x) {
-            f(tile_at(map, x, y), 
-              x - left + v.display_left, 
-              y - top + v.display_top);
+            if (map->lightmap[ y * map->width + x])
+                f(tile_at(map, x, y), 
+                  x - left + v.display_left, 
+                  y - top + v.display_top);
         }
     }
 }

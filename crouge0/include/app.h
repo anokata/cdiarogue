@@ -18,6 +18,7 @@
 #include "item.h"
 #include "inventory.h"
 #include "charinfo.h"
+#include "lightcalc.h"
 
 void debug_draw(G g);
 

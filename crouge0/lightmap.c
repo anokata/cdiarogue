@@ -8,5 +8,10 @@ LightMap lightmap_new(int width, int height) {
 }
 
 void lightmap_free(LightMap lm) {
-    free(lm);
+    if (lm) free(lm);
+}
+
+void lightmap_clear(LightMap lm, int width, int height) {
+    size_t size = width * height * sizeof(lightcell);
+    memset(lm, 0, size);
 }

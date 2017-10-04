@@ -289,6 +289,7 @@ int cursor_draw(void* data) {
     G g = data;
 
     clear();
+    map_lightning(g->gmap, g->player->x, g->player->y);
     draw_map(g->gmap, g->view);
     /* cc_putxy('@', cn_yellow, */ 
     /*         min(g->view->cx, g->view->width / 2) + g->view->display_left, */ 
