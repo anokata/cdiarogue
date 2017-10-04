@@ -265,6 +265,7 @@ int cursor_draw(void* data) {
     /*         min(g->view->cy, g->view->height / 2) + g->view->display_top); */
     draw_charpoints(g->gmap->items, g->view);
     draw_charpoints(g->gmap->actors, g->view);
+    draw_charpoints(g->gmap->objects, g->view);
     draw_actor_self(g->player, g->view);
     ui_draw(g);
     return 0;

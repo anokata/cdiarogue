@@ -1,7 +1,7 @@
 #include "object.h"
 const char object_dump_format[] = "%d:%d:%c:%s:\n";
 const char obj_file_header[] = "x:y:char:param:\n";
-const char obj_file_type[] = "# vi: filetype=sh\n";
+const char obj_file_type[] = "# v" "i: filetype=sh\n";
 
 Object object_new(int x, int y, char c) {
     Object obj = malloc(sizeof(struct Object));
@@ -9,6 +9,7 @@ Object object_new(int x, int y, char c) {
     obj->x = x;
     obj->y = y;
     obj->c = c;
+    obj->color = cn_white;
     return obj;
 }
 
@@ -90,3 +91,4 @@ void objects_free(Objects *objs) {
     g_list_free(*objs);
     *objs = NULL;
 }
+

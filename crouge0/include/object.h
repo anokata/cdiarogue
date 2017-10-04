@@ -5,9 +5,11 @@
 #include <glib.h>
 
 typedef struct Object {
+/* First (four) fields is CharPoint struct */
+    char c;
     int x;
     int y;
-    char c;
+    Color color; /* end of CharPoint */
     char *param;
     Funcvp action;
 } *Object;

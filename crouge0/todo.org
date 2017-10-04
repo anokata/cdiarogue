@@ -107,7 +107,7 @@
             - +save player items
             - +save location items
 
-[ INWORK ]
+[ INWORK for this week: to 8.10.2017]
 * 10 min dia like
 ** dung
       - add objects
@@ -117,7 +117,7 @@
             - +save objects
             - +load objects
             - +objects of location
-            - draw objects
+            - +draw objects
             - acting objects
                   > on portal
       - enter to dung
