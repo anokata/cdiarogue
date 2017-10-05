@@ -1,4 +1,8 @@
 #include "map_gen.h"
+#include <stdbool.h>
+
+
+char char_at(Map map, int x, int y);
 
 Map make_map(int width, int height) { // OK 
     Map map = malloc(sizeof(struct Map));
@@ -15,7 +19,9 @@ void free_map(Map map) { // OK
     free(map);
 }
 
-static const char map_chars[] = ".......ox";
+static const char map_chars[] = ".##";
+static const char wall = '#';
+static const char floor = '.';
 int map_chars_count = sizeof(map_chars);
 // TODO chars and probabilities
 
@@ -27,17 +33,30 @@ char map_char_at(TileMap map, int x, int y) {
     return map->tiles[y * map->width + x].c;
 }
 
-int map_neighbours(Map map, Point p) {
+int map_neighbours(Map map, int a, int b) {
     int n = 0;
-    UNUSED(map);
-    UNUSED(p);
-    // TODO
+    for (int x = -1; x < 2; x++) {
+        for (int y = -1; y < 2; y++) {
+            if (char_at(map, y + a, x + b) != floor) {
+                n++;
+            }
+        }
+    }
     return n;
 }
 
-void gen_map_step(Map map) {
-    // TODO
-    UNUSED(map);
+bool gen_map_step(Map map) {
+    bool changed = false;
+    for (int i=0; i < map->height; i++) {
+        for (int j=0; j < map->width; j++) {
+            int n = map_neighbours(map, j, i);
+            if (n < 5) {
+                map->data[i * map->width + j] = floor;
+                changed = true;
+            }
+        }
+    }
+    return changed;
 }
 
 Map gen_map(int width, int height) {
@@ -52,12 +71,23 @@ Map gen_map(int width, int height) {
             map->data[i * width + j] = rand_char();
         }
     }
+    /* while (gen_map_step(map)) ; */
+    for (int i = 0; i < 5; i++) {
+        gen_map_step(map);
+    }
     return map;
 }
 
+void gen_map_floodfill(Map map) {
+    UNUSED(map);
+    /* TODO */
+}
 
-static const char wall = '#';
-static const char floor = '.';
+void gen_map_invert(Map map) {
+    UNUSED(map);
+    /* TODO */
+}
+
 
 char char_at(Map map, int x, int y) {
     /* printf("char@ %d %d\n", x, y); */

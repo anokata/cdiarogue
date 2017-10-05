@@ -1,6 +1,6 @@
 # vim: filetype=make
 OBJECTS=app.c main.c map_gen.c world_map.c g.c tile_map.c util.c config_parser.c actor.c render.c collide.c events.c behavior.c item.c inventory.c charinfo.c object.c lightmap.c lightcalc.c
-MAP_OBJECTS=test_mapgen.c map_gen.c tile_map.c util.c config_parser.c actor.c item.c object.c
+MAP_OBJECTS=test_mapgen.c map_gen.c tile_map.c util.c config_parser.c actor.c item.c object.c lightmap.c
 TMAP_OBJECTS=tile_map.c test_tile_map.c util.c
 
 BUILD_DIR=/tmp/build
