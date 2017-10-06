@@ -126,9 +126,13 @@
                   - acting objects
             - make some portaled maps with different objs and itms and mobs
             - generate dungeon
+                  - gen tiles file
+                  - gen location file
+                  - with exit object
+                  - save map (where?)
                   - with mobs
                   - with items
-                  - with exit
+                  - generate mobs 
 
 * 11 gameplay
 ** combat

@@ -57,6 +57,11 @@ void test_gen() {
     gen_proc_cave(map);
     gen_map_invert(map);
     print_map(map);
+
+    TileMap m = map_convert2tilemap(map);
+    m->tiles_file = "map_1_1.tiles";
+    save_tilemap(m, "/tmp/out");
+
     free_map(map);
 }
 
