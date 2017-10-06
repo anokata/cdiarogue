@@ -28,6 +28,8 @@ void free_map(Map map);
 Map tilemap_convert2map(TileMap tmap);
 TileMap map_convert2tilemap(Map map);
 int get_map_size(Map map);
+void gen_map_invert(Map map);
+void gen_proc_cave(Map map);
 
 
 #endif

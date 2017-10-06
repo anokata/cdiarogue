@@ -45,18 +45,24 @@ int map_neighbours(Map map, int a, int b) {
     return n;
 }
 
-bool gen_map_step(Map map) {
+bool gen_map_step(Map map, int threshold) {
     bool changed = false;
     for (int i=0; i < map->height; i++) {
         for (int j=0; j < map->width; j++) {
             int n = map_neighbours(map, j, i);
-            if (n < 5) {
+            if (n < threshold) {
                 map->data[i * map->width + j] = floor;
                 changed = true;
             }
         }
     }
     return changed;
+}
+
+void gen_proc_cave(Map map) {
+    for (int i = 0; i < 3; i++) {
+        gen_map_step(map, 5);
+    }
 }
 
 Map gen_map(int width, int height) {
@@ -71,10 +77,7 @@ Map gen_map(int width, int height) {
             map->data[i * width + j] = rand_char();
         }
     }
-    /* while (gen_map_step(map)) ; */
-    for (int i = 0; i < 5; i++) {
-        gen_map_step(map);
-    }
+
     return map;
 }
 
@@ -92,8 +95,15 @@ void gen_map_floodfill(Map map, int x, int y) {
 }
 
 void gen_map_invert(Map map) {
-    UNUSED(map);
-    /* TODO */
+    for (int i=0; i < map->height; i++) {
+        for (int j=0; j < map->width; j++) {
+            if (map->data[i * map->width + j] == wall) {
+                map->data[i * map->width + j] = floor;
+            } else {
+                map->data[i * map->width + j] = wall;
+            }
+        }
+    }
 }
 
 

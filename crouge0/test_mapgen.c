@@ -54,6 +54,8 @@ void test_gen() {
     int height = 20;
     DEBUG_PRINT("\n***Creating map gen\n");
     Map map = gen_map(width, height);
+    gen_proc_cave(map);
+    gen_map_invert(map);
     print_map(map);
     free_map(map);
 }
