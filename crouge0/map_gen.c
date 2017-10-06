@@ -78,8 +78,16 @@ Map gen_map(int width, int height) {
     return map;
 }
 
-void gen_map_floodfill(Map map) {
+void gen_map_floodfill(Map map, int x, int y) {
     UNUSED(map);
+    for (int i = -1; i < 2; i++) {
+        for (int j = -1; j < 2; j++) {
+            if (char_at(map, j + x, i + y) == floor) {
+
+            } else {
+            }
+        }
+    }
     /* TODO */
 }
 
