@@ -134,6 +134,8 @@
                   - +with items
                   - +make main app load map by arg pass
                   - with exit object
+                        - exit to previous map
+                        - enter to generated map or exiting
 
 - add map files to location file
 
@@ -150,16 +152,17 @@
 ** maps
       - move player to map enter : spawn point in location
 - more contens: mobs, equips, items
-- save equiped
+- save equiped - save/load player equiped state items (item equiped flag?)
+- spawn at enter? in some dungs
+- savefile : map path and you path
+- items, actors, objects not visible without light
 
 
 - mobs/items and objs description in one file, - position in their map
 - cleanup, rem unused, see todo
 - detect maps wh from first? or?
 - save and exit and exit without save with confirmation
-- spawn at enter? in some dungs
 - if ?I need same char with different colors on same map 
-- save/load player equiped state items (item equiped flag?)
 
 
 - TECHDEBT :: 
@@ -212,7 +215,6 @@
             - +light on by rays
             - +recalc light every step = clear, lightup
             - +draw only lighted tiles
-            - items, actors, objects not visible without light
             - variable light radius
             - other lighing sources
       - heal point
