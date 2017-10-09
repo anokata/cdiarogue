@@ -7,7 +7,7 @@
 #include <glib.h>
 #include "lib/ccurses.h"
 
-#define BUFSIZE 128
+#define BUFSIZE 256
 typedef char* string;
 
 #define UNUSED(x) ((void)(x));

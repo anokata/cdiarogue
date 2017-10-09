@@ -324,18 +324,45 @@ char *gen_mapname() {
     return strdup(name);
 }
 
-char *gen_path(char *suffix) {
-    char *mapname = gen_mapname();
+char *gen_path(char *suffix, char* name) {
     char map_path[BUFSIZE];
-    snprintf(map_path, BUFSIZE, "save/%s.%s", mapname, suffix);
-    free(mapname);
+    snprintf(map_path, BUFSIZE, "save/%s%s", name, suffix);
     return strdup(map_path);
+}
+
+void location_save_data(char *filename, int width, int height, 
+        char* actors_file, char* items_file, char* objects_file,
+        char* map_prefix) {
+    FILE *fout = fopen(filename, "w");
+    char buf[BUFSIZE];
+    snprintf(buf, BUFSIZE, 
+            "x_segments:1\n"
+            "y_segments:1\n"
+            "map_width:%d\n"
+            "map_height:%d\n"
+            "actors:%s\n"
+            "items:%s\n"
+            "map_name_prefix:%s\n"
+            "objects:%s\n"
+            , width, height, actors_file, items_file, map_prefix, objects_file);
+
+    fwrite(buf, strlen(buf), 1, fout);
+    fwrite("\n", 1, 1, fout);
+    fclose(fout);
 }
 
 void gen_location(int width, int height) {
     char *common_tiles_file = "map_1_1.tiles";
     char *items_file_lvl1 = "maps/lvl1.items";
-    char *map_path = gen_path("map");
+    char *mapname = gen_mapname();
+    char map_path_buf[BUFSIZE];
+    snprintf(map_path_buf, BUFSIZE, "save/%s_1_1.map", mapname);
+    char *map_path = strdup(map_path_buf);
+
+    char *items_path = gen_path(".items", mapname);
+    char *actors_path = gen_path(".actors", mapname);
+    char *objects_path = gen_path(".objs", mapname);
+    char *loc_path = gen_path(".loc", mapname);
 
     Map map = gen_map(width, height);
     gen_proc_cave(map);
@@ -348,7 +375,6 @@ void gen_location(int width, int height) {
     free(map_path);
 
     /* gen items from set of lvl */
-    char *items_path = gen_path("items");
     int items_take_count = (width * height) / 20;
     // load items file for specific lvl
     Items items = items_load(items_file_lvl1);
@@ -369,15 +395,24 @@ void gen_location(int width, int height) {
     }
 
     /* gen exit and enter */
+    struct IntPair enter_point = gen_get_nine_space(map);
+    struct IntPair exit_point = gen_get_nine_space(map);
+    // todo: add objects
+
     /* gen mobs */
 
     /* location */
-    char *loc_path = gen_path("loc");
+    // save location
+    location_save_data(loc_path, width, height, actors_path,
+            items_path, objects_path, mapname);
 
     items_free(&items);
     /* items_free(&m->items); */
     free_tile_map(m);
     free(loc_path);
+    free(objects_path);
+    free(actors_path);
     free(items_path);
+    free(mapname);
     free_map(map);
 }
