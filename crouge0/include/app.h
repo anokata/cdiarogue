@@ -21,5 +21,6 @@
 #include "lightcalc.h"
 
 void debug_draw(G g);
+void start(char *arg1);
 
 #endif

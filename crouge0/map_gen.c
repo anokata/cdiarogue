@@ -327,7 +327,7 @@ char *gen_mapname() {
 
 char *gen_path(char *suffix, char* name) {
     char map_path[BUFSIZE];
-    snprintf(map_path, BUFSIZE, "save/%s%s", name, suffix);
+    snprintf(map_path, BUFSIZE, "%s%s", name, suffix);
     return strdup(map_path);
 }
 
@@ -393,7 +393,9 @@ void gen_location(int width, int height) {
     // add item
         item_add(&m->items, item);
     // save items
-        items_save(items_path, m->items);
+        char items_full_path[BUFSIZE];
+        snprintf(items_full_path, BUFSIZE, "save/%s", items_path);
+        items_save(items_full_path, m->items);
     }
 
     /* gen exit and enter */
@@ -412,12 +414,16 @@ void gen_location(int width, int height) {
         actor->x = p.a;
         actor->y = p.b;
         actor_add(&m->actors, actor);
-        actors_save(actors_path, m->actors);
+        char actors_full_path[BUFSIZE];
+        snprintf(actors_full_path, BUFSIZE, "save/%s", actors_path);
+        actors_save(actors_full_path, m->actors);
     }
 
     /* location */
     // save location
-    location_save_data(loc_path, width, height, actors_path,
+    char location_full_path[BUFSIZE];
+    snprintf(location_full_path, BUFSIZE, "save/%s", loc_path);
+    location_save_data(location_full_path, width, height, actors_path,
             items_path, objects_path, mapname);
 
     items_free(&items);

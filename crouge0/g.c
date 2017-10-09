@@ -19,8 +19,7 @@ void debuglog(G g, char *msg) {
     g->log = g_list_append(g->log, g_strdup(msg));
 }
 
-G new_g() {
-    char *location_path = "./maps/loc2";
+G new_g(char *location_path) {
     G g = malloc(sizeof(struct G));
     bzero(g, sizeof(struct G));
 

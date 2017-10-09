@@ -421,11 +421,15 @@ void item_debug(G g) {
     item_add(&g->gmap->items, potion);
 }
 
-void start() {
+void start(char *arg1) {
+    char *location_path = "./maps/loc2";
+    if (arg1) {
+        location_path = arg1;
+    }
     /* tests if debug */
         // TODO
     fill_exp_road();
-    G g = new_g();
+    G g = new_g(location_path);
     load(g);
     add_actor(g, g->player);
     /* init_inventory(g); */

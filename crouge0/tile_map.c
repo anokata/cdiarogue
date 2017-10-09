@@ -218,15 +218,16 @@ TileMap load_global_tmap(char *location_path) {
     char *actors_file = _ensure_param_get(config, "actors");
     char *items_file = _ensure_param_get(config, "items");
     char *items_full_path = build_path(location_path, items_file);
+    char *actors_full_path = build_path(location_path, actors_file);
     char *objects_file = _ensure_param_get(config, "objects");
     char *objects_full_path = build_path(location_path, objects_file);
 
     global_map = make_tile_map(local_width * local_map_width, local_height * local_map_height);
     DEBUG_PRINT("Global tile map with w:%d h:%d\n", global_map->width, global_map->height);
-    global_map->actors = actors_load(actors_file);
+    global_map->actors = actors_load(actors_full_path);
     global_map->items = items_load(items_full_path);
     global_map->items_file = items_full_path;
-    global_map->actors_file = strdup(actors_file);
+    global_map->actors_file = strdup(actors_full_path);
     global_map->objects_file = objects_full_path;
     global_map->objects = objects_load(objects_full_path);
 
