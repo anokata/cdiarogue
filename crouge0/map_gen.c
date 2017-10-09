@@ -1,6 +1,7 @@
 #include "map_gen.h"
 #include <stdbool.h>
 #include "item.h"
+#include "actor.h"
 
 char char_at(Map map, int x, int y);
 
@@ -354,6 +355,7 @@ void location_save_data(char *filename, int width, int height,
 void gen_location(int width, int height) {
     char *common_tiles_file = "map_1_1.tiles";
     char *items_file_lvl1 = "maps/lvl1.items";
+    char *actors_file_lvl1 = "maps/lvl1.actors";
     char *mapname = gen_mapname();
     char map_path_buf[BUFSIZE];
     snprintf(map_path_buf, BUFSIZE, "save/%s_1_1.map", mapname);
@@ -400,6 +402,18 @@ void gen_location(int width, int height) {
     // todo: add objects
 
     /* gen mobs */
+    int actors_take_count = (width * height) / 20;
+    Actors actors = actors_load(actors_file_lvl1);
+    int actors_count = g_list_length(actors);
+    for (int i = 0; i < actors_take_count; i++) {
+        Actor actor = g_list_nth_data(actors, rand() % actors_count);
+        actor = actor_clone(actor);
+        struct IntPair p = gen_get_free_space(map);
+        actor->x = p.a;
+        actor->y = p.b;
+        actor_add(&m->actors, actor);
+        actors_save(actors_path, m->actors);
+    }
 
     /* location */
     // save location

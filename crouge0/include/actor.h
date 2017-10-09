@@ -63,10 +63,13 @@ typedef struct Actor {
     Item equiped_body;
 } *Actor;
 
+typedef GList *Actors;
+
 CharPoint actor_as_charpoint_cast(Actor actor);
 
 Actor make_actor(char c, int x, int y);
 void free_actors(GList **actors);
+Actor actor_clone(Actor actor);
 void actor_add(GList **actors, Actor actor);
 void actor_free(Actor actor);
 bool _actor_isat_directed_place(Actor actor);

@@ -76,6 +76,13 @@ void actor_free(Actor actor) {
     free(actor);
 }
 
+Actor actor_clone(Actor actor) {
+    Actor clone = make_actor(actor->c, actor->x , actor->y);
+    memcpy(clone, actor, sizeof(struct Actor));
+    clone->name = strdup(actor->name);
+    return clone;
+}
+
 void free_actors(GList **actors) {
     GList *it = *actors;
     while (it) {

@@ -126,14 +126,14 @@
                   - acting objects
             - make some portaled maps with different objs and itms and mobs
             - generate dungeon location
-                  - gen random name
-                  - gen tiles file
-                  - gen location file
+                  - +gen random name
+                  - ?gen tiles file
+                  - +gen location file
+                  - +save map (where?)
+                  - +with mobs
+                  - +with items
                   - with exit object
-                  - save map (where?)
-                  - with mobs
-                  - with items
-                  - generate mobs 
+                  - make main app load map by arg pass
 
 * 11 gameplay
 ** combat
