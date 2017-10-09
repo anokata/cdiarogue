@@ -42,6 +42,13 @@ void item_free(Item item) {
     free(item);
 }
 
+Item item_clone(Item item) {
+    Item clone = item_new(item->c, item->x , item->y);
+    memcpy(clone, item, sizeof(struct Item));
+    clone->name = strdup(item->name);
+    return clone;
+}
+
 void item_add(Items *items, Item item) {
     *items = g_list_append(*items, item);
 }

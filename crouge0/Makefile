@@ -34,7 +34,7 @@ lint:
 	splint main.c $(IFLAGS)
 
 test_mapgen: prepare
-	$(CC) $(MAP_OBJECTS) $(CFLAGS) -o $(BUILD_DIR)/$@ && valgrind $(BUILD_DIR)/$@ && ls -l $(BUILD_DIR)/*.map
+	$(CC) $(MAP_OBJECTS) $(CFLAGS) -o $(BUILD_DIR)/$@ && valgrind $(BUILD_DIR)/$@ && ls -l save
 
 test_sky: prepare
 	$(CC) $(CFLAGS) test_sky.c sky_view.c $(GLIB) -I./include -I../ccurses -o $(BUILD_DIR)/$@ && $(BUILD_DIR)/$@

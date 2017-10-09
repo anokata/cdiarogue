@@ -27,6 +27,7 @@ void test() {
     print_tile_map(m);
     save_tilemap(m, "/tmp/out");
     print_tile_map(m);
+    free_tile_map(m);
 
     free_tile_map(m);
     free_map(map);
@@ -73,6 +74,7 @@ int main() {
     /* test(); */
     /* test_gen_rooms(); */
     /* test_gen(); */
-    test_name();
+    /* test_name(); */
+    gen_location(20, 30);
 }
 

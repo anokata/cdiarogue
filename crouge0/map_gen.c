@@ -1,6 +1,6 @@
 #include "map_gen.h"
 #include <stdbool.h>
-
+#include "item.h"
 
 char char_at(Map map, int x, int y);
 
@@ -162,6 +162,19 @@ bool gen_is_9_space(Map map, int x, int y) {
     );
 }
 
+struct IntPair gen_get_free_space(Map map) {
+    struct IntPair p= {0, 0};
+    p.a = rand() % map->width;
+    p.b = rand() % map->height;
+    int limit = 1000;
+    while (!(char_at(map, p.a, p.b) == floor) && limit) {
+        p.a = rand() % map->width;
+        p.b = rand() % map->height;
+        limit--;
+    }
+    return p;
+}
+
 struct IntPair gen_get_nine_space(Map map) {
     struct IntPair p= {0, 0};
     p.a = rand() % map->width;
@@ -315,11 +328,13 @@ char *gen_path(char *suffix) {
     char *mapname = gen_mapname();
     char map_path[BUFSIZE];
     snprintf(map_path, BUFSIZE, "save/%s.%s", mapname, suffix);
+    free(mapname);
     return strdup(map_path);
 }
 
 void gen_location(int width, int height) {
     char *common_tiles_file = "map_1_1.tiles";
+    char *items_file_lvl1 = "maps/lvl1.items";
     char *map_path = gen_path("map");
 
     Map map = gen_map(width, height);
@@ -327,24 +342,42 @@ void gen_location(int width, int height) {
     gen_map_invert(map);
 
     TileMap m = map_convert2tilemap(map);
-    m->tiles_file = common_tiles_file;
+    m->tiles_file = strdup(common_tiles_file);
     save_tilemap(m, map_path);
 
-    free_map(map);
     free(map_path);
 
     /* gen items from set of lvl */
     char *items_path = gen_path("items");
-    int items_count = (width * height) / 20;
-    // make item
+    int items_take_count = (width * height) / 20;
+    // load items file for specific lvl
+    Items items = items_load(items_file_lvl1);
+    int items_count = g_list_length(items);
+    // take N random items: clone add
+    for (int i = 0; i < items_take_count; i++) {
+    // take item
+        Item item = g_list_nth_data(items, rand() % items_count);
+        item = item_clone(item);
     // place item
+        struct IntPair p = gen_get_free_space(map);
+        item->x = p.a;
+        item->y = p.b;
     // add item
+        item_add(&m->items, item);
     // save items
-    free(items_path);
+        items_save(items_path, m->items);
+    }
 
+    /* gen exit and enter */
+    /* gen mobs */
 
     /* location */
     char *loc_path = gen_path("loc");
 
+    items_free(&items);
+    /* items_free(&m->items); */
+    free_tile_map(m);
     free(loc_path);
+    free(items_path);
+    free_map(map);
 }
