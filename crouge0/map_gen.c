@@ -300,3 +300,7 @@ void save_tilemap(TileMap map, char *filename) {
     free(buf);
     free_map(m);
 }
+
+void gen_location() {
+
+}

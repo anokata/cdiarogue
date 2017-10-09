@@ -125,7 +125,8 @@
             - add objects - i.e. chest, trap
                   - acting objects
             - make some portaled maps with different objs and itms and mobs
-            - generate dungeon
+            - generate dungeon location
+                  - gen random name
                   - gen tiles file
                   - gen location file
                   - with exit object
@@ -146,8 +147,11 @@
       - stash items - item count - same items to stack with number
 ** maps
       - move player to map enter : spawn point in location
+- more contens: mobs, equips, items
+- save equiped
 
 
+- mobs/items and objs description in one file, - position in their map
 - cleanup, rem unused, see todo
 - detect maps wh from first? or?
 - save and exit and exit without save with confirmation
