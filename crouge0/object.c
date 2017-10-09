@@ -70,12 +70,12 @@ Objects objects_load(char *filename) {
     filename = strdup(filename);
     StringTable st = parse_dsv_file(filename);
     StringTable it = &st[1]; // first line is header
-    do {
+    while (*it) {
         Object obj = object_deserialize(*it);
         object_add(&objs, obj); 
         DEBUG_PRINT("load obj: %s\n", obj->param);
-    } while (*++it);
-
+        ++it;
+    }
     free_dsv_table(st);
     free(filename);
     return objs;

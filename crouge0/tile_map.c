@@ -232,7 +232,7 @@ TileMap load_global_tmap(char *location_path) {
     global_map->objects = objects_load(objects_full_path);
 
     /* TODO From location */
-    string mapname_format = "%s/%s%i_%i";
+    string mapname_format = "%s/%s_%i_%i.map";
     char mapname[100];
     int block_height = local_map_width * local_width * local_map_height;
 

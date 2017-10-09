@@ -353,7 +353,7 @@ void location_save_data(char *filename, int width, int height,
 }
 
 void gen_location(int width, int height) {
-    char *common_tiles_file = "map_1_1.tiles";
+    char *common_tiles_file = "../maps/map_1_1.tiles";
     char *items_file_lvl1 = "maps/lvl1.items";
     char *actors_file_lvl1 = "maps/lvl1.actors";
     char *mapname = gen_mapname();
@@ -392,11 +392,11 @@ void gen_location(int width, int height) {
         item->y = p.b;
     // add item
         item_add(&m->items, item);
-    // save items
-        char items_full_path[BUFSIZE];
-        snprintf(items_full_path, BUFSIZE, "save/%s", items_path);
-        items_save(items_full_path, m->items);
     }
+    // save items
+    char items_full_path[BUFSIZE];
+    snprintf(items_full_path, BUFSIZE, "save/%s", items_path);
+    items_save(items_full_path, m->items);
 
     /* gen exit and enter */
     struct IntPair enter_point = gen_get_nine_space(map);
@@ -414,10 +414,14 @@ void gen_location(int width, int height) {
         actor->x = p.a;
         actor->y = p.b;
         actor_add(&m->actors, actor);
-        char actors_full_path[BUFSIZE];
-        snprintf(actors_full_path, BUFSIZE, "save/%s", actors_path);
-        actors_save(actors_full_path, m->actors);
     }
+    char actors_full_path[BUFSIZE];
+    snprintf(actors_full_path, BUFSIZE, "save/%s", actors_path);
+    actors_save(actors_full_path, m->actors);
+
+    char objects_full_path[BUFSIZE];
+    snprintf(objects_full_path, BUFSIZE, "save/%s", objects_path);
+    objects_save(objects_full_path, m->objects);
 
     /* location */
     // save location
@@ -426,8 +430,12 @@ void gen_location(int width, int height) {
     location_save_data(location_full_path, width, height, actors_path,
             items_path, objects_path, mapname);
 
-    items_free(&items);
     /* items_free(&m->items); */
+
+    free_actors(&m->actors);
+    objects_free(&m->objects);
+    items_free(&items);
+    free_actors(&actors);
     free_tile_map(m);
     free(loc_path);
     free(objects_path);

@@ -4,5 +4,5 @@ map_width:30
 map_height:20
 actors:map_1_1.actors
 items:map_1_1.items
-map_name_prefix:map_
+map_name_prefix:map
 objects:loc1.objs

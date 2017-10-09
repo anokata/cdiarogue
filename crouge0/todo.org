@@ -132,8 +132,10 @@
                   - +save map (where?)
                   - +with mobs
                   - +with items
+                  - +make main app load map by arg pass
                   - with exit object
-                  - make main app load map by arg pass
+
+- add map files to location file
 
 * 11 gameplay
 ** combat

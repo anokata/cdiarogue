@@ -4,5 +4,5 @@ map_width:40
 map_height:20
 actors:map_1_1.actors
 items:map_1_1.items
-map_name_prefix:dun_
+map_name_prefix:dun
 objects:loc2.objs
