@@ -30,6 +30,8 @@ TileMap map_convert2tilemap(Map map);
 int get_map_size(Map map);
 void gen_map_invert(Map map);
 void gen_proc_cave(Map map);
+char *gen_mapname();
+char *gen_path();
 
 
 #endif

@@ -301,6 +301,50 @@ void save_tilemap(TileMap map, char *filename) {
     free_map(m);
 }
 
-void gen_location() {
+char *gen_mapname() {
+    char name[] = "            ";
+    char chars[] = "0123456789ABCDEFGHJKLMNOPQRSUVWXYZabcdefghjklmnopqrsuvwxyz";
+    size_t chars_count = strlen(chars);
+    for (size_t i = 0; i < strlen(name); i++) {
+        name[i] = chars[rand() % chars_count];
+    }
+    return strdup(name);
+}
 
+char *gen_path(char *suffix) {
+    char *mapname = gen_mapname();
+    char map_path[BUFSIZE];
+    snprintf(map_path, BUFSIZE, "save/%s.%s", mapname, suffix);
+    return strdup(map_path);
+}
+
+void gen_location(int width, int height) {
+    char *common_tiles_file = "map_1_1.tiles";
+    char *map_path = gen_path("map");
+
+    Map map = gen_map(width, height);
+    gen_proc_cave(map);
+    gen_map_invert(map);
+
+    TileMap m = map_convert2tilemap(map);
+    m->tiles_file = common_tiles_file;
+    save_tilemap(m, map_path);
+
+    free_map(map);
+    free(map_path);
+
+    /* gen items from set of lvl */
+    char *items_path = gen_path("items");
+    int items_count = (width * height) / 20;
+    // make item
+    // place item
+    // add item
+    // save items
+    free(items_path);
+
+
+    /* location */
+    char *loc_path = gen_path("loc");
+
+    free(loc_path);
 }

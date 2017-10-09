@@ -65,9 +65,14 @@ void test_gen() {
     free_map(map);
 }
 
+void test_name() {
+    printf("%s\n%s\n", gen_mapname(), gen_path("TEST"));
+}
+
 int main() {
     /* test(); */
     /* test_gen_rooms(); */
-    test_gen();
+    /* test_gen(); */
+    test_name();
 }
 
