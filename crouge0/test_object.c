@@ -16,7 +16,7 @@ void test_serialization() {
     free(x);
     object_free(o);
 
-    char *test = strdup("1:2:$:hello:\n");
+    char *test = strdup("1:2:$:hello stash:ObjectTypeStash:\n");
     Strings s = parse_dsv_line(test, 9);
     Object z = object_deserialize(s);
     object_print(z);

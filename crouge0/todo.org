@@ -138,9 +138,9 @@
                   - acting objects
             - make some portaled maps with different objs and itms and mobs
                   - ?levels files - list of items/actos on map of that lvl
+            - +add object type enum
             - add player enter point to loc
                   - find map exit
-            - add object type enum
 
 
 - add map files to location file

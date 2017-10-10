@@ -4,20 +4,6 @@
 #include "util.h"
 #include "config_parser.h"
 
-#define DECLARE_ENUM(NAME, ELEMS) typedef enum NAME {\
-    ELEMS(MAKE_ENUM)\
-} NAME;\
-NAME NAME##_from_str(char *str);
-
-#define IMPLEMENT_ENUM(NAME, ELEMS) \
-char *NAME##Names[] = {\
-    ELEMS(MAKE_STRING)\
-    NULL\
-};\
-NAME NAME##_from_str(char *str) {\
-    ENUM_FROMSTR(NAME)\
-}\
-
 #define ITEMS_CLS(X) \
     X(ItemNoCls) \
     X(ItemPotionCls) \

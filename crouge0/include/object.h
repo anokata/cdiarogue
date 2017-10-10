@@ -4,6 +4,15 @@
 #include "config_parser.h"
 #include <glib.h>
 
+#define OBJECT_TYPE(X) \
+    X(ObjectTypeExit) \
+    X(ObjectTypeEnter) \
+    X(ObjectTypeStash) \
+    X(ObjectTypeDoor) \
+    X(ObjectTypeTrap) \
+
+DECLARE_ENUM(ObjectType, OBJECT_TYPE)
+
 typedef struct Object {
 /* First (four) fields is CharPoint struct */
     char c;
@@ -12,6 +21,7 @@ typedef struct Object {
     Color color; /* end of CharPoint */
     char *param;
     Funcvp action;
+    ObjectType type;
 } *Object;
 
 typedef GList *Objects;

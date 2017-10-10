@@ -1,7 +1,10 @@
 #include "object.h"
-const char object_dump_format[] = "%d:%d:%c:%s:\n";
-const char obj_file_header[] = "x:y:char:param:\n";
+const char object_dump_format[] = "%d:%d:%c:%s:%s:\n";
+const char obj_file_header[] = "x:y:char:param:type:\n";
 const char obj_file_type[] = "# v" "i: filetype=sh\n";
+
+// make ObjectTypeNames, ObjectType_from_str
+IMPLEMENT_ENUM(ObjectType, OBJECT_TYPE)
 
 Object object_new(int x, int y, char c) {
     Object obj = malloc(sizeof(struct Object));
@@ -10,6 +13,7 @@ Object object_new(int x, int y, char c) {
     obj->y = y;
     obj->c = c;
     obj->color = cn_white;
+    obj->type = ObjectTypeDoor;
     return obj;
 }
 
@@ -21,7 +25,8 @@ void object_free(Object obj) {
 
 
 void object_print(Object object) {
-    printf("Obj %c: [%d:%d] %s\n", object->c, object->x, object->y, object->param);
+    printf("Obj %c: [%d:%d] %s %s\n", object->c, object->x, object->y, object->param,
+            ObjectTypeNames[object->type]);
 }
 
 void object_add(Objects *objs, Object obj) {
@@ -34,7 +39,8 @@ char *object_serialize(Object obj) {
             obj->x,
             obj->y,
             obj->c,
-            (obj->param ? obj->param : " ")
+            (obj->param ? obj->param : " "),
+            ObjectTypeNames[obj->type]
     );
     return buf;
 }
@@ -45,6 +51,7 @@ Object object_deserialize(Strings str) {
     obj->y = atoi(str[1]);
     obj->c = str[2][0];
     obj->param = strdup(str[3]);
+    obj->type = ObjectType_from_str(str[4]);
     return obj;
 }
 
