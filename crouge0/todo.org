@@ -110,6 +110,12 @@
 [ INWORK for this week: to 8.10.2017]
 * 10 min dia like
 ** dung
+      - +lighting
+            - +create, clear light map
+            - +calc rays (radius, center, angle)
+            - +light on by rays
+            - +recalc light every step = clear, lightup
+            - +draw only lighted tiles
       - +add objects
             - +add object struct
             - +save object
@@ -121,50 +127,62 @@
             + > on portal
             - +event on collide with portal obj? or > cmd
 
-      - dungeons
-            - +generate dungeon location
-                  - +gen random name
-                  - ?gen tiles file
-                  - +gen location file
-                  - +save map (where?)
-                  - +with mobs
-                  - +with items
-                  - +make main app load map by arg pass
-                  - +with exit object
-                        - +exit to previous map
-                        - +enter to generated map or exiting
-            - +add object type enum
-            - +add player enter point to loc
-                  - +find map exit
-            - portal spec paths: town, lvl1, lvl2 ...
-            - add objects - i.e. chest, trap
-                  - acting objects
-            - make some portaled maps with different objs and itms and mobs
-                  - ?levels files - list of items/actos on map of that lvl
+      - +generate dungeon location
+            - +gen random name
+            - ?gen tiles file
+            - +gen location file
+            - +save map (where?)
+            - +with mobs
+            - +with items
+            - +make main app load map by arg pass
+            - +with exit object
+                  - +exit to previous map
+                  - +enter to generated map or exiting
 
+      - +add object type enum
+      - +add player enter point to loc
+            - +find map exit
 
-- add map files to location file
+      - portal spec paths: town, lvl1, lvl2 ...
+            - add levels files - list of items/actos on map of that lvl
+            - generate map from lvl files description
 
 * 11 gameplay
-- proressbar
-- clock - steps to time convert
 ** combat
       - balance: hp restore down - only in town space and rest cmd
+            - restore by rest cmd
+            - restore hp in town
       - ranged damage i.e. 2-5 
+            - item add dispersion value
       - dodging chance
+            - add actor dex, dodge % calculated by dex
       - crit hits - critical rate
+
+** lighting
+      - items, actors, objects not visible without light
+
 ** mobs
+      - save equiped - save/load player equiped state items (item equiped flag?)
       - gold drop
+            - add gold count to actor(you)
+            - add item gold
+            - drop rate,  gold = value * actor lvl
+            - show gold in char info
 ** items
-      - stash items - item count - same items to stack with number
+      - stack items - item count - same items to stack with number
+            - add to item count prop
+            - proc when take from map, merge items
 ** maps
-      - move player to map enter : spawn point in location
-- more contens: mobs, equips, items
-- save equiped - save/load player equiped state items (item equiped flag?)
-- spawn at enter? in some dungs
-- savefile : map path and you path
-- items, actors, objects not visible without light
+      - savefile : map path and player path
+      - add objects - i.e. chest, trap
+            - open stash for get gold/(random item)
+            - step to trap cause dmg
+      - make some maps and town, mobs, items equip
+
+- proressbar
+- clock - steps to time convert
 - save and exit and exit without save with confirmation
+- more contens: mobs, equips, items
 
 - TECHDEBT :: 
       - Extract viewport module
@@ -173,14 +191,23 @@
 
 * improvements features
 ** combat
+      - add def by con?
       - fire, bows
             - fly animation, steps frames without count world
       - damage at different parts of body/armor
       - skills - weapon health 
       - balance and fun
       - endurance wisdom intelegence dex (4 base stats?)
+      - color elements
+            - develop color repress-reinforce system
+            - add item ColorElement
+            - add actor ColorElement
+            - add actor resistence
+            - make items gain resistence
+            - show resistence
 
 ** mobs
+      - add actor drops chanses by items? - actor file, drops file
       - mobs minds
       - mobs evoluting. script based(bf like) behavior - see x:y if this = TileRock
         ... move to, attack, take, eat.
@@ -211,12 +238,9 @@
       - item actions - pass func
       - read scrolls, books to effect on stats, skills, spells
 ** map
+      - some maps must contain some unique mobs/items - add lvl.must.items
+      - add map files to location file (not %d_%d pattern name - just list of files to load)
       - lighting
-            - +create, clear light map
-            - +calc rays (radius, center, angle)
-            - +light on by rays
-            - +recalc light every step = clear, lightup
-            - +draw only lighted tiles
             - variable light radius
             - other lighing sources
       - heal point
