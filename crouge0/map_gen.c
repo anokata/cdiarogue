@@ -354,7 +354,7 @@ void location_save_data(char *filename, int width, int height,
     fclose(fout);
 }
 
-void gen_location(int width, int height, 
+char *gen_location(int width, int height, 
         char *back_location_path, char *next_location_path) {
     char *common_tiles_file = "../maps/map_1_1.tiles";
     char *items_file_lvl1 = "maps/lvl1.items";
@@ -452,4 +452,5 @@ void gen_location(int width, int height,
     free(items_path);
     free(mapname);
     free_map(map);
+    return strdup(location_full_path);
 }

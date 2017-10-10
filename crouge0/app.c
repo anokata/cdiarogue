@@ -167,17 +167,44 @@ int wmap_draw(void* data) {
     return 0;
 }
 
+static const char *special_locations[] = {
+    "lvl1",
+    "lvl2"
+};
+
+bool is_special_location(char *location_path) {
+    for (size_t i = 0; i < sizeof(special_locations)/sizeof(char*); i++) {
+        if (!strcmp(special_locations[i], location_path)) {
+            return true;
+        }
+    }
+    return false;
+}
+
 void change_map(G g, char *location_filename) {
     // save player
 
-    /* because location_filename stored in global map */
     char *location_filename_d = strdup(location_filename);
-    free_global_map(g->gmap);
-    g->player = NULL;
-    g->gmap = load_global_tmap(location_filename_d);
+
+    if (is_special_location(location_filename)) {
+        char *back_location_path = strdup(g->location_path);
+        // generate map
+// TODO END get w h next back by loc name?
+        //char *location_name = gen_map();
+        // and load it
+    
+        free(back_location_path);
+    } else {
+        // if location_filename is real location then load
+        /* because location_filename stored in global map */
+        free_global_map(g->gmap);
+        g->player = NULL;
+        g->gmap = load_global_tmap(location_filename_d);
+    }
+
+    // TODO move player to map enter : spawn point
     load(g);
     add_actor(g, g->player);
-    // TODO move player to map enter : spawn point
     free(location_filename_d);
 }
 

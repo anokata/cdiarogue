@@ -36,6 +36,7 @@ typedef struct GlobalEvent {
 
 bool roll_dice(int probability); /* probability 0..100 */
 
+/* TODO extract location */
 typedef struct G {
     WorldMap wmap;
     TileMap gmap;
