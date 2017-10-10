@@ -133,14 +133,14 @@
                   - +with exit object
                         - +exit to previous map
                         - +enter to generated map or exiting
+            - +add object type enum
+            - +add player enter point to loc
+                  - +find map exit
             - portal spec paths: town, lvl1, lvl2 ...
             - add objects - i.e. chest, trap
                   - acting objects
             - make some portaled maps with different objs and itms and mobs
                   - ?levels files - list of items/actos on map of that lvl
-            - +add object type enum
-            - add player enter point to loc
-                  - find map exit
 
 
 - add map files to location file

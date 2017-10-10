@@ -35,3 +35,4 @@ void objects_save(char *filename, Objects objs);
 Objects objects_load(char *filename);
 void objects_free(Objects *objs);
 void object_add(Objects *objs, Object obj);
+Object objects_get_exit(Objects objects);

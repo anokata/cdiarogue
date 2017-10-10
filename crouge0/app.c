@@ -458,6 +458,15 @@ G g_init(char *arg1)  {
     fill_exp_road();
     G g = new_g(location_path);
     load(g);
+
+    /* move player to exit */
+    Object exit = objects_get_exit(g->gmap->objects);
+    if (!exit) {
+        perror("Can't find exit on map");
+    }
+    g->player->x = exit->x;
+    g->player->y = exit->y;
+
     add_actor(g, g->player);
     /* init_inventory(g); */
     return g;

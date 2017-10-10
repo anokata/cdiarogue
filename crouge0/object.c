@@ -99,3 +99,14 @@ void objects_free(Objects *objs) {
     *objs = NULL;
 }
 
+Object objects_get_exit(Objects objects) {
+    GList *it = objects;
+    while (it) {
+        Object obj = it->data;
+        if (obj->type == ObjectTypeExit) {
+            return obj;
+        }
+        it = g_list_next(it);
+    }
+    return NULL;
+}

@@ -406,8 +406,12 @@ char *gen_location(int width, int height,
     struct IntPair exit_point = gen_get_nine_space(map);
     Object exit = object_new(exit_point.a, exit_point.b, exit_portal);
     exit->param = strdup(back_location_path);
+    exit->type = ObjectTypeExit;
+
     Object enter = object_new(enter_point.a, enter_point.b, enter_portal);
     enter->param = strdup(next_location_path);
+    enter->type = ObjectTypeEnter;
+
     object_add(&m->objects, exit);
     object_add(&m->objects, enter);
     // todo: add objects from lvl.objs
