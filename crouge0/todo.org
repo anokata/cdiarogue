@@ -125,6 +125,7 @@
             - add objects - i.e. chest, trap
                   - acting objects
             - make some portaled maps with different objs and itms and mobs
+                  - ?levels files - list of items/actos on map of that lvl
             - generate dungeon location
                   - +gen random name
                   - ?gen tiles file
@@ -144,7 +145,7 @@
       - balance: hp restore down - only in town space and rest cmd
       - ranged damage i.e. 2-5 
       - dodging chance
-      - crit hits
+      - crit hits - critical rate
 ** mobs
       - gold drop
 ** items
@@ -156,14 +157,7 @@
 - spawn at enter? in some dungs
 - savefile : map path and you path
 - items, actors, objects not visible without light
-
-
-- mobs/items and objs description in one file, - position in their map
-- cleanup, rem unused, see todo
-- detect maps wh from first? or?
 - save and exit and exit without save with confirmation
-- if ?I need same char with different colors on same map 
-
 
 - TECHDEBT :: 
       - Extract viewport module
@@ -172,8 +166,9 @@
 
 * improvements features
 ** combat
-      - damage at different parts of body/armor
       - fire, bows
+            - fly animation, steps frames without count world
+      - damage at different parts of body/armor
       - skills - weapon health 
       - balance and fun
       - endurance wisdom intelegence dex (4 base stats?)
@@ -230,6 +225,10 @@
 
 - ! parse header and store columns indexes and get columns index and make struct
 - debug commands for mobs spawn, items, heal
+- if ?I need same char with different colors on same map 
+- mobs/items and objs description in one file, - position in their map
+- cleanup, rem unused, see todo
+- detect maps wh from first? or?
 
 - +wait and rest 
 - +viewport at load not moving to @ center
@@ -258,7 +257,6 @@ First - fun therefore slash like dia, but not clone dia.
  Collect souls(of colors, grades) to equip, grade up it to cristalize?
  ! TODO Remember ff7-9 dia cata elona poke tohou... etc what elements i like - write down, and which can implemnt
  - materia in equip gain exp and abilitis
- - critical hist rate and grow near zero hp
  - random encounters, abc time combats
  - capture mobs for link to equip/slots for stats and buffs, resists
  - night mode, time dependent effects
