@@ -1,5 +1,6 @@
 # vim: filetype=make
-OBJECTS=app.c main.c map_gen.c world_map.c g.c tile_map.c util.c config_parser.c actor.c render.c collide.c events.c behavior.c item.c inventory.c charinfo.c object.c lightmap.c lightcalc.c
+OBJECTS=app.c map_gen.c world_map.c g.c tile_map.c util.c config_parser.c actor.c render.c collide.c events.c behavior.c item.c inventory.c charinfo.c object.c lightmap.c lightcalc.c
+ALL_OBJECTS=main.c $(OBJECTS)
 MAP_OBJECTS=test_mapgen.c map_gen.c tile_map.c util.c config_parser.c actor.c item.c object.c lightmap.c
 TMAP_OBJECTS=tile_map.c test_tile_map.c util.c
 
@@ -20,10 +21,10 @@ CFLAGS=$(DEBUG) $(WORK) -Wall -Wextra -std=gnu11 -g -D_GNU_SOURCE=1 $(IFLAGS) $(
 # Must be first rule, for compile main app
 main: prepare
 	$(eval DEBUG=)
-	$(CC) $(OBJECTS) $(CFLAGS) -o $(BUILD_DIR)/$(P) && $(BUILD_DIR)/$(P)
+	$(CC) $(ALL_OBJECTS) $(CFLAGS) -o $(BUILD_DIR)/$(P) && $(BUILD_DIR)/$(P)
 
 debug: prepare
-	$(CC) $(OBJECTS) $(CFLAGS) -o $(BUILD_DIR)/$(P) && $(BUILD_DIR)/$(P)
+	$(CC) $(ALL_OBJECTS) $(CFLAGS) -o $(BUILD_DIR)/$(P) && $(BUILD_DIR)/$(P)
 
 prepare:
 	if [ ! -e ../lib ]; then mkdir ../lib; fi
@@ -32,6 +33,10 @@ prepare:
 
 lint:
 	splint main.c $(IFLAGS)
+
+test_g: prepare
+	$(eval DEBUG=)
+	$(CC) test_g.c $(OBJECTS) $(CFLAGS) -o $(BUILD_DIR)/$@ && valgrind $(BUILD_DIR)/$@
 
 test_mapgen: prepare
 	$(CC) $(MAP_OBJECTS) $(CFLAGS) -o $(BUILD_DIR)/$@ && valgrind $(BUILD_DIR)/$@ && ls -l save
@@ -105,7 +110,7 @@ coverage:
 	@echo ">>> build lib"
 	(cd $(BUILD_DIR)/ccurses; make makelib)
 	@echo ">>> build app"
-	(cd $(BUILD_DIR)/src; GCOV_PREFIX=$(BUILD_DIR) $(CC) $(OBJECTS) $(CFLAGS) -o $(BUILD_DIR)/$(P))
+	(cd $(BUILD_DIR)/src; GCOV_PREFIX=$(BUILD_DIR) $(CC) $(ALL_OBJECTS) $(CFLAGS) -o $(BUILD_DIR)/$(P))
 	@echo ">>> run app"
 	$(BUILD_DIR)/$(P)
 	(cd $(BUILD_DIR)/src; gcov *.gcda)

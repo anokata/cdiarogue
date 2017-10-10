@@ -139,11 +139,15 @@
             - make some portaled maps with different objs and itms and mobs
                   - ?levels files - list of items/actos on map of that lvl
             - add player enter point to loc
+                  - find map exit
+            - add object type enum
 
 
 - add map files to location file
 
 * 11 gameplay
+- proressbar
+- clock - steps to time convert
 ** combat
       - balance: hp restore down - only in town space and rest cmd
       - ranged damage i.e. 2-5 

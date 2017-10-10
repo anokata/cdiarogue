@@ -448,7 +448,7 @@ void item_debug(G g) {
     item_add(&g->gmap->items, potion);
 }
 
-void start(char *arg1) {
+G g_init(char *arg1)  {
     char *location_path = "./maps/loc2";
     if (arg1) {
         location_path = arg1;
@@ -460,7 +460,11 @@ void start(char *arg1) {
     load(g);
     add_actor(g, g->player);
     /* init_inventory(g); */
+    return g;
+}
 
+void start(char *arg1) {
+    G g = g_init(arg1);
     curses_init();
     state_init();
 
