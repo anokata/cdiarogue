@@ -75,6 +75,6 @@ int main() {
     /* test_gen_rooms(); */
     /* test_gen(); */
     /* test_name(); */
-    gen_location(20, 30);
+    gen_location(20, 30, "town", "lvl2");
 }
 

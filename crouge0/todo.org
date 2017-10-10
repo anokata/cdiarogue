@@ -122,11 +122,7 @@
             - +event on collide with portal obj? or > cmd
 
       - dungeons
-            - add objects - i.e. chest, trap
-                  - acting objects
-            - make some portaled maps with different objs and itms and mobs
-                  - ?levels files - list of items/actos on map of that lvl
-            - generate dungeon location
+            - +generate dungeon location
                   - +gen random name
                   - ?gen tiles file
                   - +gen location file
@@ -134,9 +130,14 @@
                   - +with mobs
                   - +with items
                   - +make main app load map by arg pass
-                  - with exit object
-                        - exit to previous map
-                        - enter to generated map or exiting
+                  - +with exit object
+                        - +exit to previous map
+                        - +enter to generated map or exiting
+            - portal spec paths: town, lvl1, lvl2 ...
+            - add objects - i.e. chest, trap
+                  - acting objects
+            - make some portaled maps with different objs and itms and mobs
+                  - ?levels files - list of items/actos on map of that lvl
 
 - add map files to location file
 

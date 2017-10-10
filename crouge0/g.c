@@ -38,8 +38,8 @@ G new_g(char *location_path) {
     g->view->width = 40;
     g->view->height = 40;
 #else
-    g->view->width = 8;
-    g->view->height = 8;
+    g->view->width = 12;
+    g->view->height = 12;
 #endif
     g->view->display_left = 1;
     g->view->display_top = 1;

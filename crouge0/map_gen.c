@@ -22,6 +22,8 @@ void free_map(Map map) { // OK
 
 static const char map_chars[] = ".##";
 static const char wall = '#';
+static const char exit_portal = '<';
+static const char enter_portal = '>';
 static const char floor = '.';
 int map_chars_count = sizeof(map_chars);
 // TODO chars and probabilities
@@ -352,7 +354,8 @@ void location_save_data(char *filename, int width, int height,
     fclose(fout);
 }
 
-void gen_location(int width, int height) {
+void gen_location(int width, int height, 
+        char *back_location_path, char *next_location_path) {
     char *common_tiles_file = "../maps/map_1_1.tiles";
     char *items_file_lvl1 = "maps/lvl1.items";
     char *actors_file_lvl1 = "maps/lvl1.actors";
@@ -401,7 +404,13 @@ void gen_location(int width, int height) {
     /* gen exit and enter */
     struct IntPair enter_point = gen_get_nine_space(map);
     struct IntPair exit_point = gen_get_nine_space(map);
-    // todo: add objects
+    Object exit = object_new(exit_point.a, exit_point.b, exit_portal);
+    exit->param = strdup(back_location_path);
+    Object enter = object_new(enter_point.a, enter_point.b, enter_portal);
+    enter->param = strdup(next_location_path);
+    object_add(&m->objects, exit);
+    object_add(&m->objects, enter);
+    // todo: add objects from lvl.objs
 
     /* gen mobs */
     int actors_take_count = (width * height) / 20;
