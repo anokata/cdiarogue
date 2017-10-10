@@ -11,8 +11,12 @@ void map_lightning(TileMap map, int cx, int cy) {
         for (float r = 1; r < radius; r += r_step) {
             x = cosf(angle) * r + cx;
             y = sinf(angle) * r + cy;
+            if (x >= 0 && y >= 0 && x < map->width && y < map->height) {
+                map->lightmap[ y * map->width + x] = 1;
+            } else {
+                break;
+            }
             /* printf("%d %d\n", x, y); */
-            map->lightmap[ y * map->width + x] = 1;
             if (!tile_at(map, x, y)->passable) {
                 /* break this ray at not passable tile lighted */
                 break;

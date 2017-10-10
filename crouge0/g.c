@@ -22,6 +22,7 @@ void debuglog(G g, char *msg) {
 G new_g(char *location_path) {
     G g = malloc(sizeof(struct G));
     bzero(g, sizeof(struct G));
+    g->location_path = strdup(location_path);
 
     g->debug = 0;
     g->events = events;
@@ -58,6 +59,7 @@ void gfree(gpointer data, gpointer user_data) {
 }
 
 void free_g(G g) {
+    free(g->location_path);
     free_wmap(g->wmap);
     free_global_map(g->gmap);
 

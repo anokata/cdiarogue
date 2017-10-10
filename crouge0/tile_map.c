@@ -250,6 +250,7 @@ TileMap load_global_tmap(char *location_path) {
     
     /* free(items_full_path); */
     free(d_location_path);
+    free(actors_full_path);
     g_hash_table_destroy(config);
     return global_map;
 }
