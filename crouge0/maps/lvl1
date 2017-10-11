@@ -1,4 +1,6 @@
 objects:5
-actors:10
-items:10
+actors:6
+items:4
 gen:?
+width:20
+height:30

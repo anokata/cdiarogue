@@ -23,6 +23,12 @@ void object_free(Object obj) {
     free(obj);
 }
 
+Object object_clone(Object obj) {
+    Object clone = object_new(obj->c, obj->x , obj->y);
+    memcpy(clone, obj, sizeof(struct Object));
+    clone->param = strdup(obj->param);
+    return clone;
+}
 
 void object_print(Object object) {
     printf("Obj %c: [%d:%d] %s %s\n", object->c, object->x, object->y, object->param,
@@ -110,3 +116,16 @@ Object objects_get_exit(Objects objects) {
     }
     return NULL;
 }
+
+/* todo template? or basic void* */
+void free_objects(GList **objects) {
+    GList *it = *objects;
+    while (it) {
+        Object obj = it->data;
+        object_free(obj);
+        it = g_list_next(it);
+    }
+    g_list_free(*objects);
+    *objects = NULL;
+}
+

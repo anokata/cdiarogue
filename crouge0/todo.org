@@ -146,8 +146,9 @@
       - portal spec paths: town, lvl1, lvl2 ...
             - +add levels files - list of items/actors on map of that lvl
             - +level description file: items/actors count, type of generate algo
-            - make generator use level file, and items/actors from lvlX.xx
-            - generate map from lvl files description
+            - +make generator use level file, and items/actors from lvlX.xx
+            - +generate map from lvl files description
+            - !load spec files = gen map
 
 * 11 gameplay
 ** combat
@@ -240,6 +241,7 @@
       - item actions - pass func
       - read scrolls, books to effect on stats, skills, spells
 ** map
+      - not intersect objs, items, actors while gen map
       - some maps must contain some unique mobs/items - add lvl.must.items
       - add map files to location file (not %d_%d pattern name - just list of files to load)
       - lighting

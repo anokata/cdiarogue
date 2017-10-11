@@ -2,6 +2,7 @@
 #include <stdbool.h>
 #include "item.h"
 #include "actor.h"
+#include <glib.h>
 
 char char_at(Map map, int x, int y);
 
@@ -378,10 +379,12 @@ char *make_path(char *prefix, char *name, char *suffix) {
 
 // add Map to Tilemap?
 void gen_items_on(char *lvlname, TileMap m, Map map, char* mapname) {
+    /* gen items from set of lvl */
     char *items_file_lvl = make_path("maps/", lvlname, ".items");
     char *items_path = gen_path(".items", mapname);
-    /* gen items from set of lvl */
-    int items_take_count = 10;
+    char *lvl_file = make_path("maps/", lvlname, "");
+    GHashTable *config = parse_file(lvl_file);
+    int items_take_count = atoi(g_hash_table_lookup(config, "items"));
     // load items file for specific lvl
     Items items = items_load(items_file_lvl);
     int items_count = g_list_length(items);
@@ -404,6 +407,8 @@ void gen_items_on(char *lvlname, TileMap m, Map map, char* mapname) {
     items_free(&items);
     free(items_file_lvl);
     free(items_path);
+    free(lvl_file);
+    g_hash_table_destroy(config);
 }
 
 void gen_exit_enter(TileMap m, Map map, char *back_location_path, char *next_location_path) {
@@ -424,10 +429,13 @@ void gen_exit_enter(TileMap m, Map map, char *back_location_path, char *next_loc
 
 
 void gen_mobs_on(char *lvlname, TileMap m, Map map, char *mapname) {
+    /* gen mobs */
     char *actors_file_lvl = make_path("maps/", lvlname, ".actors");
     char *actors_path = gen_path(".actors", mapname);
-    /* gen mobs */
-    int actors_take_count = 10;
+    char *lvl_file = make_path("maps/", lvlname, "");
+    GHashTable *config = parse_file(lvl_file);
+    int actors_take_count = atoi(g_hash_table_lookup(config, "actors"));
+
     Actors actors = actors_load(actors_file_lvl);
     int actors_count = g_list_length(actors);
     for (int i = 0; i < actors_take_count; i++) {
@@ -445,6 +453,38 @@ void gen_mobs_on(char *lvlname, TileMap m, Map map, char *mapname) {
     free_actors(&actors);
     free(actors_file_lvl);
     free(actors_path);
+    free(lvl_file);
+    g_hash_table_destroy(config);
+}
+
+void gen_objects_on(char *lvlname, TileMap m, Map map, char *mapname) {
+    char *objects_file_lvl = make_path("maps/", lvlname, ".objs");
+    char *objects_path = gen_path(".objs", mapname);
+    char *lvl_file = make_path("maps/", lvlname, "");
+    GHashTable *config = parse_file(lvl_file);
+    int objects_take_count = atoi(g_hash_table_lookup(config, "objects"));
+
+    Objects objects = objects_load(objects_file_lvl);
+    int objects_count = g_list_length(objects);
+    for (int i = 0; i < objects_take_count; i++) {
+        Object object = g_list_nth_data(objects, rand() % objects_count);
+        object = object_clone(object);
+        struct IntPair p = gen_get_free_space(map);
+        object->x = p.a;
+        object->y = p.b;
+        object_add(&m->objects, object);
+    }
+
+    char objects_full_path[BUFSIZE];
+    snprintf(objects_full_path, BUFSIZE, "save/%s", objects_path);
+    objects_save(objects_full_path, m->objects);
+
+    free_objects(&m->objects);
+    free_objects(&objects);
+    free(objects_file_lvl);
+    free(objects_path);
+    free(lvl_file);
+    g_hash_table_destroy(config);
 }
 
 char *gen_location(int width, int height, 
@@ -452,7 +492,6 @@ char *gen_location(int width, int height,
         char *lvlname) {
     char *common_tiles_file = "../maps/map_1_1.tiles";
     // todo: from lvl file
-    char *objects_file_lvl = make_path("maps/", lvlname, ".objs");
     char *mapname = gen_mapname();
     char *map_path = make_map_path(mapname);
 
@@ -469,12 +508,9 @@ char *gen_location(int width, int height,
 
     gen_items_on(lvlname, m, map, mapname);
     gen_exit_enter(m, map, back_location_path, next_location_path);
+    gen_objects_on(lvlname, m, map, mapname); // after exit enter gen
     gen_mobs_on(lvlname, m, map, mapname);
     // todo: add objects from lvl.objs
-
-    char objects_full_path[BUFSIZE];
-    snprintf(objects_full_path, BUFSIZE, "save/%s", objects_path);
-    objects_save(objects_full_path, m->objects);
 
     /* location */
     // save location
@@ -485,7 +521,6 @@ char *gen_location(int width, int height,
 
     /* items_free(&m->items); */
 
-    free(objects_file_lvl);
     objects_free(&m->objects);
     free(map_path);
     free_tile_map(m);

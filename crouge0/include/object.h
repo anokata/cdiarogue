@@ -28,6 +28,7 @@ typedef GList *Objects;
 
 Object object_new(int x, int y, char c);
 void object_free(Object object);
+Object object_clone(Object obj);
 void object_print(Object object);
 char *object_serialize(Object obj);
 Object object_deserialize(Strings str);
@@ -36,3 +37,4 @@ Objects objects_load(char *filename);
 void objects_free(Objects *objs);
 void object_add(Objects *objs, Object obj);
 Object objects_get_exit(Objects objects);
+void free_objects(GList **objects);
