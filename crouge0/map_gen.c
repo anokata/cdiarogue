@@ -406,12 +406,52 @@ void gen_items_on(char *lvlname, TileMap m, Map map, char* mapname) {
     free(items_path);
 }
 
+void gen_exit_enter(TileMap m, Map map, char *back_location_path, char *next_location_path) {
+    /* gen exit and enter */
+    struct IntPair enter_point = gen_get_nine_space(map);
+    struct IntPair exit_point = gen_get_nine_space(map);
+    Object exit = object_new(exit_point.a, exit_point.b, exit_portal);
+    exit->param = strdup(back_location_path);
+    exit->type = ObjectTypeExit;
+
+    Object enter = object_new(enter_point.a, enter_point.b, enter_portal);
+    enter->param = strdup(next_location_path);
+    enter->type = ObjectTypeEnter;
+
+    object_add(&m->objects, exit);
+    object_add(&m->objects, enter);
+}
+
+
+void gen_mobs_on(char *lvlname, TileMap m, Map map, char *mapname) {
+    char *actors_file_lvl = make_path("maps/", lvlname, ".actors");
+    char *actors_path = gen_path(".actors", mapname);
+    /* gen mobs */
+    int actors_take_count = 10;
+    Actors actors = actors_load(actors_file_lvl);
+    int actors_count = g_list_length(actors);
+    for (int i = 0; i < actors_take_count; i++) {
+        Actor actor = g_list_nth_data(actors, rand() % actors_count);
+        actor = actor_clone(actor);
+        struct IntPair p = gen_get_free_space(map);
+        actor->x = p.a;
+        actor->y = p.b;
+        actor_add(&m->actors, actor);
+    }
+    char actors_full_path[BUFSIZE];
+    snprintf(actors_full_path, BUFSIZE, "save/%s", actors_path);
+    actors_save(actors_full_path, m->actors);
+    free_actors(&m->actors);
+    free_actors(&actors);
+    free(actors_file_lvl);
+    free(actors_path);
+}
+
 char *gen_location(int width, int height, 
         char *back_location_path, char *next_location_path,
         char *lvlname) {
     char *common_tiles_file = "../maps/map_1_1.tiles";
     // todo: from lvl file
-    char *actors_file_lvl = make_path("maps/", lvlname, ".actors");
     char *objects_file_lvl = make_path("maps/", lvlname, ".objs");
     char *mapname = gen_mapname();
     char *map_path = make_map_path(mapname);
@@ -428,37 +468,9 @@ char *gen_location(int width, int height,
     save_tilemap(m, map_path);
 
     gen_items_on(lvlname, m, map, mapname);
-
-    /* gen exit and enter */
-    struct IntPair enter_point = gen_get_nine_space(map);
-    struct IntPair exit_point = gen_get_nine_space(map);
-    Object exit = object_new(exit_point.a, exit_point.b, exit_portal);
-    exit->param = strdup(back_location_path);
-    exit->type = ObjectTypeExit;
-
-    Object enter = object_new(enter_point.a, enter_point.b, enter_portal);
-    enter->param = strdup(next_location_path);
-    enter->type = ObjectTypeEnter;
-
-    object_add(&m->objects, exit);
-    object_add(&m->objects, enter);
+    gen_exit_enter(m, map, back_location_path, next_location_path);
+    gen_mobs_on(lvlname, m, map, mapname);
     // todo: add objects from lvl.objs
-
-    /* gen mobs */
-    int actors_take_count = (width * height) / 20;
-    Actors actors = actors_load(actors_file_lvl);
-    int actors_count = g_list_length(actors);
-    for (int i = 0; i < actors_take_count; i++) {
-        Actor actor = g_list_nth_data(actors, rand() % actors_count);
-        actor = actor_clone(actor);
-        struct IntPair p = gen_get_free_space(map);
-        actor->x = p.a;
-        actor->y = p.b;
-        actor_add(&m->actors, actor);
-    }
-    char actors_full_path[BUFSIZE];
-    snprintf(actors_full_path, BUFSIZE, "save/%s", actors_path);
-    actors_save(actors_full_path, m->actors);
 
     char objects_full_path[BUFSIZE];
     snprintf(objects_full_path, BUFSIZE, "save/%s", objects_path);
@@ -473,12 +485,9 @@ char *gen_location(int width, int height,
 
     /* items_free(&m->items); */
 
-    free(actors_file_lvl);
     free(objects_file_lvl);
-    free_actors(&m->actors);
     objects_free(&m->objects);
     free(map_path);
-    free_actors(&actors);
     free_tile_map(m);
     free(loc_path);
     free(objects_path);
