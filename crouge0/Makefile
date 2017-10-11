@@ -39,6 +39,7 @@ test_g: prepare
 	$(CC) test_g.c $(OBJECTS) $(CFLAGS) -o $(BUILD_DIR)/$@ && valgrind $(BUILD_DIR)/$@
 
 test_mapgen: prepare
+	$(eval DEBUG=)
 	$(CC) $(MAP_OBJECTS) $(CFLAGS) -o $(BUILD_DIR)/$@ && valgrind $(BUILD_DIR)/$@ && ls -l save
 
 test_sky: prepare

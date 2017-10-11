@@ -354,35 +354,54 @@ void location_save_data(char *filename, int width, int height,
     fclose(fout);
 }
 
-char *gen_location(int width, int height, 
-        char *back_location_path, char *next_location_path) {
-    char *common_tiles_file = "../maps/map_1_1.tiles";
-    char *items_file_lvl1 = "maps/lvl1.items";
-    char *actors_file_lvl1 = "maps/lvl1.actors";
-    char *mapname = gen_mapname();
+char *make_map_path(char *mapname) {
     char map_path_buf[BUFSIZE];
     snprintf(map_path_buf, BUFSIZE, "save/%s_1_1.map", mapname);
     char *map_path = strdup(map_path_buf);
+    return map_path;
+}
+
+Map gen_cave_a(int width, int height) {
+    Map map = gen_map(width, height);
+    gen_proc_cave(map);
+    gen_map_invert(map);
+    return map;
+}
+
+char *make_path(char *prefix, char *name, char *suffix) {
+    char buf[BUFSIZE];
+    snprintf(buf, BUFSIZE, "%s%s%s", prefix, name, suffix);
+    char *path = strdup(buf);
+    return path;
+}
+
+char *gen_location(int width, int height, 
+        char *back_location_path, char *next_location_path,
+        char *lvlname) {
+    char *common_tiles_file = "../maps/map_1_1.tiles";
+    // todo: from lvl file
+    char *items_file_lvl = make_path("maps/", lvlname, ".items");
+    char *actors_file_lvl = make_path("maps/", lvlname, ".actors");
+    char *objects_file_lvl = make_path("maps/", lvlname, ".objs");
+    char *mapname = gen_mapname();
+    char *map_path = make_map_path(mapname);
 
     char *items_path = gen_path(".items", mapname);
     char *actors_path = gen_path(".actors", mapname);
     char *objects_path = gen_path(".objs", mapname);
     char *loc_path = gen_path(".loc", mapname);
-
-    Map map = gen_map(width, height);
-    gen_proc_cave(map);
-    gen_map_invert(map);
+    // todo choose algo from lvl file
+    Map map = gen_cave_a(width, height);
 
     TileMap m = map_convert2tilemap(map);
     m->tiles_file = strdup(common_tiles_file);
     save_tilemap(m, map_path);
 
-    free(map_path);
-
+    // TODO extract gen_items(m, items_file_lvl)
     /* gen items from set of lvl */
     int items_take_count = (width * height) / 20;
     // load items file for specific lvl
-    Items items = items_load(items_file_lvl1);
+    Items items = items_load(items_file_lvl);
     int items_count = g_list_length(items);
     // take N random items: clone add
     for (int i = 0; i < items_take_count; i++) {
@@ -400,6 +419,7 @@ char *gen_location(int width, int height,
     char items_full_path[BUFSIZE];
     snprintf(items_full_path, BUFSIZE, "save/%s", items_path);
     items_save(items_full_path, m->items);
+    items_free(&items);
 
     /* gen exit and enter */
     struct IntPair enter_point = gen_get_nine_space(map);
@@ -418,7 +438,7 @@ char *gen_location(int width, int height,
 
     /* gen mobs */
     int actors_take_count = (width * height) / 20;
-    Actors actors = actors_load(actors_file_lvl1);
+    Actors actors = actors_load(actors_file_lvl);
     int actors_count = g_list_length(actors);
     for (int i = 0; i < actors_take_count; i++) {
         Actor actor = g_list_nth_data(actors, rand() % actors_count);
@@ -445,9 +465,12 @@ char *gen_location(int width, int height,
 
     /* items_free(&m->items); */
 
+    free(items_file_lvl);
+    free(actors_file_lvl);
+    free(objects_file_lvl);
     free_actors(&m->actors);
     objects_free(&m->objects);
-    items_free(&items);
+    free(map_path);
     free_actors(&actors);
     free_tile_map(m);
     free(loc_path);

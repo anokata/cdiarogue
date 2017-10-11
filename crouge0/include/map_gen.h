@@ -32,7 +32,7 @@ void gen_map_invert(Map map);
 void gen_proc_cave(Map map);
 char *gen_mapname();
 char *gen_path();
-char *gen_location(int width, int height, char *back_location_path, char *next_location_path);
+char *gen_location(int width, int height, char *back_location_path, char *next_location_path, char *lvlname);
 
 
 #endif

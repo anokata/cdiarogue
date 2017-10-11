@@ -107,7 +107,7 @@
             - +save player items
             - +save location items
 
-[ INWORK for this week: to 8.10.2017]
+[ INWORK for this week: to 14.10.2017]
 * 10 min dia like
 ** dung
       - +lighting
@@ -144,7 +144,9 @@
             - +find map exit
 
       - portal spec paths: town, lvl1, lvl2 ...
-            - add levels files - list of items/actos on map of that lvl
+            - +add levels files - list of items/actors on map of that lvl
+            - +level description file: items/actors count, type of generate algo
+            - make generator use level file, and items/actors from lvlX.xx
             - generate map from lvl files description
 
 * 11 gameplay
