@@ -375,31 +375,13 @@ char *make_path(char *prefix, char *name, char *suffix) {
     return path;
 }
 
-char *gen_location(int width, int height, 
-        char *back_location_path, char *next_location_path,
-        char *lvlname) {
-    char *common_tiles_file = "../maps/map_1_1.tiles";
-    // todo: from lvl file
+
+// add Map to Tilemap?
+void gen_items_on(char *lvlname, TileMap m, Map map, char* mapname) {
     char *items_file_lvl = make_path("maps/", lvlname, ".items");
-    char *actors_file_lvl = make_path("maps/", lvlname, ".actors");
-    char *objects_file_lvl = make_path("maps/", lvlname, ".objs");
-    char *mapname = gen_mapname();
-    char *map_path = make_map_path(mapname);
-
     char *items_path = gen_path(".items", mapname);
-    char *actors_path = gen_path(".actors", mapname);
-    char *objects_path = gen_path(".objs", mapname);
-    char *loc_path = gen_path(".loc", mapname);
-    // todo choose algo from lvl file
-    Map map = gen_cave_a(width, height);
-
-    TileMap m = map_convert2tilemap(map);
-    m->tiles_file = strdup(common_tiles_file);
-    save_tilemap(m, map_path);
-
-    // TODO extract gen_items(m, items_file_lvl)
     /* gen items from set of lvl */
-    int items_take_count = (width * height) / 20;
+    int items_take_count = 10;
     // load items file for specific lvl
     Items items = items_load(items_file_lvl);
     int items_count = g_list_length(items);
@@ -420,6 +402,32 @@ char *gen_location(int width, int height,
     snprintf(items_full_path, BUFSIZE, "save/%s", items_path);
     items_save(items_full_path, m->items);
     items_free(&items);
+    free(items_file_lvl);
+    free(items_path);
+}
+
+char *gen_location(int width, int height, 
+        char *back_location_path, char *next_location_path,
+        char *lvlname) {
+    char *common_tiles_file = "../maps/map_1_1.tiles";
+    // todo: from lvl file
+    char *actors_file_lvl = make_path("maps/", lvlname, ".actors");
+    char *objects_file_lvl = make_path("maps/", lvlname, ".objs");
+    char *mapname = gen_mapname();
+    char *map_path = make_map_path(mapname);
+
+    char *items_path = gen_path(".items", mapname);
+    char *actors_path = gen_path(".actors", mapname);
+    char *objects_path = gen_path(".objs", mapname);
+    char *loc_path = gen_path(".loc", mapname);
+    // todo choose algo from lvl file
+    Map map = gen_cave_a(width, height);
+
+    TileMap m = map_convert2tilemap(map);
+    m->tiles_file = strdup(common_tiles_file);
+    save_tilemap(m, map_path);
+
+    gen_items_on(lvlname, m, map, mapname);
 
     /* gen exit and enter */
     struct IntPair enter_point = gen_get_nine_space(map);
@@ -465,7 +473,6 @@ char *gen_location(int width, int height,
 
     /* items_free(&m->items); */
 
-    free(items_file_lvl);
     free(actors_file_lvl);
     free(objects_file_lvl);
     free_actors(&m->actors);
