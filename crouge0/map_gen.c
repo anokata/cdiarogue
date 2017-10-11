@@ -487,8 +487,7 @@ void gen_objects_on(char *lvlname, TileMap m, Map map, char *mapname) {
     g_hash_table_destroy(config);
 }
 
-char *gen_location(int width, int height, 
-        char *back_location_path, char *next_location_path,
+char *gen_location(char *back_location_path, char *next_location_path,
         char *lvlname) {
     char *common_tiles_file = "../maps/map_1_1.tiles";
     // todo: from lvl file
@@ -499,6 +498,11 @@ char *gen_location(int width, int height,
     char *actors_path = gen_path(".actors", mapname);
     char *objects_path = gen_path(".objs", mapname);
     char *loc_path = gen_path(".loc", mapname);
+
+    char *lvl_file = make_path("maps/", lvlname, "");
+    GHashTable *config = parse_file(lvl_file);
+    int width = atoi(g_hash_table_lookup(config, "width"));
+    int height = atoi(g_hash_table_lookup(config, "height"));
     // todo choose algo from lvl file
     Map map = gen_cave_a(width, height);
 
@@ -530,5 +534,7 @@ char *gen_location(int width, int height,
     free(items_path);
     free(mapname);
     free_map(map);
+    free(lvl_file);
+    g_hash_table_destroy(config);
     return strdup(location_full_path);
 }
