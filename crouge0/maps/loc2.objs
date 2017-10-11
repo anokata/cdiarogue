@@ -3,4 +3,5 @@ x:y:char:param:type:
 1:2:z:zu:ObjectTypeStash:
 2:2:a:au:ObjectTypeStash:
 6:4:>:./maps/loc1:ObjectTypeEnter:
-6:4:<:./maps/loc1:ObjectTypeExit:
+6:5:>:lvl1:ObjectTypeEnter:
+7:4:<:./maps/loc1:ObjectTypeExit:

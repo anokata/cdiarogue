@@ -107,9 +107,8 @@
             - +save player items
             - +save location items
 
-[ INWORK for this week: to 14.10.2017]
 * 10 min dia like
-** dung
+** +dung
       - +lighting
             - +create, clear light map
             - +calc rays (radius, center, angle)
@@ -143,13 +142,14 @@
       - +add player enter point to loc
             - +find map exit
 
-      - portal spec paths: town, lvl1, lvl2 ...
+      - +portal spec paths: town, lvl1, lvl2 ...
             - +add levels files - list of items/actors on map of that lvl
             - +level description file: items/actors count, type of generate algo
             - +make generator use level file, and items/actors from lvlX.xx
             - +generate map from lvl files description
-            - !load spec files = gen map
+            - +load spec files = gen map
 
+[ INWORK for this week: to 14.10.2017]
 * 11 gameplay
 ** combat
       - balance: hp restore down - only in town space and rest cmd
@@ -181,11 +181,13 @@
             - open stash for get gold/(random item)
             - step to trap cause dmg
       - make some maps and town, mobs, items equip
+      - go to back portal <
 
 - proressbar
 - clock - steps to time convert
 - save and exit and exit without save with confirmation
 - more contens: mobs, equips, items
+- refactor app, g load, init
 
 - TECHDEBT :: 
       - Extract viewport module

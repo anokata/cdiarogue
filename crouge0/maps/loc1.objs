@@ -3,4 +3,5 @@ x:y:char:param:type:
 5:4:^:trap:ObjectTypeTrap:
 5:6:0:1 gold box:ObjectTypeStash:
 6:4:>:./maps/loc2:ObjectTypeEnter:
+6:5:>:lvl1:ObjectTypeEnter:
 5:5:<:./maps/loc2:ObjectTypeExit:

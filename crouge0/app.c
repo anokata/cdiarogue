@@ -11,6 +11,7 @@ void ui_draw(G g);
 void save_player(Actor you);
 void save_location(TileMap map);
 void load(G g);
+void g_post_init(G g);
 
 void process_input(G g) {
     ss_handle(state, Event_draw, g);
@@ -188,11 +189,16 @@ void change_map(G g, char *location_filename) {
 
     if (is_special_location(location_filename)) {
         char *back_location_path = strdup(g->location_path);
+// TODO END
         // generate map
-// TODO END get w h next back by loc name?
-        //char *location_name = gen_map();
+        char *location_name = gen_location(back_location_path, 
+                location_filename, location_filename);
         // and load it
+        free_global_map(g->gmap);
+        g->player = NULL;
+        g->gmap = load_global_tmap(location_name);
     
+        free(location_name);
         free(back_location_path);
     } else {
         // if location_filename is real location then load
@@ -204,7 +210,8 @@ void change_map(G g, char *location_filename) {
 
     // TODO move player to map enter : spawn point
     load(g);
-    add_actor(g, g->player);
+    g_post_init(g);
+    /* add_actor(g, g->player); */
     free(location_filename_d);
 }
 
@@ -390,8 +397,6 @@ void save(G g) {
 void load(G g) {
     load_player(&g->player);
     g->player->items = items_load(player_items_file);
-    g->view->cx = g->player->x;
-    g->view->cy = g->player->y;
 }
 
 void init_inventory(G g) {
@@ -448,6 +453,21 @@ void item_debug(G g) {
     item_add(&g->gmap->items, potion);
 }
 
+void g_post_init(G g) {
+    /* move player to exit */
+    Object exit = objects_get_exit(g->gmap->objects);
+    if (!exit) {
+        perror("Can't find exit on map");
+    }
+    g->player->x = exit->x;
+    g->player->y = exit->y;
+    g->view->cx = g->player->x;
+    g->view->cy = g->player->y;
+
+    add_actor(g, g->player);
+    /* init_inventory(g); */
+}
+
 G g_init(char *arg1)  {
     char *location_path = "./maps/loc2";
     if (arg1) {
@@ -458,17 +478,8 @@ G g_init(char *arg1)  {
     fill_exp_road();
     G g = new_g(location_path);
     load(g);
+    g_post_init(g);
 
-    /* move player to exit */
-    Object exit = objects_get_exit(g->gmap->objects);
-    if (!exit) {
-        perror("Can't find exit on map");
-    }
-    g->player->x = exit->x;
-    g->player->y = exit->y;
-
-    add_actor(g, g->player);
-    /* init_inventory(g); */
     return g;
 }
 
