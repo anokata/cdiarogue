@@ -248,6 +248,8 @@
       - item actions - pass func
       - read scrolls, books to effect on stats, skills, spells
 ** map
+      - copy town to save in begin game
+      - map gen: border around map
       - not intersect objs, items, actors while gen map
       - some maps must contain some unique mobs/items - add lvl.must.items
       - add map files to location file (not %d_%d pattern name - just list of files to load)
