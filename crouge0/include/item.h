@@ -38,6 +38,7 @@ typedef struct Item {
     int y;
     Color color;
     int value;
+    int dispersion;
     char *name;
     ItemClass cls;
     ItemState state;

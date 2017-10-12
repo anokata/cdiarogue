@@ -122,6 +122,18 @@ int actor_stat_attack(Actor actor) {
     return atk;
 }
 
+int actor_attack_dispersion(Actor actor) {
+    int dis = 0;
+    dis += actor_weapon_dispersion(actor);
+    return dis * 2 + 1;
+}
+
+int actor_weapon_dispersion(Actor actor) {
+    int dis = 0;
+    if (actor->equiped_right_hand) dis += actor->equiped_right_hand->dispersion;
+    return dis;
+}
+
 int actor_stat_defence(Actor actor) {
     int def = 0;
     if (actor->equiped_head) def += actor->equiped_head->value;
@@ -138,8 +150,13 @@ int actor_stat_regen(Actor actor) {
 
 int actor_calc_damage(Actor attacker, Actor defender) {
     int atk = actor_stat_attack(attacker);
+    int dis = actor_attack_dispersion(attacker);
+    int dispersion_value = 0;
+    if (dis) {
+        dispersion_value = (rand() % dis) - dis/2;
+    }
     int def = actor_stat_defence(defender);
-    int dif = atk - def;
+    int dif = (atk + dispersion_value) - def;
     return MAX(dif, 0);
 }
 

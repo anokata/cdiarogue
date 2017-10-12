@@ -11,7 +11,7 @@ int charinfo_draw(void* data) {
 "Name: %s\n\
 hp/max: %d/%d\n\
 (s) str: %d  (c) con: %d \t press (key) to spend points to up or Shift-(key) to down\n\
-atk: %d  def: %d\n\
+atk: %d-%d  def: %d\n\
 exp: %ld  lvl: %d\n\
 *points to spend: %d\n\
 \n\
@@ -27,7 +27,8 @@ body: %s gain %d def \n\
     player->stat_hp, actor_stat_maxhp(player),
     player->basestat_strength,
     player->basestat_constitution,
-    actor_stat_attack(player),
+    actor_stat_attack(player) - actor_weapon_dispersion(player),
+    actor_stat_attack(player) + actor_weapon_dispersion(player),
     actor_stat_defence(player),
     player->exp, player->lvl,
     player->stat_points,

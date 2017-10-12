@@ -25,9 +25,12 @@ int main() {
 
     /* (de)serialize one item */
     printf("Load: \n");
-    char *test = strdup("wood sword:/:1:1:_cn_white:1:ItemWeaponCls:ItemNormalState:ItemWeaponSword:\n");
-    Strings s = parse_dsv_line(test, 9);
+    char *test = strdup("wood sword:/:1:1:_cn_white:1:1:ItemWeaponCls:ItemNormalState:ItemWeaponSword:\n");
+    Strings s = parse_dsv_line(test, 10);
     Item item = item_deserialize(s);
+    char *dsc = item_descript(item);
+    printf("%s\n", dsc);
+    free(dsc);
 
     char *dump = item_serialize(item);
     printf("serialized: %s\n", dump);

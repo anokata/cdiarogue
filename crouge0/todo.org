@@ -155,8 +155,11 @@
       - balance: hp restore down - only in town space and rest cmd
             - restore by rest cmd
             - restore hp in town
-      - ranged damage i.e. 2-5 
-            - item add dispersion value
+      - +ranged damage i.e. 2-5 
+            - +item add dispersion value, serialize, fix in files
+            - +show in item dmg range
+            - +show dmg range in charinfo
+            - +chg dmg calc and test
       - dodging chance
             - add actor dex, dodge % calculated by dex
       - crit hits - critical rate

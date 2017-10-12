@@ -6,9 +6,9 @@ IMPLEMENT_ENUM(ItemType, ITEMS_TYPES)
 
 
 extern char *ColorNames[];
-const char item_file_header[] = "name:char:x:y:color:value:class:state:type:\n";
+const char item_file_header[] = "name:char:x:y:color:value:dispersion:class:state:type:\n";
 const char item_file_type[] = "# vi: filetype=sh\n";
-const char item_dump_format[] = "%s:%c:%d:%d:%s:%d:%s:%s:%s:\n";
+const char item_dump_format[] = "%s:%c:%d:%d:%s:%d:%d:%s:%s:%s:\n";
 
 char *item_types[] = {
     "potion of cure wounds",
@@ -94,10 +94,22 @@ char *item_descript(Item item) {
     if (!item) return "";
     char *buf = malloc(BUFSIZE); // FIXME
     // check for null in type, state, ...
-    snprintf(buf, BUFSIZE, "%s %s", 
-            item_states[item->state],
-            item_types[item->type]
-    );
+    switch (item->cls) {
+        case ItemWeaponCls:
+            snprintf(buf, BUFSIZE, "%s %s dmg(%d-%d)", 
+                    item_states[item->state],
+                    item_types[item->type],
+                    item->value - item->dispersion,
+                    item->value + item->dispersion
+            );
+            break;
+        default:
+            snprintf(buf, BUFSIZE, "%s %s", 
+                    item_states[item->state],
+                    item_types[item->type]
+            );
+            break;
+    }
     
     return buf;
 }
@@ -115,9 +127,10 @@ Item item_deserialize(Strings str) {
     item->name = strdup(str[0]);
     item->color = cc_color_from_str(str[4]);
     item->value = atoi(str[5]);
-    item->cls = ItemClass_from_str(str[6]);
-    item->state = ItemState_from_str(str[7]);
-    item->type = ItemType_from_str(str[8]);
+    item->dispersion = atoi(str[6]);
+    item->cls = ItemClass_from_str(str[7]);
+    item->state = ItemState_from_str(str[8]);
+    item->type = ItemType_from_str(str[9]);
     return item;
 }
 
@@ -130,6 +143,7 @@ char *item_serialize(Item item) {
             item->y,
             ColorNames[item->color.color],
             item->value,
+            item->dispersion,
             ItemClassNames[item->cls],
             ItemStateNames[item->state],
             ItemTypeNames[item->type]

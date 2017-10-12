@@ -81,6 +81,7 @@ int actor_stat_attack(Actor actor); /* physical */
 int actor_stat_defence(Actor actor); /* physical */
 int actor_stat_regen(Actor actor);
 int actor_calc_damage(Actor attacker, Actor defender);
+int actor_weapon_dispersion(Actor actor);
 void actor_heal(Actor actor, int value);
 
 bool actor_equip(Actor actor, Item item);

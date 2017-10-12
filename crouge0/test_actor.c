@@ -6,8 +6,8 @@ void test() {
     Actor a = make_actor('a', 0, 0);
     actor_free(a);
 
-    char * in = strdup("pink poring:p:3:3:_cn_white:BehaviorSimpleAttacker:StatusLive:4:2:1:RoleMonster:0:1:1:\n");
-    Strings s = parse_dsv_line(in, 14);
+    char * in = strdup("pinkporing:p:5:3:_cn_white:BehaviorSimpleAttacker:StatusLive:4:2:1:RoleMonster:0:1:1:0:\n");
+    Strings s = parse_dsv_line(in, 15);
     printf("%s \n", s[0]);
     Strings it = s;
     while (*it) {
@@ -16,7 +16,7 @@ void test() {
 
     a = actor_from_strings(s);
     char *dump = actor_serialize(a);
-    printf("%s%s", in, dump);
+    printf("CMP:\n%s\n%s", in, dump);
     assert(!strcmp(in, dump));
     printf("actor= %s", dump);
     free(dump);
@@ -62,7 +62,32 @@ void test() {
     printf("%llu\n%llx\n", max,ULLONG_MAX);
 }
 
+void test_dmg() {
+    // make actor
+    char *player_file = "./maps/you"; // make test files
+    char *player_items_file = "./maps/you.items";
+    GList *lst = actors_load(player_file);
+    Actor actor = lst->data;
+    g_list_free(lst);
+    // make weapon
+    Items i = items_load(player_items_file);
+    Item w = g_list_nth_data(i, 0);
+    printf("atk:%d\n", actor_stat_attack(actor));
+    actor_equip(actor, w);
+    printf("atk:%d\n", actor_stat_attack(actor));
+    printf("dis:%d\n", actor_weapon_dispersion(actor));
+    printf("%d - %d\n",
+        actor_stat_attack(actor) - actor_weapon_dispersion(actor),
+        actor_stat_attack(actor) + actor_weapon_dispersion(actor)
+    );
+    // equip weapon
+    // tst dmg X times
+    items_free(&i);
+    actor_free(actor);
+}
+
 int main() {
     test();
     test_exp();
+    test_dmg();
 }
