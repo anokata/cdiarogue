@@ -1,5 +1,5 @@
 #include "app.h"
-char version[] = "0.0.3";
+char version[] = "0.0.4";
 /* save file: */
 char *player_file = "./maps/you";
 char *player_items_file = "./maps/you.items";
@@ -328,9 +328,9 @@ int cursor_draw(void* data) {
     /* cc_putxy('@', cn_yellow, */ 
     /*         min(g->view->cx, g->view->width / 2) + g->view->display_left, */ 
     /*         min(g->view->cy, g->view->height / 2) + g->view->display_top); */
-    draw_charpoints(g->gmap->items, g->view);
-    draw_charpoints(g->gmap->actors, g->view);
-    draw_charpoints(g->gmap->objects, g->view);
+    draw_charpoints(g->gmap->items, g);
+    draw_charpoints(g->gmap->actors, g);
+    draw_charpoints(g->gmap->objects, g);
     draw_actor_self(g->player, g->view);
     ui_draw(g);
     return 0;

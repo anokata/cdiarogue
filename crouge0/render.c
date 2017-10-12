@@ -1,16 +1,19 @@
 #include "render.h"
 
-void draw_charpoints(GList *elements, Viewport *v) {
+void draw_charpoints(GList *elements, G g) {
     GList *it = elements;
+    Viewport *v = g->view;
     int top = viewport_top(v);
     int left = viewport_left(v);
 
     while (it) {
         CharPoint cp = it->data;
         if (in_viewport(v, cp->x, cp->y)) {
-            draw_charpoint(it->data, 
-                    v->display_left + cp->x - left, 
-                    v->display_top + cp->y - top);
+            if (g->gmap->lightmap[cp->y * g->gmap->width + cp->x] || g->debug) {
+                draw_charpoint(it->data, 
+                        v->display_left + cp->x - left, 
+                        v->display_top + cp->y - top);
+            }
         }
         it = g_list_next(it);
     }

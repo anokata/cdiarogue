@@ -162,10 +162,12 @@
       - crit hits - critical rate
 
 ** lighting
-      - items, actors, objects not visible without light
+      - +items, actors, objects not visible without light
+            - +in debug on - show
 
 ** mobs
       - save equiped - save/load player equiped state items (item equiped flag?)
+            - actor inventory file
       - gold drop
             - add gold count to actor(you)
             - add item gold
