@@ -163,11 +163,11 @@
       - dodging chance
             - +add actor dex
             - +dodge % calculated by dex, 1dex = 1% * (1+ (lvl atk - lvl dfd) / 10)
-            - ?hit rate? accuracy
-            - dodge apply when attacked
-            - test
+            - +dodge apply when attacked
+            - +test
             - add to SP spend
       - crit hits - critical rate
+            - how much? how freq? ~dex
       - +add int
 
 ** lighting
@@ -177,6 +177,7 @@
 ** mobs
       - save equiped - save/load player equiped state items (item equiped flag?)
             - actor inventory file
+            - drop equiped item
       - gold drop
             - add gold count to actor(you)
             - add item gold
@@ -214,6 +215,7 @@
       - skills - weapon health 
       - balance and fun
       - endurance wisdom intelegence dex (4 base stats?)
+      - ?hit rate? accuracy
       - color elements
             - develop color repress-reinforce system
             - add item ColorElement
