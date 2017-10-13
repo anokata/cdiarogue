@@ -49,6 +49,9 @@ typedef struct Actor {
     int stat_hp;
     int basestat_constitution; /* con -> max hp */
     int basestat_strength; /* str -> attack */
+    int basestat_dexterity; /* dex -> dodge, crit */
+    int basestat_intelligence; /* int -> mana, magic attack */
+    /* ? magic defence */
     long exp;
     int lvl;
     int stat_points;

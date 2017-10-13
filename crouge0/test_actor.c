@@ -6,8 +6,8 @@ void test() {
     Actor a = make_actor('a', 0, 0);
     actor_free(a);
 
-    char * in = strdup("pinkporing:p:5:3:_cn_white:BehaviorSimpleAttacker:StatusLive:4:2:1:RoleMonster:0:1:1:0:\n");
-    Strings s = parse_dsv_line(in, 15);
+    char * in = strdup("pinkporing:p:5:3:_cn_white:BehaviorSimpleAttacker:StatusLive:4:2:1:1:2:RoleMonster:0:1:1:0:\n");
+    Strings s = parse_dsv_line(in, 17);
     printf("%s \n", s[0]);
     Strings it = s;
     while (*it) {

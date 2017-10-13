@@ -10,7 +10,8 @@ int charinfo_draw(void* data) {
     snprintf(buf, BUFSIZE * 10, 
 "Name: %s\n\
 hp/max: %d/%d\n\
-(s) str: %d  (c) con: %d \t press (key) to spend points to up or Shift-(key) to down\n\
+(s) str: %d  (c) con: %d \t press (key) to spend points to up \n\
+(d) dex: %d  (i) int: %d  \t or Shift-(key) to down\n\
 atk: %d-%d  def: %d\n\
 exp: %ld  lvl: %d\n\
 *points to spend: %d\n\
@@ -27,6 +28,8 @@ body: %s gain %d def \n\
     player->stat_hp, actor_stat_maxhp(player),
     player->basestat_strength,
     player->basestat_constitution,
+    player->basestat_dexterity,
+    player->basestat_intelligence,
     actor_stat_attack(player) - actor_weapon_dispersion(player),
     actor_stat_attack(player) + actor_weapon_dispersion(player),
     actor_stat_defence(player),

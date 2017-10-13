@@ -161,8 +161,10 @@
             - +show dmg range in charinfo
             - +chg dmg calc and test
       - dodging chance
-            - add actor dex, dodge % calculated by dex
+            - +add actor dex
+            - dodge % calculated by dex
       - crit hits - critical rate
+      - +add int
 
 ** lighting
       - +items, actors, objects not visible without light
