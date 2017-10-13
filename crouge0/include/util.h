@@ -90,3 +90,5 @@ typedef void (*Funcvp)(void *);
 
 void afree(void *data);
 CharPoint charpoint_at(GList *lst, int x, int y);
+bool chance(float prob);
+

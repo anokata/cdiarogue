@@ -87,3 +87,7 @@ CharPoint charpoint_at(GList *lst, int x, int y) {
     return NULL;
 }
 
+bool chance(float prob) {
+    return ((rand() % 1001) / 10.0) < prob;
+}
+

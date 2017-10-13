@@ -162,7 +162,7 @@
             - +chg dmg calc and test
       - dodging chance
             - +add actor dex
-            - !dodge % calculated by dex, 1dex = 1% * (1+ (lvl atk - lvl dfd) / 10)
+            - +dodge % calculated by dex, 1dex = 1% * (1+ (lvl atk - lvl dfd) / 10)
             - ?hit rate? accuracy
             - dodge apply when attacked
             - test

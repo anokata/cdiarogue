@@ -159,10 +159,6 @@ float actor_calc_dodge(Actor attacker, Actor defender) {
     return dodge;
 }
 
-bool chance(float prob) {
-    return ((rand() % 1001) / 10.0) < prob;
-}
-
 int actor_calc_damage(Actor attacker, Actor defender) {
     if (chance(actor_calc_dodge(attacker, defender))) return 0;
 

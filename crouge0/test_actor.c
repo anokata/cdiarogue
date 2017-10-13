@@ -73,6 +73,7 @@ void test_dmg() {
     Items i = items_load(player_items_file);
     Item w = g_list_nth_data(i, 0);
     printf("atk:%d\n", actor_stat_attack(actor));
+    // equip weapon
     actor_equip(actor, w);
     printf("atk:%d\n", actor_stat_attack(actor));
     printf("dis:%d\n", actor_weapon_dispersion(actor));
@@ -80,13 +81,31 @@ void test_dmg() {
         actor_stat_attack(actor) - actor_weapon_dispersion(actor),
         actor_stat_attack(actor) + actor_weapon_dispersion(actor)
     );
-    // equip weapon
+
+    actor->basestat_dexterity = 20;
+    printf("dex:%f\n", actor_stat_dodge(actor));
     // tst dmg X times
+    for (int i = 0; i < 10; i++) {
+        float dod = actor_calc_dodge(actor, actor);
+        printf("dod: %f\n", dod);
+
+        int dmg = actor_calc_damage(actor, actor);
+        printf("dmg: %d\n", dmg);
+    }
+    int x = 0;
+    int n = 123;
+    int p = 93;
+    for (int i = 0; i < n; i++) {
+        if (chance(p)) x++;
+        printf("dice: %d ", x);
+    }
+    printf("%%=%f\n", x / (1.0 * n));
     items_free(&i);
     actor_free(actor);
 }
 
 int main() {
+    srand(time(NULL));
     test();
     test_exp();
     test_dmg();
