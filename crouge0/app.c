@@ -1,5 +1,5 @@
 #include "app.h"
-char version[] = "0.0.4";
+char version[] = "0.0.5";
 /* save file: */
 char *player_file = "./maps/you";
 char *player_items_file = "./maps/you.items";

@@ -154,7 +154,7 @@
 ** combat
       - balance: hp restore down - only in town space and rest cmd
             - restore by rest cmd
-            - restore hp in town
+            - +restore hp in town only
       - +ranged damage i.e. 2-5 
             - +item add dispersion value, serialize, fix in files
             - +show in item dmg range
@@ -162,7 +162,8 @@
             - +chg dmg calc and test
       - dodging chance
             - +add actor dex
-            - dodge % calculated by dex
+            - !dodge % calculated by dex, 1dex = 1% * (1+ (lvl atk - lvl dfd) / 10)
+            - ?hit rate? accuracy
             - dodge apply when attacked
             - test
             - add to SP spend

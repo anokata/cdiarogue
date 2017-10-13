@@ -122,6 +122,10 @@ int actor_stat_attack(Actor actor) {
     return atk;
 }
 
+float actor_stat_dodge(Actor actor) {
+    return actor->basestat_dexterity * 0.9;
+}
+
 int actor_attack_dispersion(Actor actor) {
     int dis = 0;
     dis += actor_weapon_dispersion(actor);
@@ -148,7 +152,20 @@ int actor_stat_regen(Actor actor) {
     return actor->basestat_constitution / 2 - 1;
 }
 
+float actor_calc_dodge(Actor attacker, Actor defender) {
+    float dodge = actor_stat_dodge(defender);
+    int lvl_delta = defender->lvl - attacker->lvl;
+    dodge = dodge * (1 + lvl_delta / 10.0);
+    return dodge;
+}
+
+bool chance(float prob) {
+    return ((rand() % 1001) / 10.0) < prob;
+}
+
 int actor_calc_damage(Actor attacker, Actor defender) {
+    if (chance(actor_calc_dodge(attacker, defender))) return 0;
+
     int atk = actor_stat_attack(attacker);
     int dis = actor_attack_dispersion(attacker);
     int dispersion_value = 0;

@@ -13,6 +13,7 @@ hp/max: %d/%d\n\
 (s) str: %d  (c) con: %d \t press (key) to spend points to up \n\
 (d) dex: %d  (i) int: %d  \t or Shift-(key) to down\n\
 atk: %d-%d  def: %d\n\
+dodge: %f \n\
 exp: %ld  lvl: %d\n\
 *points to spend: %d\n\
 \n\
@@ -33,6 +34,7 @@ body: %s gain %d def \n\
     actor_stat_attack(player) - actor_weapon_dispersion(player),
     actor_stat_attack(player) + actor_weapon_dispersion(player),
     actor_stat_defence(player),
+    actor_stat_dodge(player),
     player->exp, player->lvl,
     player->stat_points,
     item_descript(player->equiped_right_hand),

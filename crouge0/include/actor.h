@@ -86,6 +86,8 @@ int actor_stat_regen(Actor actor);
 int actor_calc_damage(Actor attacker, Actor defender);
 int actor_weapon_dispersion(Actor actor);
 void actor_heal(Actor actor, int value);
+float actor_calc_dodge(Actor attacker, Actor defender);
+float actor_stat_dodge(Actor actor);
 
 bool actor_equip(Actor actor, Item item);
 bool actor_item_is_equiped(Actor actor, Item item);
