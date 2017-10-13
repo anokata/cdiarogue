@@ -189,7 +189,6 @@ void change_map(G g, char *location_filename) {
 
     if (is_special_location(location_filename)) {
         char *back_location_path = strdup(g->location_path);
-// TODO END
         // generate map
         char *location_name = gen_location(back_location_path, 
                 location_filename, location_filename);
@@ -208,11 +207,12 @@ void change_map(G g, char *location_filename) {
         g->gmap = load_global_tmap(location_filename_d);
     }
 
-    // TODO move player to map enter : spawn point
+    free(g->location_path);
+    g->location_path = location_filename_d;
+    /* free(location_filename_d); */
     load(g);
     g_post_init(g);
     /* add_actor(g, g->player); */
-    free(location_filename_d);
 }
 
 void enter_location(G g) {
@@ -469,7 +469,7 @@ void g_post_init(G g) {
 }
 
 G g_init(char *arg1)  {
-    char *location_path = "./maps/loc2";
+    char *location_path = "./maps/town";
     if (arg1) {
         location_path = arg1;
     }
@@ -488,7 +488,7 @@ void start(char *arg1) {
     curses_init();
     state_init();
 
-    actor_debug(g);
+    /* actor_debug(g); */
     /* item_debug(g); */
 
     start_events();

@@ -163,6 +163,9 @@
       - dodging chance
             - +add actor dex
             - dodge % calculated by dex
+            - dodge apply when attacked
+            - test
+            - add to SP spend
       - crit hits - critical rate
       - +add int
 

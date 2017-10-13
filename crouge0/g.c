@@ -5,7 +5,10 @@ void _rand_msg(G g) {
 }
 
 void player_regen(G g) {
-    actor_heal(g->player, actor_stat_regen(g->player));
+    // if player in town
+    if (strstr(g->location_path, "town")) {
+        actor_heal(g->player, actor_stat_regen(g->player));
+    }
 }
 
 GlobalEvent events[] = {
