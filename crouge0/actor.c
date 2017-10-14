@@ -149,7 +149,7 @@ int actor_stat_defence(Actor actor) {
 }
 
 int actor_stat_regen(Actor actor) {
-    return actor->basestat_constitution / 2 - 1;
+    return actor->basestat_constitution / 4 - 1;
 }
 
 float actor_calc_dodge(Actor attacker, Actor defender) {

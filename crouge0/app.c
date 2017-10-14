@@ -1,5 +1,5 @@
 #include "app.h"
-char version[] = "0.0.5";
+char version[] = "0.0.6";
 /* save file: */
 char *player_file = "./maps/you";
 char *player_items_file = "./maps/you.items";
@@ -104,14 +104,17 @@ int draw(void* data) {
     clear();
     cc_printxy(
             "Key bindings:\n\
-        w world map\n\
+        ESQ exit\n\
         h this help\n\
         c character game mode\n\
         i show inventory\n\
         d drop an item \n\
         q quaff a potion \n\
         e equip something \n\
+        , take item on ground \n\
+        . rest one step \n\
         / debug info on/of\n\
+        w world map\n\
         ", 
             cn_white, 0, 0);
     return 0;
@@ -313,6 +316,9 @@ int cursor_key(void* data) {
             // TODO make return description string
             msg = actor_take_from(g->player, g->gmap, g->player->x, g->player->y);
             debuglog(g, msg);
+            break;
+        case '.':
+            actor_heal(g->player, actor_stat_regen(g->player));
             break;
     }
     move_all_actors_rand(g);

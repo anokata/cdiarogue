@@ -151,18 +151,22 @@
 
 [ INWORK for this week: to 14.10.2017]
 * 11 gameplay
-** +add
-      - +item: equiped flag(or bit field, 0 - no, 1 -equiped, 2, 4 ...)
-      - +item: count
-** combat
-      - balance: hp restore down - only in town space and rest cmd
-            - restore by rest cmd
+      - +add
+            - +item: equiped flag(or bit field, 0 - no, 1 -equiped, 2, 4 ...)
+            - +item: count
+      - +add int to actor
+      - +balance: hp restore down - only in town space and rest cmd
+            - +restore by rest cmd
             - +restore hp in town only
       - +ranged damage i.e. 2-5 
             - +item add dispersion value, serialize, fix in files
             - +show in item dmg range
             - +show dmg range in charinfo
             - +chg dmg calc and test
+      - +lighting
+            - +items, actors, objects not visible without light
+            - +in debug on - show
+** combat
       - dodging chance
             - +add actor dex
             - +dodge % calculated by dex, 1dex = 1% * (1+ (lvl atk - lvl dfd) / 10)
@@ -172,12 +176,6 @@
             - add to SP spend
       - crit hits - critical rate
             - how much? how freq? ~dex
-      - +add int
-
-** lighting
-      - +items, actors, objects not visible without light
-            - +in debug on - show
-
 ** mobs
       - save equiped - save/load player equiped state items (item equiped flag?)
             - ?actor inventory file
