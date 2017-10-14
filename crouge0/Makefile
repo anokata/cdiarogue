@@ -68,6 +68,9 @@ test_object: prepare
 test_lightmap: prepare
 	$(CC) $@.c $(OBJECTS) $(CFLAGS) -o $(BUILD_DIR)/$@ && valgrind $(BUILD_DIR)/$@
 
+test_charinfo: prepare
+	$(CC) $@.c $(OBJECTS) $(CFLAGS) -o $(BUILD_DIR)/$@ && valgrind $(BUILD_DIR)/$@
+
 val:
 	valgrind $(BUILD_DIR)/$(P)
 

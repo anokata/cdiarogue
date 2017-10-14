@@ -4,3 +4,4 @@
 
 int charinfo_key(void* data);
 int charinfo_draw(void* data);
+char *charinfo_print(Actor player); /* return static str */

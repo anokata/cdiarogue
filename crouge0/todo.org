@@ -173,7 +173,7 @@
             - +dodge apply when attacked
             - +test
             - dex ~ 250 -> dodge 95%
-            - add to SP spend
+            - add to SP spend: dex, int
       - crit hits - critical rate
             - how much? how freq? ~dex
 ** mobs

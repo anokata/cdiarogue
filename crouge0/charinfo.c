@@ -1,12 +1,8 @@
 #include "charinfo.h"
 
-int charinfo_draw(void* data) {
-    G g = data;
-    Actor player = g->player;
-    clear();
-    cc_printxy("@", cn_white, 0, 0);
+static char buf[BUFSIZE * 10];
 
-    char buf[BUFSIZE * 10];
+char *charinfo_print(Actor player) {
     snprintf(buf, BUFSIZE * 10, 
 "Name: %s\n\
 hp/max: %d/%d\n\
@@ -50,7 +46,15 @@ body: %s gain %d def \n\
     item_descript(player->equiped_body),
     item_value(player->equiped_body)
     );
+    return buf;
+}
 
+int charinfo_draw(void* data) {
+    G g = data;
+    Actor player = g->player;
+    clear();
+    cc_printxy("@", cn_white, 0, 0);
+    charinfo_print(player);
     cc_printxy(buf, cn_white, 0, 1);
     return 0;
 }

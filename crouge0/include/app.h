@@ -23,5 +23,7 @@
 void debug_draw(G g);
 void start(char *arg1);
 G g_init(char *arg1);
+void load(G g);
+void g_post_init(G g);
 
 #endif
