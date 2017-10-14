@@ -2,6 +2,9 @@
 #include <stdio.h>
 #include <assert.h>
 
+static const char *test_item_line = "wood sword:/:1:1:_cn_white:1:1:ItemWeaponCls:ItemNormalState:ItemWeaponSword:1:0:\n";
+int item_fields_count = 12;
+
 int main() {
     Item i = item_new('i', 0, 0);
     item_free(i);
@@ -25,8 +28,8 @@ int main() {
 
     /* (de)serialize one item */
     printf("Load: \n");
-    char *test = strdup("wood sword:/:1:1:_cn_white:1:1:ItemWeaponCls:ItemNormalState:ItemWeaponSword:\n");
-    Strings s = parse_dsv_line(test, 10);
+    char *test = strdup(test_item_line);
+    Strings s = parse_dsv_line(test, item_fields_count);
     Item item = item_deserialize(s);
     char *dsc = item_descript(item);
     printf("%s\n", dsc);

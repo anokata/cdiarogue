@@ -82,7 +82,7 @@ void test_dmg() {
         actor_stat_attack(actor) + actor_weapon_dispersion(actor)
     );
 
-    actor->basestat_dexterity = 20;
+    actor->basestat_dexterity = 250;
     printf("dex:%f\n", actor_stat_dodge(actor));
     // tst dmg X times
     for (int i = 0; i < 10; i++) {

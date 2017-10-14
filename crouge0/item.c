@@ -6,9 +6,6 @@ IMPLEMENT_ENUM(ItemType, ITEMS_TYPES)
 
 
 extern char *ColorNames[];
-const char item_file_header[] = "name:char:x:y:color:value:dispersion:class:state:type:\n";
-const char item_file_type[] = "# vi: filetype=sh\n";
-const char item_dump_format[] = "%s:%c:%d:%d:%s:%d:%d:%s:%s:%s:\n";
 
 char *item_types[] = {
     "potion of cure wounds",
@@ -131,6 +128,8 @@ Item item_deserialize(Strings str) {
     item->cls = ItemClass_from_str(str[7]);
     item->state = ItemState_from_str(str[8]);
     item->type = ItemType_from_str(str[9]);
+    item->count = atoi(str[10]);
+    item->mode = atoi(str[11]);
     return item;
 }
 
@@ -146,7 +145,9 @@ char *item_serialize(Item item) {
             item->dispersion,
             ItemClassNames[item->cls],
             ItemStateNames[item->state],
-            ItemTypeNames[item->type]
+            ItemTypeNames[item->type],
+            item->count,
+            item->mode
     );
     return buf;
 }
@@ -182,4 +183,16 @@ void items_save(char *filename, Items items) {
     }
 
     fclose(out);
+}
+
+bool item_is_equiped(Item item) {
+    return (item->mode && ITEM_MODE_EQUIPED);
+}
+
+void item_set_equiped(Item item) {
+    item->mode |= ITEM_MODE_EQUIPED;
+}
+
+void item_unset_equiped(Item item) {
+    item->mode ^= ITEM_MODE_EQUIPED;
 }

@@ -43,7 +43,15 @@ typedef struct Item {
     ItemClass cls;
     ItemState state;
     ItemType type;
+    int count;
+    u_int32_t mode; /* bit field (equiped,..) */
 } *Item;
+
+static const char item_file_header[] = "name:char:x:y:color:value:dispersion:class:state:type:count:mode:\n";
+static const char item_file_type[] = "# vi: filetype=sh\n";
+static const char item_dump_format[] = "%s:%c:%d:%d:%s:%d:%d:%s:%s:%s:%d:%d:\n";
+
+#define ITEM_MODE_EQUIPED 1
 
 typedef GList *Items;
 
@@ -57,6 +65,8 @@ void item_remove(Items *items, Item item);
 void item_detach(Items *items, Item item);
 CharPoint item_as_charpoint_cast(Item item);
 Item items_get(Items items, int x, int y);
+bool item_is_equiped(Item item);
+void item_set_equiped(Item item);
 
 char *item_descript(Item item);
 int item_value(Item item);

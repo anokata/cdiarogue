@@ -151,6 +151,9 @@
 
 [ INWORK for this week: to 14.10.2017]
 * 11 gameplay
+** +add
+      - +item: equiped flag(or bit field, 0 - no, 1 -equiped, 2, 4 ...)
+      - +item: count
 ** combat
       - balance: hp restore down - only in town space and rest cmd
             - restore by rest cmd
@@ -165,6 +168,7 @@
             - +dodge % calculated by dex, 1dex = 1% * (1+ (lvl atk - lvl dfd) / 10)
             - +dodge apply when attacked
             - +test
+            - dex ~ 250 -> dodge 95%
             - add to SP spend
       - crit hits - critical rate
             - how much? how freq? ~dex
@@ -176,8 +180,10 @@
 
 ** mobs
       - save equiped - save/load player equiped state items (item equiped flag?)
-            - actor inventory file
+            - ?actor inventory file
             - drop equiped item
+            - equiped/takeoff change item mode
+            - load and equip
       - gold drop
             - add gold count to actor(you)
             - add item gold
@@ -187,6 +193,8 @@
       - stack items - item count - same items to stack with number
             - add to item count prop
             - proc when take from map, merge items
+            - quaff take 1 from all count
+            - remove when 1->0 : item_spend: bool is 0
 ** maps
       - savefile : map path and player path
       - add objects - i.e. chest, trap
@@ -200,6 +208,9 @@
 - save and exit and exit without save with confirmation
 - more contens: mobs, equips, items
 - refactor app, g load, init
+- actors in dir/file 
+      - actors/poring = name:poring id:223 ...
+      - actors ids in location -> mobs:1...
 
 - TECHDEBT :: 
       - Extract viewport module
@@ -258,6 +269,7 @@
 ** map
       - copy town to save in begin game
       - map gen: border around map
+      - flood fill map at gen, if exit and enter not in same area - remade it
       - not intersect objs, items, actors while gen map
       - some maps must contain some unique mobs/items - add lvl.must.items
       - add map files to location file (not %d_%d pattern name - just list of files to load)
