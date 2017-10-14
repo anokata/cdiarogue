@@ -2,6 +2,6 @@ x:y:char:param:type:
 # vi: filetype=sh
 1:2:z:zu:ObjectTypeStash:
 2:2:a:au:ObjectTypeStash:
-6:4:>:./maps/loc1:ObjectTypeEnter:
+6:4:>:./maps/town:ObjectTypeEnter:
 6:5:>:lvl1:ObjectTypeEnter:
-7:4:<:./maps/loc1:ObjectTypeExit:
+7:4:<:./maps/town:ObjectTypeExit:

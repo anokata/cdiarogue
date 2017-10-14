@@ -199,6 +199,8 @@ void change_map(G g, char *location_filename) {
         free_global_map(g->gmap);
         g->player = NULL;
         g->gmap = load_global_tmap(location_name);
+        free(location_filename_d);
+        location_filename_d = strdup(location_name);
     
         free(location_name);
         free(back_location_path);
@@ -222,7 +224,7 @@ void enter_location(G g) {
     CharPoint cp = charpoint_at(g->gmap->objects, g->player->x, g->player->y);
     Object obj = (Object) cp;
         // if obj type portal
-    if (obj && obj->c == '>') {
+if (obj && (obj->type == ObjectTypeExit|| obj->type == ObjectTypeEnter)) {
         debuglog(g, obj->param);
         change_map(g, obj->param);
     } else {
@@ -236,6 +238,7 @@ int cursor_key(void* data) {
     char *msg;
     switch (key) {
         case '>':
+        case '<':
             enter_location(g);
             break;
         case 's':

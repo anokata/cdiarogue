@@ -172,6 +172,7 @@
             - +dodge apply when attacked
             - +test
             - +add to SP spend: dex, int
+      - +go to back portal <
 ** combat
       - crit hits - critical rate
             - how much? how freq? ~dex
@@ -198,12 +199,12 @@
             - open stash for get gold/(random item)
             - step to trap cause dmg
       - make some maps and town, mobs, items equip
-      - go to back portal <
 
 ** charinfo
       - enter stat spend mode, exit by ?
       - exit info by 'c' key
 
+# if (code = smth(thing))...
 - proressbar
 - clock - steps to time convert
 - save and exit and exit without save with confirmation
@@ -268,7 +269,9 @@
       - item effects: effect X itemType X action
       - item actions - pass func
       - read scrolls, books to effect on stats, skills, spells
+      - keys
 ** map
+      - make and show map name (like dungeon level 2)
       - copy town to save in begin game
       - map gen: border around map
       - flood fill map at gen, if exit and enter not in same area - remade it
@@ -414,6 +417,10 @@ freedome, lying in island in see over a desert.
 * things to do may separate
 - genetic evolve 
 - sound
+      - play
+      - generate noise
+      - fade in/out by volume
+      - compose in sample
 - map gen
 - ascii art pic editor mode, terminal again vi keys... + animation.
 - UI progress bar with value
