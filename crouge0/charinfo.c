@@ -79,6 +79,30 @@ int charinfo_key(void* data) {
                 you->basestat_constitution++;
             }
             break;
+        case 'd':
+            if (you->stat_points) {
+                you->stat_points--;
+                you->basestat_dexterity++;
+            }
+            break;
+        case 'D':
+            if (you->basestat_strength) {
+                you->stat_points++;
+                you->basestat_dexterity--;
+            }
+            break;
+        case 'i':
+            if (you->stat_points) {
+                you->stat_points--;
+                you->basestat_intelligence++;
+            }
+            break;
+        case 'I':
+            if (you->basestat_strength) {
+                you->stat_points++;
+                you->basestat_intelligence--;
+            }
+            break;
         case 'C': // if can? or reset points
             if (you->basestat_constitution) {
                 you->stat_points++;

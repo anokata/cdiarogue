@@ -166,14 +166,13 @@
       - +lighting
             - +items, actors, objects not visible without light
             - +in debug on - show
-** combat
-      - dodging chance
+      - +dodging chance
             - +add actor dex
             - +dodge % calculated by dex, 1dex = 1% * (1+ (lvl atk - lvl dfd) / 10)
             - +dodge apply when attacked
             - +test
-            - dex ~ 250 -> dodge 95%
-            - add to SP spend: dex, int
+            - +add to SP spend: dex, int
+** combat
       - crit hits - critical rate
             - how much? how freq? ~dex
 ** mobs
@@ -201,6 +200,10 @@
       - make some maps and town, mobs, items equip
       - go to back portal <
 
+** charinfo
+      - enter stat spend mode, exit by ?
+      - exit info by 'c' key
+
 - proressbar
 - clock - steps to time convert
 - save and exit and exit without save with confirmation
@@ -225,6 +228,7 @@
       - balance and fun
       - endurance wisdom intelegence dex (4 base stats?)
       - ?hit rate? accuracy
+      - dex ~ 250 -> dodge 95%
       - color elements
             - develop color repress-reinforce system
             - add item ColorElement
