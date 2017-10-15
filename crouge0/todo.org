@@ -149,7 +149,6 @@
             - +generate map from lvl files description
             - +load spec files = gen map
 
-[ INWORK for this week: to 14.10.2017]
 * 11 gameplay
       - +add
             - +item: equiped flag(or bit field, 0 - no, 1 -equiped, 2, 4 ...)
@@ -173,9 +172,17 @@
             - +test
             - +add to SP spend: dex, int
       - +go to back portal <
+
+[ INWORK for this week: to 19.10.2017]
+* 12 mechanic
 ** combat
       - crit hits - critical rate
             - how much? how freq? ~dex
+** mana
+      - add mana MP
+      - calc from int (+some con)
+      - restore by rest
+      - mana potion
 ** mobs
       - save equiped - save/load player equiped state items (item equiped flag?)
             - ?actor inventory file
@@ -204,8 +211,10 @@
       - enter stat spend mode, exit by ?
       - exit info by 'c' key
 
+- test curses app
 # if (code = smth(thing))...
-- proressbar
+- proressbar (min = 0?)
+      - (x * w) / Xmax
 - clock - steps to time convert
 - save and exit and exit without save with confirmation
 - more contens: mobs, equips, items
@@ -294,6 +303,7 @@
 
 - ! parse header and store columns indexes and get columns index and make struct
 - debug commands for mobs spawn, items, heal
+      - modes: m: mobs a: add - list
 - if ?I need same char with different colors on same map 
 - mobs/items and objs description in one file, - position in their map
 - cleanup, rem unused, see todo
