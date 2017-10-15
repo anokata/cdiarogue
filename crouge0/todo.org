@@ -183,12 +183,13 @@
       - calc from int (+some con)
       - restore by rest
       - mana potion
+      - show in info
 ** mobs
       - save equiped - save/load player equiped state items (item equiped flag?)
-            - ?actor inventory file
-            - drop equiped item
+            - actor inventory file - load actor items from it's items file
             - equiped/takeoff change item mode
-            - load and equip
+            - while loading items equip by mode
+            - if drop equiped item - take off or not permit
       - gold drop
             - add gold count to actor(you)
             - add item gold
