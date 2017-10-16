@@ -2,7 +2,7 @@
 char version[] = "0.0.6";
 /* save file: */
 char *player_file = "./maps/you";
-char *player_items_file = "./maps/you.items";
+/* char *player_items_file = "./maps/you.items"; */
 
 /* GLOBAL */
 extern State state;

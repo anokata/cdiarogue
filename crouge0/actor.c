@@ -286,14 +286,23 @@ GList *actors_load(char* filename) {
     StringTable st = parse_dsv_file(filename);
     StringTable it = &st[1]; // first line is header
     do {
+        /* TODO actor load */
         Actor actor = actor_from_strings(*it);
         actor_add(&actors, actor); 
         DEBUG_PRINT("load actor: %s\n", actor->name);
         if (strlen(actor->items_file) > 1) {
-            /* TODO build path */
             char *items_file = build_path(filename, actor->items_file);
             actor->items = items_load(items_file);
             free(items_file);
+            /* equip */
+            GList *pitem = actor->items;
+            while (pitem) {
+                Item item = pitem->data;
+                if (item_is_equiped(item)) {
+                    actor_equip(actor, item);
+                }
+                pitem = g_list_next(pitem);
+            }
         }
     
     } while (*++it);

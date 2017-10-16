@@ -67,6 +67,7 @@ CharPoint item_as_charpoint_cast(Item item);
 Item items_get(Items items, int x, int y);
 bool item_is_equiped(Item item);
 void item_set_equiped(Item item);
+void item_unset_equiped(Item item);
 
 char *item_descript(Item item);
 int item_value(Item item);

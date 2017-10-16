@@ -72,6 +72,7 @@ void inventory_action(Item item, G g) {
         case State_equip:
             debuglog(g, "you try equip");
             if (actor_equip(g->player, item)) {
+                item_set_equiped(item);
                 debuglog(g, "Equiped!");
             } else {
                 debuglog(g, error_msg());
@@ -86,6 +87,7 @@ void inventory_action(Item item, G g) {
             } 
             *(actor_item_slot(g->player, item)) = NULL;
             debuglog(g, "Taked off");
+            item_unset_equiped(item);
             ss_setstate(state, State_cursor);
             break;
     }

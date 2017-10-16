@@ -191,8 +191,8 @@
       - save equiped - save/load player equiped state items (item equiped flag?)
             - +actor inventory file - load actor items from it's items file
             - +save you items
-            - equiped/takeoff change item mode
-            - while loading items equip by mode
+            - +equiped/takeoff change item mode
+            - +while loading items equip by mode
             - if drop equiped item - take off or not permit
       - gold drop
             - add gold count to actor(you)
