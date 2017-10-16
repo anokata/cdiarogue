@@ -68,6 +68,11 @@ typedef struct Actor {
     Item equiped_body;
 } *Actor;
 
+static const char actor_file_header[] = "name:char:x:y:color:behavior:status:hp:con:str:dex:int:role:items_file:exp:lvl:sp:\n";
+static const char actor_file_type[] = "# vi: filetype=sh\n";
+static const char actor_dump_format[] = "%s:%c:%d:%d:%s:%s:%s:%d:%d:%d:%d:%d:%s:%s:%ld:%d:%d:\n";
+
+
 typedef GList *Actors;
 
 CharPoint actor_as_charpoint_cast(Actor actor);
@@ -117,3 +122,5 @@ long calc_exp_gain(Actor actor, Actor subject);
 void fill_exp_road();
 bool is_lvl_up(int lvl, long new_exp);
 long exp_get_to_next(int lvl);
+
+void save_player(Actor you, char *player_file);

@@ -8,7 +8,6 @@ char *player_file = "./maps/you";
 extern State state;
 
 void ui_draw(G g);
-void save_player(Actor you);
 void save_location(TileMap map);
 void load(G g);
 void g_post_init(G g);
@@ -244,7 +243,7 @@ int cursor_key(void* data) {
             enter_location(g);
             break;
         case 's':
-            save_player(g->player);
+            save_player(g->player, player_file);
             save_location(g->gmap);
             debuglog(g, "Saved");
             break;
@@ -374,24 +373,6 @@ void save_location(TileMap map) {
     items_save(map->items_file, map->items);
 }
 
-void save_player(Actor you) {
-    extern char actor_file_header[];
-    extern char actor_file_type[];
-    FILE *out = fopen(player_file, "w+");
-    fwrite(actor_file_header, strlen(actor_file_header), 1, out);
-    fwrite(actor_file_type, strlen(actor_file_type), 1, out);
-
-    char *line = actor_serialize(you);
-    fwrite(line, strlen(line), 1, out);
-    free(line);
-
-    fclose(out);
-
-    char *path = build_path(player_file, you->items_file);
-    items_save(path, you->items);
-    free(path);
-}
-
 void load_player(Actor *you) {
     if (*you) actor_free(*you);
     GList *lst = actors_load(player_file);
@@ -403,7 +384,7 @@ void load_player(Actor *you) {
 }
 
 void save(G g) {
-    //save_player(g->player); // unplug for debug 
+    //save_player(g->player, player_file); // unplug for debug 
     UNUSED(g);
 }
 

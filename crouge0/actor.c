@@ -2,10 +2,6 @@
 extern EError global_error;
 extern char *ColorNames[];
 
-const char actor_file_header[] = "name:char:x:y:color:behavior:status:hp:con:str:dex:int:role:items_file:exp:lvl:sp:\n";
-const char actor_file_type[] = "# vi: filetype=sh\n";
-const char actor_dump_format[] = "%s:%c:%d:%d:%s:%s:%s:%d:%d:%d:%d:%d:%s:%s:%ld:%d:%d:\n";
-
 char *RoleNames[] = {
     FOREACH_ROLE(MAKE_STRING)
     NULL
@@ -442,3 +438,20 @@ void test_exp() {
         printf("lvl: %d\t exp: %ld\n ", lvl, exp_road[lvl]);
     }
 }
+
+void save_player(Actor you, char *player_file) {
+    FILE *out = fopen(player_file, "w+");
+    fwrite(actor_file_header, strlen(actor_file_header), 1, out);
+    fwrite(actor_file_type, strlen(actor_file_type), 1, out);
+
+    char *line = actor_serialize(you);
+    fwrite(line, strlen(line), 1, out);
+    free(line);
+
+    fclose(out);
+
+    char *path = build_path(player_file, you->items_file);
+    items_save(path, you->items);
+    free(path);
+}
+
