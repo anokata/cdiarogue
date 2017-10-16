@@ -186,11 +186,12 @@
       - crit hits - critical rate
             - how much? how freq? ~dex
 ** mana
-      - add mana MP
-      - calc from int (+some con)
-      - restore by rest
+      - +add mana MP
+      - serialize
+      - +calc from int (?+some con)
+      - +restore by rest
       - mana potion
-      - show in info
+      - +show in info
 ** mobs
       - save actor fun(with items like you)
             - save actor items to items file if exist

@@ -43,6 +43,7 @@ Status status_from_str(char *str) {
 
 Actor make_actor(char c, int x, int y) {
     Actor actor = malloc(sizeof(struct Actor));
+    memset(actor, 0, sizeof(struct Actor));
     actor->c = c;
     actor->x = x;
     actor->y = y;
@@ -120,6 +121,10 @@ int actor_stat_maxhp(Actor actor) {
     return actor->basestat_constitution * 10;
 }
 
+int actor_stat_maxmp(Actor actor) {
+    return actor->basestat_intelligence * 10;
+}
+
 int actor_stat_attack(Actor actor) {
     int atk = actor->basestat_strength * 2;
     if (actor->equiped_right_hand) atk += actor->equiped_right_hand->value;
@@ -156,6 +161,10 @@ int actor_stat_regen(Actor actor) {
     return actor->basestat_constitution / 4 - 1;
 }
 
+int actor_stat_mp_regen(Actor actor) {
+    return MAX(actor->basestat_intelligence / 4 - 1, 0);
+}
+
 float actor_calc_dodge(Actor attacker, Actor defender) {
     float dodge = actor_stat_dodge(defender);
     int lvl_delta = defender->lvl - attacker->lvl;
@@ -184,6 +193,16 @@ void actor_heal(Actor actor, int value) {
         actor->stat_hp = maxhp;
     } else {
         actor->stat_hp = hp; 
+    }
+}
+
+void actor_heal_mp(Actor actor, int value) {
+    int mp = actor->stat_mp + value;
+    int maxmp = actor_stat_maxmp(actor);
+    if (mp > maxmp) {
+        actor->stat_mp = maxmp;
+    } else {
+        actor->stat_mp = mp; 
     }
 }
 

@@ -47,6 +47,7 @@ typedef struct Actor {
     Point directed;
     Status status;
     int stat_hp;
+    int stat_mp;
     int basestat_constitution; /* con -> max hp */
     int basestat_strength; /* str -> attack */
     int basestat_dexterity; /* dex -> dodge, crit */
@@ -81,12 +82,15 @@ int _actor_direct_diffx(Actor actor);
 int _actor_direct_diffy(Actor actor);
 
 int actor_stat_maxhp(Actor actor);
+int actor_stat_maxmp(Actor actor);
 int actor_stat_attack(Actor actor); /* physical */
 int actor_stat_defence(Actor actor); /* physical */
 int actor_stat_regen(Actor actor);
+int actor_stat_mp_regen(Actor actor);
 int actor_calc_damage(Actor attacker, Actor defender);
 int actor_weapon_dispersion(Actor actor);
 void actor_heal(Actor actor, int value);
+void actor_heal_mp(Actor actor, int value);
 float actor_calc_dodge(Actor attacker, Actor defender);
 float actor_stat_dodge(Actor actor);
 

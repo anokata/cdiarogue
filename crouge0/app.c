@@ -56,9 +56,11 @@ void ui_draw(G g) {
 
     char buf[BUFSIZE];
     snprintf(buf, BUFSIZE, 
-        "@ x:y = %d:%d [HP: %d/%d atk: %d def: %d ]",
-        g->player->x, g->player->y, g->player->stat_hp,
-        actor_stat_maxhp(g->player), actor_stat_attack(g->player), 
+        "@ x:y = %d:%d [HP: %d/%d MP: %d/%d atk: %d def: %d ]",
+        g->player->x, g->player->y, 
+        g->player->stat_hp, actor_stat_maxhp(g->player), 
+        g->player->stat_mp, actor_stat_maxmp(g->player), 
+        actor_stat_attack(g->player), 
         actor_stat_defence(g->player)
         );
     cc_printxy(buf, cn_white, UI_X, y++);

@@ -12,6 +12,7 @@ char *charinfo_print(Actor player) {
     snprintf(buf, BUFSIZE * 10, 
 "Name: %s\n\
 hp/max: %d/%d\n\
+mp/max: %d/%d\n\
 (s) str: %d  (c) con: %d \t press (key) to spend points to up \n\
 (d) dex: %d  (i) int: %d  \t or Shift-(key) to down\n\
 atk: %d-%d  def: %d\n\
@@ -29,6 +30,7 @@ body: %s gain %d def \n\
 ", 
     player->name, 
     player->stat_hp, actor_stat_maxhp(player),
+    player->stat_mp, actor_stat_maxmp(player),
     player->basestat_strength,
     player->basestat_constitution,
     player->basestat_dexterity,

@@ -8,6 +8,7 @@ void player_regen(G g) {
     // if player in town
     if (strstr(g->location_path, "town")) {
         actor_heal(g->player, actor_stat_regen(g->player));
+        actor_heal_mp(g->player, actor_stat_mp_regen(g->player));
     }
 }
 
