@@ -4,7 +4,7 @@ extern char *ColorNames[];
 
 const char actor_file_header[] = "name:char:x:y:color:behavior:status:hp:con:str:dex:int:role:items_file:exp:lvl:sp:\n";
 const char actor_file_type[] = "# vi: filetype=sh\n";
-const char actor_dump_format[] = "%s:%c:%d:%d:%s:%s:%s:%d:%d:%d:%d:%d:%s:0:%ld:%d:%d:\n";
+const char actor_dump_format[] = "%s:%c:%d:%d:%s:%s:%s:%d:%d:%d:%d:%d:%s:%s:%ld:%d:%d:\n";
 
 char *RoleNames[] = {
     FOREACH_ROLE(MAKE_STRING)
@@ -66,12 +66,14 @@ Actor make_actor(char c, int x, int y) {
     actor->exp = 1;
     actor->lvl = 1;
     actor->stat_points = 2;
+    actor->items_file = strdup("O");
     return actor;
 }
 
 void actor_free(Actor actor) {
     if (!actor) return;
     items_free(&actor->items);
+    free(actor->items_file);
     if (actor->name) free(actor->name);
     free(actor);
 }
@@ -242,10 +244,16 @@ Actor actor_from_strings(Strings str) {
     actor->basestat_dexterity = atoi(str[10]);
     actor->basestat_intelligence = atoi(str[11]);
     actor->role = role_from_str(str[12]);
-    //actor->items = str[13];
     actor->exp = atol(str[14]);
     actor->lvl = atoi(str[15]);
     actor->stat_points = atoi(str[16]);
+
+    actor->items_file = strdup(str[13]);
+    if (strlen(actor->items_file) > 1) {
+        /* TODO build path */
+        /* actor->items = items_load(actor->items_file); */
+    }
+    
     return actor;
 }
 
@@ -266,6 +274,7 @@ char *actor_serialize(Actor actor) {
         actor->basestat_dexterity,
         actor->basestat_intelligence,
         RoleNames[actor->role],
+        actor->items_file,
         actor->exp,
         actor->lvl,
         actor->stat_points

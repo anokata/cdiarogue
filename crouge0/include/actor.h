@@ -58,6 +58,7 @@ typedef struct Actor {
     char *name;
     Role role;
     Items items;
+    char *items_file;
     Item equiped_right_hand;
     Item equiped_head;
     Item equiped_foot;
