@@ -385,7 +385,9 @@ void save_player(Actor you) {
 
     fclose(out);
 
-    items_save(player_items_file, you->items);
+    char *path = build_path(player_file, you->items_file);
+    items_save(path, you->items);
+    free(path);
 }
 
 void load_player(Actor *you) {
@@ -405,7 +407,7 @@ void save(G g) {
 
 void load(G g) {
     load_player(&g->player);
-    g->player->items = items_load(player_items_file);
+    /* g->player->items = items_load(player_items_file); */
 }
 
 void init_inventory(G g) {

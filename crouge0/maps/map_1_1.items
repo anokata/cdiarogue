@@ -2,5 +2,4 @@ name:char:x:y:color:value:dispersion:class:state:type:count:mode:
 # vi: filetype=sh
 potion of cure wounds:!:2:2:_cb_red:10:0:ItemPotionCls:ItemNormalState:ItemPotionOfCure:1:0:
 potion #32 GEX UHT:1:8:8:_cn_white:1:1:ItemPotionCls:ItemNormalState:ItemPotionOfCure:1:0:
-wood sword:/:8:4:_cn_white:1:1:ItemWeaponCls:ItemNormalState:ItemWeaponSword:1:0:
 potion #32 GEX UHT:1:8:3:_cn_white:1:1:ItemPotionCls:ItemNormalState:ItemPotionOfCure:1:0:
