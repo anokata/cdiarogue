@@ -2,12 +2,15 @@
 #include <stdio.h>
 #include <assert.h>
 
+char *actor_line = "pinkporing:p:5:3:_cn_white:BehaviorSimpleAttacker:StatusLive:4:43:2:1:1:2:RoleMonster:0:1:1:0:\n";
+int actor_fields_count = 19;
+
 void test() {
     Actor a = make_actor('a', 0, 0);
     actor_free(a);
 
-    char * in = strdup("pinkporing:p:5:3:_cn_white:BehaviorSimpleAttacker:StatusLive:4:2:1:1:2:RoleMonster:0:1:1:0:\n");
-    Strings s = parse_dsv_line(in, 17);
+    char * in = strdup(actor_line);
+    Strings s = parse_dsv_line(in, actor_fields_count);
     printf("%s \n", s[0]);
     Strings it = s;
     while (*it) {

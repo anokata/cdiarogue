@@ -68,9 +68,9 @@ typedef struct Actor {
     Item equiped_body;
 } *Actor;
 
-static const char actor_file_header[] = "name:char:x:y:color:behavior:status:hp:con:str:dex:int:role:items_file:exp:lvl:sp:\n";
+static const char actor_file_header[] = "name:char:x:y:color:behavior:status:hp:mp:con:str:dex:int:role:items_file:exp:lvl:sp:\n";
 static const char actor_file_type[] = "# vi: filetype=sh\n";
-static const char actor_dump_format[] = "%s:%c:%d:%d:%s:%s:%s:%d:%d:%d:%d:%d:%s:%s:%ld:%d:%d:\n";
+static const char actor_dump_format[] = "%s:%c:%d:%d:%s:%s:%s:%d:%d:%d:%d:%d:%d:%s:%s:%ld:%d:%d:\n";
 
 
 typedef GList *Actors;

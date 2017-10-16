@@ -268,16 +268,17 @@ Actor actor_from_strings(Strings str) {
     actor->behavior = behavior_from_str(str[5]);
     actor->status = status_from_str(str[6]);
     actor->stat_hp = atoi(str[7]);
-    actor->basestat_constitution = atoi(str[8]);
-    actor->basestat_strength = atoi(str[9]);
-    actor->basestat_dexterity = atoi(str[10]);
-    actor->basestat_intelligence = atoi(str[11]);
-    actor->role = role_from_str(str[12]);
-    actor->exp = atol(str[14]);
-    actor->lvl = atoi(str[15]);
-    actor->stat_points = atoi(str[16]);
+    actor->stat_mp = atoi(str[8]);
+    actor->basestat_constitution = atoi(str[9]);
+    actor->basestat_strength = atoi(str[10]);
+    actor->basestat_dexterity = atoi(str[11]);
+    actor->basestat_intelligence = atoi(str[12]);
+    actor->role = role_from_str(str[13]);
+    actor->exp = atol(str[15]);
+    actor->lvl = atoi(str[16]);
+    actor->stat_points = atoi(str[17]);
 
-    actor->items_file = strdup(str[13]);
+    actor->items_file = strdup(str[14]);
     return actor;
 }
 
@@ -293,6 +294,7 @@ char *actor_serialize(Actor actor) {
         BehaviorNames[actor->behavior],
         StatusNames[actor->status],
         actor->stat_hp,
+        actor->stat_mp,
         actor->basestat_constitution,
         actor->basestat_strength,
         actor->basestat_dexterity,

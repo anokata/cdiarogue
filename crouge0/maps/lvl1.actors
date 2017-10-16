@@ -1,6 +1,6 @@
-name:char:x:y:color:behavior:status:hp:con:str:dex:int:role:items_file:exp:lvl:sp:
-pinkporing:p:5:3:_cn_white:BehaviorSimpleAttacker:StatusLive:4:2:1:1:1:RoleMonster:0:1:1:0:
-ring:p:3:4:_cn_white:BehaviorSimpleAttacker:StatusLive:4:2:1:1:1:RoleMonster:0:1:1:0:
-poring:p:5:3:_cn_white:BehaviorSimpleAttacker:StatusLive:8:2:1:1:1:RoleMonster:0:1:1:0:
-poring:p:5:3:_cn_white:BehaviorSimpleAttacker:StatusLive:1:2:1:1:1:RoleMonster:0:1:1:0:
-poring:p:5:3:_cn_white:BehaviorSimpleAttacker:StatusLive:1:2:1:1:1:RoleMonster:0:1:1:0:
+name:char:x:y:color:behavior:status:hp:mp:con:str:dex:int:role:items_file:exp:lvl:sp:
+pinkporing:p:5:3:_cn_white:BehaviorSimpleAttacker:StatusLive:4:0:2:1:1:1:RoleMonster:0:1:1:0:
+ring:p:3:4:_cn_white:BehaviorSimpleAttacker:StatusLive:4:0:2:1:1:1:RoleMonster:0:1:1:0:
+poring:p:5:3:_cn_white:BehaviorSimpleAttacker:StatusLive:8:0:2:1:1:1:RoleMonster:0:1:1:0:
+poring:p:5:3:_cn_white:BehaviorSimpleAttacker:StatusLive:1:0:2:1:1:1:RoleMonster:0:1:1:0:
+poring:p:5:3:_cn_white:BehaviorSimpleAttacker:StatusLive:1:0:2:1:1:1:RoleMonster:0:1:1:0:

@@ -187,7 +187,7 @@
             - how much? how freq? ~dex
 ** mana
       - +add mana MP
-      - serialize
+      - +serialize mp
       - +calc from int (?+some con)
       - +restore by rest
       - mana potion
