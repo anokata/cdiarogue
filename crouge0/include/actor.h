@@ -91,6 +91,7 @@ float actor_calc_dodge(Actor attacker, Actor defender);
 float actor_stat_dodge(Actor actor);
 
 bool actor_equip(Actor actor, Item item);
+bool actor_takeoff(Actor actor, Item item);
 bool actor_item_is_equiped(Actor actor, Item item);
 Item *actor_item_slot(Actor actor, Item item);
 

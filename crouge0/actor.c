@@ -187,6 +187,15 @@ void actor_heal(Actor actor, int value) {
     }
 }
 
+bool actor_takeoff(Actor actor, Item item) {
+    if (!actor_item_is_equiped(actor, item)) {
+        return false;
+    } 
+    *(actor_item_slot(actor, item)) = NULL;
+    item_unset_equiped(item);
+    return true;
+}
+
 bool actor_equip(Actor actor, Item item) {
     switch (item->cls) {
         case ItemWeaponCls:
@@ -195,6 +204,7 @@ bool actor_equip(Actor actor, Item item) {
                 return false;
             }
             actor->equiped_right_hand = item;
+            item_set_equiped(item);
             return true;
             break;
         case ItemHeadEquipCls:
@@ -203,6 +213,7 @@ bool actor_equip(Actor actor, Item item) {
                 return false;
             }
             actor->equiped_head = item;
+            item_set_equiped(item);
             return true;
             break;
         default:
