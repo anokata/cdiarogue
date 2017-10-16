@@ -140,16 +140,6 @@ void load_colors(TileMap map, GHashTable *config, char* base_path) {
     free_dsv_table(tiles_config);
 }
 
-char *build_path(char *basepath_file, char *filename) {
-    char *fullname = strdup(basepath_file);
-    char *base_path = strdup(dirname(fullname));
-    free(fullname);
-    char *path = malloc(BUFSIZE);
-    snprintf(path, BUFSIZE, "%s/%s", base_path, filename);
-    free(base_path);
-    return path;
-}
-
 TileMap load_tile_map(string filename) {
     TileMap map = NULL;
     GHashTable *config = parse_file(filename);

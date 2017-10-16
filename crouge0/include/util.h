@@ -5,6 +5,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <glib.h>
+#include <libgen.h>
 #include "lib/ccurses.h"
 
 #define BUFSIZE 256
@@ -91,4 +92,4 @@ typedef void (*Funcvp)(void *);
 void afree(void *data);
 CharPoint charpoint_at(GList *lst, int x, int y);
 bool chance(float prob);
-
+char *build_path(char *basepath_file, char *filename);

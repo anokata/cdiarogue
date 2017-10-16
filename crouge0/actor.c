@@ -73,7 +73,9 @@ Actor make_actor(char c, int x, int y) {
 void actor_free(Actor actor) {
     if (!actor) return;
     items_free(&actor->items);
-    free(actor->items_file);
+    if (actor->items_file) {
+        free(actor->items_file);
+    }
     if (actor->name) free(actor->name);
     free(actor);
 }
@@ -234,6 +236,7 @@ Item *actor_item_slot(Actor actor, Item item) {
 
 Actor actor_from_strings(Strings str) {
     Actor actor = make_actor(str[1][0], atoi(str[2]), atoi(str[3]));
+    free(actor->items_file);
     actor->name = strdup(str[0]);
     actor->color = cc_color_from_str(str[4]);
     actor->behavior = behavior_from_str(str[5]);
@@ -249,11 +252,6 @@ Actor actor_from_strings(Strings str) {
     actor->stat_points = atoi(str[16]);
 
     actor->items_file = strdup(str[13]);
-    if (strlen(actor->items_file) > 1) {
-        /* TODO build path */
-        /* actor->items = items_load(actor->items_file); */
-    }
-    
     return actor;
 }
 
@@ -291,6 +289,13 @@ GList *actors_load(char* filename) {
         Actor actor = actor_from_strings(*it);
         actor_add(&actors, actor); 
         DEBUG_PRINT("load actor: %s\n", actor->name);
+        if (strlen(actor->items_file) > 1) {
+            /* TODO build path */
+            char *items_file = build_path(filename, actor->items_file);
+            actor->items = items_load(items_file);
+            free(items_file);
+        }
+    
     } while (*++it);
 
     free_dsv_table(st);

@@ -20,6 +20,7 @@ void test() {
     assert(!strcmp(in, dump));
     printf("actor= %s", dump);
     free(dump);
+    /* free(a->items_file); */
     actor_free(a);
 
     free_dsv_strings(s);
@@ -83,7 +84,7 @@ void test_dmg() {
     );
 
     actor->basestat_dexterity = 250;
-    printf("dex:%f\n", actor_stat_dodge(actor));
+    printf("dex:%f\n", actor_stat_dodge(actor));;
     // tst dmg X times
     for (int i = 0; i < 10; i++) {
         float dod = actor_calc_dodge(actor, actor);
@@ -108,5 +109,6 @@ int main() {
     srand(time(NULL));
     test();
     test_exp();
+    printf("Test DMG\n");
     test_dmg();
 }

@@ -91,3 +91,13 @@ bool chance(float prob) {
     return ((rand() % 1001) / 10.0) < prob;
 }
 
+char *build_path(char *basepath_file, char *filename) {
+    char *fullname = strdup(basepath_file);
+    char *base_path = strdup(dirname(fullname));
+    free(fullname);
+    char *path = malloc(BUFSIZE);
+    snprintf(path, BUFSIZE, "%s/%s", base_path, filename);
+    free(base_path);
+    return path;
+}
+
