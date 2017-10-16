@@ -88,7 +88,7 @@ Item items_get(Items items, int x, int y) {
 }
 
 char *item_descript(Item item) {
-    if (!item) return "";
+    if (!item) return strdup("");
     char *buf = malloc(BUFSIZE); // FIXME
     // check for null in type, state, ...
     switch (item->cls) {

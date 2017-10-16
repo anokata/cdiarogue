@@ -3,6 +3,12 @@
 static char buf[BUFSIZE * 10];
 
 char *charinfo_print(Actor player) {
+    char *right_hand = item_descript(player->equiped_right_hand);
+    char *head = item_descript(player->equiped_head);
+    char *foot = item_descript(player->equiped_foot);
+    char *legs = item_descript(player->equiped_legs);
+    char *arms = item_descript(player->equiped_arms);
+    char *body = item_descript(player->equiped_body);
     snprintf(buf, BUFSIZE * 10, 
 "Name: %s\n\
 hp/max: %d/%d\n\
@@ -33,19 +39,27 @@ body: %s gain %d def \n\
     actor_stat_dodge(player),
     player->exp, player->lvl,
     player->stat_points,
-    item_descript(player->equiped_right_hand),
+    right_hand,
     item_value(player->equiped_right_hand),
-    item_descript(player->equiped_head),
+    head,
     item_value(player->equiped_head),
-    item_descript(player->equiped_foot),
+    foot,
     item_value(player->equiped_foot),
-    item_descript(player->equiped_legs),
+    legs,
     item_value(player->equiped_legs),
-    item_descript(player->equiped_arms),
+    arms,
     item_value(player->equiped_arms),
-    item_descript(player->equiped_body),
+    body,
     item_value(player->equiped_body)
     );
+
+    free(right_hand);
+    free(head);
+    free(foot);
+    free(legs);
+    free(arms);
+    free(body);
+
     return buf;
 }
 
