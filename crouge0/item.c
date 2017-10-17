@@ -221,3 +221,12 @@ void item_set_equiped(Item item) {
 void item_unset_equiped(Item item) {
     item->mode ^= ITEM_MODE_EQUIPED;
 }
+
+bool item_spend(Items *items, Item item) {
+    item->count--;
+    if (!item->count) {
+        item_remove(items, item);
+        return false;
+    }
+    return true;
+}

@@ -1,6 +1,7 @@
 name:char:x:y:color:value:dispersion:class:state:type:count:mode:
 # vi: filetype=sh
-potion of cure wounds:!:2:2:_cb_red:10:0:ItemPotionCls:ItemNormalState:ItemPotionOfCure:1:0:
+potion of cure wounds:!:2:5:_cb_red:10:0:ItemPotionCls:ItemNormalState:ItemPotionOfCure:1:0:
+potion of cure wounds:!:3:5:_cb_red:10:0:ItemPotionCls:ItemNormalState:ItemPotionOfCure:1:0:
 potion #32 GEX UHT:1:8:8:_cn_white:1:1:ItemPotionCls:ItemNormalState:ItemPotionOfCure:1:0:
 potion #32 GEX UHT:1:8:3:_cn_white:1:1:ItemPotionCls:ItemNormalState:ItemPotionOfCure:1:0:
 potion of cure power:!:2:4:_cb_blue:10:0:ItemPotionCls:ItemNormalState:ItemPotionOfMana:1:0:

@@ -80,3 +80,4 @@ Item item_deserialize(Strings str);
 char *item_serialize(Item item);
 Items items_load(char *filename);
 void items_save(char *filename, Items items);
+bool item_spend(Items *items, Item item);

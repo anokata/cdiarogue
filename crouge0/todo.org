@@ -211,6 +211,12 @@
       - +show in info
 - +money
       - +add item gold
+- +stack items - item count - same items to stack with number
+      - +add to item count prop
+      - +show count
+      - +proc when take from map, merge items with same type
+      - +quaff take 1 from all count
+      - +remove when 1->0 : item_spend: bool is 0
 
 ** combat
       - crit hits - critical rate
@@ -225,12 +231,6 @@
       - currency ?$rc resource
             - add gold count to actor(you)
             - show gold in char info
-      - stack items - item count - same items to stack with number
-            - +add to item count prop
-            - +show count
-            - +proc when take from map, merge items with same type
-            - quaff take 1 from all count
-            - remove when 1->0 : item_spend: bool is 0
 ** maps
       - savefile : map path and player path
       - add objects - i.e. chest, trap
@@ -322,6 +322,7 @@
       - item actions - pass func
       - read scrolls, books to effect on stats, skills, spells
       - keys
+      - stack items: equip one..
 ** map
       - make and show map name (like dungeon level 2)
       - copy town to save in begin game
