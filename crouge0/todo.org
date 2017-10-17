@@ -227,8 +227,8 @@
             - show gold in char info
       - stack items - item count - same items to stack with number
             - +add to item count prop
-            - show count if > 1
-            - !proc when take from map, merge items with same type
+            - +show count
+            - +proc when take from map, merge items with same type
             - quaff take 1 from all count
             - remove when 1->0 : item_spend: bool is 0
 ** maps

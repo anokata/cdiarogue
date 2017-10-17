@@ -109,9 +109,34 @@ void test_dmg() {
 }
 
 void test_take() {
-    /* Actor you; */
-    /* load_player(&you); */
+    char *player_file = "./maps/you";
+    char *player_items_file = "./maps/you.items";
+    Actor you = NULL;
+    load_player(&you, player_file);
+    Items i = items_load(player_items_file);
 
+    GList *it = you->items;
+    while (it) {
+        Item itm = it->data;
+        printf("* %s (%d)\n", itm->name, itm->count);
+        it = g_list_next(it);
+    }
+
+    Item x = g_list_nth_data(i, 0);
+    item_add_stacked(&you->items, x);
+    i = g_list_remove(i, x);
+    Item y = g_list_nth_data(you->items, 0);
+    printf("count: %d %s\n", y->count, y->name);
+
+    it = you->items;
+    while (it) {
+        Item itm = it->data;
+        printf("* %s (%d)\n", itm->name, itm->count);
+        it = g_list_next(it);
+    }
+
+    items_free(&i);
+    actor_free(you);
 }
 
 int main() {

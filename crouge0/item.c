@@ -48,6 +48,29 @@ Item item_clone(Item item) {
     return clone;
 }
 
+void item_add_stacked(Items *items, Item item) {
+    /* find same item */
+    if (*items != NULL) {
+        GList *it = *items;
+        Item i = it->data;
+        DEBUG_PRINT("  search %s %d\n", i->name, i->count);
+        it = g_list_next(it);
+        while (i->type != item->type && it) {
+            DEBUG_PRINT("  search %s %d\n", i->name, i->count);
+            i = it->data;
+            it = g_list_next(it);
+        }
+        if (it || i->type == item->type) {
+            DEBUG_PRINT(">> found? %s %d\n", i->name, i->count);
+            i->count += item->count;
+            item_free(item);
+            return;
+        }
+    }
+    /* if exist - add count, drop item */
+    *items = g_list_append(*items, item);
+}
+
 void item_add(Items *items, Item item) {
     *items = g_list_append(*items, item);
 }
@@ -161,8 +184,8 @@ Items items_load(char *filename) {
     StringTable it = &st[1]; // first line is header
     do {
         Item item = item_deserialize(*it);
-        item_add(&items, item); 
         DEBUG_PRINT("load item: %s\n", item->name);
+        item_add(&items, item); 
     } while (*++it);
 
     free_dsv_table(st);

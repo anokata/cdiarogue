@@ -114,7 +114,7 @@ int inventory_draw(void* data) {
         // wtf with % sign?
         char *description = item_descript(item);
         char state = (actor_item_is_equiped(g->player, item) ? '*' : ' ');
-        snprintf(buf, BUFSIZE, "%c) %c%c - %s", (y + 'a'), state, item->c, description);
+        snprintf(buf, BUFSIZE, "%c) %c%c (%d) - %s", (y + 'a'), state, item->c, item->count, description);
         free(description);
         cc_printxy(buf, cn_white, 2, ++y);
         it = g_list_next(it);

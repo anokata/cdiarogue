@@ -373,23 +373,13 @@ void save_location(TileMap map) {
     items_save(map->items_file, map->items);
 }
 
-void load_player(Actor *you) {
-    if (*you) actor_free(*you);
-    GList *lst = actors_load(player_file);
-    Actor actor = lst->data;
-    if (actor) {
-        *you = actor;
-    } // else create player?
-    g_list_free(lst);
-}
-
 void save(G g) {
     //save_player(g->player, player_file); // unplug for debug 
     UNUSED(g);
 }
 
 void load(G g) {
-    load_player(&g->player);
+    load_player(&g->player, player_file);
     /* g->player->items = items_load(player_items_file); */
 }
 

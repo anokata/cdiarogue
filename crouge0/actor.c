@@ -457,3 +457,13 @@ void save_player(Actor you, char *player_file) {
     free(path);
 }
 
+void load_player(Actor *you, char *player_file) {
+    if (*you) actor_free(*you);
+    GList *lst = actors_load(player_file);
+    Actor actor = lst->data;
+    if (actor) {
+        *you = actor;
+    } // else create player?
+    g_list_free(lst);
+}
+

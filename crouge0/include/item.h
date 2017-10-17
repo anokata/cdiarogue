@@ -64,6 +64,7 @@ Item item_clone(Item item);
 
 void items_free(Items *items);
 void item_add(Items *items, Item item);
+void item_add_stacked(Items *items, Item item);
 void item_remove(Items *items, Item item);
 void item_detach(Items *items, Item item);
 CharPoint item_as_charpoint_cast(Item item);
