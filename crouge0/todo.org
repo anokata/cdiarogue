@@ -202,17 +202,17 @@
       - +equiped/takeoff change item mode
       - +while loading items equip by mode
       - +if drop equiped item - take off or not permit
-
-** combat
-      - crit hits - critical rate
-            - how much? how freq? ~dex
-** mana
+- +mana
       - +add mana MP
       - +serialize mp
       - +calc from int (?+some con)
       - +restore by rest
-      - mana potion
+      - +mana potion
       - +show in info
+
+** combat
+      - crit hits - critical rate
+            - how much? how freq? ~dex
 ** mobs
       - save actor fun(with items like you)
             - save actor items to items file if exist

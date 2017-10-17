@@ -69,6 +69,10 @@ void inventory_action(Item item, G g) {
                     /* remove from inv */
                     item_remove(&g->player->items, item);
                 }
+                if (item->type == ItemPotionOfMana) {
+                    actor_heal_mp(g->player, item->value);
+                    item_remove(&g->player->items, item);
+                }
 
             ss_setstate(state, State_cursor);
             break;
