@@ -217,6 +217,9 @@
       - +proc when take from map, merge items with same type
       - +quaff take 1 from all count
       - +remove when 1->0 : item_spend: bool is 0
+      - +currency ?$rc resource
+            - -add gold count to actor(you)
+            - +show gold in char info
 
 ** combat
       - crit hits - critical rate
@@ -227,10 +230,6 @@
       - save actors when map change
       - gold drop
             - drop rate,  gold = value * actor lvl
-** items
-      - currency ?$rc resource
-            - add gold count to actor(you)
-            - show gold in char info
 ** maps
       - savefile : map path and player path
       - add objects - i.e. chest, trap

@@ -48,20 +48,25 @@ Item item_clone(Item item) {
     return clone;
 }
 
+Item item_search_by_type(Items items, ItemType type) {
+    GList *it = items;
+    Item i = it->data;
+    it = g_list_next(it);
+    while (i->type != type && it) {
+        i = it->data;
+        it = g_list_next(it);
+    }
+    if (it && i->type == type) {
+        return i;
+    }
+    return NULL;
+}
+
 void item_add_stacked(Items *items, Item item) {
     /* find same item */
     if (*items != NULL) {
-        GList *it = *items;
-        Item i = it->data;
-        DEBUG_PRINT("  search %s %d\n", i->name, i->count);
-        it = g_list_next(it);
-        while (i->type != item->type && it) {
-            DEBUG_PRINT("  search %s %d\n", i->name, i->count);
-            i = it->data;
-            it = g_list_next(it);
-        }
-        if (it || i->type == item->type) {
-            DEBUG_PRINT(">> found? %s %d\n", i->name, i->count);
+        Item i = item_search_by_type(*items, item->type);
+        if (i && i->type == item->type) {
             i->count += item->count;
             item_free(item);
             return;
