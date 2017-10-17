@@ -3,3 +3,4 @@ potion of cure wounds:!:2:2:_cb_red:20:0:ItemPotionCls:ItemNormalState:ItemPotio
 wood sword:/:8:4:_cn_white:1:2:ItemWeaponCls:ItemNormalState:ItemWeaponSword:1:0:
 potion of cure minor wounds:!:2:2:_cb_red:10:0:ItemPotionCls:ItemNormalState:ItemPotionOfCure:1:0:
 potion of cure minor power:!:2:3:_cb_blue:10:0:ItemPotionCls:ItemNormalState:ItemPotionOfMana:1:0:
+rc:$:4:4:_cb_yellow:1:0:ItemResourceCls:ItemNormalState:ItemRC:1:0:

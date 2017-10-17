@@ -108,10 +108,17 @@ void test_dmg() {
     actor_free(actor);
 }
 
+void test_take() {
+    /* Actor you; */
+    /* load_player(&you); */
+
+}
+
 int main() {
     srand(time(NULL));
     test();
     test_exp();
     printf("Test DMG\n");
     test_dmg();
+    test_take();
 }

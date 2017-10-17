@@ -13,6 +13,7 @@ static const char *item_types[] = {
     "simple straw hat",
     "paw of day darkness knuckles",
     "potion of cure power",
+    "RC (money)",
 };
 
 static const char *item_states[] = {
