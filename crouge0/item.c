@@ -48,6 +48,16 @@ Item item_clone(Item item) {
     return clone;
 }
 
+void *g_item_clone(const void *item, void *data) {
+    UNUSED(data);
+    Item i = (Item) item;
+    return item_clone(i);
+}
+
+Items items_clone(Items items) {
+    return g_list_copy_deep(items, g_item_clone, NULL);
+}
+
 Item item_search_by_type(Items items, ItemType type) {
     GList *it = items;
     Item i = it->data;
@@ -92,9 +102,7 @@ void item_remove(Items *items, Item item) {
 void items_free(Items *items) {
     if (!*items) return;
     GList *it = *items;
-    printf("item free %p\n", *items);
     while (it) {
-        printf("item free %p\n", it);
         item_free((Item) it->data);
         it = g_list_next(it);
     }

@@ -139,6 +139,21 @@ void test_take() {
     actor_free(you);
 }
 
+void test_clone() {
+    char *player_file = "./maps/you";
+    Actor you = NULL;
+    load_player(&you, player_file);
+    Actor clone = actor_clone(you);
+    actor_free(you);
+    actor_free(clone);
+}
+
+void test_save_with_items() {
+    GList *as = actors_load("./maps/lvl1.actors");
+    actors_save("/tmp/as", as);
+    free_actors(&as);
+}
+
 int main() {
     srand(time(NULL));
     test();
@@ -146,4 +161,6 @@ int main() {
     printf("Test DMG\n");
     test_dmg();
     test_take();
+    test_clone();
+    test_save_with_items();
 }

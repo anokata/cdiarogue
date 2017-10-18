@@ -5,7 +5,7 @@
 static const char *test_item_line = "wood sword:/:1:1:_cn_white:1:1:ItemWeaponCls:ItemNormalState:ItemWeaponSword:1:0:\n";
 int item_fields_count = 12;
 
-int main() {
+void test_dumps() {
     Item i = item_new('i', 0, 0);
     item_free(i);
 
@@ -56,4 +56,27 @@ int main() {
     free(full_mapname);
     printf("%s\n", base_path);
     free(base_path);
+}
+
+void test_clone() {
+    Items items = items_load("./maps/you.items");
+    Item a = g_list_nth_data(items, 0);
+    Item b = item_clone(a);
+    item_free(b);
+    Items is = items_clone(items);
+
+    GList *i = is;
+    while (i) {
+        Item itm = i->data;
+        printf("->%s\n", itm->name);
+        i = g_list_next(i);
+    }
+
+    items_free(&items);
+    items_free(&is);
+}
+
+int main() {
+    test_dumps();
+    test_clone();
 }

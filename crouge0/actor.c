@@ -84,6 +84,7 @@ Actor actor_clone(Actor actor) {
     memcpy(clone, actor, sizeof(struct Actor));
     clone->name = strdup(actor->name);
     clone->items_file = strdup(actor->items_file);
+    clone->items = items_clone(actor->items);
     /* clone items list */
     return clone;
 }
@@ -344,6 +345,14 @@ GList *actors_load(char* filename) {
     return actors;
 }
 
+void actor_items_save(char *filename, Actor actor) {
+    if (strlen(actor->items_file) > 1) {
+        char *items_path = build_path(filename, actor->items_file);
+        items_save(items_path, actor->items);
+        free(items_path);
+    }
+}
+
 void actors_save(char* filename, GList *actors) {
     GList *it = actors;
     FILE *out = fopen(filename, "w+");
@@ -355,6 +364,9 @@ void actors_save(char* filename, GList *actors) {
         char *line = actor_serialize(actor);
         fwrite(line, strlen(line), 1, out);
         free(line);
+
+        actor_items_save(filename, actor);
+
         it = g_list_next(it);
     }
 
