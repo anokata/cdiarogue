@@ -92,7 +92,9 @@ void item_remove(Items *items, Item item) {
 void items_free(Items *items) {
     if (!*items) return;
     GList *it = *items;
+    printf("item free %p\n", *items);
     while (it) {
+        printf("item free %p\n", it);
         item_free((Item) it->data);
         it = g_list_next(it);
     }

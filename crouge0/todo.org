@@ -229,6 +229,12 @@
             - save actor items to items file if exist
       - save actors when map change
       - gold drop
+            - mobs items, drop one item when die
+                  - +fix map gen with actors cloned items files
+                  - fix map gen actors free items list
+                        - clone item list or store actor string and recreate
+                        g_list_copy
+                  - add to map gen copy actor.items file to save
             - drop rate,  gold = value * actor lvl
 ** maps
       - savefile : map path and player path

@@ -72,6 +72,7 @@ void actor_free(Actor actor) {
     items_free(&actor->items);
     if (actor->items_file) {
         free(actor->items_file);
+        actor->items_file = NULL;
     }
     if (actor->name) free(actor->name);
     free(actor);
@@ -79,8 +80,11 @@ void actor_free(Actor actor) {
 
 Actor actor_clone(Actor actor) {
     Actor clone = make_actor(actor->c, actor->x , actor->y);
+    free(clone->items_file);
     memcpy(clone, actor, sizeof(struct Actor));
     clone->name = strdup(actor->name);
+    clone->items_file = strdup(actor->items_file);
+    /* clone items list */
     return clone;
 }
 
