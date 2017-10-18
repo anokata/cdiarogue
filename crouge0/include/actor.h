@@ -125,3 +125,4 @@ long exp_get_to_next(int lvl);
 
 void save_player(Actor you, char *player_file);
 void load_player(Actor *you, char *player_file);
+int actor_money_count(Actor actor);

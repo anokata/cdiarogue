@@ -220,22 +220,22 @@
       - +currency ?$rc resource
             - -add gold count to actor(you)
             - +show gold in char info
+      - +gold drop
+            - +mobs items, drop one item when die
+                  - +fix map gen with actors cloned items files
+                  - +fix map gen actors free items list
+                  - +clone item list
+                  - +make items clone with g_list_copy_deep
+                  - +actors save must save items to items file
+                  - +drop random cloned item from items of actor to map
+- +save actor items to items file if exist
 
 ** combat
       - crit hits - critical rate
             - how much? how freq? ~dex
 ** mobs
       - save actor fun(with items like you)
-            - save actor items to items file if exist
       - save actors when map change
-      - gold drop
-            - mobs items, drop one item when die
-                  - +fix map gen with actors cloned items files
-                  - +fix map gen actors free items list
-                  - +clone item list
-                  - +make items clone with g_list_copy_deep
-                  - +actors save must save items to items file
-            - drop rate,  gold = value * actor lvl
 ** maps
       - savefile : map path and player path
       - add objects - i.e. chest, trap
@@ -268,6 +268,7 @@
 
 
 * improvements features
+- space action: enter, take, ... other obvious actions in context
 ** menu (not up down - use vi like.)
       - new, load, exit, help, keys
       - list of saves
@@ -315,6 +316,7 @@
                   dialog = array of remarks
       - simple enter to shop by move (npc shop type)
       - loot, paws, wool, skin, bone, meet, jelly
+      - drop rate,  gold = value * actor lvl. Gen?
 ** items
       - teleport scroll with P
       - item eat, activate, use

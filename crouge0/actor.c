@@ -483,3 +483,8 @@ void load_player(Actor *you, char *player_file) {
     g_list_free(lst);
 }
 
+int actor_money_count(Actor actor) {
+    Item money = item_search_by_type(actor->items, ItemRC);
+    return (money ? money->count : 0);
+}
+

@@ -9,7 +9,6 @@ char *charinfo_print(Actor player) {
     char *legs = item_descript(player->equiped_legs);
     char *arms = item_descript(player->equiped_arms);
     char *body = item_descript(player->equiped_body);
-    Item money = item_search_by_type(player->items, ItemRC);
     snprintf(buf, BUFSIZE * 10, 
 "Name: %s %d$\n\
 hp/max: %d/%d\n\
@@ -29,7 +28,7 @@ legs: %s gain %d def \n\
 arms: %s gain %d def \n\
 body: %s gain %d def \n\
 ", 
-    player->name, (money ? money->count : 0),
+    player->name, actor_money_count(player),
     player->stat_hp, actor_stat_maxhp(player),
     player->stat_mp, actor_stat_maxmp(player),
     player->basestat_strength,

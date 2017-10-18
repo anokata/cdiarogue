@@ -59,6 +59,19 @@ bool collisions_player_move(Actor player, int dx, int dy, G g) {
     return result;
 }
 
+void tmap_actor_drop_item(G g, Actor actor) {
+    int len = g_list_length(actor->items);
+    if (!len) return;
+    int index = rand() % len;
+    /* Item item = item_clone(g_list_nth_data(actor->items, index)); */
+    Item item = g_list_nth_data(actor->items, index);
+
+    item->x = actor->x;
+    item->y = actor->y;
+    tmap_add_item(g->gmap, item);
+    item_detach(&actor->items, item);
+}
+
 void collide_action_player_monster(Action action, Actor actor, Actor subject, G g) {
     UNUSED(actor);
     UNUSED(subject);
@@ -79,6 +92,7 @@ void collide_action_player_monster(Action action, Actor actor, Actor subject, G 
         //actor_kill(subject, g); TODO
         subject->status = StatusDead;
         g->gmap->actors = g_list_remove(g->gmap->actors, subject);
+        tmap_actor_drop_item(g, subject);
         actor_free(subject); // strange behavior of g_list_remove (its free data)
     }
 

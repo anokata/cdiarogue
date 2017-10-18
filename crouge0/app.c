@@ -55,8 +55,8 @@ void ui_draw(G g) {
 
     char buf[BUFSIZE];
     snprintf(buf, BUFSIZE, 
-        "@ x:y = %d:%d [HP: %d/%d MP: %d/%d atk: %d def: %d ]",
-        g->player->x, g->player->y, 
+        "@ x:y = %d:%d %d$ [HP: %d/%d MP: %d/%d atk: %d def: %d ]",
+        g->player->x, g->player->y, actor_money_count(g->player),
         g->player->stat_hp, actor_stat_maxhp(g->player), 
         g->player->stat_mp, actor_stat_maxmp(g->player), 
         actor_stat_attack(g->player), 

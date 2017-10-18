@@ -1,7 +1,7 @@
 name:char:x:y:color:value:dispersion:class:state:type:count:mode:
 # vi: filetype=sh
-rc:$:4:4:_cb_yellow:1:0:ItemResourceCls:ItemNormalState:ItemRC:1:0:
+rc:$:4:4:_cb_yellow:1:0:ItemResourceCls:ItemNormalState:ItemRC:3:0:
 paw of day darkness:8:2:2:_cb_red:10:8:ItemWeaponCls:ItemNormalState:ItemPoDDKnuckles:1:0:
-potion #32 GEX UHT:1:8:8:_cn_white:1:1:ItemPotionCls:ItemNormalState:ItemPotionOfCure:1:0:
+potion #32 GEX UHT:1:8:8:_cn_white:1:1:ItemPotionCls:ItemNormalState:ItemPotionOfCure:4:0:
 kood sword:/:5:4:_cn_white:1:1:ItemWeaponCls:ItemNormalState:ItemWeaponSword:1:0:
 wood sword:/:8:4:_cn_white:1:1:ItemWeaponCls:ItemNormalState:ItemWeaponSword:1:1:
