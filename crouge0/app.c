@@ -239,6 +239,9 @@ int cursor_key(void* data) {
     char key = g->key;
     char *msg;
     switch (key) {
+        case 'a':
+            ss_setstate(state, State_anim);
+            break;
         case '>':
         case '<':
             enter_location(g);
@@ -347,6 +350,18 @@ int cursor_draw(void* data) {
     return 0;
 }
 
+int anim_draw(void* data) {
+    G g = data;
+    UNUSED(g);
+    return 0;
+}
+
+int anim_key(void* data) {
+    G g = data;
+    UNUSED(g);
+    return 0;
+}
+
 void state_init() {
     state = ss_make_state(NUM_STATES, NUM_EVENTS);
     ss_sethander(state, State_run, Event_draw, draw);
@@ -367,6 +382,8 @@ void state_init() {
     ss_sethander(state, State_takeoff, Event_key, inventory_key);
     ss_sethander(state, State_charinfo, Event_draw, charinfo_draw);
     ss_sethander(state, State_charinfo, Event_key, charinfo_key);
+    ss_sethander(state, State_anim, Event_draw, anim_draw);
+    ss_sethander(state, State_anim, Event_key, anim_key);
     ss_setstate(state, State_cursor);
     ss_setstate(state, State_charinfo);
 }

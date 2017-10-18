@@ -242,6 +242,13 @@
             - open stash for get gold/(random item)
             - step to trap cause dmg
       - make some maps and town, mobs, items equip
+** animation
+      - anim state with anim draw function over base draw
+            - +add anim state
+            - +test anim toggle by a
+            - anim proc, draw funcs (anim struct? current anim)
+      - steps, pause, next frame (processing G or anim data func)... 
+            exit from state when proc func return true
 
 
 - proressbar (min = 0?) => (x * w) / Xmax
@@ -291,20 +298,18 @@
       - flood fill map at gen, if exit and enter not in same area - remade it
       - other gen algo, choose from location lvl file
       - not intersect objs, items, actors while gen map
-
-* improvements features
-- space action: enter, take, ... other obvious actions in context
 ** menu (not up down - use vi like.)
       - new, load, exit, help, keys
       - list of saves
       - save and exit and exit without save with confirmation
+
+* improvements features
+- space action: enter, take, ... other obvious actions in context
 ** help
-      tutor, moving hjkl, yunm - labirints
-      translate
+      - tutor, moving hjkl, yunm - labirints
+      - translate
 ** animation
-      - anim state with anim draw function over base draw
-      - steps, pause, next frame (processing G or anim data func)... 
-            exit from state when proc func return true
+      - persistent anim, rain, objects
 ** combat
       - add def by con?
       - fire, bows

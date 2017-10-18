@@ -18,6 +18,7 @@ enum States {
     State_equip,
     State_charinfo,
     State_takeoff,
+    State_anim,
     NUM_STATES};
 
 enum Events {
