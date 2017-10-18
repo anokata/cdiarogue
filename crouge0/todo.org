@@ -262,47 +262,7 @@
       - refactor app, g load, init
       - cleanup, rem unused, see todo
 
-
-* improvements features
-- space action: enter, take, ... other obvious actions in context
-** menu (not up down - use vi like.)
-      - new, load, exit, help, keys
-      - list of saves
-      - save and exit and exit without save with confirmation
-** help
-      tutor, moving hjkl, yunm - labirints
-      translate
-** combat
-      - add def by con?
-      - fire, bows
-            - fly animation, steps frames without count world
-      - damage at different parts of body/armor
-      - skills - weapon health 
-      - balance and fun
-      - endurance wisdom intelegence dex (4 base stats?)
-      - ?hit rate? accuracy
-      - dex ~ 250 -> dodge 95%
-      - crit hits - critical rate
-            - how much? how freq? ~dex
-      - color elements
-            - develop color repress-reinforce system
-            - add item ColorElement
-            - add actor ColorElement
-            - add actor resistence
-            - make items gain resistence
-            - show resistence
-
-** mobs
-      - add actor drops chanses by items? - actor file, drops file
-      - mobs minds
-      - mobs evoluting. script based(bf like) behavior - see x:y if this = TileRock
-        ... move to, attack, take, eat.
-      - mobs generic type and inherit
-            - mobs/items types and instances?
-      - drop from actors
-      - wild simulations, population, born, old, learn, work, eat, sleep
-      - save actor fun(with items like you)
-
+* 13 content
 ** shop
       - shops, buy potions
       - npc, dialogs
@@ -314,31 +274,117 @@
             - remark = struct {name, func_id, text}
                   dialog = array of remarks
       - simple enter to shop by move (npc shop type)
-      - loot, paws, wool, skin, bone, meet, jelly
-      - drop rate,  gold = value * actor lvl. Gen?
+            - add shop object
+            - [#] add item base price 
+            - change state to shop when collide or cmd
+            - shop files, items prices 
+            - show goods list
+            - enter sell mode
 ** items
       - teleport scroll with P
             - teleport object
             - create with scroll teleport to town (in dung, in town)
             - remove when enter
             - step to portal to teleport
+** mapgen
+      - map gen: border around map
+      - flood fill map at gen, if exit and enter not in same area - remade it
+      - other gen algo, choose from location lvl file
+      - not intersect objs, items, actors while gen map
+
+* improvements features
+- space action: enter, take, ... other obvious actions in context
+** menu (not up down - use vi like.)
+      - new, load, exit, help, keys
+      - list of saves
+      - save and exit and exit without save with confirmation
+** help
+      tutor, moving hjkl, yunm - labirints
+      translate
+** animation
+      - anim state with anim draw function over base draw
+      - steps, pause, next frame (processing G or anim data func)... 
+            exit from state when proc func return true
+** combat
+      - add def by con?
+      - fire, bows
+            - fly animation, steps frames without count world
+      - balance and fun
+      - ?hit rate? accuracy
+      - dex ~ 250 -> dodge 95%
+      - crit hits - critical rate
+            - how much? how freq? ~dex
+      - skills (s) what spend? time? countdown
+            categories, phisycal, mental(magical)
+                  - cost
+                  - round attack, dmg, max radius, piersing
+            - skills list
+      - magic (x) list spells
+            - spells list
+      - color elements
+            - develop color repress-reinforce system
+                  red orange? yellow green blue purple white gray
+                  light-normal-dark
+                  red-normal - fire
+                  red-dark - blood
+                  red-light - 
+                  yellow-normal - 
+                  yellow-dark - ground
+                  yellow-light - light rays
+                  green-normal - nature
+                  green-dark - poison
+                  green-light - life
+                  blue-normal - water
+                  blue-dark - cold ice
+                  blue-light - air wind
+                  purple-normal - 
+                  purple-dark - necro death
+                  purple-light - 
+                  white-normal - 
+                  white-dark - Dark
+                  white-light - Light
+                  gray-normal - normal
+                  gray-dark - gravity
+                  gray-light - 
+            - add item ColorElement
+            - add actor ColorElement
+            - add actor resistence
+            - make items gain resistence
+            - show resistence
+      - damage at different parts of body/armor
+      - endurance wisdom other stats or derivatives
+      - weapon health 
+
+** mobs
+      - loot, paws, wool, skin, bone, meet, jelly - add items to mobs
+      - drop rate,  gold = value * actor lvl. Gen?
+      - save actor fun(with items like you)
+      - add actor drops chanses by items? - actor file, drops file
+      - mobs generic type and inherit
+            - mobs/items types and instances?
+      - mobs minds
+      - mobs evoluting. script based(bf like) behavior - see x:y if this = TileRock
+        ... move to, attack, take, eat.
+      - wild simulations, population, born, old, learn, work, eat, sleep
+
+** items
       - item eat, activate, use
       - items grade, power ups
       - zap wands
+      - books for teach skills and spells (int to read - value)
 
       - pick up from direction, view menu list items
       - better inventory by category
       - item effects: effect X itemType X action
       - item actions - pass func
       - read scrolls, books to effect on stats, skills, spells
-      - keys
+      - keys, locked objects
       - stack items: equip one..
 ** map
       - make and show map name (like dungeon level 2)
-      - copy town to save in begin game
-      - map gen: border around map
-      - flood fill map at gen, if exit and enter not in same area - remade it
-      - not intersect objs, items, actors while gen map
+            - add location name
+            - ?extract location struct
+      - copy town to save_dir in begin game
       - some maps must contain some unique mobs/items - add lvl.must.items
       - add map files to location file (not %d_%d pattern name - just list of files to load)
       - lighting
@@ -346,7 +392,7 @@
             - other lighing sources
             - gray on edge of radius
             - gray already saw blocks
-      - heal point
+      - heal points objects, activated objects
       - more map tiles types, plants, rocks, sand
       - more objects: doors, open, close, kick - commands, to direction mode
             - stashs bushs barrels stones garbage
@@ -370,11 +416,6 @@
 - map gen 
 - magic, spells, mana
 - craft
-- skills
-      - menu list by s key
-      - categories, phisycal, mental(magical)
-      - cost
-      - round attack, dmg, max radius, piersing
 - spells
 
 * monsters data files, spawns
