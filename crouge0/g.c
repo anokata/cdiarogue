@@ -82,6 +82,7 @@ bool roll_dice(int probability) {
 } 
 
 void proc_global_events(G g) {
+    g->turns++;
     int events_count = sizeof(events) / sizeof(events[0]);
     for (int i = 1; i < events_count; i++) {
         GlobalEvent event = g->events[i];
@@ -89,4 +90,8 @@ void proc_global_events(G g) {
             event.f(g);
         }
     }
+}
+
+bool g_is_stat_edit(G g) {
+    return g->mode & G_STAT_EDIT;
 }

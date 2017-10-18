@@ -64,7 +64,8 @@ void ui_draw(G g) {
         );
     cc_printxy(buf, cn_white, UI_X, y++);
     snprintf(buf, BUFSIZE, 
-        "\t\t[exp: %ld  lvl: %d ]",
+        "Turn: %d\t\t[exp: %ld  lvl: %d ]",
+        g->turns,
         g->player->exp, g->player->lvl
         );
     cc_printxy(buf, cn_white, UI_X, y++);
@@ -367,6 +368,7 @@ void state_init() {
     ss_sethander(state, State_charinfo, Event_draw, charinfo_draw);
     ss_sethander(state, State_charinfo, Event_key, charinfo_key);
     ss_setstate(state, State_cursor);
+    ss_setstate(state, State_charinfo);
 }
 
 void save_location(TileMap map) {

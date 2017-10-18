@@ -2,6 +2,19 @@
 
 static char buf[BUFSIZE * 10];
 
+char *charinfo_print_edit(Actor player) {
+    snprintf(buf, BUFSIZE * 10, 
+"(s) str: %d  (c) con: %d \t press (key) to spend points to up \n\
+(d) dex: %d  (i) int: %d  \t or Shift-(key) to down\n\
+", 
+    player->basestat_strength,
+    player->basestat_constitution,
+    player->basestat_dexterity,
+    player->basestat_intelligence
+    );
+    return buf;
+}
+
 char *charinfo_print(Actor player) {
     char *right_hand = item_descript(player->equiped_right_hand);
     char *head = item_descript(player->equiped_head);
@@ -13,8 +26,8 @@ char *charinfo_print(Actor player) {
 "Name: %s %d$\n\
 hp/max: %d/%d\n\
 mp/max: %d/%d\n\
-(s) str: %d  (c) con: %d \t press (key) to spend points to up \n\
-(d) dex: %d  (i) int: %d  \t or Shift-(key) to down\n\
+str: %d  con: %d \n\
+dex: %d  int: %d \n\
 atk: %d-%d  def: %d\n\
 dodge: %f \n\
 exp: %ld  lvl: %d\n\
@@ -72,6 +85,10 @@ int charinfo_draw(void* data) {
     cc_printxy("@", cn_white, 0, 0);
     charinfo_print(player);
     cc_printxy(buf, cn_white, 0, 1);
+    if (g_is_stat_edit(g)) {
+        charinfo_print_edit(player);
+        cc_printxy(buf, cn_white, 0, 20);
+    }
     return 0;
 }
 
@@ -79,9 +96,27 @@ int charinfo_key(void* data) {
     G g = data;
     char key = g->key;
     Actor you = g->player;
+    if (!g_is_stat_edit(g)) {
+        switch (key) {
+            case 'k':
+                g->mode |= G_STAT_EDIT;
+                break;
+            case '.':
+                break;
+            default:
+                ss_setstate(state, State_cursor);
+                break;
+    
+        }
+        return 0;
+    }
     switch (key) {
+        case 'k':
+            g->mode ^= G_STAT_EDIT;
+            break;
         case 'q':
             ss_setstate(state, State_cursor);
+            g->mode ^= G_STAT_EDIT;
             break;
         case 's':
             if (you->stat_points) {

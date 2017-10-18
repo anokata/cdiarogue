@@ -229,12 +229,12 @@
                   - +actors save must save items to items file
                   - +drop random cloned item from items of actor to map
 - +save actor items to items file if exist
+- +Display turns.
+- +charinfo
+      - +enter stat spend mode, exit by k
+      - +exit info by 'k' key or other than enter spend mode
 
-** combat
-      - crit hits - critical rate
-            - how much? how freq? ~dex
 ** mobs
-      - save actor fun(with items like you)
       - save actors when map change
 ** maps
       - savefile : map path and player path
@@ -243,10 +243,6 @@
             - step to trap cause dmg
       - make some maps and town, mobs, items equip
 
-** charinfo
-      - enter stat spend mode, exit by ?
-      - exit info by 'c' key
-      - Display turns.
 
 - proressbar (min = 0?) => (x * w) / Xmax
 - clock - steps to time convert
@@ -286,6 +282,8 @@
       - endurance wisdom intelegence dex (4 base stats?)
       - ?hit rate? accuracy
       - dex ~ 250 -> dodge 95%
+      - crit hits - critical rate
+            - how much? how freq? ~dex
       - color elements
             - develop color repress-reinforce system
             - add item ColorElement
@@ -303,6 +301,7 @@
             - mobs/items types and instances?
       - drop from actors
       - wild simulations, population, born, old, learn, work, eat, sleep
+      - save actor fun(with items like you)
 
 ** shop
       - shops, buy potions
@@ -319,6 +318,10 @@
       - drop rate,  gold = value * actor lvl. Gen?
 ** items
       - teleport scroll with P
+            - teleport object
+            - create with scroll teleport to town (in dung, in town)
+            - remove when enter
+            - step to portal to teleport
       - item eat, activate, use
       - items grade, power ups
       - zap wands

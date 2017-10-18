@@ -50,12 +50,17 @@ typedef struct G {
     GlobalEvent *events;
     int debug;
     char *location_path;
+    int turns;
+    unsigned int mode;
 } *G;
+
+#define G_STAT_EDIT 1
 
 G new_g();
 void free_g(G g);
 void debuglog(G g, char *msg);
 void add_actor(G g, Actor actor);
+bool g_is_stat_edit(G g);
 
 State state;
 
