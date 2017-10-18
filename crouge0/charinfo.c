@@ -23,7 +23,8 @@ char *charinfo_print(Actor player) {
     char *arms = item_descript(player->equiped_arms);
     char *body = item_descript(player->equiped_body);
     snprintf(buf, BUFSIZE * 10, 
-"Name: %s %d$\n\
+"Press (k) key to spend SP\n\
+Name: %s %d$\n\
 hp/max: %d/%d\n\
 mp/max: %d/%d\n\
 str: %d  con: %d \n\
@@ -137,7 +138,7 @@ int charinfo_key(void* data) {
             }
             break;
         case 'D':
-            if (you->basestat_strength) {
+            if (you->basestat_dexterity> 1) {
                 you->stat_points++;
                 you->basestat_dexterity--;
             }
@@ -149,19 +150,19 @@ int charinfo_key(void* data) {
             }
             break;
         case 'I':
-            if (you->basestat_strength) {
+            if (you->basestat_intelligence > 1) {
                 you->stat_points++;
                 you->basestat_intelligence--;
             }
             break;
         case 'C': // if can? or reset points
-            if (you->basestat_constitution) {
+            if (you->basestat_constitution > 1) {
                 you->stat_points++;
                 you->basestat_constitution--;
             }
             break;
         case 'S':
-            if (you->basestat_strength) {
+            if (you->basestat_strength > 1) {
                 you->stat_points++;
                 you->basestat_strength--;
             }
