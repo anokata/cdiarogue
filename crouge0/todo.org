@@ -247,6 +247,7 @@
             - +add anim state
             - +test anim toggle by a
             - anim proc, draw funcs (anim struct? current anim)
+            - repetitive redraw with sleep
       - steps, pause, next frame (processing G or anim data func)... 
             exit from state when proc func return true
 

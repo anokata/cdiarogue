@@ -1,5 +1,5 @@
 # vim: filetype=make
-OBJECTS=app.c map_gen.c world_map.c g.c tile_map.c util.c config_parser.c actor.c render.c collide.c events.c behavior.c item.c inventory.c charinfo.c object.c lightmap.c lightcalc.c
+OBJECTS=app.c map_gen.c world_map.c g.c tile_map.c util.c config_parser.c actor.c render.c collide.c events.c behavior.c item.c inventory.c charinfo.c object.c lightmap.c lightcalc.c anim.c
 ALL_OBJECTS=main.c $(OBJECTS)
 MAP_OBJECTS=test_mapgen.c map_gen.c tile_map.c util.c config_parser.c actor.c item.c object.c lightmap.c
 TMAP_OBJECTS=tile_map.c test_tile_map.c util.c
@@ -52,6 +52,9 @@ test_tile_map: prepare
 test_config_parser: prepare
 	$(eval DEBUG=-DDEBUG)
 	$(CC) test_config_parser.c config_parser.c util.c $(CFLAGS) -o $(BUILD_DIR)/$@ && valgrind $(BUILD_DIR)/$@
+
+test_anim: prepare
+	$(CC) $@.c $(OBJECTS) $(CFLAGS) -o $(BUILD_DIR)/$@ && valgrind $(BUILD_DIR)/$@
 
 test_events: prepare
 	$(CC) $@.c $(OBJECTS) $(CFLAGS) -o $(BUILD_DIR)/$@ && valgrind $(BUILD_DIR)/$@

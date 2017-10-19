@@ -19,6 +19,7 @@
 #include "inventory.h"
 #include "charinfo.h"
 #include "lightcalc.h"
+#include "anim.h"
 
 void debug_draw(G g);
 void start(char *arg1);

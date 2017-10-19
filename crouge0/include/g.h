@@ -5,6 +5,7 @@
 #include "tile_map.h"
 #include "world_map.h"
 #include "actor.h"
+#include "anim.h"
 #include <glib.h>
 
 enum States {
@@ -53,6 +54,7 @@ typedef struct G {
     char *location_path;
     int turns;
     unsigned int mode;
+    Anim anim;
 } *G;
 
 #define G_STAT_EDIT 1

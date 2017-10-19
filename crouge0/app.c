@@ -11,6 +11,7 @@ void ui_draw(G g);
 void save_location(TileMap map);
 void load(G g);
 void g_post_init(G g);
+void anim_start(G g);
 
 void process_input(G g) {
     ss_handle(state, Event_draw, g);
@@ -240,7 +241,7 @@ int cursor_key(void* data) {
     char *msg;
     switch (key) {
         case 'a':
-            ss_setstate(state, State_anim);
+            anim_start(g);
             break;
         case '>':
         case '<':
@@ -350,15 +351,35 @@ int cursor_draw(void* data) {
     return 0;
 }
 
+void anim_start(G g) {
+    ss_setstate(state, State_anim);
+    g->anim = anim_make();
+    g->anim->frame = 3;
+}
+
+bool anim_proc(G g) {
+    bool is_end = anim_step(g->anim);
+    if (is_end) {
+        anim_free(g->anim);
+        g->anim = NULL;
+    }
+    return is_end;
+}
+
 int anim_draw(void* data) {
     G g = data;
     UNUSED(g);
+    cursor_draw(g);
+
     return 0;
 }
 
 int anim_key(void* data) {
     G g = data;
     UNUSED(g);
+    if (anim_proc(g)) {
+        ss_setstate(state, State_cursor);
+    }
     return 0;
 }
 
