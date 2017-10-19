@@ -40,6 +40,10 @@ void cc_putxy(char ch, struct Color color, int x, int y) {
     attroff(COLOR_PAIR(color.color));
 }
 
+void cc_refresh() {
+    refresh();
+}
+
 void curses_init() {
 	initscr();
     use_default_colors(); /* fror transparend -1 as back*/

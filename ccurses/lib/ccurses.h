@@ -25,5 +25,6 @@ void curses_init();
 void processInput();
 void curses_end();
 void start();
+void cc_refresh();
 
 #endif
