@@ -351,14 +351,22 @@ int cursor_draw(void* data) {
     return 0;
 }
 
+void anim_1(void *data) {
+    G g = data;
+    cc_putxy(g->anim->c++, cn_white, g->anim->sx++, 1);
+}
+
 void anim_start(G g) {
     ss_setstate(state, State_anim);
     g->anim = anim_make();
-    g->anim->frame = 3;
+    g->anim->frame = 8;
+    g->anim->fun = anim_1;
+    g->anim->c = 'a';
 }
 
 bool anim_proc(G g) {
     bool is_end = anim_step(g->anim);
+    usleep(100000);
     if (is_end) {
         anim_free(g->anim);
         g->anim = NULL;
@@ -370,15 +378,21 @@ int anim_draw(void* data) {
     G g = data;
     UNUSED(g);
     cursor_draw(g);
-
+    while (!anim_proc(g)) {
+        cursor_draw(g);
+        g->anim->fun(g);
+        cc_refresh();
+    }
+        ss_setstate(state, State_cursor);
     return 0;
 }
 
 int anim_key(void* data) {
     G g = data;
-    if (anim_proc(g)) {
-        ss_setstate(state, State_cursor);
-    }
+    UNUSED(g);
+    /* if (anim_proc(g)) { */
+    /*     ss_setstate(state, State_cursor); */
+    /* } */
     return 0;
 }
 
