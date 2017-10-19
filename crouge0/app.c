@@ -376,7 +376,6 @@ int anim_draw(void* data) {
 
 int anim_key(void* data) {
     G g = data;
-    UNUSED(g);
     if (anim_proc(g)) {
         ss_setstate(state, State_cursor);
     }
