@@ -20,6 +20,7 @@
 #include "charinfo.h"
 #include "lightcalc.h"
 #include "anim.h"
+#include "sky_view.h"
 
 void debug_draw(G g);
 void start(char *arg1);

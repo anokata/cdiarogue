@@ -27,3 +27,13 @@ char *sky_draw_string(Sky s) {
     asprintf(&str, "[%s%s(*)%s%s]", BGBLUED, RED, BGBLUE_END, DEFAULT);
     return str;
 }
+
+char *sky_steps2time(int steps) {
+    /* One step = 1 sec */
+    int hours = steps / (60 * 60);
+    int minutes = (steps / 60) - hours * 60;
+    int seconds = steps - hours * 60 * 60 - minutes * 60;
+    static char buf[BUFSIZE];
+    snprintf(buf, BUFSIZE, "%02d:%02d:%02d", hours, minutes, seconds);
+    return buf;
+}

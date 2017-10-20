@@ -233,6 +233,7 @@
 - +charinfo
       - +enter stat spend mode, exit by k
       - +exit info by 'k' key or other than enter spend mode
+- +clock - steps to time convert and display
 
 ** mobs
       - save actors when map change
@@ -260,7 +261,6 @@
 
 
 - proressbar (min = 0?) => (x * w) / Xmax
-- clock - steps to time convert
 - more contens: mobs, equips, items
 - actors in dir/file 
       - actors/poring = name:poring id:223 ...

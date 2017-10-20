@@ -66,8 +66,8 @@ void ui_draw(G g) {
         );
     cc_printxy(buf, cn_white, UI_X, y++);
     snprintf(buf, BUFSIZE, 
-        "Turn: %d\t\t[exp: %ld  lvl: %d ]",
-        g->turns,
+        "%s Turn: %d\t\t[exp: %ld  lvl: %d ]",
+        sky_steps2time(g->turns), g->turns,
         g->player->exp, g->player->lvl
         );
     cc_printxy(buf, cn_white, UI_X, y++);

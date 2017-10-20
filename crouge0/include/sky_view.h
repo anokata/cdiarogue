@@ -1,4 +1,5 @@
 #include <stdlib.h>
+#include "util.h"
 
 // Escapes
 #define RED "\033[0;31;44m" // 7 chars len
@@ -26,3 +27,4 @@ void free_sky(Sky s);
 
 char *sky_draw_string(Sky s);
 char *sky_draw_cc(Sky s, int x, int y);
+char *sky_steps2time(int steps);
