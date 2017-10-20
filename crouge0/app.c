@@ -79,6 +79,7 @@ void ui_draw(G g) {
     );
     cc_printxy(buf, cn_white, UI_X, y++);
 
+    y++;
     for (int i = log_start; i < log_end; i++) {
         char *msg = g_list_nth_data(g->log, i);
         cc_printxy(msg, cn_white, UI_X, y++);
@@ -435,6 +436,11 @@ void save(G g) {
 void load(G g) {
     load_player(&g->player, player_file);
     /* g->player->items = items_load(player_items_file); */
+}
+
+void load_savefile(G g, char *savefile) {
+    UNUSED(g);
+    UNUSED(savefile);
 }
 
 void init_inventory(G g) {

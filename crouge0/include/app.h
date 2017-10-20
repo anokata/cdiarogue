@@ -27,5 +27,6 @@ void start(char *arg1);
 G g_init(char *arg1);
 void load(G g);
 void g_post_init(G g);
+void load_savefile(G g, char *savefile);
 
 #endif

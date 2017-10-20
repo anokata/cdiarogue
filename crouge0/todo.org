@@ -265,6 +265,7 @@
 - actors in dir/file 
       - actors/poring = name:poring id:223 ...
       - actors ids in location -> mobs:1...
+- color log and info
 
 - TECHDEBT :: 
       - Extract viewport module
