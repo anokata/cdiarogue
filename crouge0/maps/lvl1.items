@@ -11,3 +11,7 @@ rc:$:4:4:_cb_yellow:1:0:ItemResourceCls:ItemNormalState:ItemRC:20:0:
 robe:[:8:4:_cb_white:3:0:ItemBodyEquipCls:ItemNormalState:ItemCottonRobe:1:0:
 simple boots:[:8:5:_cb_white:2:0:ItemLegsEquipCls:ItemBlessedState:ItemLeatherBoots:1:0:
 red ring:=:8:6:_cb_red:1:0:ItemFingerEquipCls:ItemCursedState:ItemCopperRing:1:0:
+iSword:/:8:7:_cn_white:8:8:ItemWeaponCls:ItemNormalState:ItemWeaponIronSword:1:0:
+dagger:/:8:7:_cn_white:1:10:ItemWeaponCls:ItemNormalState:ItemWeaponDagger:1:0:
+hammer:|:8:7:_cn_blue:10:3:ItemWeaponCls:ItemNormalState:ItemWeaponHammer:1:0:
+helmet:[:8:7:_cb_white:5:0:ItemHeadEquipCls:ItemNormalState:ItemPlasticHelmet:1:0:

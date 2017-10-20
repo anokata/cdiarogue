@@ -30,7 +30,11 @@ DECLARE_ENUM(ItemState, ITEMS_STATE)
 #define ITEMS_TYPES(X) \
     X(ItemPotionOfCure) \
     X(ItemWeaponSword) \
+    X(ItemWeaponIronSword) \
+    X(ItemWeaponDagger) \
+    X(ItemWeaponHammer) \
     X(ItemStrawHat) \
+    X(ItemPlasticHelmet) \
     X(ItemPoDDKnuckles) \
     X(ItemPotionOfMana) \
     X(ItemRC) \

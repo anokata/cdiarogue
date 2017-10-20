@@ -385,6 +385,7 @@
       - items grade, power ups
       - zap wands
       - books for teach skills and spells (int to read - value)
+      - add spawn(gen) chance
 
       - pick up from direction, view menu list items
       - better inventory by category

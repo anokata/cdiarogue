@@ -9,11 +9,15 @@ extern char *ColorNames[];
 
 /* see: ITEMS_TYPES */
 static const char *item_types[] = {
-    "potion of cure wounds",
-    "wood sword",
-    "simple straw hat",
-    "paw of day darkness knuckles",
-    "potion of cure power",
+    "Potion of cure wounds",
+    "Wood sword",
+    "Iron sword",
+    "Dagger",
+    "Hammer",
+    "Straw hat",
+    "Plastic Helmet",
+    "Paw of day darkness knuckles",
+    "Potion of cure power",
     "RC (money)",
     "Cotton robe",
     "Leather boots",
