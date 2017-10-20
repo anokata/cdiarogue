@@ -238,6 +238,13 @@
       - save actors when map change
 ** maps
       - savefile : map path and player path
+            - +decide naming, place
+                  save/charname.save
+                  default test savefile
+            - +data, test savefile
+            - read savefile
+            - load save
+            - save to savefile when save
       - add objects - i.e. chest, trap
             - open stash for get gold/(random item)
             - step to trap cause dmg

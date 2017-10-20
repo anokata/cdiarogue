@@ -2,6 +2,7 @@
 char version[] = "0.0.6";
 /* save file: */
 char *player_file = "./maps/you";
+char *test_savefile = "./save/test.save";
 /* char *player_items_file = "./maps/you.items"; */
 
 /* GLOBAL */
