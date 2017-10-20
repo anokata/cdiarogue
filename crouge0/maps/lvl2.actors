@@ -1,0 +1,3 @@
+name:char:x:y:color:behavior:status:hp:mp:con:str:dex:int:role:items_file:exp:lvl:sp:
+blue poring:p:5:3:_cn_blue:BehaviorSimpleAttacker:StatusLive:18:10:4:4:4:4:RoleMonster:poring.items:10:3:0:
+white poring:p:5:3:_cn_white:BehaviorSimpleAttacker:StatusLive:24:10:4:4:4:4:RoleMonster:poring.items:10:4:0:

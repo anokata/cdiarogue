@@ -393,6 +393,7 @@
       - read scrolls, books to effect on stats, skills, spells
       - keys, locked objects
       - stack items: equip one..
+      - items effect func when equip
 ** map
       - make and show map name (like dungeon level 2)
             - add location name

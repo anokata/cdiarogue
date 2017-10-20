@@ -7,6 +7,7 @@ IMPLEMENT_ENUM(ItemType, ITEMS_TYPES)
 
 extern char *ColorNames[];
 
+/* see: ITEMS_TYPES */
 static const char *item_types[] = {
     "potion of cure wounds",
     "wood sword",
@@ -14,6 +15,9 @@ static const char *item_types[] = {
     "paw of day darkness knuckles",
     "potion of cure power",
     "RC (money)",
+    "Cotton robe",
+    "Leather boots",
+    "Copper ring",
 };
 
 static const char *item_states[] = {

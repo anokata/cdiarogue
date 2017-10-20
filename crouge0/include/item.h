@@ -15,6 +15,8 @@
     X(ItemFingerEquipCls) \
     X(ItemFoodCls) \
     X(ItemResourceCls) \
+    X(ItemBookCls) \
+    X(ItemScrollCls) \
 
 DECLARE_ENUM(ItemClass, ITEMS_CLS)
 
@@ -32,6 +34,9 @@ DECLARE_ENUM(ItemState, ITEMS_STATE)
     X(ItemPoDDKnuckles) \
     X(ItemPotionOfMana) \
     X(ItemRC) \
+    X(ItemCottonRobe) \
+    X(ItemLeatherBoots) \
+    X(ItemCopperRing) \
 
 DECLARE_ENUM(ItemType, ITEMS_TYPES)
 

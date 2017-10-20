@@ -4,3 +4,10 @@ wood sword:/:8:4:_cn_white:1:2:ItemWeaponCls:ItemNormalState:ItemWeaponSword:1:0
 potion of cure minor wounds:!:2:2:_cb_red:10:0:ItemPotionCls:ItemNormalState:ItemPotionOfCure:1:0:
 potion of cure minor power:!:2:3:_cb_blue:10:0:ItemPotionCls:ItemNormalState:ItemPotionOfMana:1:0:
 rc:$:4:4:_cb_yellow:1:0:ItemResourceCls:ItemNormalState:ItemRC:1:0:
+potion of cure wounds:!:2:2:_cb_red:40:0:ItemPotionCls:ItemNormalState:ItemPotionOfCure:1:0:
+potion of cure major wounds:!:2:2:_cb_red:100:0:ItemPotionCls:ItemNormalState:ItemPotionOfCure:1:0:
+rc:$:4:4:_cb_yellow:1:0:ItemResourceCls:ItemNormalState:ItemRC:10:0:
+rc:$:4:4:_cb_yellow:1:0:ItemResourceCls:ItemNormalState:ItemRC:20:0:
+robe:[:8:4:_cb_white:3:0:ItemBodyEquipCls:ItemNormalState:ItemCottonRobe:1:0:
+simple boots:[:8:5:_cb_white:2:0:ItemLegsEquipCls:ItemBlessedState:ItemLeatherBoots:1:0:
+red ring:=:8:6:_cb_red:1:0:ItemFingerEquipCls:ItemCursedState:ItemCopperRing:1:0:
