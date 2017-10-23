@@ -194,7 +194,7 @@
             - +add to SP spend: dex, int
       - +go to back portal <
 
-[ INWORK for this week: to 19.10.2017]
+[ INWORK for this week ]
 * 12 mechanic
 - +save equiped - save/load player equiped state items (item equiped flag?)
       - +actor inventory file - load actor items from it's items file
@@ -235,8 +235,6 @@
       - +exit info by 'k' key or other than enter spend mode
 - +clock - steps to time convert and display
 
-** mobs
-      - save actors when map change
 ** maps
       - savefile : map path and player path
             - +decide naming, place
@@ -246,18 +244,6 @@
             - read savefile
             - load save
             - save to savefile when save
-      - add objects - i.e. chest, trap
-            - open stash for get gold/(random item)
-            - step to trap cause dmg
-      - make some maps and town, mobs, items equip
-** animation
-      - anim state with anim draw function over base draw
-            - +add anim state
-            - +test anim toggle by a
-            - anim proc, draw funcs (anim struct? current anim)
-            - repetitive redraw with sleep
-      - steps, pause, next frame (processing G or anim data func)... 
-            exit from state when proc func return true
 
 
 - proressbar (min = 0?) => (x * w) / Xmax
@@ -307,10 +293,25 @@
       - flood fill map at gen, if exit and enter not in same area - remade it
       - other gen algo, choose from location lvl file
       - not intersect objs, items, actors while gen map
+
+      - add objects - i.e. chest, trap
+            - open stash for get gold/(random item)
+            - step to trap cause dmg
+      - make some maps and town, mobs, items equip
 ** menu (not up down - use vi like.)
       - new, load, exit, help, keys
       - list of saves
       - save and exit and exit without save with confirmation
+** animation
+      - anim state with anim draw function over base draw
+            - +add anim state
+            - +test anim toggle by a
+            - anim proc, draw funcs (anim struct? current anim)
+            - repetitive redraw with sleep
+      - steps, pause, next frame (processing G or anim data func)... 
+            exit from state when proc func return true
+** mobs
+      - save actors when map change
 
 * improvements features
 - space action: enter, take, ... other obvious actions in context
