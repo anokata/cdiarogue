@@ -194,7 +194,6 @@
             - +add to SP spend: dex, int
       - +go to back portal <
 
-[ INWORK for this week ]
 * 12 mechanic
 - +save equiped - save/load player equiped state items (item equiped flag?)
       - +actor inventory file - load actor items from it's items file
@@ -234,38 +233,17 @@
       - +enter stat spend mode, exit by k
       - +exit info by 'k' key or other than enter spend mode
 - +clock - steps to time convert and display
+- +savefile : map path and player path
+      - +decide naming, place
+            save/charname.save
+            default test savefile
+      - +data, test savefile
+      - +read savefile
+      - +load save
+      - +save to savefile when map change
+      - +refactor
 
-** maps
-      - savefile : map path and player path
-            - +decide naming, place
-                  save/charname.save
-                  default test savefile
-            - +data, test savefile
-            - +read savefile
-            - +load save
-            - +save to savefile when map change
-            - save to savefile when save, and save when change map
-            - refactor
-
-
-- proressbar (min = 0?) => (x * w) / Xmax
-- more contens: mobs, equips, items
-- actors in dir/file 
-      - actors/poring = name:poring id:223 ...
-      - actors ids in location -> mobs:1...
-- color log and info
-
-- TECHDEBT :: 
-      - Extract viewport module
-      - tests and coverage - by gcov
-      - make dir for src, tests
-      - separate src .c for dirs/modules
-      - Check map folder exist
-      - test curses app
-      # if (code = smth(thing))...
-      - refactor app, g load, init
-      - cleanup, rem unused, see todo
-
+[ INWORK for this week ]
 * 13 content
 ** shop
       - shops, buy potions
@@ -304,6 +282,7 @@
       - new, load, exit, help, keys
       - list of saves
       - save and exit and exit without save with confirmation
+      - save to savefile when save, and save when change map
 ** animation
       - anim state with anim draw function over base draw
             - +add anim state
@@ -314,6 +293,26 @@
             exit from state when proc func return true
 ** mobs
       - save actors when map change
+
+
+- proressbar (min = 0?) => (x * w) / Xmax
+- more contens: mobs, equips, items
+- actors in dir/file 
+      - actors/poring = name:poring id:223 ...
+      - actors ids in location -> mobs:1...
+- color log and info
+
+- TECHDEBT :: 
+      - Extract viewport module
+      - tests and coverage - by gcov
+      - make dir for src, tests
+      - separate src .c for dirs/modules
+      - Check map folder exist
+      - test curses app
+      # if (code = smth(thing))...
+      - refactor app, g load, init
+      - cleanup, rem unused, see todo
+
 
 * improvements features
 - space action: enter, take, ... other obvious actions in context

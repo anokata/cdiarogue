@@ -51,16 +51,15 @@ void change_map(G g, char *location_filename) {
     char *location_filename_d = strdup(location_filename);
 
     if (is_special_location(location_filename)) {
-        char *back_location_path = strdup(g->location_path);
-        // generate map
-        char *location_name = gen_location(back_location_path, 
-                location_filename, location_filename);
-        // and load it
+        /* char *back_location_path = strdup(g->location_path); */
         free(location_filename_d);
-        location_filename_d = strdup(location_name);
-    
-        free(location_name);
-        free(back_location_path);
+
+        location_filename_d = gen_location(g->location_path, 
+                location_filename, location_filename);
+
+        /* location_filename_d = location_name; */
+        /* free(location_name); */
+        /* free(back_location_path); */
 
     } else { }
 

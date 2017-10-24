@@ -1,8 +1,5 @@
 #include "app.h"
 char version[] = "0.0.7";
-/* save file: */
-char *player_file = "./maps/you";
-char *savefile = "./save/test.save";
 
 /* GLOBAL */
 extern State state;
