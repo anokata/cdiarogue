@@ -242,8 +242,10 @@
                   default test savefile
             - +data, test savefile
             - +read savefile
-            - load save
-            - save to savefile when save
+            - +load save
+            - +save to savefile when map change
+            - save to savefile when save, and save when change map
+            - refactor
 
 
 - proressbar (min = 0?) => (x * w) / Xmax

@@ -52,6 +52,7 @@ typedef struct G {
     GlobalEvent *events;
     int debug;
     char *location_path;
+    char *savefile;
     int turns;
     unsigned int mode;
     Anim anim;

@@ -3,6 +3,7 @@ char version[] = "0.0.6";
 /* save file: */
 char *player_file = "./maps/you";
 char *test_savefile = "./save/test.save";
+char *savefile = "./save/test.save";
 /* char *player_items_file = "./maps/you.items"; */
 
 /* GLOBAL */
@@ -13,6 +14,7 @@ void save_location(TileMap map);
 void load(G g);
 void g_post_init(G g);
 void anim_start(G g);
+void save_savefile(G g);
 
 void process_input(G g) {
     ss_handle(state, Event_draw, g);
@@ -57,8 +59,12 @@ void ui_draw(G g) {
 
     char buf[BUFSIZE];
     snprintf(buf, BUFSIZE, 
-        "@ x:y = %d:%d %d$ [HP: %d/%d MP: %d/%d atk: %d def: %d ]",
-        g->player->x, g->player->y, actor_money_count(g->player),
+        "@ x:y = %d:%d %d$",
+        g->player->x, g->player->y, actor_money_count(g->player)
+        );
+    cc_printxy(buf, cn_white, UI_X, y++);
+    snprintf(buf, BUFSIZE, 
+        "[HP: %d/%d MP: %d/%d atk: %d def: %d ]",
         g->player->stat_hp, actor_stat_maxhp(g->player), 
         g->player->stat_mp, actor_stat_maxmp(g->player), 
         actor_stat_attack(g->player), 
@@ -66,7 +72,7 @@ void ui_draw(G g) {
         );
     cc_printxy(buf, cn_white, UI_X, y++);
     snprintf(buf, BUFSIZE, 
-        "%s Turn: %d\t\t[exp: %ld  lvl: %d ]",
+        "%s Turn: %d [exp: %ld  lvl: %d ]",
         sky_steps2time(g->turns), g->turns,
         g->player->exp, g->player->lvl
         );
@@ -97,9 +103,11 @@ void debug_draw(G g) {
             "VLeft: %d\t" 
             "Vcx:cy = %d:%d\t" 
             "Vleft:top = %d:%d\n" 
+            "loc %s\n" 
         , g->key, 
         g->view->display_left, g->view->cx, g->view->cy,
-        viewport_left(g->view), viewport_top(g->view)
+        viewport_left(g->view), viewport_top(g->view),
+        g->location_path
         );
     cc_printxy(buf, cn_white, 0, 20);
 }
@@ -201,28 +209,23 @@ void change_map(G g, char *location_filename) {
         char *location_name = gen_location(back_location_path, 
                 location_filename, location_filename);
         // and load it
-        free_global_map(g->gmap);
-        g->player = NULL;
-        g->gmap = load_global_tmap(location_name);
         free(location_filename_d);
         location_filename_d = strdup(location_name);
     
         free(location_name);
         free(back_location_path);
-    } else {
-        // if location_filename is real location then load
-        /* because location_filename stored in global map */
-        free_global_map(g->gmap);
-        g->player = NULL;
-        g->gmap = load_global_tmap(location_filename_d);
-    }
+
+    } else { }
+
+    free_global_map(g->gmap);
+    g->player = NULL;
 
     free(g->location_path);
     g->location_path = location_filename_d;
-    /* free(location_filename_d); */
+    save_savefile(g);
+    free(g->location_path);
     load(g);
     g_post_init(g);
-    /* add_actor(g, g->player); */
 }
 
 void enter_location(G g) {
@@ -434,22 +437,27 @@ void save(G g) {
 }
 
 void load(G g) {
-    char *savefile = strdup("./save/test.save");
-    load_savefile(g, savefile);
-    /* g->player->items = items_load(player_items_file); */
-    free(savefile);
+    load_savefile(g);
 }
 
-void load_savefile(G g, char *savefile) {
-    GHashTable *config = parse_file(savefile);
+void load_savefile(G g) {
+    GHashTable *config = parse_file(g->savefile);
     char *player_file = g_hash_table_lookup(config, "player");
     char *location_path = g_hash_table_lookup(config, "location");
 
     load_player(&g->player, player_file);
-    g->wmap = load_wmap();
     g->gmap = load_global_tmap(location_path);
+    g->location_path = strdup(location_path);
 
     g_hash_table_destroy(config);
+}
+
+void save_savefile(G g) {
+    char buf[BUFSIZE];
+    snprintf(buf, BUFSIZE, "player:%s\nlocation:%s\n", player_file, g->location_path);
+    FILE *fout = fopen(g->savefile, "w");
+    fwrite(buf, strlen(buf), 1, fout);
+    fclose(fout);
 }
 
 void init_inventory(G g) {
@@ -522,14 +530,15 @@ void g_post_init(G g) {
 }
 
 G g_init(char *arg1)  {
-    char *location_path = "./maps/town";
+    char *savefile_path = "./save/test.save";
     if (arg1) {
-        location_path = arg1;
+        savefile_path = arg1;
     }
     /* tests if debug */
-        // TODO
+
     fill_exp_road();
-    G g = new_g(location_path);
+    G g = new_g(savefile_path);
+    g->wmap = load_wmap();
     load(g);
     g_post_init(g);
 
