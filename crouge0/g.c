@@ -30,8 +30,6 @@ G new_g(char *location_path) {
 
     g->debug = 0;
     g->events = events;
-    g->wmap = load_wmap();
-    g->gmap = load_global_tmap(location_path);
     g->cursor.x = 0;
     g->cursor.y = 0;
 

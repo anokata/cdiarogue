@@ -434,13 +434,22 @@ void save(G g) {
 }
 
 void load(G g) {
-    load_player(&g->player, player_file);
+    char *savefile = strdup("./save/test.save");
+    load_savefile(g, savefile);
     /* g->player->items = items_load(player_items_file); */
+    free(savefile);
 }
 
 void load_savefile(G g, char *savefile) {
-    UNUSED(g);
-    UNUSED(savefile);
+    GHashTable *config = parse_file(savefile);
+    char *player_file = g_hash_table_lookup(config, "player");
+    char *location_path = g_hash_table_lookup(config, "location");
+
+    load_player(&g->player, player_file);
+    g->wmap = load_wmap();
+    g->gmap = load_global_tmap(location_path);
+
+    g_hash_table_destroy(config);
 }
 
 void init_inventory(G g) {

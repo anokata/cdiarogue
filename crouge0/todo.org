@@ -241,7 +241,7 @@
                   save/charname.save
                   default test savefile
             - +data, test savefile
-            - read savefile
+            - +read savefile
             - load save
             - save to savefile when save
 
