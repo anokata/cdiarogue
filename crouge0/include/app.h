@@ -21,6 +21,7 @@
 #include "lightcalc.h"
 #include "anim.h"
 #include "sky_view.h"
+#include "location.h"
 
 void debug_draw(G g);
 void start(char *arg1);

@@ -23,6 +23,7 @@ void free_sky(Sky s) {
 }
 
 char *sky_draw_string(Sky s) {
+    UNUSED(s);
     char *str = NULL;
     asprintf(&str, "[%s%s(*)%s%s]", BGBLUED, RED, BGBLUE_END, DEFAULT);
     return str;
