@@ -19,15 +19,15 @@ void collision_effect(Actor actor, Actor subject, G g) {
 }
 
 /* return collided actor */
-Actor collision_get_actor(Actor actor, int dx, int dy, GList *actors) {
-    GList *node = actors;
+CharPoint collision_get_charpoint(Actor actor, int dx, int dy, GList *cp) {
+    GList *node = cp;
     int x = actor->x + dx;
     int y = actor->y + dy;
 
     while (node) {
-        Actor subject = node->data;
+        CharPoint subject = node->data;
         // also checks for self collide
-        if ((x == subject->x) && (y == subject->y) && (actor != subject)) {
+        if ((x == subject->x) && (y == subject->y) && ((CharPoint) actor != subject)) {
             return subject;
         }
         node = g_list_next(node);
@@ -39,7 +39,7 @@ Actor collision_get_actor(Actor actor, int dx, int dy, GList *actors) {
 bool collisions_player_move(Actor player, int dx, int dy, G g) {
     if ((dx == 0) && (dy == 0)) return false;
 
-    Actor subject = collision_get_actor(player, dx, dy, g->gmap->actors);
+    Actor subject = (Actor) collision_get_charpoint(player, dx, dy, g->gmap->actors);
     bool result = false;
     if (!subject) {
         result = actor_move_hv(player, g->gmap, dx, dy);
@@ -55,6 +55,10 @@ bool collisions_player_move(Actor player, int dx, int dy, G g) {
         free(description);
         debuglog(g, buf);
     }
+
+    /* with objects */
+    Object object = (Object) collision_get_charpoint(player, dx, dy, g->gmap->objects);
+    if (object) debuglog(g, "collide object");
 
     return result;
 }

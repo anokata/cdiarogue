@@ -5,4 +5,4 @@ x:y:char:color:param:type:
 6:4:>:_cn_red:./maps/loc2:ObjectTypeEnter:
 6:5:>:_cn_yellow:lvl1:ObjectTypeEnter:
 5:5:<:_cn_green:./maps/loc2:ObjectTypeExit:
-7:7:O:_cb_blue:trap:ObjectTypeTrap:
+7:7:O:_cb_blue:trap:ObjectTypeTeleport:

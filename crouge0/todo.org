@@ -265,7 +265,8 @@
 ** items
       - teleport scroll with P
             - +add color obj
-            - teleport object
+            - +teleport object
+            - objects collide
             - create with scroll teleport to town (in dung, in town)
             - remove when enter
             - step to portal to teleport

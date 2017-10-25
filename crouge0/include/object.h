@@ -10,6 +10,7 @@
     X(ObjectTypeStash) \
     X(ObjectTypeDoor) \
     X(ObjectTypeTrap) \
+    X(ObjectTypeTeleport) \
 
 DECLARE_ENUM(ObjectType, OBJECT_TYPE)
 
