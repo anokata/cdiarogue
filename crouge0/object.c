@@ -1,8 +1,6 @@
 #include "object.h"
-const char object_dump_format[] = "%d:%d:%c:%s:%s:\n";
-const char obj_file_header[] = "x:y:char:param:type:\n";
-const char obj_file_type[] = "# v" "i: filetype=sh\n";
 
+extern char *ColorNames[];
 // make ObjectTypeNames, ObjectType_from_str
 IMPLEMENT_ENUM(ObjectType, OBJECT_TYPE)
 
@@ -45,6 +43,7 @@ char *object_serialize(Object obj) {
             obj->x,
             obj->y,
             obj->c,
+            ColorNames[obj->color.color],
             (obj->param ? obj->param : " "),
             ObjectTypeNames[obj->type]
     );
@@ -56,8 +55,9 @@ Object object_deserialize(Strings str) {
     obj->x = atoi(str[0]);
     obj->y = atoi(str[1]);
     obj->c = str[2][0];
-    obj->param = strdup(str[3]);
-    obj->type = ObjectType_from_str(str[4]);
+    obj->color = cc_color_from_str(str[3]);
+    obj->param = strdup(str[4]);
+    obj->type = ObjectType_from_str(str[5]);
     return obj;
 }
 

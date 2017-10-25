@@ -1,7 +1,7 @@
-x:y:char:param:type:
+x:y:char:color:param:type:
 # vi: filetype=sh
-1:2:z:zu:ObjectTypeStash:
-2:2:a:au:ObjectTypeStash:
-6:4:>:./maps/town:ObjectTypeEnter:
-6:5:>:lvl1:ObjectTypeEnter:
-7:4:<:./maps/town:ObjectTypeExit:
+1:2:z:_cn_blue:zu:ObjectTypeStash:
+2:2:a:_cn_white:au:ObjectTypeStash:
+6:4:>:_cn_white:./maps/town:ObjectTypeEnter:
+6:5:>:_cn_white:lvl1:ObjectTypeEnter:
+7:4:<:_cn_white:./maps/town:ObjectTypeExit:

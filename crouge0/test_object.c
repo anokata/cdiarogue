@@ -3,6 +3,9 @@
 #include <stdio.h>
 #include <assert.h>
 
+char *tst_str = "1:2:_cn_blue:$:hello stash:ObjectTypeStash:\n";
+int object_fields_count = 10;
+
 void test_create() {
     Object o = object_new(1, 2, 'z');
     object_print(o);
@@ -16,8 +19,8 @@ void test_serialization() {
     free(x);
     object_free(o);
 
-    char *test = strdup("1:2:$:hello stash:ObjectTypeStash:\n");
-    Strings s = parse_dsv_line(test, 9);
+    char *test = strdup(tst_str);
+    Strings s = parse_dsv_line(test, object_fields_count);
     Object z = object_deserialize(s);
     object_print(z);
     object_free(z);

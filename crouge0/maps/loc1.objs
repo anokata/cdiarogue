@@ -1,7 +1,8 @@
-x:y:char:param:type:
+x:y:char:color:param:type:
 # vi: filetype=sh
-5:4:^:trap:ObjectTypeTrap:
-5:6:0:1 gold box:ObjectTypeStash:
-6:4:>:./maps/loc2:ObjectTypeEnter:
-6:5:>:lvl1:ObjectTypeEnter:
-5:5:<:./maps/loc2:ObjectTypeExit:
+5:4:^:_cn_white:trap:ObjectTypeTrap:
+5:6:0:_cn_blue:1 gold box:ObjectTypeStash:
+6:4:>:_cn_red:./maps/loc2:ObjectTypeEnter:
+6:5:>:_cn_yellow:lvl1:ObjectTypeEnter:
+5:5:<:_cn_green:./maps/loc2:ObjectTypeExit:
+7:7:O:_cb_blue:trap:ObjectTypeTrap:

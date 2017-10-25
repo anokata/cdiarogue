@@ -1,3 +1,3 @@
-x:y:char:param:type:
+x:y:char:color:param:type:
 # vi: filetype=sh
-1:1:O:10:ObjectTypeStash:
+1:1:O:_cn_blue:10:ObjectTypeStash:

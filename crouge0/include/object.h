@@ -24,6 +24,10 @@ typedef struct Object {
     ObjectType type;
 } *Object;
 
+static const char object_dump_format[] = "%d:%d:%c:%s:%s:%s:\n";
+static const char obj_file_header[] = "x:y:char:color:param:type:\n";
+static const char obj_file_type[] = "# v" "i: filetype=sh\n";
+
 typedef GList *Objects;
 
 Object object_new(int x, int y, char c);
