@@ -57,8 +57,10 @@ bool collisions_player_move(Actor player, int dx, int dy, G g) {
     }
 
     /* with objects */
-    Object object = (Object) collision_get_charpoint(player, dx, dy, g->gmap->objects);
-    if (object) debuglog(g, "collide object");
+    Object object = (Object) charpoint_at(g->gmap->objects, player->x, player->y);
+    if (object) {
+        debuglog(g, "collide object");
+    }
 
     return result;
 }
