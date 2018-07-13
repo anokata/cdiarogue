@@ -266,6 +266,8 @@
       - teleport scroll with P
             - +add color obj
             - +teleport object
+            # it possible have multiple teleports on same map
+- save player position
             - objects collide
             - create with scroll teleport to town (in dung, in town)
             - remove when enter

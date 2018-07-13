@@ -60,6 +60,12 @@ bool collisions_player_move(Actor player, int dx, int dy, G g) {
     Object object = (Object) charpoint_at(g->gmap->objects, player->x, player->y);
     if (object) {
         debuglog(g, "collide object");
+        switch (object->type) {
+            case ObjectTypeTeleport: 
+                debuglog(g, "Teleport!");
+                break;
+            default:  break;
+        }
     }
 
     return result;
