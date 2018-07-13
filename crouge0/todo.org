@@ -267,7 +267,6 @@
             - +add color obj
             - +teleport object
             # it possible have multiple teleports on same map
-- save player position
             - objects collide
             - create with scroll teleport to town (in dung, in town)
             - remove when enter
@@ -305,6 +304,7 @@
       - actors/poring = name:poring id:223 ...
       - actors ids in location -> mobs:1...
 - color log and info
+- not change player position (change map) when just load savefile
 
 - TECHDEBT :: 
       - Extract viewport module
