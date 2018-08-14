@@ -2,7 +2,7 @@
 #include <linux/kernel.h>
 #include <linux/init.h>
 
-void sayhi() {
+void sayhi(void) {
     printk(KERN_INFO"Hi, from mod\n");
 }
 

@@ -1,3 +1,11 @@
+.*.cmd
+.*.o*
+.tmp*
+Module.symvers
+*.ko
+*.mod.c
+modules.order
+.cache.mk
 maps/you
 save/*
 # Compiled Object files

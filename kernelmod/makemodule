@@ -1,0 +1,1 @@
+make -C ~/kernel/linux/ SUBDIRS=$PWD modules
