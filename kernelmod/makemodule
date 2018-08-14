@@ -1,1 +1,9 @@
+#!/usr/bin/env bash
 make -C ~/kernel/linux/ SUBDIRS=$PWD modules
+rm .*.o* > /dev/null 2>&1
+rm *.o > /dev/null 2>&1
+rm *.mod.c modules.order Module.symvers > /dev/null 2>&1
+rm -rf .tmp_versions > /dev/null 2>&1
+rm .cache.mk > /dev/null 2>&1
+rm .*.ko.cmd > /dev/null 2>&1
+
